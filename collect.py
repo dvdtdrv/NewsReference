@@ -54,6 +54,32 @@ STATUS_FILE = os.path.join(DATA, "outlet_status.json")
 STATE_FILE = os.path.join(DATA, "state.json")
 
 NOW = datetime.now(timezone.utc)
+
+# Outlets marked "local" in feeds.py refuse GitHub's servers. On GitHub we don't ask them at all;
+# we use what David's PC read for them (fetch_local.py), downloaded by the workflow into local_in/.
+# On David's own PC (run_all.bat) they are read directly as usual.
+ON_GITHUB = os.environ.get("GITHUB_ACTIONS") == "true"
+LOCAL_FILE = os.path.join("local_in", "local_articles.json")
+LOCAL_MAX_AGE = timedelta(minutes=75)   # older than this = the PC is probably off
+
+
+def load_local_articles():
+    data = load_json(LOCAL_FILE, None) if ON_GITHUB else None
+    if not data:
+        return None
+    if NOW - datetime.fromisoformat(data["fetched_at"]) > LOCAL_MAX_AGE:
+        return None
+    return data
+
+
+def from_local(outlet, local):
+    """Articles for a 'local' outlet, as read by David's PC. Returns (articles, status, note)."""
+    if local is None:
+        return [], "waiting", "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+    entry = local["outlets"].get(outlet["name"])
+    if entry is None:
+        return [], "waiting", "not in the PC's latest batch"
+    return entry["articles"], entry["status"], ("via David's PC; " + entry["note"]).rstrip("; ")
 _robots = {}
 
 
@@ -312,8 +338,12 @@ def main():
 
     status = []
     print(f"Collecting from {len(OUTLETS)} outlets...\n")
+    local = load_local_articles()
     for outlet in OUTLETS:
-        fetched, word, note = fetch_outlet(outlet, state)
+        if outlet.get("local") and ON_GITHUB:
+            fetched, word, note = from_local(outlet, local)
+        else:
+            fetched, word, note = fetch_outlet(outlet, state)
         added = 0
         skipped = {"no link/title": 0, "no date": 0, "too old/future": 0}
         example_date = ""

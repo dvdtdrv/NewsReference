@@ -17,6 +17,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read      # to pick up the articles David's PC read (local-fetch.yml)
   contents: write    # to save the data branch
   pages: write       # to publish the website
   id-token: write
@@ -58,6 +59,17 @@ jobs:
 
       - name: Install libraries
         run: pip install -r requirements.txt
+
+      - name: Get the articles David's PC read
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          id=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow local-fetch.yml --status success \
+               --limit 1 --json databaseId -q '.[0].databaseId' 2>/dev/null || true)
+          if [ -n "$id" ]; then
+            gh run download "$id" --repo "$GITHUB_REPOSITORY" -n local-articles -D local_in || true
+          fi
+          if [ -f local_in/local_articles.json ]; then echo "Got the PC's articles (run $id)."; else echo "No articles from the PC."; fi
 
       - name: Collect, group, build
         run: |

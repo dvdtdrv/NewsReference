@@ -13,3 +13,7 @@ articles.json
 
 # Personal documents in this folder that shouldn't become public
 *.pdf
+
+# Handed over by the PC runner during GitHub runs
+local_in/
+local_articles.json
