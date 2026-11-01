@@ -1,0 +1,202 @@
+[
+ {
+  "outlet": "BTA",
+  "type": "news agency",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": null,
+  "first_ok": null,
+  "note": "too many requests; will retry after 21:15 UTC"
+ },
+ {
+  "outlet": "BNT",
+  "type": "public TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "bTV Novinite",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Nova",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Dnevnik",
+  "type": "online daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Capital",
+  "type": "weekly / business",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Mediapool",
+  "type": "online, politics",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Standart",
+  "type": "daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "24 Chasa",
+  "type": "mass daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Trud",
+  "type": "mass daily",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "2 skipped: too old/future; e.g. date '' read as 2026-10-19T12:13"
+ },
+ {
+  "outlet": "Sega",
+  "type": "daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "21 skipped: too old/future; e.g. date 'Fri, 23 Oct 2026 19:08:43 +0300' read as 2026-10-23T16:08"
+ },
+ {
+  "outlet": "Club Z",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Dnes.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Actualno",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Fakti",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Offnews",
+  "type": "online portal",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Blitz",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "PIK",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 23,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Banker",
+  "type": "business",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Pogled.info",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-10-31T21:10:48.091879+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ }
+]
