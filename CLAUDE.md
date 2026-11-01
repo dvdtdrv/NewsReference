@@ -44,6 +44,12 @@ He runs things by double-clicking .bat files in Desktop\NewsReference.
   https://www.dw.com/bg/news-sitemap.xml; News.bg via its https://news.bg/latest page (`page` method,
   `read_newsbg_page` in collect.py; relative times like "преди 2 часа", robots crawl-delay 10). 36 outlets.
 
+## Web app (1 Nov 2026)
+- `web/` holds manifest.webmanifest, icons (drawn in Oswald 500, NEWS/REFERENCE on #E6DFCC) and sw.js
+  (network-first for same-origin pages, falls back to cache offline). build_site.py copies web/* into site/
+  and replaces {{BASE}} in the template head ("" or "../" for archive pages). Tested: no installability
+  errors, works offline. The service worker registers only on https (GitHub Pages).
+
 ## Decisions
 - Never store or show full article text: headline, short summary, link only.
 - Google News RSS fallback is NOT allowed (Google's robots.txt disallows it).

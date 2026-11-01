@@ -1,6 +1,15 @@
 <title>News Reference</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Една новина, всички медии: българските медии една до друга.">
+<!-- web app: installable on phones ("Add to Home screen"); {{BASE}} is "" or "../" (filled in by build_site.py) -->
+<link rel="manifest" href="{{BASE}}manifest.webmanifest">
+<meta name="theme-color" content="#E6DFCC">
+<link rel="icon" type="image/png" href="{{BASE}}favicon-48.png">
+<link rel="apple-touch-icon" href="{{BASE}}apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="News Ref">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&family=Golos+Text:wght@400;500;600&display=swap">
@@ -338,6 +347,12 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
 <script>
 (() => {
   document.documentElement.lang = "bg";
+
+  // web app: the offline helper (only works on a real https site, e.g. GitHub Pages)
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    const swBase = document.querySelector('link[rel="manifest"]')?.getAttribute("href").replace("manifest.webmanifest", "") || "";
+    navigator.serviceWorker.register(`${swBase}sw.js`).catch(() => {});
+  }
   const PAGE = 20;
   const TYPE_BG = {
     "news agency": "информационна агенция", "public TV": "обществена телевизия",

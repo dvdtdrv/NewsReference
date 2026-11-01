@@ -32,6 +32,13 @@ Run it every so often; each run adds to the archive. Later, GitHub will run it e
 | `check_feeds.py`, `probe_missing.py` | Diagnostic tools used to find the feeds. |
 | `CLAUDE.md` | Project brief for Claude Code. |
 
+## Web app
+
+The `web` folder holds what makes the site installable on phones: `manifest.webmanifest`
+(name, colours, icons), the icons, and `sw.js` (keeps the last opened pages available offline).
+`build_site.py` copies them into `site\`. On a phone: open the site, then
+"Add to Home screen" (Android) or Share → "Add to Home Screen" (iPhone).
+
 ## On GitHub
 
 `.github/workflows/update.yml` runs the three steps on GitHub every 30 minutes and publishes `site/`
