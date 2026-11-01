@@ -8,6 +8,8 @@ Each outlet has:
   feed     - the RSS feed address, OR
   sitemap  - a "news sitemap" address (a list of new articles with headlines) for outlets without a feed
   gentle   - True for sites that limit automated traffic: read at most once per run, and wait when told to
+  local    - True for outlets that refuse GitHub's servers but work from David's PC: they are read on
+             the PC by fetch_local.py (workflow local-fetch.yml), and GitHub's run picks up the result
   as_browser - introduce ourselves as a web browser. ONLY with the outlet's written permission
                (kept in the permissions folder).
 
@@ -30,7 +32,7 @@ OUTLETS = [
     # --- Commercial TV ---
     # bTV gave written permission on 1 Nov 2026 to read its coverage through a browser for this
     # project (see permissions/bTV.md), so the program introduces itself as a browser for bTV only.
-    {"name": "bTV Novinite", "domain": "btvnovinite.bg", "type": "commercial TV",
+    {"name": "bTV Novinite", "local": True, "domain": "btvnovinite.bg", "type": "commercial TV",
      "feed": "https://btvnovinite.bg/lbin/v3/rss.php", "as_browser": True},
     {"name": "Nova", "domain": "nova.bg", "type": "commercial TV",
      "feed": "https://nova.bg/rss/latest"},
@@ -46,13 +48,13 @@ OUTLETS = [
      "feed": "https://www.standartnews.com/rss?p=1"},
     {"name": "24 Chasa", "domain": "24chasa.bg", "type": "mass daily",
      "feed": "https://www.24chasa.bg/rss"},
-    {"name": "Trud", "domain": "trud.bg", "type": "mass daily",
+    {"name": "Trud", "local": True, "domain": "trud.bg", "type": "mass daily",
      "sitemap": "https://trud.bg/sitemaps/sitemap_latest.xml"},
     {"name": "Sega", "domain": "segabg.com", "type": "daily",
      "feed": "https://www.segabg.com/rss"},
     {"name": "Club Z", "domain": "clubz.bg", "type": "online",
      "feed": "https://www.clubz.bg/rss"},
-    {"name": "Dnes.bg", "domain": "dnes.bg", "type": "online portal",
+    {"name": "Dnes.bg", "local": True, "domain": "dnes.bg", "type": "online portal",
      "feed": "https://www.dnes.bg/rss.php?today"},
     {"name": "Actualno", "domain": "actualno.com", "type": "online portal",
      "feed": "https://www.actualno.com/rss"},
@@ -60,7 +62,7 @@ OUTLETS = [
      "feed": "https://fakti.bg/feed"},
     {"name": "Offnews", "domain": "offnews.bg", "type": "online portal",
      "sitemap": "https://offnews.bg/xml/sitemap.php?type=news"},
-    {"name": "Blitz", "domain": "blitz.bg", "type": "online portal",
+    {"name": "Blitz", "local": True, "domain": "blitz.bg", "type": "online portal",
      "feed": "https://blitz.bg/rss"},
     # Novini.bg's feed is under /api/, which its robots.txt forbids, so we read its news sitemap instead
     {"name": "Novini.bg", "domain": "novini.bg", "type": "online portal",
@@ -84,9 +86,9 @@ OUTLETS = [
     # News.bg has no feed or sitemap; we read its "latest news" page (robots.txt allows it)
     {"name": "News.bg", "domain": "news.bg", "type": "online portal",
      "page": "https://news.bg/latest"},
-    {"name": "BG On Air", "domain": "bgonair.bg", "type": "commercial TV",
+    {"name": "BG On Air", "local": True, "domain": "bgonair.bg", "type": "commercial TV",
      "feed": "https://www.bgonair.bg/rss/news"},
-    {"name": "Bloomberg TV", "domain": "bloombergtv.bg", "type": "business TV",
+    {"name": "Bloomberg TV", "local": True, "domain": "bloombergtv.bg", "type": "business TV",
      "feed": "https://www.bloombergtv.bg/rss/news"},
     {"name": "Evrocom", "domain": "eurocom.bg", "type": "commercial TV",
      "feed": "https://eurocom.bg/feed/"},
@@ -99,7 +101,7 @@ OUTLETS = [
      "feed": "https://boulevardbulgaria.bg/feed.atom"},
     {"name": "Svobodna Tochka", "domain": "svobodnatochka.bg", "type": "online",
      "feed": "https://svobodnatochka.bg/feed/"},
-    {"name": "Marica", "domain": "marica.bg", "type": "regional",
+    {"name": "Marica", "local": True, "domain": "marica.bg", "type": "regional",
      "feed": "https://www.marica.bg/rss"},
     {"name": "Moreto.net", "domain": "moreto.net", "type": "regional",
      "feed": "https://www.moreto.net/rss/lastnews.xml"},

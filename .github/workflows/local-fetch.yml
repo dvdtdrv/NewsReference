@@ -1,0 +1,40 @@
+# Runs on David's PC (a "self-hosted runner"), every 30 minutes while the PC is on.
+#
+# Some outlets refuse GitHub's servers but accept a normal Bulgarian internet connection.
+# This job reads only those outlets (marked "local" in feeds.py) and hands the articles to the
+# main "Update News Reference" run, which starts a few minutes later and picks them up.
+# If the PC is off, the main run carries on without these outlets (they show as "waiting").
+
+name: Read blocked outlets on David's PC
+
+on:
+  schedule:
+    - cron: "2,32 * * * *"     # 5 minutes before the main run (:07 and :37)
+  workflow_dispatch:
+
+concurrency:
+  group: local-fetch
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: [self-hosted, Windows]
+    timeout-minutes: 10
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Read the blocked outlets
+        shell: powershell
+        run: |
+          $py = "$env:USERPROFILE\anaconda3\python.exe"
+          if (-not (Test-Path $py)) { $py = "python" }
+          & $py -m pip install -q -r requirements.txt
+          & $py fetch_local.py
+
+      - name: Hand the articles to the main run
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-articles
+          path: local_articles.json
+          retention-days: 1
