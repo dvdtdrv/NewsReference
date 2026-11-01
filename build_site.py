@@ -5,6 +5,7 @@ Takes site_template.html and writes:
   site/index.html               the front page: stories from the last 48 hours
   site/abonament.html           the subscription page
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
+  site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
 
 The stories are put inside each page itself, so the pages work straight from your folder:
 double-click site/index.html to open the site.
@@ -14,11 +15,13 @@ Run with:   python build_site.py
 
 import json
 import os
+import shutil
 
 from feeds import UNTRACKED
 
 TEMPLATE = "site_template.html"
 OUT_DIR = "site"
+WEB_DIR = "web"   # manifest, icons and offline helper that make the site installable on phones
 DAYS_DIR = os.path.join("data", "stories")
 KEEP = ("outlet", "title", "link", "published", "image")
 
@@ -45,7 +48,7 @@ def archive_days():
 def render(data, template, fragment_only=False):
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     payload = payload.replace("</", "<\\/")  # a headline containing "</script>" must not end the script
-    page = template.replace("/*__DATA__*/", payload)
+    page = template.replace("/*__DATA__*/", payload).replace("{{BASE}}", data.get("base", ""))
     if fragment_only:
         return page
     # wrap in a full HTML document: title, fonts and styles go in <head>, the rest in <body>
@@ -76,6 +79,10 @@ def main():
     with open(TEMPLATE, encoding="utf-8") as f:
         template = f.read()
     os.makedirs(os.path.join(OUT_DIR, "archive"), exist_ok=True)
+
+    # web app files (manifest, icons, offline helper) are copied as they are
+    for name in os.listdir(WEB_DIR):
+        shutil.copyfile(os.path.join(WEB_DIR, name), os.path.join(OUT_DIR, name))
 
     front = front_page_data()
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
