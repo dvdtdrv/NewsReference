@@ -1,0 +1,15 @@
+# Made by the scripts on each run; on GitHub they live on the "data" branch and the website.
+data/
+site/
+
+# Local working files
+__pycache__/
+*.pyc
+*.tmp
+run_log.txt
+feed_report.csv
+probe_report.txt
+articles.json
+
+# Personal documents in this folder that shouldn't become public
+*.pdf

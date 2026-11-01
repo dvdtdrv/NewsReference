@@ -1,0 +1,628 @@
+<title>News Reference</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Една новина, всички медии: българските медии една до друга.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: newspaper column on egg-white paper. Clean spread header, a big condensed
+   statement, then one band per story: summary title, coverage strip, the outlets' own articles. */
+:root {
+  --paper: #F3EFE4;        /* egg white: the stories */
+  --paper-deep: #E6DFCC;   /* a shade darker: the first screen, under the sliding sheet */
+  --paper-2: #E9E3D3;      /* photo placeholder, hover wash */
+  --ink: #15162B;          /* deep navy-black, from the reference header */
+  --ink-soft: #3E3F55;
+  --muted: #74717A;
+  --rule: #D8D1BF;
+  --display: "Oswald", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --max: 1240px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper-deep); color: var(--ink); font: 400 15px/1.5 var(--body); }
+a { color: inherit; }
+.wrap {
+  max-width: calc(var(--max) + 64px); margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- two "slides": the first screen stays put, the stories slide up over it ---------- */
+.stage {
+  position: sticky; top: 0; z-index: 0; overflow: hidden;
+  height: calc(100vh - 72px); height: calc(100svh - 72px);   /* the sheet's top edge peeks in below */
+}
+.stage-inner { height: 100%; display: flex; flex-direction: column; transform-origin: 50% 35%; will-change: transform, opacity; }
+.stage .intro { flex: 1; align-content: center; }
+.sheet {
+  position: relative; z-index: 1; min-height: 100vh;
+  background: var(--paper); border-radius: 28px 28px 0 0;
+  box-shadow: 0 -18px 50px rgba(21, 22, 43, .14);
+}
+/* small or short screens: no sliding, the page simply scrolls */
+@media (max-width: 860px), (max-height: 620px) {
+  .stage { position: relative; height: auto; overflow: visible; }
+  .sheet { border-radius: 20px 20px 0 0; }
+}
+
+/* ---------- header ---------- */
+.masthead {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center;
+  padding-block: 18px 16px; border-bottom: 1px solid var(--rule);
+}
+.nav-link, .cta, .tab { white-space: nowrap; }
+.nav-link {
+  font: 400 15px/1 var(--display); letter-spacing: .06em; text-transform: uppercase;
+  text-decoration: none; color: var(--ink-soft); justify-self: center; padding: 8px 4px;
+}
+.nav-link:hover, .nav-link:focus-visible { color: var(--ink); }
+.nav-group { display: flex; align-items: center; justify-content: space-around; gap: 12px; }
+.logo { text-align: center; text-decoration: none; padding: 0 24px; }
+.logo b {
+  display: block; font: 500 30px/.9 var(--display); text-transform: uppercase;
+  letter-spacing: -.005em; color: var(--ink);
+}
+.logo small {
+  display: block; margin-top: 8px; font: 400 10.5px/1 var(--display);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+}
+.cta {
+  font: 400 15px/1 var(--display); letter-spacing: .06em; text-transform: uppercase;
+  background: var(--ink); color: var(--paper); border: 0; padding: 12px 16px; cursor: pointer;
+  border-radius: 2px; text-decoration: none; display: inline-block;
+}
+.cta:disabled { opacity: .4; cursor: not-allowed; }
+.cta:hover, .cta:focus-visible { background: var(--ink-soft); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* ---------- intro ---------- */
+.intro {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px 56px;
+  align-items: end; padding-block: 56px 64px;
+}
+.intro h1 {
+  margin: 0; font: 200 clamp(56px, 9.5vw, 132px)/.9 var(--display);
+  letter-spacing: -.015em; text-wrap: balance;
+}
+.intro p { margin: 0 0 16px; max-width: 44ch; font-size: 17px; color: var(--ink-soft); }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.stat { font: 300 15px/1.2 var(--display); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.stat strong { display: block; font-weight: 300; font-size: 40px; letter-spacing: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ---------- story list ---------- */
+.list-head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 24px;
+  padding-block: 28px 8px;
+}
+.list-head h2 { margin: 0; font: 300 15px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.tab {
+  font: 400 15px/1 var(--display); letter-spacing: .06em; text-transform: uppercase;
+  background: none; border: 0; padding: 8px 0; color: var(--muted); cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+.tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+
+.story { padding-block: 36px 40px; border-bottom: 1px solid var(--rule); }
+.story-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 14px;
+  font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+.story-meta .count { color: var(--ink); }
+.squares { display: inline-flex; gap: 3px; }
+.sq { width: 9px; height: 9px; border: 1px solid var(--rule); }
+.sq.on { background: var(--ink); border-color: var(--ink); }
+.story h3 {
+  margin: 0; max-width: 26ch; font: 300 clamp(30px, 3.8vw, 50px)/1.02 var(--display);
+  letter-spacing: -.01em; text-wrap: balance;
+}
+/* title + a hand-drawn arrow to a small note saying how the title was made */
+.title-row { position: relative; display: flex; align-items: flex-start; gap: 4px; margin-bottom: 24px; }
+.title-row h3 { min-width: 0; }
+/* once measured, the note is pinned right after the end of the title's first line */
+.title-row.placed .title-note { position: absolute; margin-top: 10px; }
+.title-note {
+  display: flex; align-items: flex-end; gap: 3px; flex-shrink: 0; white-space: nowrap;
+  margin-top: .35em; color: var(--muted); cursor: help;
+}
+.title-arrow { width: 40px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.title-note-text { font: 400 10.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; padding-bottom: 1px; }
+@media (max-width: 700px) {
+  .title-row { flex-direction: column; gap: 6px; }
+  .title-note { margin-top: 0; }
+}
+/* a story shows one full row of articles; "all N articles" opens the rest */
+.articles { --cols: 5; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 28px 20px; }
+.articles.collapsed > .card:nth-child(n + 6) { display: none; }
+.expand {
+  margin-top: 20px; background: none; border: 0; padding: 6px 0; cursor: pointer; color: var(--ink);
+  font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase;
+  border-bottom: 1px solid var(--ink);
+}
+.view-note { margin: 0 0 8px; font-size: 14px; color: var(--muted); max-width: 70ch; }
+.card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; min-width: 0; }
+.ph {
+  position: relative; aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; background: var(--paper-2);
+}
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.ph .fallback {
+  position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 12px;
+  font: 200 30px/.95 var(--display); text-transform: uppercase; color: var(--ink-soft);
+}
+.card:hover .ph img { transform: scale(1.03); }
+.src {
+  display: flex; justify-content: space-between; gap: 8px;
+  font: 500 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase;
+}
+.src time { font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hl { font-size: 15px; line-height: 1.38; overflow-wrap: anywhere; }
+.card:hover .hl, .card:focus-visible .hl { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.missing { margin: 24px 0 0; font-size: 13px; color: var(--muted); }
+.missing b { font: 400 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-right: 6px; }
+.more-wrap { display: flex; justify-content: center; padding-block: 40px; }
+.more { background: none; color: var(--ink); border: 1px solid var(--ink); }
+.more:hover, .more:focus-visible { background: var(--ink); color: var(--paper); }
+
+/* ---------- outlets, method, footer ---------- */
+.section { padding-block: 56px; border-top: 1px solid var(--ink); }
+.section h2 { margin: 0 0 28px; font: 200 clamp(40px, 6vw, 72px)/.95 var(--display); }
+.outlets { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 32px; }
+.outlet { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--rule); min-width: 0; }
+.outlet span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
+.outlet span:last-child { font-size: 13px; color: var(--muted); text-align: right; }
+.outlet.off span:first-child { color: var(--muted); }
+.subhead { margin: 40px 0 12px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 48px; }
+.cols p { margin: 0; max-width: 60ch; color: var(--ink-soft); }
+.cols h3 { margin: 0 0 8px; font: 400 18px/1.2 var(--display); text-transform: uppercase; letter-spacing: .04em; }
+footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+/* ---------- subscription page ---------- */
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; padding-block: 8px 24px; }
+.tier {
+  display: flex; flex-direction: column; gap: 14px; padding: 28px 24px;
+  border: 1px solid var(--rule); background: var(--paper); min-width: 0;
+}
+.tier.featured { border-color: var(--ink); }
+.tier h3 { margin: 0; font: 400 15px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.price { margin: 0; font: 300 15px/1 var(--display); letter-spacing: .04em; color: var(--muted); }
+.price strong { font: 200 64px/1 var(--display); color: var(--ink); letter-spacing: -.01em; margin-right: 6px; }
+.tier p:not(.price) { margin: 0; color: var(--ink-soft); flex: 1; }
+.tier .cta { align-self: flex-start; }
+.pay-note { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+#support { padding-block: 48px 56px; }
+
+/* ---------- archive ---------- */
+.back {
+  display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--ink);
+  font: 400 14px/1 var(--display); letter-spacing: .08em; text-transform: uppercase;
+  border-bottom: 1px solid var(--ink); padding-bottom: 4px;
+}
+.days { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0 24px; margin-top: 20px; }
+.day {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  padding-block: 12px; border-bottom: 1px solid var(--rule); text-decoration: none;
+}
+.day span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
+.day span:last-child { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.day:hover span:first-child, .day:focus-visible span:first-child { text-decoration: underline; text-underline-offset: 3px; }
+.day[aria-current="page"] { border-bottom-color: var(--ink); }
+.day[aria-current="page"] span:first-child { font-weight: 500; }
+
+/* ---------- narrow screens ---------- */
+@media (max-width: 1100px) {
+  .articles { --cols: 4; }
+  .articles.collapsed > .card:nth-child(n + 5) { display: none; }
+}
+@media (max-width: 860px) {
+  .masthead { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; }
+  .logo { flex-basis: 100%; margin-bottom: 8px; }
+  .nav-group { display: contents; }
+  .logo { grid-column: 1 / -1; order: -1; }
+  .intro { grid-template-columns: minmax(0, 1fr); padding-block: 40px 36px; }
+}
+@media (max-width: 480px) {
+  .nav-link, .cta { font-size: 13px; }
+  .cta { padding: 10px 12px; }
+  .articles { --cols: 2; gap: 22px 14px; }
+  .hl { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .ph img, body { transition: none; } }
+</style>
+<!--body-->
+<div class="stage" id="top">
+ <div class="wrap stage-inner">
+  <header class="masthead">
+    <nav class="nav-group" aria-label="Раздели">
+      <a class="nav-link" href="#stories">Истории</a>
+      <a class="nav-link" href="#archive" id="nav-archive">Архив</a>
+    </nav>
+    <a class="logo" href="#top" aria-label="News Reference, начало">
+      <b>News<br>Reference</b>
+      <small id="dateline">&nbsp;</small>
+    </a>
+    <div class="nav-group">
+      <a class="nav-link" href="#outlets">Медии</a>
+      <a class="nav-link" href="#about">За проекта</a>
+      <a class="cta" id="cta-sub" href="abonament.html">Абонамент</a>
+    </div>
+  </header>
+
+    <section class="intro" id="intro">
+      <h1 id="intro-title">Една новина.<br>Всички медии.</h1>
+      <div>
+        <a class="back" id="back" href="../index.html" hidden>← Последните 48 часа</a>
+        <p id="intro-text">Събираме заглавията на българските медии и ги подреждаме по история. Така виждате кой какво отразява, как го озаглавява и кой мълчи.</p>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+ </div>
+</div>
+
+<main class="sheet">
+ <div class="wrap">
+    <div class="list-head" id="stories">
+      <h2 id="list-title">Истории · последните 48 часа</h2>
+      <div class="tabs" role="group" aria-label="Подреждане">
+        <button class="tab" type="button" data-view="top" aria-pressed="true">Най-отразявани</button>
+        <button class="tab" type="button" data-view="new" aria-pressed="false">Най-нови</button>
+      </div>
+    </div>
+    <p class="view-note" id="view-note" hidden></p>
+    <div id="list"></div>
+    <div class="more-wrap" id="more-wrap"><button class="cta more" id="more" type="button">Покажи още истории</button></div>
+
+    <section id="support" hidden>
+      <div class="tiers">
+        <div class="tier">
+          <h3>Читател</h3>
+          <p class="price"><strong>3 €</strong>на месец</p>
+          <p>Помагаш сайтът да остане безплатен за всички и без реклами.</p>
+          <button class="cta" type="button" disabled>Абонирай се</button>
+        </div>
+        <div class="tier featured">
+          <h3>Поддръжник</h3>
+          <p class="price"><strong>7 €</strong>на месец</p>
+          <p>Покриваш част от разходите за сървъри и за добавяне на още медии, включително регионални.</p>
+          <button class="cta" type="button" disabled>Абонирай се</button>
+        </div>
+        <div class="tier">
+          <h3>Еднократно</h3>
+          <p class="price"><strong>€</strong>сума по избор</p>
+          <p>Подкрепа веднъж, без абонамент.</p>
+          <button class="cta" type="button" disabled>Дари</button>
+        </div>
+      </div>
+      <p class="pay-note">Плащанията още не са включени. Скоро тук ще можеш да се абонираш с карта.</p>
+    </section>
+
+    <section class="section" id="archive" hidden>
+      <h2>Архив</h2>
+      <p class="view-note">Всички истории остават тук, подредени по деня, в който са започнали.</p>
+      <div class="days" id="day-list"></div>
+    </section>
+
+    <section class="section" id="outlets">
+      <h2>Медии</h2>
+      <div class="outlets" id="outlet-list"></div>
+      <p class="subhead" id="untracked-head">Още не следим</p>
+      <div class="outlets" id="untracked-list"></div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>За проекта</h2>
+      <div class="cols">
+        <p>News Reference показва как различните български медии отразяват едни и същи събития, без да слага етикети като „ляво“ и „дясно“.</p>
+        <p>Заглавията и снимките принадлежат на съответните медии. Всяка карта води към оригиналната статия на сайта на медията.</p>
+      </div>
+      <p class="subhead" id="method">Как работи</p>
+      <div class="cols">
+        <div><h3>Събиране</h3><p>Четем публичните RSS емисии и новинарските карти на сайтовете на медиите. Взимаме само заглавието, снимката и връзката към статията. Спазваме правилата на всеки сайт за автоматизиран достъп.</p></div>
+        <div><h3>Групиране</h3><p>Сравняваме заглавията и началото на текстовете. Статии от различни медии за едно и също събитие стават една история. История има, когато поне две медии са писали за нея.</p></div>
+        <div><h3>„Не отразиха“</h3><p>Медия се показва като „не отрази“ само ако я следим в момента и имаме нейните публикации отпреди началото на историята. Медиите, които още не следим, никога не се броят.</p></div>
+      </div>
+    </section>
+  <footer>
+    <span>News Reference</span>
+    <span id="updated"></span>
+  </footer>
+ </div>
+</main>
+
+<script type="application/json" id="data">/*__DATA__*/</script>
+<script>
+(() => {
+  document.documentElement.lang = "bg";
+  const PAGE = 20;
+  const TYPE_BG = {
+    "news agency": "информационна агенция", "public TV": "обществена телевизия",
+    "commercial TV": "търговска телевизия", "online daily": "онлайн всекидневник",
+    "weekly / business": "седмичник, бизнес", "online, politics": "онлайн, политика",
+    "daily": "всекидневник", "mass daily": "всекидневник", "online": "онлайн медия",
+    "online portal": "новинарски портал", "business": "бизнес", "public radio": "обществено радио",
+    "radio": "радио", "business TV": "бизнес телевизия", "international": "международна медия",
+    "regional": "регионална медия"
+  };
+  const UNTRACKED_BG = {
+    "BNR": "няма RSS емисия", "Novini.bg": "няма емисия със заглавия", "Dir.bg": "няма емисия"
+  };
+
+  let data;
+  try { data = JSON.parse(document.getElementById("data").textContent); } catch (e) { data = null; }
+  if (!data || !data.stories) {
+    document.getElementById("list").textContent = "Няма данни. Пуснете run_all.bat.";
+    return;
+  }
+
+  const tz = "Europe/Sofia";
+  const fmtTime = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, hour: "2-digit", minute: "2-digit" });
+  const fmtDay = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "short" });
+  const fmtLong = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, weekday: "long", day: "numeric", month: "long" });
+  const dayKey = d => new Intl.DateTimeFormat("en-CA", { timeZone: tz }).format(d);
+  const generated = new Date(data.generated_at);
+  const archiveDate = data.archive_date || null;            // set on archive pages, e.g. "2026-10-30"
+  const base = data.base || "";                            // "../" on archive pages
+  const dayDate = s => new Date(`${s}T12:00:00Z`);          // midday, so the date is the same in Sofia
+  const refDay = archiveDate || dayKey(generated);
+  const when = iso => {
+    const d = new Date(iso);
+    return dayKey(d) === refDay ? fmtTime.format(d) : `${fmtDay.format(d)} ${fmtTime.format(d)}`;
+  };
+  // story dates: "31 октомври", "30 – 31 октомври" or "31 октомври – 1 ноември"
+  const partsOf = iso => {
+    const p = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "long" }).formatToParts(new Date(iso));
+    return { day: p.find(x => x.type === "day").value, month: p.find(x => x.type === "month").value };
+  };
+  const dateSpan = (a, b) => {
+    const x = partsOf(a), y = partsOf(b);
+    if (x.day === y.day && x.month === y.month) return `${x.day} ${x.month}`;
+    if (x.month === y.month) return `${x.day} – ${y.day} ${y.month}`;
+    return `${x.day} ${x.month} – ${y.day} ${y.month}`;
+  };
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : null;
+
+  const tracked = data.tracked_outlets || [];
+  const active = tracked.filter(o => o.active);
+
+  // header + intro
+  document.getElementById("dateline").textContent = fmtLong.format(archiveDate ? dayDate(archiveDate) : generated);
+  if (archiveDate) {
+    const long = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "long", year: "numeric" })
+      .format(dayDate(archiveDate));
+    document.title = `${long} · News Reference`;
+    document.getElementById("intro-title").textContent = long.replace(/\s*г\.$/, "");
+    document.getElementById("intro-text").textContent =
+      "Архив. Историите, започнали в този ден, с всички медии, които ги отразиха.";
+    document.getElementById("list-title").textContent = `Истории · ${fmtLong.format(dayDate(archiveDate))}`;
+    document.getElementById("back").hidden = false;
+    document.querySelector(".logo").href = `${base}index.html`;
+  }
+  // links between pages: the subscription page sits next to index.html
+  document.getElementById("cta-sub").href = `${base}abonament.html`;
+
+  // the subscription page: same header and design, its own intro, no story list
+  const isSupport = data.page === "support";
+  if (isSupport) {
+    document.title = "Абонамент · News Reference";
+    document.getElementById("intro-title").textContent = "Подкрепи News Reference.";
+    document.getElementById("intro-text").textContent =
+      "Сайтът е безплатен и без реклами. Абонаментът покрива сървърите и времето, нужно да следим още медии и да показваме кой какво отразява.";
+    ["stories", "view-note", "list", "more-wrap", "archive", "stats"].forEach(id => {
+      document.getElementById(id).hidden = true;
+    });
+    document.getElementById("support").hidden = false;
+    document.getElementById("cta-sub").setAttribute("aria-current", "page");
+    document.querySelector(".logo").href = `${base}index.html`;
+    document.querySelector('.nav-link[href="#stories"]').href = `${base}index.html#stories`;
+    document.getElementById("nav-archive").href = `${base}index.html#archive`;
+  }
+
+  const stats = document.getElementById("stats");
+  [[data.stories.length, "истории"], [active.length, "медии"], [archiveDate ? null : data.articles_in_window, "статии за 48 ч"]]
+    .filter(([n]) => n != null)
+    .forEach(([n, label]) => { const s = el("div", "stat"); s.append(el("strong", null, n), label); stats.append(s); });
+
+  // archive: the list of days
+  const days = data.archive_days || [];
+  if (days.length && !isSupport) {
+    const fmtDayName = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, weekday: "short", day: "numeric", month: "short" });
+    const list = document.getElementById("day-list");
+    days.forEach(d => {
+      const a = el("a", "day");
+      a.href = (archiveDate ? "" : "archive/") + `${d.date}.html`;
+      if (d.date === archiveDate) a.setAttribute("aria-current", "page");
+      a.append(el("span", null, fmtDayName.format(dayDate(d.date))), el("span", null, `${d.count} ист.`));
+      list.append(a);
+    });
+    document.getElementById("archive").hidden = false;
+  }
+  document.getElementById("updated").textContent = `Данни към ${fmtLong.format(generated)}, ${fmtTime.format(generated)}`;
+
+  // the first screen stays in place while the stories sheet slides over it;
+  // as it gets covered it shrinks a little and fades, like a slide going into the background
+  (() => {
+    const stage = document.getElementById("top");
+    const inner = stage.querySelector(".stage-inner");
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let queued = false;
+    const paint = () => {
+      queued = false;
+      if (still.matches || getComputedStyle(stage).position !== "sticky") {
+        inner.style.transform = ""; inner.style.opacity = "";
+        return;
+      }
+      const p = Math.min(1, Math.max(0, window.scrollY / stage.offsetHeight));
+      inner.style.transform = `scale(${(1 - 0.06 * p).toFixed(4)})`;
+      inner.style.opacity = (1 - 0.75 * p).toFixed(3);
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    paint();
+  })();
+
+  // a hand-drawn loop arrow (our own drawing): sweeps right, loops once, points right
+  const ARROW_SVG = '<svg class="title-arrow" viewBox="0 0 120 56" aria-hidden="true" focusable="false">' +
+    '<path d="M4 40 C 22 14, 56 6, 68 24 C 76 37, 64 49, 56 41 C 48 33, 60 20, 78 23 C 94 26, 104 34, 110 42" />' +
+    '<path d="M95 44 L111 43 L107 28" /></svg>';
+
+  // one story
+  function storyNode(s) {
+    const art = el("article", "story");
+    const meta = el("div", "story-meta");
+    meta.append(el("span", "count", `${s.outlet_count} ${s.outlet_count === 1 ? "медия" : "медии"}`));
+    const sq = el("span", "squares");
+    sq.setAttribute("aria-hidden", "true");
+    active.forEach(o => {
+      const b = el("i", "sq" + (s.outlets.includes(o.name) ? " on" : ""));
+      b.title = o.name;
+      sq.append(b);
+    });
+    meta.append(sq, el("time", null, dateSpan(s.first_seen, s.last_updated)));
+    // the story title, with a hand-drawn arrow pointing to a note on where the title comes from
+    const titleRow = el("div", "title-row");
+    const note = el("span", "title-note");
+    note.innerHTML = ARROW_SVG;   // a constant drawing, no outside text in it
+    const ai = s.headline_source === "ai";
+    note.append(el("span", "title-note-text", ai ? "Обобщено от AI" : "Автоматично избрано заглавие"));
+    note.title = ai
+      ? "Това заглавие е написано от изкуствен интелект въз основа на заглавията на медиите. Оригиналните заглавия са под него."
+      : "Това заглавие е избрано автоматично измежду заглавията на медиите. Оригиналните заглавия са под него.";
+    // the note sits right next to the end of the title's first line
+    const h3 = el("h3", null, s.headline);
+    titleRow.append(h3, note);
+    art.append(meta, titleRow);
+
+    const grid = el("div", "articles");
+    s.articles.forEach(a => {
+      const link = safeUrl(a.link);
+      const card = el(link ? "a" : "div", "card");
+      if (link) { card.href = link; card.target = "_blank"; card.rel = "noopener noreferrer"; }
+      const ph = el("div", "ph");
+      const fallback = () => { ph.replaceChildren(el("span", "fallback", a.outlet)); };
+      const img = safeUrl(a.image);
+      if (img) {
+        const i = new Image();
+        i.loading = "lazy"; i.alt = ""; i.referrerPolicy = "no-referrer"; i.decoding = "async";
+        i.onerror = fallback;
+        i.src = img;
+        ph.append(i);
+      } else fallback();
+      const src = el("div", "src");
+      const pub = new Date(a.published);
+      src.append(el("span", null, a.outlet), el("time", null, `${fmtDay.format(pub)}, ${fmtTime.format(pub)}`));
+      card.append(ph, src, el("div", "hl", a.title));
+      grid.append(card);
+    });
+    art.append(grid);
+    // one row shows by default; the CSS decides how many fit (5, 4 or 2 per row)
+    if (s.articles.length > 4) {
+      grid.classList.add("collapsed");
+      const btn = el("button", "expand", `Всички ${s.articles.length} статии`);
+      btn.type = "button";
+      btn.addEventListener("click", () => {
+        const open = grid.classList.toggle("collapsed");
+        btn.textContent = open ? `Всички ${s.articles.length} статии` : "Скрий";
+      });
+      art.append(btn);
+      // hide the button when the whole story already fits in one row
+      requestAnimationFrame(() => {
+        const cols = parseInt(getComputedStyle(grid).getPropertyValue("--cols"), 10) || 5;
+        if (s.articles.length <= cols) btn.hidden = true;
+      });
+    }
+
+    if (s.not_covered && s.not_covered.length) {
+      const m = el("p", "missing");
+      m.append(el("b", null, "Не отразиха"), s.not_covered.join(", "));
+      art.append(m);
+    }
+    return art;
+  }
+
+  // views
+  const views = {
+    top: { note: "", list: () => [...data.stories] },
+    new: { note: "", list: () => [...data.stories].sort((a, b) => b.last_updated.localeCompare(a.last_updated)) }
+  };
+  let current = "top", shown = 0, items = [];
+  const list = document.getElementById("list");
+  const more = document.getElementById("more");
+
+  // pin each title's note right after the end of the title's first line
+  const narrow = window.matchMedia("(max-width: 700px)");
+  function placeNotes() {
+    document.querySelectorAll(".title-row").forEach(row => {
+      const h3 = row.querySelector("h3"), note = row.querySelector(".title-note");
+      row.classList.remove("placed");
+      note.style.left = note.style.top = "";
+      if (narrow.matches) return;                       // on phones the note sits under the title
+      const range = document.createRange();
+      range.selectNodeContents(h3);
+      const first = range.getClientRects()[0];
+      if (!first) return;
+      const box = row.getBoundingClientRect();
+      const left = first.right - box.left + 12;
+      if (left + note.offsetWidth > box.width) return;  // no room: keep it beside the title block
+      row.classList.add("placed");
+      note.style.left = `${left}px`;
+      note.style.top = `${first.top - box.top}px`;
+    });
+  }
+  let placeQueued = false;
+  const queuePlace = () => { if (!placeQueued) { placeQueued = true; requestAnimationFrame(() => { placeQueued = false; placeNotes(); }); } };
+  window.addEventListener("resize", queuePlace);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queuePlace);
+
+  function renderMore() {
+    const frag = document.createDocumentFragment();
+    items.slice(shown, shown + PAGE).forEach(s => frag.append(storyNode(s)));
+    list.append(frag);
+    queuePlace();
+    shown = Math.min(shown + PAGE, items.length);
+    more.hidden = shown >= items.length;
+  }
+  function setView(v) {
+    current = v; items = views[v].list(); shown = 0;
+    list.replaceChildren();
+    const note = document.getElementById("view-note");
+    note.textContent = views[v].note;
+    note.hidden = !views[v].note;
+    document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.view === v)));
+    renderMore();
+  }
+  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
+  more.addEventListener("click", renderMore);
+  setView("top");
+
+  // outlets
+  const counts = {};
+  data.stories.forEach(s => s.outlets.forEach(o => { counts[o] = (counts[o] || 0) + 1; }));
+  const ol = document.getElementById("outlet-list");
+  tracked.forEach(o => {
+    const row = el("div", "outlet" + (o.active ? "" : " off"));
+    const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${counts[o.name] || 0} ист.` : "временно недостъпна";
+    row.append(el("span", null, o.name), el("span", null, right));
+    ol.append(row);
+  });
+  const ul = document.getElementById("untracked-list");
+  const untracked = data.untracked_outlets || [];
+  document.getElementById("untracked-head").hidden = !untracked.length;
+  untracked.forEach(o => {
+    const row = el("div", "outlet off");
+    row.append(el("span", null, o.name), el("span", null, UNTRACKED_BG[o.name] || o.reason));
+    ul.append(row);
+  });
+})();
+</script>
