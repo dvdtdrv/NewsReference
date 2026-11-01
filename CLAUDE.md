@@ -57,6 +57,10 @@ He runs things by double-clicking .bat files in Desktop\NewsReference.
   our program may read the feed in any way, at most once per 30 min (text in `permissions/BTA.md`).
   So BTA is `as_browser` in feeds.py (browser User-Agent, BTA only). Commercial use, photos and attribution
   were not covered: ask BTA again before the project earns money.
+- bTV: refused GitHub's servers (403). On 1 Nov 2026 bTV replied that we may read its coverage "from the
+  browser" for this student project (`permissions/bTV.md`) -> `as_browser` for bTV. Same caveats as BTA.
+- GitHub Actions cannot reach 8 outlets (bTV, Trud, Blitz, Marica: 403; Dnes.bg, BG On Air, Bloomberg TV:
+  timeout; Nova: empty). They work from David's PC. Do not bypass; options: permission, self-hosted runner, EU server.
 - English outlets (Novinite, Sofia Globe) left out: grouping is Bulgarian text only. Sofia Globe feed dead since Jul 2025.
 - Outlet classification: no left/right labels. Measured axes: ownership (cited records), geopolitical framing,
   blindspots, sensationalism. Always show evidence.

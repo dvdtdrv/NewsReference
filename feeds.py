@@ -28,8 +28,10 @@ OUTLETS = [
      "feed": "https://bnrnews.bg/api/rss/main"},
 
     # --- Commercial TV ---
+    # bTV gave written permission on 1 Nov 2026 to read its coverage through a browser for this
+    # project (see permissions/bTV.md), so the program introduces itself as a browser for bTV only.
     {"name": "bTV Novinite", "domain": "btvnovinite.bg", "type": "commercial TV",
-     "feed": "https://btvnovinite.bg/lbin/v3/rss.php"},
+     "feed": "https://btvnovinite.bg/lbin/v3/rss.php", "as_browser": True},
     {"name": "Nova", "domain": "nova.bg", "type": "commercial TV",
      "feed": "https://nova.bg/rss/latest"},
 
