@@ -22,6 +22,10 @@ const SUMMARY_CHARS = 200;
 const readJson = f => JSON.parse(fs.readFileSync(f, "utf8"));
 const jsonFiles = dir => fs.existsSync(dir) ? fs.readdirSync(dir).filter(n => n.endsWith(".json")).sort() : [];
 
+// each article's own photo, if collect.py found it on the article page
+const photos = fs.existsSync(path.join(DATA, "page_images.json")) ? readJson(path.join(DATA, "page_images.json")) : {};
+const photoOf = a => photos[a.link] || a.image || "";
+
 // 1. stories, and which story each article belongs to
 const storyOf = new Map();   // article link -> { href, title }
 const stories = [];
@@ -59,7 +63,7 @@ for (const { s, href } of stories) {
       count: String(s.outlet_count),
       first: s.first_seen,
       last: s.last_updated,
-      image: (s.articles.find(a => a.image) || {}).image || ""
+      image: s.articles.map(photoOf).find(Boolean) || ""
     },
     filters: { type: ["story"] },
     sort: { date: s.last_updated }
@@ -78,7 +82,7 @@ for (const a of articles.values()) {
       href: a.link,
       outlet: a.outlet,
       published: a.published || "",
-      image: a.image || "",
+      image: photoOf(a),
       story: story ? story.title : "",
       story_href: story ? story.href : ""
     },

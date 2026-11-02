@@ -25,12 +25,26 @@ OUT_DIR = "site"
 WEB_DIR = "web"   # manifest, icons and offline helper that make the site installable on phones
 DAYS_DIR = os.path.join("data", "stories")
 KEEP = ("outlet", "title", "link", "published", "image")
+PHOTOS_FILE = os.path.join("data", "page_images.json")   # each article's own photo (see collect.py)
+_photos = None
+
+
+def photo_for(a):
+    """The photo the article's own page picked, if we know it; else the one we stored."""
+    global _photos
+    if _photos is None:
+        try:
+            with open(PHOTOS_FILE, encoding="utf-8") as f:
+                _photos = json.load(f)
+        except (OSError, ValueError):
+            _photos = {}
+    return _photos.get(a.get("link")) or a.get("image", "")
 
 
 def slim(stories):
     """Keep only what the page uses, so it loads fast."""
     for s in stories:
-        s["articles"] = [{k: a.get(k, "") for k in KEEP} for a in s["articles"]]
+        s["articles"] = [{**{k: a.get(k, "") for k in KEEP}, "image": photo_for(a)} for a in s["articles"]]
     return stories
 
 

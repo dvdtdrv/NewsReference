@@ -60,6 +60,8 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   (<= 250 KB), take og:image (else twitter:image), max 20 page reads per outlet per run, robots + crawl-delay.
   Answers remembered in data/page_images.json (PC: NR_CACHE_DIR = actions-runner\cache). Feed photo stays
   as fallback. `good_image` drops svg/gif and file names like logo/icon/avatar/default/placeholder.
+- Older articles: `backfill_page_images` upgrades up to 40 per outlet per run (12 outlets in parallel, 6 min cap),
+  newest first; build_site.py and build_search.mjs show the remembered page photo for any link (incl. frozen stories).
 - Skipped: BTA (permission covers the feed only), Dnevnik + Capital (`page_images: False`, pages 403 us).
 
 ## Search (2 Nov 2026)
