@@ -17,3 +17,4 @@ articles.json
 # Handed over by the PC runner during GitHub runs
 local_in/
 local_articles.json
+node_modules/

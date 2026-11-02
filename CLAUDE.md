@@ -52,6 +52,17 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   and replaces {{BASE}} in the template head ("" or "../" for archive pages). Tested: no installability
   errors, works offline. The service worker registers only on https (GitHub Pages).
 
+## Search (2 Nov 2026)
+- Header magnifier -> `site/tarsene.html` (template `data.page == "search"`, body.compact: no sliding stage).
+  Tabs Истории | Статии with counts, sort Най-подходящи | Най-нови; address keeps ?q=&t=article&s=new.
+- `build_search.mjs` (Pagefind 1.5.2 via package.json, Node API custom records) indexes ALL archived stories
+  (headline + article titles; meta href archive/DAY.html#s-ID) and articles (title + first 200 chars of summary;
+  meta: outlet, published, image, story link). Filters type/outlet, sort date. Output site/pagefind/.
+- Story bands have id="s-<id>"; archive page with that hash renders down to it, scrolls and flashes it.
+- Works only over http(s), not file://. sw.js (cache v2) does not cache /pagefind/.
+- Size: ~850 bytes per record (6.8 MB for 8k records); ~75k articles/month -> Pages 1 GB limit in about a year.
+  Before then: index only recent months, or move search to a server.
+
 ## Decisions
 - Never store or show full article text: headline, short summary, link only.
 - Google News RSS fallback is NOT allowed (Google's robots.txt disallows it).

@@ -4,6 +4,7 @@ Step 3: build the website pages from the latest stories and the archive.
 Takes site_template.html and writes:
   site/index.html               the front page: stories from the last 48 hours
   site/abonament.html           the subscription page
+  site/tarsene.html             the search page (the index itself is made by build_search.mjs)
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
 
@@ -106,6 +107,10 @@ def main():
     # the subscription page: same template and data, shown in "support" mode
     with open(os.path.join(OUT_DIR, "abonament.html"), "w", encoding="utf-8") as f:
         f.write(render({**front, "page": "support"}, template))
+
+    # the search page: same template, "search" mode; it needs no stories of its own
+    with open(os.path.join(OUT_DIR, "tarsene.html"), "w", encoding="utf-8") as f:
+        f.write(render({**front, "page": "search", "stories": []}, template))
 
     days = front["archive_days"]
     for day in days:
