@@ -92,7 +92,8 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   the built site only (free), or GitHub Pro; private minutes (~2000/mo) need hourly runs or self-hosted.
 - Later option for 24/7 without the PC: small EU server (Hetzner ~4 EUR/mo); test the 7 outlets first.
 - English outlets (Novinite, Sofia Globe) left out: grouping is Bulgarian text only. Sofia Globe feed dead since Jul 2025.
-- Outlet classification: no left/right labels. Measured axes: ownership (cited records), geopolitical framing,
+- Outlet classification: David (2 Nov 2026) wants the site to show where each outlet sits on a spectrum
+  ("За проекта" now says so, as a coming feature). Earlier plan was no left/right labels; Measured axes: ownership (cited records), geopolitical framing,
   blindspots, sensationalism. Always show evidence.
 - Hosting (live): GitHub Actions runs collect + group every 30 min and commits `data/stories.json`;
   GitHub Pages serves a static site that reads it.
