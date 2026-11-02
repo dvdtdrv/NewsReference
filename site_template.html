@@ -444,7 +444,7 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
   }
 
   const stats = document.getElementById("stats");
-  [[data.stories.length, "истории"], [active.length, "медии"], [archiveDate ? null : data.articles_in_window, "статии за 48 ч"]]
+  [[data.stories.length, "истории"], [active.length, "медии"], [archiveDate ? null : (data.articles_total ?? data.articles_in_window), "статии"]]
     .filter(([n]) => n != null)
     .forEach(([n, label]) => { const s = el("div", "stat"); s.append(el("strong", null, n), label); stats.append(s); });
 

@@ -60,11 +60,26 @@ def render(data, template, fragment_only=False):
     )
 
 
+def total_articles():
+    """How many articles the permanent archive holds (data/articles/YYYY-MM.json)."""
+    folder = os.path.join("data", "articles")
+    if not os.path.isdir(folder):
+        return None
+    total = 0
+    for name in os.listdir(folder):
+        if name.endswith(".json"):
+            with open(os.path.join(folder, name), encoding="utf-8") as f:
+                month = json.load(f)
+            total += len(month["articles"] if isinstance(month, dict) else month)
+    return total
+
+
 def front_page_data():
     with open(os.path.join("data", "stories.json"), encoding="utf-8") as f:
         data = json.load(f)
     slim(data["stories"])
     data["archive_days"] = archive_days()
+    data["articles_total"] = total_articles()
     data["base"] = ""
     return data
 
