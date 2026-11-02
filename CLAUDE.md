@@ -61,10 +61,17 @@ He runs things by double-clicking .bat files in Desktop\NewsReference.
   browser" for this student project (`permissions/bTV.md`) -> `as_browser` for bTV. Same caveats as BTA.
 - GitHub Actions cannot reach 8 outlets (bTV, Trud, Blitz, Marica: 403; Dnes.bg, BG On Air, Bloomberg TV:
   timeout; Nova: empty). They work from David's PC. Do not bypass; options: permission, self-hosted runner, EU server.
+- Self-hosted runner (live 2 Nov 2026): David's PC (`david-pc`, C:\Users\david\actions-runner) runs
+  local-fetch.yml at :02/:32 -> fetch_local.py reads the 7 `local` outlets -> artifact; update.yml (:07/:37)
+  downloads it, collect.py uses it if < 75 min old, else status "waiting". Runner starts hidden at login
+  (start_runner.bat / stop_runner.bat). Public repo: never approve fork PR workflow runs.
+- Repo stays public for now (free Pages + unlimited minutes). If going private later: second public repo for
+  the built site only (free), or GitHub Pro; private minutes (~2000/mo) need hourly runs or self-hosted.
+- Later option for 24/7 without the PC: small EU server (Hetzner ~4 EUR/mo); test the 7 outlets first.
 - English outlets (Novinite, Sofia Globe) left out: grouping is Bulgarian text only. Sofia Globe feed dead since Jul 2025.
 - Outlet classification: no left/right labels. Measured axes: ownership (cited records), geopolitical framing,
   blindspots, sensationalism. Always show evidence.
-- Hosting (planned): GitHub Actions runs collect + group every 30 min and commits `data/stories.json`;
+- Hosting (live): GitHub Actions runs collect + group every 30 min and commits `data/stories.json`;
   GitHub Pages serves a static site that reads it.
 - Design: done with Claude as a clickable mockup first, then turned into the real static page.
 - Architecture doc: https://claude.ai/artifact/WMiJigfLkQ3aMtR8eK3eMn
