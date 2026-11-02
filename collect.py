@@ -178,10 +178,11 @@ def good_image(url):
 
 
 def page_image(url, headers):
-    """The photo an article page announces for sharing (og:image), or "" if it has none."""
+    """The photo an article page announces for sharing (og:image), "" if it has none,
+    or None if the page refused us or couldn't be reached (then we ask again another time)."""
     with requests.get(url, headers=headers, timeout=TIMEOUT, stream=True) as r:
         if r.status_code != 200:
-            return ""
+            return None
         raw = b""
         for chunk in r.iter_content(16384):
             raw += chunk
@@ -211,7 +212,7 @@ def add_page_images(outlet, articles, cache, known=()):
         return 0
     headers = BROWSER_HEADERS if outlet.get("as_browser") else HEADERS
     oldest = NOW - timedelta(days=KEEP_DAYS)
-    reads = 0
+    reads = failed = 0
     for a in articles:
         link = a.get("link")
         if not link:
@@ -220,7 +221,7 @@ def add_page_images(outlet, articles, cache, known=()):
             if cache[link]:
                 a["image"] = cache[link]
             continue
-        if reads >= MAX_PAGE_READS or not a.get("published"):
+        if reads >= MAX_PAGE_READS or failed >= 3 or not a.get("published"):
             continue
         when = datetime.fromisoformat(a["published"])
         if when < oldest:
@@ -232,12 +233,15 @@ def add_page_images(outlet, articles, cache, known=()):
         if allowed(link):
             reads += 1
             try:
-                img = fix_image_url(page_image(link, headers), link, outlet.get("domain", ""))
+                img = page_image(link, headers)
             except requests.RequestException:
-                img = None   # couldn't reach it: try again next time
+                img = None
+            if img is not None:
+                img = fix_image_url(img, link, outlet.get("domain", ""))
             time.sleep(crawl_delay(link))
         if img is None:
-            continue
+            failed += 1      # refused or unreachable: not remembered, so we try again next run;
+            continue         # after 3 such pages we stop asking this outlet for this run
         cache[link] = img if good_image(img) else ""
         if cache[link]:
             a["image"] = cache[link]
