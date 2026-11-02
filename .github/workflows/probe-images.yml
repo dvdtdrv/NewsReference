@@ -1,0 +1,25 @@
+# A one-off test, started by hand: compares the photos in the outlets' feeds with the photo each
+# article page announces for sharing (og:image). Runs on David's PC, which can reach all outlets.
+# The result stays on the PC: C:\Users\<you>\actions-runner\probe_images.json
+
+name: Test article photos (on David's PC)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: [self-hosted, Windows]
+    timeout-minutes: 25
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Compare feed photos with page photos
+        shell: powershell
+        run: |
+          $py = "$env:USERPROFILE\anaconda3\python.exe"
+          if (-not (Test-Path $py)) { $py = "python" }
+          $env:PYTHONIOENCODING = "utf-8"
+          & $py -m pip install -q -r requirements.txt
+          & $py probe_images.py "$env:USERPROFILE\actions-runner\probe_images.json"
