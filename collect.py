@@ -248,6 +248,83 @@ def add_page_images(outlet, articles, cache, known=()):
     return reads
 
 
+BACKFILL_PER_OUTLET = 40       # older articles whose photo we upgrade per outlet per run
+BACKFILL_SECONDS = 360          # never spend more than 6 minutes on it per run
+
+
+def backfill_page_images(cache):
+    """Articles collected before we used page photos still have the feed's photo (or none).
+    Each run, upgrade some of them: newest first, up to BACKFILL_PER_OUTLET per outlet, outlets side by
+    side (each outlet still gets one request at a time, with its pause). Returns (pages read, still to do)."""
+    from concurrent.futures import ThreadPoolExecutor
+    by_name = {o["name"]: o for o in OUTLETS}
+    todo = {}
+    if os.path.isdir(MONTHS_DIR):
+        for name in os.listdir(MONTHS_DIR):
+            if not name.endswith(".json"):
+                continue
+            for a in load_json(os.path.join(MONTHS_DIR, name), []):
+                o = by_name.get(a.get("outlet"))
+                if (not o or o.get("gentle") or o.get("page_images") is False
+                        or (o.get("local") and ON_GITHUB) or not a.get("link") or a["link"] in cache):
+                    continue
+                todo.setdefault(o["name"], []).append(a)
+    for items in todo.values():
+        items.sort(key=lambda a: a.get("published") or "", reverse=True)
+    deadline = time.monotonic() + BACKFILL_SECONDS
+
+    def work(name):
+        outlet = by_name[name]
+        headers = BROWSER_HEADERS if outlet.get("as_browser") else HEADERS
+        reads = failed = 0
+        for a in todo[name]:
+            if reads >= BACKFILL_PER_OUTLET or failed >= 3 or time.monotonic() > deadline:
+                break
+            link = a["link"]
+            if not allowed(link):
+                cache[link] = ""
+                continue
+            reads += 1
+            try:
+                img = page_image(link, headers)
+            except requests.RequestException:
+                img = None
+            time.sleep(crawl_delay(link))
+            if img is None:
+                failed += 1
+                continue
+            img = fix_image_url(img, link, outlet.get("domain", ""))
+            cache[link] = img if good_image(img) else ""
+        return reads
+
+    with ThreadPoolExecutor(max_workers=12) as pool:
+        done = sum(pool.map(work, list(todo)))
+    left = sum(1 for items in todo.values() for a in items if a["link"] not in cache)
+    return done, left
+
+
+def apply_page_images(articles, cache):
+    """Put the remembered page photos on these articles. Returns how many changed."""
+    changed = 0
+    for a in articles:
+        img = cache.get(a.get("link"))
+        if img and a.get("image") != img:
+            a["image"] = img
+            changed += 1
+    return changed
+
+
+def apply_page_images_to_months(cache):
+    if not os.path.isdir(MONTHS_DIR):
+        return
+    for name in os.listdir(MONTHS_DIR):
+        if name.endswith(".json"):
+            path = os.path.join(MONTHS_DIR, name)
+            items = load_json(path, [])
+            if apply_page_images(items, cache):
+                save_json(path, items)
+
+
 def load_page_images():
     return load_json(PAGE_IMAGES_FILE, {})
 
@@ -495,7 +572,11 @@ def main():
         print(f"{word:<8} {outlet['name']:<14} +{added:<4} {note}")
         time.sleep(1)  # one outlet at a time, with a pause
 
+    done, left = backfill_page_images(photos)
+    apply_page_images(archive, photos)
+    print(f"\nPhotos: upgraded {done} older articles from their own pages; {left} still to do.")
     saved_forever = save_monthly(archive)
+    apply_page_images_to_months(photos)
 
     archive = [a for a in archive if datetime.fromisoformat(a["published"]) >= oldest_allowed]
     archive.sort(key=lambda a: a["published"], reverse=True)
