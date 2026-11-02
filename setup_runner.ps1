@@ -30,17 +30,8 @@ Write-Host "Connecting this PC to your project..."
 & .\config.cmd --unattended --url $repo --token $Code --name "david-pc" --labels "newsreference" --work "_work" --replace
 if ($LASTEXITCODE -ne 0) { throw "Connecting failed. The code may have expired (it lasts 1 hour): get a new one and try again." }
 
-Write-Host "Making it start when you log in to Windows..."
-$startup = [Environment]::GetFolderPath("Startup")
-$shell = New-Object -ComObject WScript.Shell
-$link = $shell.CreateShortcut((Join-Path $startup "NewsReference runner.lnk"))
-$link.TargetPath = Join-Path $dir "run.cmd"
-$link.WorkingDirectory = $dir
-$link.WindowStyle = 7   # minimized
-$link.Save()
-
-Write-Host "Starting it now (a minimized window called 'run' will stay open; leave it running)..."
-Start-Process -FilePath (Join-Path $dir "run.cmd") -WorkingDirectory $dir -WindowStyle Minimized
+Write-Host "Starting it in the background and at every login..."
+& (Join-Path $PSScriptRoot "start_runner.ps1")
 
 Write-Host ""
 Write-Host "Done. This PC now reads the blocked outlets for your site whenever it is on."
