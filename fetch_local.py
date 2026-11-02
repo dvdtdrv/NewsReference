@@ -20,13 +20,15 @@ OUT_FILE = "local_articles.json"
 
 def main():
     result = {"fetched_at": collect.NOW.isoformat(), "outlets": {}}
+    photos = collect.load_page_images()   # remembered article photos (kept outside the project folder)
     for outlet in OUTLETS:
         if not outlet.get("local"):
             continue
-        articles, status, note = collect.fetch_outlet(outlet, {})
+        articles, status, note = collect.fetch_outlet(outlet, {}, photos)
         result["outlets"][outlet["name"]] = {"status": status, "note": note, "articles": articles}
         print(f"{status:<8} {outlet['name']:<14} {len(articles):>4} articles  {note}")
         time.sleep(1)
+    collect.save_page_images(photos)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False)
     print(f"Saved {OUT_FILE}")

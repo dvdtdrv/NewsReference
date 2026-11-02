@@ -62,6 +62,19 @@ ON_GITHUB = os.environ.get("GITHUB_ACTIONS") == "true"
 LOCAL_FILE = os.path.join("local_in", "local_articles.json")
 LOCAL_MAX_AGE = timedelta(minutes=75)   # older than this = the PC is probably off
 
+# Photos: the feed's photo is often missing, a small crop or an icon. The photo the outlet itself picked
+# for its article is announced at the top of the article page ("og:image", the one Facebook and Viber
+# show in link previews). We read only the top of the page, once per new article, and remember the
+# answer in page_images.json so we never ask twice. On David's PC the memory lives outside the project
+# folder (NR_CACHE_DIR), because GitHub cleans the project folder before every run.
+PAGE_IMAGES_FILE = os.path.join(os.environ.get("NR_CACHE_DIR") or DATA, "page_images.json")
+PAGE_IMAGES_KEEP = 20000        # remember this many articles' photos
+MAX_PAGE_READS = 20             # per outlet per run; the rest keep the feed photo
+HEAD_BYTES = 250_000            # og:image is in the <head>; never read more than this
+OG_TAG = re.compile(r"""<meta[^>]+(?:property|name)\s*=\s*["'](og:image(?::secure_url)?|twitter:image(?::src)?)["'][^>]*>""", re.I)
+OG_CONTENT = re.compile(r"""content\s*=\s*["']([^"']+)["']""", re.I)
+JUNK_IMAGE = re.compile(r"\.(svg|gif)(\?|$)|(?<![a-z0-9])(logo|icons?|avatar|placeholder|default|pixel|spacer|emoji)(?![a-z])", re.I)
+
 
 def load_local_articles():
     data = load_json(LOCAL_FILE, None) if ON_GITHUB else None
@@ -156,6 +169,91 @@ def find_image(e):
     return html.unescape(m.group(1)) if m else ""
 
 
+def good_image(url):
+    """False for icons, logos, tracking pixels and other pictures that aren't an article photo."""
+    if not url or not url.startswith(("http://", "https://")):
+        return False
+    filename = urlparse(url).path.rstrip("/").rsplit("/", 1)[-1]   # judge the file's name, not its folders
+    return not JUNK_IMAGE.search(filename)
+
+
+def page_image(url, headers):
+    """The photo an article page announces for sharing (og:image), or "" if it has none."""
+    with requests.get(url, headers=headers, timeout=TIMEOUT, stream=True) as r:
+        if r.status_code != 200:
+            return ""
+        raw = b""
+        for chunk in r.iter_content(16384):
+            raw += chunk
+            if len(raw) > HEAD_BYTES or b"</head>" in raw.lower():
+                break
+    text = raw.decode(r.encoding or "utf-8", errors="replace")
+    found = {}
+    for m in OG_TAG.finditer(text):
+        c = OG_CONTENT.search(m.group(0))
+        if c:
+            found.setdefault(m.group(1).lower().split(":")[0], html.unescape(c.group(1)).strip())
+    return found.get("og") or found.get("twitter") or ""
+
+
+def crawl_delay(url):
+    try:
+        d = _robots.get(f"{urlparse(url).scheme}://{urlparse(url).netloc}")
+        return max(1.0, float(d.crawl_delay(USER_AGENT) or 0)) if d else 1.0
+    except (TypeError, ValueError):
+        return 1.0
+
+
+def add_page_images(outlet, articles, cache, known=()):
+    """Give each new article the photo its own page announces. Old articles and ones we already
+    asked about use the remembered answer; the feed's photo stays when the page has none."""
+    if outlet.get("gentle") or outlet.get("page_images") is False:
+        return 0
+    headers = BROWSER_HEADERS if outlet.get("as_browser") else HEADERS
+    oldest = NOW - timedelta(days=KEEP_DAYS)
+    reads = 0
+    for a in articles:
+        link = a.get("link")
+        if not link:
+            continue
+        if link in cache:
+            if cache[link]:
+                a["image"] = cache[link]
+            continue
+        if reads >= MAX_PAGE_READS or not a.get("published"):
+            continue
+        when = datetime.fromisoformat(a["published"])
+        if when < oldest:
+            continue
+        # an article we already have: only worth asking if it has no photo yet and is still on the front page
+        if link in known and (a.get("image") or when < NOW - timedelta(hours=48)):
+            continue
+        img = ""
+        if allowed(link):
+            reads += 1
+            try:
+                img = fix_image_url(page_image(link, headers), link, outlet.get("domain", ""))
+            except requests.RequestException:
+                img = None   # couldn't reach it: try again next time
+            time.sleep(crawl_delay(link))
+        if img is None:
+            continue
+        cache[link] = img if good_image(img) else ""
+        if cache[link]:
+            a["image"] = cache[link]
+    return reads
+
+
+def load_page_images():
+    return load_json(PAGE_IMAGES_FILE, {})
+
+
+def save_page_images(cache):
+    items = list(cache.items())[-PAGE_IMAGES_KEEP:]
+    os.makedirs(os.path.dirname(PAGE_IMAGES_FILE), exist_ok=True)
+    save_json(PAGE_IMAGES_FILE, dict(items))
+
+
 def fix_image_url(url, link, domain):
     """Make a photo address absolute, and repair 'https://clubz.bg147/...' (missing slash in Club Z's feed)."""
     if not url:
@@ -183,7 +281,7 @@ def read_feed(content, outlet):
             "link": e.get("link") or e.get("id") or "",
             "summary": clean_text(e.get("summary")),
             "published": when.isoformat() if when else None,
-            "image": fix_image_url(find_image(e), e.get("link"), outlet.get("domain", "")),
+            "image": (lambda u: u if good_image(u) else "")(fix_image_url(find_image(e), e.get("link"), outlet.get("domain", ""))),
             "raw_date": e.get("published") or e.get("updated") or "",
         })
     return out
@@ -249,8 +347,9 @@ def read_newsbg_page(text, outlet):
     return out
 
 
-def fetch_outlet(outlet, state):
-    """Returns (articles, status_word, note)."""
+def fetch_outlet(outlet, state, cache=None, known=()):
+    """Returns (articles, status_word, note). With a photo memory (cache), new articles also get
+    the photo from their own page (see add_page_images)."""
     name = outlet["name"]
     wait_until = state.get("wait_until", {}).get(name)
     if wait_until and datetime.fromisoformat(wait_until) > NOW:
@@ -285,6 +384,8 @@ def fetch_outlet(outlet, state):
         articles = read_newsbg_page(r.text, outlet)
     if not articles:
         return [], "error", "no articles found in the response"
+    if cache is not None:
+        add_page_images(outlet, articles, cache, known)
     return articles, "ok", ""
 
 
@@ -339,11 +440,12 @@ def main():
     status = []
     print(f"Collecting from {len(OUTLETS)} outlets...\n")
     local = load_local_articles()
+    photos = load_page_images()
     for outlet in OUTLETS:
         if outlet.get("local") and ON_GITHUB:
             fetched, word, note = from_local(outlet, local)
         else:
-            fetched, word, note = fetch_outlet(outlet, state)
+            fetched, word, note = fetch_outlet(outlet, state, photos, seen_links)
         added = 0
         skipped = {"no link/title": 0, "no date": 0, "too old/future": 0}
         example_date = ""
@@ -396,6 +498,7 @@ def main():
     save_json(ARTICLES_FILE, archive)
     save_json(STATUS_FILE, status)
     save_json(STATE_FILE, state)
+    save_page_images(photos)
 
     ok = sum(1 for s in status if s["status"] == "ok")
     new = sum(s["added_this_run"] for s in status)

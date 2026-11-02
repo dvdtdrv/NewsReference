@@ -10,6 +10,7 @@ Each outlet has:
   gentle   - True for sites that limit automated traffic: read at most once per run, and wait when told to
   local    - True for outlets that refuse GitHub's servers but work from David's PC: they are read on
              the PC by fetch_local.py (workflow local-fetch.yml), and GitHub's run picks up the result
+  page_images - False for outlets whose article pages refuse us (403): keep the feed's photo
   as_browser - introduce ourselves as a web browser. ONLY with the outlet's written permission
                (kept in the permissions folder).
 
@@ -39,9 +40,9 @@ OUTLETS = [
 
     # --- Newspapers and online media ---
     {"name": "Dnevnik", "domain": "dnevnik.bg", "type": "online daily",
-     "feed": "https://www.dnevnik.bg/rss/"},
+     "feed": "https://www.dnevnik.bg/rss/", "page_images": False},
     {"name": "Capital", "domain": "capital.bg", "type": "weekly / business",
-     "feed": "https://www.capital.bg/rss/"},
+     "feed": "https://www.capital.bg/rss/", "page_images": False},
     {"name": "Mediapool", "domain": "mediapool.bg", "type": "online, politics",
      "feed": "https://www.mediapool.bg/rss"},
     {"name": "Standart", "domain": "standartnews.com", "type": "daily",
