@@ -19,7 +19,7 @@ concurrency:
 jobs:
   fetch:
     runs-on: [self-hosted, Windows]
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Get the code
         uses: actions/checkout@v4
@@ -30,6 +30,7 @@ jobs:
           $py = "$env:USERPROFILE\anaconda3\python.exe"
           if (-not (Test-Path $py)) { $py = "python" }
           & $py -m pip install -q -r requirements.txt
+          $env:NR_CACHE_DIR = "$env:USERPROFILE\actions-runner\cache"   # remembered photos; GitHub cleans the project folder
           & $py fetch_local.py
 
       - name: Hand the articles to the main run

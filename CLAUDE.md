@@ -52,6 +52,16 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   and replaces {{BASE}} in the template head ("" or "../" for archive pages). Tested: no installability
   errors, works offline. The service worker registers only on https (GitHub Pages).
 
+## Photos (2 Nov 2026)
+- Probe (probe_images.py, run on the PC via probe-images.yml) showed og:image on article pages for 33 of 35
+  outlets; feeds had none for BNT, BNR, Mediapool, Offnews, Novini.bg, Euronews, Marica, Moreto, few for PIK,
+  Svobodna Tochka, and Evrocom's were a Facebook icon. Many feed photos are small crops (Banker 150x150).
+- collect.py `add_page_images`: for NEW articles (and photo-less ones < 48 h old) read the page head
+  (<= 250 KB), take og:image (else twitter:image), max 20 page reads per outlet per run, robots + crawl-delay.
+  Answers remembered in data/page_images.json (PC: NR_CACHE_DIR = actions-runner\cache). Feed photo stays
+  as fallback. `good_image` drops svg/gif and file names like logo/icon/avatar/default/placeholder.
+- Skipped: BTA (permission covers the feed only), Dnevnik + Capital (`page_images: False`, pages 403 us).
+
 ## Search (2 Nov 2026)
 - Header magnifier -> `site/tarsene.html` (template `data.page == "search"`, body.compact: no sliding stage).
   Tabs Истории | Статии with counts, sort Най-подходящи | Най-нови; address keeps ?q=&t=article&s=new.
