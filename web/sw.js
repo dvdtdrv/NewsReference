@@ -1,9 +1,9 @@
 // Offline helper for the News Reference web app.
 // Pages: always try the internet first (the news must be fresh); if there's no connection,
 // show the last copy we saved. Icons and the manifest: kept from the first visit.
-// Photos and fonts come from other websites and are left alone.
+// Photos and fonts come from other websites and are left alone; so is the search index.
 
-const CACHE = "news-reference-v1";
+const CACHE = "news-reference-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", event => {
@@ -20,7 +20,9 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   const req = event.request;
-  if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
+  const url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== self.location.origin) return;
+  if (url.pathname.includes("/pagefind/")) return;   // search index: always from the internet, not saved
   event.respondWith(
     fetch(req)
       .then(res => {

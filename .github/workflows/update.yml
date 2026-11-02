@@ -2,6 +2,7 @@
 #
 #   1. gets the saved data (all articles and stories so far) from the "data" branch
 #   2. collect.py -> group_stories.py -> build_site.py   (the same as run_all.bat)
+#      then build_search.mjs makes the search index for the search page
 #   3. saves the updated data back to the "data" branch
 #   4. publishes the site/ folder with GitHub Pages
 #
@@ -76,6 +77,17 @@ jobs:
           python collect.py
           python group_stories.py
           python build_site.py
+
+      - name: Set up Node.js (for the search index)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Build the search index
+        run: |
+          npm ci --no-audit --no-fund
+          node build_search.mjs
 
       - name: Save the data
         env:

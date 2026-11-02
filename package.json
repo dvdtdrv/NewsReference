@@ -1,0 +1,9 @@
+{
+  "name": "newsreference-search",
+  "private": true,
+  "description": "Only used to build the search index (build_search.mjs).",
+  "type": "module",
+  "dependencies": {
+    "pagefind": "1.5.2"
+  }
+}

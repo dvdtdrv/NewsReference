@@ -205,6 +205,40 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
 .pay-note { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
 #support { padding-block: 48px 56px; }
 
+/* ---------- search ---------- */
+.search-link { display: inline-flex; align-items: center; }
+.search-link svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.search-link[aria-current="page"] { color: var(--ink); }
+/* the search page: no sliding first screen, the results follow right under the search box */
+body.compact .stage { position: relative; height: auto; overflow: visible; }
+body.compact .intro { padding-block: 40px 44px; align-items: center; }
+.search-form { display: flex; gap: 10px; align-items: stretch; }
+.search-form input {
+  flex: 1; min-width: 0; padding: 10px 2px; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0;
+  background: transparent; color: var(--ink); font: 300 26px/1.1 var(--display); outline-offset: 4px;
+}
+.search-form input::placeholder { color: var(--muted); }
+.tab .n { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 4px; }
+.hit { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 8px 28px; padding-block: 26px; border-bottom: 1px solid var(--rule); }
+.hit h3 { margin: 0 0 10px; font: 300 clamp(24px, 2.6vw, 34px)/1.05 var(--display); letter-spacing: -.005em; text-wrap: balance; }
+.hit h3 a { text-decoration: none; }
+.hit h3 a:hover, .hit h3 a:focus-visible { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.hit .story-meta { margin-bottom: 10px; }
+.hit p { margin: 0; font-size: 14px; color: var(--muted); }
+.hit .ph { grid-row: 1 / span 3; grid-column: 2; }
+.hits { --cols: 5; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 32px 20px; padding-top: 20px; }
+.hit-card { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.in-story { font-size: 13px; color: var(--muted); text-decoration: none; overflow-wrap: anywhere; }
+.in-story:hover, .in-story:focus-visible { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.story.flash { animation: flash 2.4s ease-out; }
+@keyframes flash { from { background: var(--paper-2); } to { background: transparent; } }
+@media (max-width: 1100px) { .hits { --cols: 4; } }
+@media (max-width: 700px) {
+  .hit { grid-template-columns: minmax(0, 1fr); }
+  .hit .ph { display: none; }   /* on phones a story result is text only, so more fit on screen */
+}
+@media (max-width: 480px) { .hits { --cols: 2; gap: 24px 14px; } .search-form input { font-size: 22px; } }
+
 /* ---------- archive ---------- */
 .back {
   display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--ink);
@@ -257,6 +291,9 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
     <div class="nav-group">
       <a class="nav-link" href="#outlets">Медии</a>
       <a class="nav-link" href="#about">За проекта</a>
+      <a class="nav-link search-link" id="nav-search" href="tarsene.html" aria-label="Търсене" title="Търсене">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+      </a>
       <a class="cta" id="cta-sub" href="abonament.html">Абонамент</a>
     </div>
   </header>
@@ -267,6 +304,10 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
         <a class="back" id="back" href="../index.html" hidden>← Последните 48 часа</a>
         <p id="intro-text">Събираме заглавията на българските медии и ги подреждаме по история. Така виждате кой какво отразява, как го озаглавява и кой мълчи.</p>
         <div class="stats" id="stats"></div>
+        <form class="search-form" id="search-form" role="search" action="tarsene.html" hidden>
+          <input type="search" id="q" name="q" placeholder="Например „бюджет“" aria-label="Търсене в историите и статиите" autocomplete="off" enterkeyhint="search">
+          <button class="cta" type="submit">Търси</button>
+        </form>
       </div>
     </section>
 
@@ -285,6 +326,22 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
     <p class="view-note" id="view-note" hidden></p>
     <div id="list"></div>
     <div class="more-wrap" id="more-wrap"><button class="cta more" id="more" type="button">Покажи още истории</button></div>
+
+    <section id="search" hidden>
+      <div class="list-head">
+        <div class="tabs" role="group" aria-label="Какво да се покаже">
+          <button class="tab" type="button" data-type="story" aria-pressed="true">Истории<span class="n"></span></button>
+          <button class="tab" type="button" data-type="article" aria-pressed="false">Статии<span class="n"></span></button>
+        </div>
+        <div class="tabs" role="group" aria-label="Подреждане">
+          <button class="tab" type="button" data-sort="rel" aria-pressed="true">Най-подходящи</button>
+          <button class="tab" type="button" data-sort="new" aria-pressed="false">Най-нови</button>
+        </div>
+      </div>
+      <p class="view-note" id="search-status" aria-live="polite"></p>
+      <div id="search-results"></div>
+      <div class="more-wrap"><button class="cta more" id="search-more" type="button" hidden>Покажи още</button></div>
+    </section>
 
     <section id="support" hidden>
       <div class="tiers">
@@ -425,6 +482,7 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
   }
   // links between pages: the subscription page sits next to index.html
   document.getElementById("cta-sub").href = `${base}abonament.html`;
+  document.getElementById("nav-search").href = `${base}tarsene.html`;
 
   // the subscription page: same header and design, its own intro, no story list
   const isSupport = data.page === "support";
@@ -438,9 +496,30 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
     });
     document.getElementById("support").hidden = false;
     document.getElementById("cta-sub").setAttribute("aria-current", "page");
+    document.querySelector('.nav-link[href="#outlets"]').href = `${base}index.html#outlets`;
     document.querySelector(".logo").href = `${base}index.html`;
     document.querySelector('.nav-link[href="#stories"]').href = `${base}index.html#stories`;
     document.getElementById("nav-archive").href = `${base}index.html#archive`;
+  }
+
+  // the search page: same header and design, a search box in the intro, results below
+  const isSearch = data.page === "search";
+  if (isSearch) {
+    document.title = "Търсене · News Reference";
+    document.body.classList.add("compact");
+    document.getElementById("intro-title").textContent = "Търсене.";
+    document.getElementById("intro-text").textContent =
+      "Във всички истории и статии от архива: по заглавия и началото на текстовете.";
+    ["stories", "view-note", "list", "more-wrap", "archive", "stats", "outlets"].forEach(id => {
+      document.getElementById(id).hidden = true;
+    });
+    document.getElementById("search-form").hidden = false;
+    document.getElementById("search").hidden = false;
+    document.getElementById("nav-search").setAttribute("aria-current", "page");
+    document.querySelector(".logo").href = `${base}index.html`;
+    document.querySelector('.nav-link[href="#stories"]').href = `${base}index.html#stories`;
+    document.getElementById("nav-archive").href = `${base}index.html#archive`;
+    document.querySelector('.nav-link[href="#outlets"]').href = `${base}index.html#outlets`;
   }
 
   const stats = document.getElementById("stats");
@@ -450,7 +529,7 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
 
   // archive: the list of days
   const days = data.archive_days || [];
-  if (days.length && !isSupport) {
+  if (days.length && !isSupport && !isSearch) {
     const fmtDayName = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, weekday: "short", day: "numeric", month: "short" });
     const list = document.getElementById("day-list");
     days.forEach(d => {
@@ -495,6 +574,7 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
   // one story
   function storyNode(s) {
     const art = el("article", "story");
+    if (s.id) art.id = `s-${s.id}`;
     const meta = el("div", "story-meta");
     meta.append(el("span", "count", `${s.outlet_count} ${s.outlet_count === 1 ? "медия" : "медии"}`));
     const sq = el("span", "squares");
@@ -614,12 +694,155 @@ footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size:
     const note = document.getElementById("view-note");
     note.textContent = views[v].note;
     note.hidden = !views[v].note;
-    document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.view === v)));
+    document.querySelectorAll(".tab[data-view]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.view === v)));
     renderMore();
   }
-  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
+  document.querySelectorAll(".tab[data-view]").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
   more.addEventListener("click", renderMore);
   setView("top");
+
+  // a link to one story (from search: archive/DAY.html#s-ID): show it even if it's further down the list
+  const target = /^#s-[\w-]+$/.test(location.hash) ? location.hash.slice(1) : null;
+  if (target && !isSearch && !isSupport) {
+    const at = items.findIndex(s => `s-${s.id}` === target);
+    if (at >= 0) {
+      while (shown <= at) renderMore();
+      const node = document.getElementById(target);
+      const go = () => { node.scrollIntoView({ block: "start" }); node.classList.add("flash"); };
+      (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
+    }
+  }
+
+  // ---------- search (only on tarsene.html) ----------
+  if (isSearch) {
+    const form = document.getElementById("search-form");
+    const input = document.getElementById("q");
+    const status = document.getElementById("search-status");
+    const out = document.getElementById("search-results");
+    const moreBtn = document.getElementById("search-more");
+    const SEARCH_PAGE = 20;
+    let pf = null, type = "story", sort = "rel", found = { story: [], article: [] }, showing = 0, run = 0;
+
+    // the address keeps the search, so it can be shared: tarsene.html?q=бюджет&t=article&s=new
+    const params = new URLSearchParams(location.search);
+    input.value = params.get("q") || "";
+    if (params.get("t") === "article") type = "article";
+    if (params.get("s") === "new") sort = "new";
+
+    const pressTabs = () => {
+      document.querySelectorAll(".tab[data-type]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.type === type)));
+      document.querySelectorAll(".tab[data-sort]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.sort === sort)));
+    };
+    const setCounts = (a, b) => {
+      document.querySelector(".tab[data-type=story] .n").textContent = a == null ? "" : ` ${a}`;
+      document.querySelector(".tab[data-type=article] .n").textContent = b == null ? "" : ` ${b}`;
+    };
+    const photo = (src, label) => {
+      const ph = el("div", "ph");
+      const fallback = () => { ph.replaceChildren(el("span", "fallback", label)); };
+      const img = safeUrl(src);
+      if (img) {
+        const i = new Image();
+        i.loading = "lazy"; i.alt = ""; i.referrerPolicy = "no-referrer"; i.decoding = "async";
+        i.onerror = fallback; i.src = img; ph.append(i);
+      } else fallback();
+      return ph;
+    };
+    // a story: its title (to the story in the archive), how many outlets, when, which outlets
+    const storyHit = m => {
+      const box = el("article", "hit");
+      const meta = el("div", "story-meta");
+      const n = Number(m.count) || 0;
+      meta.append(el("span", "count", `${n} ${n === 1 ? "медия" : "медии"}`), el("time", null, dateSpan(m.first, m.last)));
+      const h3 = el("h3");
+      const a = el("a", null, m.title);
+      a.href = `${base}${m.href}`;
+      h3.append(a);
+      box.append(meta, h3, el("p", null, m.outlets), photo(m.image, ""));
+      return box;
+    };
+    // an article: the same card as on the front page, plus a link to its story
+    const articleHit = m => {
+      const wrap = el("div", "hit-card");
+      const link = safeUrl(m.href);
+      const card = el(link ? "a" : "div", "card");
+      if (link) { card.href = link; card.target = "_blank"; card.rel = "noopener noreferrer"; }
+      const src = el("div", "src");
+      const pub = m.published ? new Date(m.published) : null;
+      src.append(el("span", null, m.outlet), el("time", null, pub ? `${fmtDay.format(pub)}, ${fmtTime.format(pub)}` : ""));
+      card.append(photo(m.image, m.outlet), src, el("div", "hl", m.title));
+      wrap.append(card);
+      if (m.story_href) {
+        const s = el("a", "in-story", `В историята: ${m.story}`);
+        s.href = `${base}${m.story_href}`;
+        wrap.append(s);
+      }
+      return wrap;
+    };
+
+    async function showMore() {
+      const mine = run;
+      const batch = found[type].slice(showing, showing + SEARCH_PAGE);
+      showing += batch.length;
+      moreBtn.hidden = true;
+      const metas = await Promise.all(batch.map(r => r.data().then(d => d.meta)));
+      if (mine !== run) return;
+      let holder = out.lastElementChild;
+      if (type === "article") {
+        if (!holder || !holder.classList.contains("hits")) { holder = el("div", "hits"); out.append(holder); }
+        metas.forEach(m => holder.append(articleHit(m)));
+      } else metas.forEach(m => out.append(storyHit(m)));
+      moreBtn.hidden = showing >= found[type].length;
+    }
+    function draw() {
+      out.replaceChildren(); showing = 0;
+      const q = input.value.trim();
+      const n = found[type].length;
+      const word = type === "story" ? (n === 1 ? "история" : "истории") : (n === 1 ? "статия" : "статии");
+      if (!q) status.textContent = "Напишете дума, име или място. Търсим в заглавията на историите и статиите.";
+      else if (!n) status.textContent = `Няма ${type === "story" ? "истории" : "статии"} за „${q}“.`;
+      else status.textContent = `${n} ${word} за „${q}“`;
+      if (n) showMore();
+    }
+    async function search() {
+      const mine = ++run;
+      const q = input.value.trim();
+      const url = new URL(location.href);
+      ["q", "t", "s"].forEach(k => url.searchParams.delete(k));
+      if (q) url.searchParams.set("q", q);
+      if (type === "article") url.searchParams.set("t", "article");
+      if (sort === "new") url.searchParams.set("s", "new");
+      history.replaceState(null, "", url);
+      if (!q) { found = { story: [], article: [] }; setCounts(null, null); draw(); return; }
+      if (!pf) {
+        status.textContent = "Зареждане…";
+        try {
+          pf = await import(new URL(`${base}pagefind/pagefind.js`, location.href).href);
+          await pf.init();
+        } catch (e) {
+          pf = null;
+          status.textContent = "Търсенето не можа да се зареди. То работи на публикувания сайт, не от папката на компютъра.";
+          return;
+        }
+      }
+      const opts = t => ({ filters: { type: t }, ...(sort === "new" ? { sort: { date: "desc" } } : {}) });
+      const [rs, ra] = await Promise.all([pf.search(q, opts("story")), pf.search(q, opts("article"))]);
+      if (mine !== run) return;
+      found = { story: rs.results, article: ra.results };
+      setCounts(rs.results.length, ra.results.length);
+      draw();
+    }
+
+    let timer = null;
+    input.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(search, 250); });
+    form.addEventListener("submit", e => { e.preventDefault(); clearTimeout(timer); search(); input.blur(); });
+    document.querySelectorAll(".tab[data-type]").forEach(t => t.addEventListener("click", () => { type = t.dataset.type; pressTabs(); search(); }));
+    document.querySelectorAll(".tab[data-sort]").forEach(t => t.addEventListener("click", () => { sort = t.dataset.sort; pressTabs(); search(); }));
+    moreBtn.addEventListener("click", showMore);
+    pressTabs();
+    search();
+    if (!input.value) input.focus();
+  }
 
   // outlets
   const counts = {};
