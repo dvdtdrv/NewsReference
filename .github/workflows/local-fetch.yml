@@ -1,5 +1,10 @@
 # Runs on David's PC (a "self-hosted runner"), every 30 minutes while the PC is on.
 #
+# The two jobs pass a baton, so the site updates every 30 minutes even when GitHub's own timer
+# runs late: the main run ends by asking the PC for the next round (with a wait, so rounds are
+# ~30 minutes apart), and the PC ends by starting the main run. The main run's hourly timer stays as a backup
+# (it restarts the relay if it ever stops). Only one PC round exists at a time.
+#
 # Some outlets refuse GitHub's servers but accept a normal Bulgarian internet connection.
 # This job reads only those outlets (marked "local" in feeds.py) and hands the articles to the
 # main "Update News Reference" run, which starts a few minutes later and picks them up.
@@ -8,9 +13,17 @@
 name: Read blocked outlets on David's PC
 
 on:
-  schedule:
-    - cron: "2,32 * * * *"     # 5 minutes before the main run (:07 and :37)
-  workflow_dispatch:
+  workflow_dispatch:           # started by the main run (no timer of its own; if the PC is off, the
+                               # request waits on GitHub and runs as soon as the PC is back)
+    inputs:
+      wait:
+        description: "Minutes to wait before reading (set by the main run)"
+        required: false
+        default: "0"
+
+permissions:
+  actions: write     # to start the main run when done
+  contents: read
 
 concurrency:
   group: local-fetch
@@ -19,8 +32,17 @@ concurrency:
 jobs:
   fetch:
     runs-on: [self-hosted, Windows]
-    timeout-minutes: 20
+    timeout-minutes: 50
     steps:
+      - name: Wait for the next round
+        if: ${{ github.event.inputs.wait && github.event.inputs.wait != '0' }}
+        shell: powershell
+        run: |
+          $m = [int]"${{ github.event.inputs.wait }}"
+          if ($m -gt 30) { $m = 30 }
+          Write-Host "Waiting $m minutes so updates stay about 30 minutes apart..."
+          Start-Sleep -Seconds ($m * 60)
+
       - name: Get the code
         uses: actions/checkout@v4
 
@@ -39,3 +61,14 @@ jobs:
           name: local-articles
           path: local_articles.json
           retention-days: 1
+
+      - name: Start the main run
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $h = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = "application/vnd.github+json" }
+          Invoke-RestMethod -Method Post -Headers $h -ContentType "application/json" `
+            -Uri "https://api.github.com/repos/${{ github.repository }}/actions/workflows/update.yml/dispatches" `
+            -Body '{"ref":"main"}'
+          Write-Host "Started 'Update News Reference'."
