@@ -1,5 +1,5 @@
-# A one-off test, started by hand: compares the photos in the outlets' feeds with the photo each
-# article page announces for sharing (og:image). Runs on David's PC, which can reach all outlets.
+# One-off photo tests, started by hand (probe_images.py: feed vs page photos;
+# probe_photo_urls.py: do photo addresses load on our site). Runs on David's PC, which can reach all outlets.
 # The result stays on the PC: C:\Users\<you>\actions-runner\probe_images.json
 
 name: Test article photos (on David's PC)
@@ -22,4 +22,4 @@ jobs:
           if (-not (Test-Path $py)) { $py = "python" }
           $env:PYTHONIOENCODING = "utf-8"
           & $py -m pip install -q -r requirements.txt
-          & $py probe_images.py "$env:USERPROFILE\actions-runner\probe_images.json"
+          & $py probe_photo_urls.py "$env:USERPROFILE\actions-runner\probe_photo_urls.json"
