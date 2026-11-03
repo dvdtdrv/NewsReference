@@ -15,6 +15,7 @@ on:
       - site_template.html
       - build_site.py
       - build_search.mjs
+      - outlets_info.json
       - web/**
 
 permissions:
