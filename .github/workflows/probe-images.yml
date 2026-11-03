@@ -22,4 +22,4 @@ jobs:
           if (-not (Test-Path $py)) { $py = "python" }
           $env:PYTHONIOENCODING = "utf-8"
           & $py -m pip install -q -r requirements.txt
-          & $py probe_pages.py "$env:USERPROFILE\actions-runner\probe_pages.json"
+          & $py probe_docs.py "$env:USERPROFILE\actions-runner\docs"
