@@ -272,6 +272,17 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   display: inline-block; padding: 5px 10px; border: 1px dashed var(--muted); border-radius: 999px;
   font: 400 12px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
 }
+.od-note { margin: 0 0 14px !important; font-size: 13px; color: var(--muted) !important; }
+.od-cases { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.od-cases > li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 18px; padding-block: 16px; border-top: 1px solid var(--rule); }
+.od-cases > li:last-child { border-bottom: 1px solid var(--rule); }
+.od-case-date { font: 400 13px/1.4 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.od-cases h4 { margin: 0 0 6px; font: 400 19px/1.2 var(--display); }
+.od-cases p { margin: 0 0 8px; max-width: 66ch; color: var(--ink-soft); }
+.od-case-src { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.od-case-src a { color: var(--muted); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.od-case-src a:hover, .od-case-src a:focus-visible { color: var(--ink); }
+@media (max-width: 600px) { .od-cases > li { grid-template-columns: 1fr; } }
 /* the spectrum: a scale to be filled with a measured position (axes and method still to decide) */
 .od-scale { position: relative; height: 34px; margin-top: 4px; }
 .od-scale::before { content: ""; position: absolute; left: 0; right: 0; top: 16px; height: 1px; background: var(--ink); }
@@ -488,6 +499,11 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         <div class="od-scale" aria-hidden="true"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:calc(100% - 1px)"></i></div>
         <div class="od-scale-labels"><span>—</span><span>—</span></div>
         <p style="margin-top:12px"><span class="od-todo">Предстои: измерими данни и метод</span></p>
+      </section>
+      <section class="od-section" id="od-disputes-wrap" hidden>
+        <h3>Спорове за независимостта и съдебни дела</h3>
+        <p class="od-note">Публични твърдения и позиции, със страните и източниците им. Не са съдебно установени нарушения, освен ако изрично е казано.</p>
+        <ol class="od-cases" id="od-disputes"></ol>
       </section>
       <section class="od-section" id="od-sources-wrap" hidden>
         <h3>Източници</h3>
@@ -1011,6 +1027,20 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       li.append(x); list.append(li);
     });
     if (!list.children.length) list.append(el("li", null, "Няма статии в тези истории."));
+    // disputes over independence and court cases: each with date, title, both sides, sources
+    const cases = (i.disputes || []);
+    document.getElementById("od-disputes-wrap").hidden = !cases.length;
+    const cl = document.getElementById("od-disputes");
+    cl.replaceChildren();
+    cases.forEach(c => {
+      const li = el("li"), body = el("div"), links = el("div", "od-case-src");
+      (c.sources || []).filter(x => safeUrl(x.url)).forEach(x => {
+        const a = el("a", null, `${x.label} ↗`); a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer"; links.append(a);
+      });
+      body.append(el("h4", null, c.title), el("p", null, c.summary), links);
+      li.append(el("div", "od-case-date", c.date), body);
+      cl.append(li);
+    });
     // sources: a plain address, or {label, url}
     const src = (i.sources || []).map(x => typeof x === "string" ? { url: x, label: x } : x).filter(x => safeUrl(x.url));
     document.getElementById("od-sources-wrap").hidden = !src.length;
