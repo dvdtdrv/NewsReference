@@ -41,10 +41,20 @@ def photo_for(a):
     return _photos.get(a.get("link")) or a.get("image", "")
 
 
+def spare_photo(a):
+    """A second photo to try if the first doesn't load (e.g. the outlet deleted it)."""
+    first = photo_for(a)
+    for other in (a.get("image_feed"), a.get("image")):
+        if other and other != first:
+            return other
+    return ""
+
+
 def slim(stories):
     """Keep only what the page uses, so it loads fast."""
     for s in stories:
-        s["articles"] = [{**{k: a.get(k, "") for k in KEEP}, "image": photo_for(a)} for a in s["articles"]]
+        s["articles"] = [{**{k: a.get(k, "") for k in KEEP}, "image": photo_for(a), "image2": spare_photo(a)}
+                         for a in s["articles"]]
     return stories
 
 

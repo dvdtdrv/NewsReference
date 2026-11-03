@@ -183,12 +183,18 @@ def page_image(url, headers):
     with requests.get(url, headers=headers, timeout=TIMEOUT, stream=True) as r:
         if r.status_code != 200:
             return None
+        # Read until the photo tag has passed (some sites, like Novini.bg, put it far down the page,
+        # after a "</head>" that isn't the real end of the head), but never more than HEAD_BYTES.
         raw = b""
         for chunk in r.iter_content(16384):
             raw += chunk
-            if len(raw) > HEAD_BYTES or b"</head>" in raw.lower():
+            if len(raw) > HEAD_BYTES:
                 break
-    text = raw.decode(r.encoding or "utf-8", errors="replace")
+            at = raw.find(b"og:image")
+            if at >= 0 and raw.find(b">", at) > 0:
+                break
+        enc = r.encoding if r.encoding and r.encoding.lower() not in ("iso-8859-1", "latin-1") else "utf-8"
+    text = raw.decode(enc, errors="replace")
     found = {}
     for m in OG_TAG.finditer(text):
         c = OG_CONTENT.search(m.group(0))
@@ -210,6 +216,9 @@ def add_page_images(outlet, articles, cache, known=()):
     asked about use the remembered answer; the feed's photo stays when the page has none."""
     if outlet.get("gentle") or outlet.get("page_images") is False:
         return 0
+    if outlet.get("photos_on_pc") and ON_GITHUB:
+        apply_page_images(articles, cache)   # the PC sends these photos (fetch_local.py)
+        return 0
     headers = BROWSER_HEADERS if outlet.get("as_browser") else HEADERS
     oldest = NOW - timedelta(days=KEEP_DAYS)
     reads = failed = 0
@@ -218,8 +227,7 @@ def add_page_images(outlet, articles, cache, known=()):
         if not link:
             continue
         if link in cache:
-            if cache[link]:
-                a["image"] = cache[link]
+            apply_page_images([a], cache)
             continue
         if reads >= MAX_PAGE_READS or failed >= 3 or not a.get("published"):
             continue
@@ -244,6 +252,8 @@ def add_page_images(outlet, articles, cache, known=()):
             continue         # after 3 such pages we stop asking this outlet for this run
         cache[link] = img if good_image(img) else ""
         if cache[link]:
+            if a.get("image") and a["image"] != cache[link]:
+                a["image_feed"] = a["image"]
             a["image"] = cache[link]
     return reads
 
@@ -266,7 +276,8 @@ def backfill_page_images(cache):
             for a in load_json(os.path.join(MONTHS_DIR, name), []):
                 o = by_name.get(a.get("outlet"))
                 if (not o or o.get("gentle") or o.get("page_images") is False
-                        or (o.get("local") and ON_GITHUB) or not a.get("link") or a["link"] in cache):
+                        or ((o.get("local") or o.get("photos_on_pc")) and ON_GITHUB)
+                        or not a.get("link") or a["link"] in cache):
                     continue
                 todo.setdefault(o["name"], []).append(a)
     for items in todo.values():
@@ -309,6 +320,8 @@ def apply_page_images(articles, cache):
     for a in articles:
         img = cache.get(a.get("link"))
         if img and a.get("image") != img:
+            if a.get("image") and not a.get("image_feed"):
+                a["image_feed"] = a["image"]   # spare, in case the page photo is later deleted
             a["image"] = img
             changed += 1
     return changed
@@ -325,12 +338,19 @@ def apply_page_images_to_months(cache):
                 save_json(path, items)
 
 
+PAGE_IMAGES_VERSION = 2   # bump to ask again every page that earlier gave no photo
+
+
 def load_page_images():
-    return load_json(PAGE_IMAGES_FILE, {})
+    cache = load_json(PAGE_IMAGES_FILE, {})
+    if cache.get("__version__") != PAGE_IMAGES_VERSION:
+        cache = {k: v for k, v in cache.items() if v and not k.startswith("__")}
+        cache["__version__"] = PAGE_IMAGES_VERSION
+    return cache
 
 
 def save_page_images(cache):
-    items = list(cache.items())[-PAGE_IMAGES_KEEP:]
+    items = [("__version__", PAGE_IMAGES_VERSION)] + [kv for kv in cache.items() if not kv[0].startswith("__")][-PAGE_IMAGES_KEEP:]
     os.makedirs(os.path.dirname(PAGE_IMAGES_FILE), exist_ok=True)
     save_json(PAGE_IMAGES_FILE, dict(items))
 
@@ -339,6 +359,7 @@ def fix_image_url(url, link, domain):
     """Make a photo address absolute, and repair 'https://clubz.bg147/...' (missing slash in Club Z's feed)."""
     if not url:
         return ""
+    url = requests.utils.requote_uri(url.strip())   # spaces and Cyrillic letters in the address -> %20 etc.
     url = urljoin(link or (f"https://{domain}/" if domain else ""), url)
     if not domain:
         return url
@@ -522,6 +543,8 @@ def main():
     print(f"Collecting from {len(OUTLETS)} outlets...\n")
     local = load_local_articles()
     photos = load_page_images()
+    if local and local.get("photos"):
+        photos.update(local["photos"])   # photos David's PC found for outlets whose pages refuse GitHub
     for outlet in OUTLETS:
         if outlet.get("local") and ON_GITHUB:
             fetched, word, note = from_local(outlet, local)
