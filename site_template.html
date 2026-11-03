@@ -485,10 +485,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         </section>
       </div>
       <section class="od-section">
-        <h3>За медията</h3>
-        <p id="od-about"></p>
-      </section>
-      <section class="od-section">
         <h3>Позиция в спектъра</h3>
         <div class="od-scale" aria-hidden="true"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:calc(100% - 1px)"></i></div>
         <div class="od-scale-labels"><span>—</span><span>—</span></div>
@@ -1006,7 +1002,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
      [recent.length ? when(recent[0].published) : "–", "последна статия"]].forEach(([v, label]) => {
       const st = el("div", "stat"); st.append(el("strong", null, v), label); stats.append(st);
     });
-    fill("od-owner", i.owner); fill("od-founded", i.founded); fill("od-about", i.about);
+    fill("od-owner", i.owner); fill("od-founded", i.founded);
     const list = document.getElementById("od-recent");
     list.replaceChildren();
     recent.slice(0, 6).forEach(a => {
