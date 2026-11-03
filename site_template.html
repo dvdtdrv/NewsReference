@@ -523,7 +523,7 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
   }
 
   const stats = document.getElementById("stats");
-  [[data.stories.length, "истории"], [active.length, "медии"], [archiveDate ? null : (data.articles_total ?? data.articles_in_window), "статии"]]
+  [[data.stories.length, "истории"], [tracked.length, "медии"], [archiveDate ? null : (data.articles_total ?? data.articles_in_window), "статии"]]
     .filter(([n]) => n != null)
     .forEach(([n, label]) => { const s = el("div", "stat"); s.append(el("strong", null, n), label); stats.append(s); });
 
