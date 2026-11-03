@@ -1,0 +1,53 @@
+{
+ "Novini.bg": {
+  "page": [
+   "https://sportal365images.com/process/smp-images-production/novini.bg/25032025/cf663abb-d9cc-48e6-a299-b741c14eb5f3.jpg?operations=crop(93:0:2907:1583),fit(1280:720)",
+   "https://sportal365images.com/process/smp-images-production/novini.bg/13052025/45d4a33e-3d50-4a93-bcd1-bb69f67357ff.jpg?operations=crop(0:0:1920:1080),fit(1280:720)",
+   "https://sportal365images.com/process/smp-images-production/novini.bg/02112026/fe8c5c0a-5cb1-409e-a21c-269f6d4d3a3c.webp?operations=autocrop(1280:720)"
+  ],
+  "feed": [
+   "https://sportal365images.com/process/smp-images-production/novini.bg/25032025/cf663abb-d9cc-48e6-a299-b741c14eb5f3.jpg?operations=crop(93:0:2907:1583),fit(1280:720)",
+   "https://sportal365images.com/process/smp-images-production/novini.bg/13052025/45d4a33e-3d50-4a93-bcd1-bb69f67357ff.jpg?operations=crop(0:0:1920:1080),fit(1280:720)"
+  ]
+ },
+ "Marica": {
+  "page": [],
+  "feed": [
+   "https://cdn.marica.bg/images/marica.bg/1101/1200_1 OOG_7250.webp",
+   "https://cdn.marica.bg/images/marica.bg/1552/1200_kremlin.webp"
+  ]
+ },
+ "Euronews BG": {
+  "page": [
+   "https://euronews.bg/wp-content/uploads/2025/10/Dujd-Dazhd-Valeji-Valezhi-Vreme_BGNES.jpg",
+   "https://euronews.bg/wp-content/uploads/2025/10/washington-Congress-AP-1024x683.jpg",
+   "https://euronews.bg/wp-content/uploads/2026/10/Marine-Le-Pen-ap-1024x683.jpg"
+  ],
+  "feed": [
+   "https://euronews.bg/wp-content/uploads/2025/10/Dujd-Dazhd-Valeji-Valezhi-Vreme_BGNES.jpg",
+   "https://euronews.bg/wp-content/uploads/2025/10/washington-Congress-AP-1024x683.jpg"
+  ]
+ },
+ "Mediapool": {
+  "page": [
+   "https://www.mediapool.bg/svyat/polet-ot-london-za-sofiya-e-katsnal-v-budapeshta-sled-bombena-zaplaha/social-image.jpg/",
+   "https://www.mediapool.bg/svyat/iztrebitel-eskortira-samolet-na-wizz-air-ot-london-za-sofiya-sled-signal-za-bomba-nalozhil-avariyno-katsane/social-image.jpg/",
+   "https://www.mediapool.bg/bulgaria/demerdzhiev-smetnata-palata-pazi-peevski/social-image.jpg/"
+  ],
+  "feed": [
+   "https://www.mediapool.bg/svyat/polet-ot-london-za-sofiya-e-katsnal-v-budapeshta-sled-bombena-zaplaha/social-image.jpg/",
+   "https://www.mediapool.bg/svyat/iztrebitel-eskortira-samolet-na-wizz-air-ot-london-za-sofiya-sled-signal-za-bomba-nalozhil-avariyno-katsane/social-image.jpg/"
+  ]
+ },
+ "Fakti": {
+  "page": [
+   "https://cdn4.focus.bg/fakti/photos/fb/bf5/iztrebitel-gripen-vdignat-po-trevoga-zaradi-polet-kam-sofia-2.jpg",
+   "https://cdn4.focus.bg/fakti/photos/fb/79f/wizz-air-potvardi-za-otklonen-polet-londonsofia-sled-bombena-zaplaha-1.jpg",
+   "https://cdn4.focus.bg/fakti/photos/fb/8b7/nama-bomba-v-samoleta-na-wizz-air-kacnal-v-sofia-1.jpg"
+  ],
+  "feed": [
+   "https://cdn4.focus.bg/fakti/photos/fb/bf5/iztrebitel-gripen-vdignat-po-trevoga-zaradi-polet-kam-sofia-2.jpg",
+   "https://cdn4.focus.bg/fakti/photos/fb/79f/wizz-air-potvardi-za-otklonen-polet-londonsofia-sled-bombena-zaplaha-1.jpg"
+  ]
+ }
+}
