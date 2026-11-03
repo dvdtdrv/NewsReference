@@ -239,6 +239,74 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
 }
 @media (max-width: 480px) { .hits { --cols: 2; gap: 24px 14px; } .search-form input { font-size: 22px; } }
 
+/* ---------- outlet window: opens from „Медии“, same deep paper as the top of the site ---------- */
+button.outlet { width: 100%; background: none; border: 0; border-bottom: 1px solid var(--rule); color: inherit; font: inherit; text-align: left; cursor: pointer; }
+button.outlet:hover span:first-child, button.outlet:focus-visible span:first-child { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+dialog.od {
+  border: 0; padding: 0; color: var(--ink); background: var(--paper-deep);
+  width: min(780px, calc(100vw - 24px)); max-height: min(88vh, 920px); border-radius: 26px;
+  box-shadow: 0 30px 90px rgba(21, 22, 43, .30); overflow: hidden;
+}
+dialog.od[open] { display: flex; flex-direction: column; animation: od-in .28s cubic-bezier(.2, .8, .2, 1); }
+dialog.od::backdrop { background: rgba(21, 22, 43, .42); }
+@keyframes od-in { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
+dialog.od.full { width: 100vw; max-width: 100vw; height: 100vh; height: 100dvh; max-height: none; margin: 0; border-radius: 0; }
+.od-scroll { flex: 1; min-height: 0; overflow: auto; padding: 30px 36px 28px; }
+.od-body { display: flex; flex-direction: column; gap: 28px; }
+dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
+.od-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.od-eyebrow { margin: 0 0 6px; font: 400 12px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.od h2 { margin: 0; font: 200 clamp(44px, 7vw, 76px)/.92 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.od-meta { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font: 400 14px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.od-meta a { color: var(--ink); text-underline-offset: 3px; }
+.od-close {
+  flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--ink); background: transparent;
+  color: var(--ink); font: 300 24px/1 var(--display); cursor: pointer; display: grid; place-items: center;
+}
+.od-close:hover, .od-close:focus-visible { background: var(--ink); color: var(--paper-deep); }
+.od-stats { display: flex; flex-wrap: wrap; gap: 10px 36px; padding-block: 18px; border-block: 1px solid var(--rule); }
+.od-section h3 { margin: 0 0 10px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.od-section p { margin: 0; max-width: 62ch; color: var(--ink-soft); }
+.od-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px 40px; }
+.od-todo {
+  display: inline-block; padding: 5px 10px; border: 1px dashed var(--muted); border-radius: 999px;
+  font: 400 12px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+/* the spectrum: a scale to be filled with a measured position (axes and method still to decide) */
+.od-scale { position: relative; height: 34px; margin-top: 4px; }
+.od-scale::before { content: ""; position: absolute; left: 0; right: 0; top: 16px; height: 1px; background: var(--ink); }
+.od-scale i { position: absolute; top: 11px; width: 1px; height: 11px; background: var(--ink); }
+.od-scale-labels { display: flex; justify-content: space-between; font: 400 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.od-recent { list-style: none; margin: 0; padding: 0; }
+.od-recent li { border-bottom: 1px solid var(--rule); }
+.od-recent a { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding-block: 11px; text-decoration: none; }
+.od-recent time { font: 400 13px/1.45 var(--display); letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.od-recent span { overflow-wrap: anywhere; }
+.od-recent a:hover span, .od-recent a:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
+.od-foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap;
+  padding: 14px 20px 16px 36px; border-top: 1px solid var(--rule); background: var(--paper-deep);
+}
+.od-foot small { color: var(--muted); font-size: 13px; }
+.od-size {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px;
+  border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+  font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase;
+}
+.od-size:hover, .od-size:focus-visible { background: var(--ink); color: var(--paper-deep); }
+.od-size svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 600px) {
+  dialog.od { width: calc(100vw - 16px); max-height: 92vh; border-radius: 22px; }
+  .od-scroll { padding: 22px 18px 20px; }
+  .od-foot { padding: 12px 14px 14px 18px; }
+  .od-recent a { grid-template-columns: 1fr; gap: 2px; }
+  .od-stats { gap: 10px 22px; }
+  .od-stats .stat { font-size: 12px; }
+  .od-stats .stat strong { font-size: 28px; }
+  .od-foot small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { dialog.od[open] { animation: none; } }
+
 /* ---------- archive ---------- */
 .back {
   display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--ink);
@@ -393,6 +461,54 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
   </footer>
  </div>
 </main>
+
+<dialog class="od" id="od" aria-labelledby="od-name">
+  <div class="od-scroll">
+    <div class="od-body">
+      <div class="od-head">
+        <div>
+          <p class="od-eyebrow">Медия</p>
+          <h2 id="od-name"></h2>
+          <p class="od-meta" id="od-meta"></p>
+        </div>
+        <button class="od-close" id="od-close" type="button" aria-label="Затвори">×</button>
+      </div>
+      <div class="od-stats" id="od-stats"></div>
+      <div class="od-grid">
+        <section class="od-section">
+          <h3>Собственост</h3>
+          <p id="od-owner"></p>
+        </section>
+        <section class="od-section">
+          <h3>Основана</h3>
+          <p id="od-founded"></p>
+        </section>
+      </div>
+      <section class="od-section">
+        <h3>За медията</h3>
+        <p id="od-about"></p>
+      </section>
+      <section class="od-section">
+        <h3>Позиция в спектъра</h3>
+        <div class="od-scale" aria-hidden="true"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:calc(100% - 1px)"></i></div>
+        <div class="od-scale-labels"><span>—</span><span>—</span></div>
+        <p style="margin-top:12px"><span class="od-todo">Предстои: измерими данни и метод</span></p>
+      </section>
+      <section class="od-section">
+        <h3>Последни статии тук</h3>
+        <ul class="od-recent" id="od-recent"></ul>
+      </section>
+      <section class="od-section" id="od-sources-wrap" hidden>
+        <h3>Източници</h3>
+        <ul class="od-recent" id="od-sources"></ul>
+      </section>
+    </div>
+  </div>
+  <div class="od-foot">
+    <small>Информацията за медиите се попълва ръчно и винаги с посочен източник.</small>
+    <button class="od-size" id="od-size" type="button"></button>
+  </div>
+</dialog>
 
 <script type="application/json" id="data">/*__DATA__*/</script>
 <script>
@@ -844,11 +960,77 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
   data.stories.forEach(s => s.outlets.forEach(o => { counts[o] = (counts[o] || 0) + 1; }));
   const ol = document.getElementById("outlet-list");
   tracked.forEach(o => {
-    const row = el("div", "outlet" + (o.active ? "" : " off"));
+    const row = el("button", "outlet" + (o.active ? "" : " off"));
+    row.type = "button";
     const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${counts[o.name] || 0} ист.` : "временно недостъпна";
     row.append(el("span", null, o.name), el("span", null, right));
+    row.addEventListener("click", () => openOutlet(o));
     ol.append(row);
   });
+
+  // ---------- the outlet window ----------
+  const od = document.getElementById("od");
+  const info = data.outlet_info || {};
+  const EXPAND = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg>';
+  const SHRINK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>';
+  const sizeBtn = document.getElementById("od-size");
+  const setSize = full => {
+    od.classList.toggle("full", full);
+    sizeBtn.innerHTML = full ? SHRINK : EXPAND;   // constant drawings only
+    sizeBtn.append(full ? "Намали" : "Цял екран");
+    sizeBtn.setAttribute("aria-pressed", String(full));
+  };
+  const todo = () => el("span", "od-todo", "Предстои");
+  const fill = (id, text) => { const n = document.getElementById(id); n.replaceChildren(text ? document.createTextNode(text) : todo()); };
+  function openOutlet(o) {
+    const i = info[o.name] || {};
+    document.getElementById("od-name").textContent = o.name;
+    const meta = document.getElementById("od-meta");
+    meta.replaceChildren(el("span", null, TYPE_BG[o.type] || o.type));
+    if (i.domain) {
+      const a = el("a", null, `${i.domain} ↗`);
+      a.href = `https://${i.domain}`; a.target = "_blank"; a.rel = "noopener noreferrer";
+      meta.append(a);
+    }
+    if (!o.active) meta.append(el("span", null, "временно недостъпна"));
+    // what we measure ourselves, from the stories on this page
+    const mine = [];
+    data.stories.forEach(s => s.articles.forEach(a => { if (a.outlet === o.name) mine.push(a); }));
+    const seen = new Set();
+    const recent = mine.filter(a => !seen.has(a.link) && seen.add(a.link)).sort((a, b) => b.published.localeCompare(a.published));
+    const n = counts[o.name] || 0, total = data.stories.length;
+    const stats = document.getElementById("od-stats");
+    stats.replaceChildren();
+    [[n, archiveDate ? "истории този ден" : "истории за 48 ч"],
+     [total ? `${Math.round(100 * n / total)}%` : "–", "от всички истории"],
+     [recent.length ? when(recent[0].published) : "–", "последна статия"]].forEach(([v, label]) => {
+      const st = el("div", "stat"); st.append(el("strong", null, v), label); stats.append(st);
+    });
+    fill("od-owner", i.owner); fill("od-founded", i.founded); fill("od-about", i.about);
+    const list = document.getElementById("od-recent");
+    list.replaceChildren();
+    recent.slice(0, 6).forEach(a => {
+      const link = safeUrl(a.link); if (!link) return;
+      const li = el("li"), x = el("a");
+      x.href = link; x.target = "_blank"; x.rel = "noopener noreferrer";
+      const d = new Date(a.published);
+      x.append(el("time", null, `${fmtDay.format(d)}, ${fmtTime.format(d)}`), el("span", null, a.title));
+      li.append(x); list.append(li);
+    });
+    if (!list.children.length) list.append(el("li", null, "Няма статии в тези истории."));
+    const src = (i.sources || []).map(safeUrl).filter(Boolean);
+    document.getElementById("od-sources-wrap").hidden = !src.length;
+    const sl = document.getElementById("od-sources");
+    sl.replaceChildren();
+    src.forEach(u => { const li = el("li"), x = el("a"); x.href = u; x.target = "_blank"; x.rel = "noopener noreferrer"; x.append(el("span", null, u)); li.append(x); sl.append(li); });
+    setSize(false);
+    od.querySelector(".od-scroll").scrollTop = 0;
+    if (typeof od.showModal === "function") od.showModal(); else od.setAttribute("open", "");
+  }
+  const closeOd = () => { if (od.open) od.close ? od.close() : od.removeAttribute("open"); };
+  document.getElementById("od-close").addEventListener("click", closeOd);
+  sizeBtn.addEventListener("click", () => setSize(!od.classList.contains("full")));
+  od.addEventListener("click", e => { if (e.target === od) closeOd(); });   // a click on the dimmed page closes it
   const ul = document.getElementById("untracked-list");
   const untracked = data.untracked_outlets || [];
   document.getElementById("untracked-head").hidden = !untracked.length;
