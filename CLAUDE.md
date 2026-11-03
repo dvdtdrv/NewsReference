@@ -74,6 +74,10 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
 - David's rule (4 Nov): include EVERYTHING he sends and every suspicion, investigation or accusation found, but verify
   each against its source and label it (claim vs established, who says it, the other side's answer, anonymous sources).
 - Done: BTA, BNT, BNR, bTV. Sources behind bTV's firewall are fetched via the PC runner (probe_docs.py) or the PC browser.
+- 4 Nov: Media Pluralism Monitor 2026 (CMPF/EUI, Bulgaria) read in full via the PC browser (pdf.js from jsdelivr inside
+  the cadmus.eui.eu tab; PDF at /server/api/core/bitstreams/<id>/content). Its findings, each checked against the cited
+  source, were added to bTV, Nova (first 3 disputes), BNT, BNR and BTA. Still unread: IPI/MJRC "Media Capture Monitoring
+  Report: Bulgaria" (Nov 2025) and the CoE/MFRR report (Oct 2025). Nova's owner/founded still empty (next outlet).
 
 ## Search (2 Nov 2026)
 - Header magnifier -> `site/tarsene.html` (template `data.page == "search"`, body.compact: no sliding stage).
