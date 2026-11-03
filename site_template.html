@@ -272,6 +272,10 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   display: inline-block; padding: 5px 10px; border: 1px dashed var(--muted); border-radius: 999px;
   font: 400 12px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
 }
+.od-section p + p { margin-top: 8px; }
+.od-items { margin: 8px 0 0; padding-left: 18px; max-width: 66ch; color: var(--ink-soft); }
+.od-items li { margin-bottom: 4px; }
+.od-section .od-case-src { margin-top: 10px; }
 .od-note { margin: 0 0 14px !important; font-size: 13px; color: var(--muted) !important; }
 .od-cases { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .od-cases > li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 18px; padding-block: 16px; border-top: 1px solid var(--rule); }
@@ -494,6 +498,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
           <p id="od-founded"></p>
         </section>
       </div>
+      <div id="od-extra" class="od-body"></div>
       <section class="od-section">
         <h3>Позиция в спектъра</h3>
         <div class="od-scale" aria-hidden="true"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:calc(100% - 1px)"></i></div>
@@ -1027,6 +1032,26 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       li.append(x); list.append(li);
     });
     if (!list.children.length) list.append(el("li", null, "Няма статии в тези истории."));
+    // extra sections from outlets_info.json: {title, text, items?, sources?}; text paragraphs split by blank lines
+    const extra = document.getElementById("od-extra");
+    extra.replaceChildren();
+    (i.extra || []).forEach(x => {
+      const sec = el("section", "od-section");
+      sec.append(el("h3", null, x.title));
+      String(x.text || "").split(/\n\s*\n/).filter(Boolean).forEach(t => sec.append(el("p", null, t)));
+      if (x.items && x.items.length) {
+        const ul = el("ul", "od-items");
+        x.items.forEach(t => ul.append(el("li", null, t)));
+        sec.append(ul);
+      }
+      const links = el("div", "od-case-src");
+      (x.sources || []).filter(y => safeUrl(y.url)).forEach(y => {
+        const a = el("a", null, `${y.label} ↗`); a.href = y.url; a.target = "_blank"; a.rel = "noopener noreferrer"; links.append(a);
+      });
+      if (links.children.length) sec.append(links);
+      extra.append(sec);
+    });
+    extra.hidden = !extra.children.length;
     // disputes over independence and court cases: each with date, title, both sides, sources
     const cases = (i.disputes || []);
     document.getElementById("od-disputes-wrap").hidden = !cases.length;
