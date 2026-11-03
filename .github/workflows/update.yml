@@ -1,4 +1,5 @@
 # Runs the whole pipeline on GitHub every 30 minutes and publishes the website.
+# Started by David's PC after it reads its outlets (see local-fetch.yml), or by the timer as a backup.
 #
 #   1. gets the saved data (all articles and stories so far) from the "data" branch
 #   2. collect.py -> group_stories.py -> build_site.py   (the same as run_all.bat)
@@ -14,11 +15,11 @@ name: Update News Reference
 
 on:
   schedule:
-    - cron: "7,37 * * * *"     # at :07 and :37 past every hour (UTC); exact start can be a few minutes late
+    - cron: "37 * * * *"       # backup, once an hour; normally David's PC starts this every ~30 minutes
   workflow_dispatch:
 
 permissions:
-  actions: read      # to pick up the articles David's PC read (local-fetch.yml)
+  actions: write     # to pick up the articles David's PC read, and to ask it for the next round
   contents: write    # to save the data branch
   pages: write       # to publish the website
   id-token: write
@@ -37,6 +38,9 @@ jobs:
     steps:
       - name: Get the code
         uses: actions/checkout@v4
+
+      - name: Note the start time
+        run: echo "STARTED=$(date +%s)" >> "$GITHUB_ENV"
 
       - name: Get the saved data
         run: |
@@ -109,3 +113,16 @@ jobs:
       - name: Publish the website
         id: deploy
         uses: actions/deploy-pages@v4
+
+      - name: Ask David's PC for the next round
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # the next update should start about 30 minutes after this one started;
+          # the PC needs ~3 minutes to read its outlets, so it waits for the rest
+          spent=$(( ($(date +%s) - STARTED) / 60 ))
+          wait=$(( 27 - spent )); [ $wait -lt 0 ] && wait=0
+          gh workflow run local-fetch.yml --repo "$GITHUB_REPOSITORY" -f wait=$wait || \
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/local-fetch.yml/dispatches" -f ref=main -f "inputs[wait]=$wait"
+          echo "Asked the PC to read again in $wait minutes."

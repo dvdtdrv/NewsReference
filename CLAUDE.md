@@ -103,6 +103,9 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
 - Outlet classification: David (2 Nov 2026) wants the site to show where each outlet sits on a spectrum
   ("За проекта" now says so, as a coming feature). Earlier plan was no left/right labels; Measured axes: ownership (cited records), geopolitical framing,
   blindspots, sensationalism. Always show evidence.
+- Relay (3 Nov): GitHub's cron ran only ~hourly, so update.yml ends by dispatching local-fetch.yml with wait=27-min-spent;
+  the PC waits, reads, uploads, then dispatches update.yml -> ~30 min cycle. local-fetch has no cron (queued requests
+  wait for the PC); update.yml cron is an hourly backup. local-fetch concurrency cancel-in-progress keeps one relay.
 - Quick rebuild (3 Nov): rebuild.yml rebuilds pages + search from the saved data branch and deploys (~1-2 min);
   runs on push to site_template.html/build_site.py/build_search.mjs/web/** or by hand. Use it for design/text changes.
 - Hosting (live): GitHub Actions runs collect + group every 30 min and commits `data/stories.json`;
