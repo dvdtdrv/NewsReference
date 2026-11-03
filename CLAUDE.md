@@ -96,6 +96,8 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   (start_runner.bat / stop_runner.bat). Public repo: never approve fork PR workflow runs.
 - Repo stays public for now (free Pages + unlimited minutes). If going private later: second public repo for
   the built site only (free), or GitHub Pro; private minutes (~2000/mo) need hourly runs or self-hosted.
+- 3 Nov 2026: David allowed the outlet domains (incl. www.*) for Claude's cloud workspace (claude.ai Settings ->
+  Capabilities). From the workspace 29 outlets answer; the same 7 `local` ones refuse it (403/reset), so test those via the PC.
 - Later option for 24/7 without the PC: small EU server (Hetzner ~4 EUR/mo); test the 7 outlets first.
 - English outlets (Novinite, Sofia Globe) left out: grouping is Bulgarian text only. Sofia Globe feed dead since Jul 2025.
 - Outlet classification: David (2 Nov 2026) wants the site to show where each outlet sits on a spectrum
