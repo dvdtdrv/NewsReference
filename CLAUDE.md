@@ -68,6 +68,13 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   Site tries `image2` (feed photo kept as `image_feed`) when the page photo 404s (Fakti, Mediapool delete some).
 - Skipped: BTA (permission covers the feed only), Dnevnik + Capital (`page_images: False`, pages 403 us).
 
+## Outlet info (3-4 Nov 2026)
+- outlets_info.json per outlet: owner, founded, sources [{label,url}], disputes [{date,title,summary,sources}],
+  extra [{title,text,items?,sources}] (money, advertisers, election contracts...). Shown in the outlet window.
+- David's rule (4 Nov): include EVERYTHING he sends and every suspicion, investigation or accusation found, but verify
+  each against its source and label it (claim vs established, who says it, the other side's answer, anonymous sources).
+- Done: BTA, BNT, BNR, bTV. Sources behind bTV's firewall are fetched via the PC runner (probe_docs.py) or the PC browser.
+
 ## Search (2 Nov 2026)
 - Header magnifier -> `site/tarsene.html` (template `data.page == "search"`, body.compact: no sliding stage).
   Tabs Истории | Статии with counts, sort Най-подходящи | Най-нови; address keeps ?q=&t=article&s=new.
