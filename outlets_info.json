@@ -3,7 +3,6 @@
  "BTA": {
   "owner": "Национален информационен институт със специален закон и на бюджетна издръжка. Генералният директор се избира от Народното събрание за 5 години (най-много два мандата). Финансира се със субсидия от държавния бюджет и със собствени приходи.",
   "founded": "27 януари 1898 г., с указ на княз Фердинанд I, като служба към Министерството на външните работи. Първият ѝ бюлетин излиза на 16 февруари 1898 г.",
-  "about": "",
   "sources": [
    {
     "label": "БТА: „БТА навършва 118 години днес“ (16.02.2016): учредяване и първи бюлетин",
@@ -30,211 +29,176 @@
  "BNT": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "BNR": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "bTV Novinite": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Nova": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Dnevnik": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Capital": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Mediapool": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Standart": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "24 Chasa": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Trud": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Sega": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Club Z": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Dnes.bg": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Actualno": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Fakti": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Offnews": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Blitz": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Novini.bg": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Dir.bg": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "PIK": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Banker": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Pogled.info": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Darik": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Focus": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Vesti.bg": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "News.bg": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "BG On Air": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Bloomberg TV": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Evrocom": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Euronews BG": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "DW": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Boulevard Bulgaria": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Svobodna Tochka": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Marica": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  },
  "Moreto.net": {
   "owner": "",
   "founded": "",
-  "about": "",
   "sources": []
  }
 }
