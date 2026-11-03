@@ -606,12 +606,13 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
       if (link) { card.href = link; card.target = "_blank"; card.rel = "noopener noreferrer"; }
       const ph = el("div", "ph");
       const fallback = () => { ph.replaceChildren(el("span", "fallback", a.outlet)); };
-      const img = safeUrl(a.image);
-      if (img) {
+      const img = safeUrl(a.image), spare = safeUrl(a.image2);
+      if (img || spare) {
         const i = new Image();
         i.loading = "lazy"; i.alt = ""; i.referrerPolicy = "no-referrer"; i.decoding = "async";
-        i.onerror = fallback;
-        i.src = img;
+        // if the photo is gone, try the spare one, then show the outlet's name
+        i.onerror = () => { if (spare && i.src !== spare) i.src = spare; else fallback(); };
+        i.src = img || spare;
         ph.append(i);
       } else fallback();
       const src = el("div", "src");

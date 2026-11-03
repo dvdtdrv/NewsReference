@@ -10,6 +10,7 @@ Each outlet has:
   gentle   - True for sites that limit automated traffic: read at most once per run, and wait when told to
   local    - True for outlets that refuse GitHub's servers but work from David's PC: they are read on
              the PC by fetch_local.py (workflow local-fetch.yml), and GitHub's run picks up the result
+  photos_on_pc - GitHub reads the feed, but the article pages (photos) refuse GitHub: David's PC fetches them
   page_images - False for outlets whose article pages refuse us (403): keep the feed's photo
   as_browser - introduce ourselves as a web browser. ONLY with the outlet's written permission
                (kept in the permissions folder).
@@ -94,7 +95,7 @@ OUTLETS = [
     {"name": "Evrocom", "domain": "eurocom.bg", "type": "commercial TV",
      "feed": "https://eurocom.bg/feed/"},
     {"name": "Euronews BG", "domain": "euronews.bg", "type": "international",
-     "feed": "https://euronews.bg/feed/"},
+     "feed": "https://euronews.bg/feed/", "photos_on_pc": True},
     # DW's Bulgarian service has no Bulgarian feed; its news sitemap lists headlines, times and photos
     {"name": "DW", "domain": "dw.com", "type": "international",
      "sitemap": "https://www.dw.com/bg/news-sitemap.xml"},

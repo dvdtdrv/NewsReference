@@ -62,6 +62,10 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
   as fallback. `good_image` drops svg/gif and file names like logo/icon/avatar/default/placeholder.
 - Older articles: `backfill_page_images` upgrades up to 40 per outlet per run (12 outlets in parallel, 6 min cap),
   newest first; build_site.py and build_search.mjs show the remembered page photo for any link (incl. frozen stories).
+- 3 Nov: Novini.bg puts og:image ~180 KB down, after an early fake "</head>": reader now reads until og:image
+  (max 250 KB). Cache v2 dropped old "" answers once. Photo URLs are requoted (Marica: spaces, Cyrillic).
+  Euronews pages refuse GitHub -> `photos_on_pc`: fetch_local.py sends {link: photo} in local_articles.json "photos".
+  Site tries `image2` (feed photo kept as `image_feed`) when the page photo 404s (Fakti, Mediapool delete some).
 - Skipped: BTA (permission covers the feed only), Dnevnik + Capital (`page_images: False`, pages 403 us).
 
 ## Search (2 Nov 2026)
