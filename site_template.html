@@ -369,7 +369,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     <section class="intro" id="intro">
       <h1 id="intro-title">Една новина.<br>Всички медии.</h1>
       <div>
-        <a class="back" id="back" href="../index.html" hidden>← Последните 48 часа</a>
+        <a class="back" id="back" href="../index.html" hidden>← Към последните истории</a>
         <p id="intro-text">В „Новинарски справочник“ събираме заглавията на български медии и ги подреждаме по истории. Така виждате кой какво отразява, как го озаглавява и кой мълчи.</p>
         <div class="stats" id="stats"></div>
         <form class="search-form" id="search-form" role="search" action="tarsene.html" hidden>
@@ -385,7 +385,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 <main class="sheet">
  <div class="wrap">
     <div class="list-head" id="stories">
-      <h2 id="list-title">Истории · последните 48 часа</h2>
+      <h2 id="list-title">Истории</h2>
       <div class="tabs" role="group" aria-label="Подреждане">
         <button class="tab" type="button" data-view="top" aria-pressed="true">Най-отразявани</button>
         <button class="tab" type="button" data-view="new" aria-pressed="false">Най-нови</button>
@@ -1001,7 +1001,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const n = counts[o.name] || 0, total = data.stories.length;
     const stats = document.getElementById("od-stats");
     stats.replaceChildren();
-    [[n, archiveDate ? "истории този ден" : "истории за 48 ч"],
+    [[n, archiveDate ? "истории този ден" : "истории"],
      [total ? `${Math.round(100 * n / total)}%` : "–", "от всички истории"],
      [recent.length ? when(recent[0].published) : "–", "последна статия"]].forEach(([v, label]) => {
       const st = el("div", "stat"); st.append(el("strong", null, v), label); stats.append(st);
