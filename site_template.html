@@ -349,7 +349,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
  <div class="wrap stage-inner">
   <header class="masthead">
     <nav class="nav-group" aria-label="Раздели">
-      <a class="nav-link" href="#stories">Истории</a>
+      <a class="nav-link" href="#outlets" id="nav-outlets">Медии</a>
       <a class="nav-link" href="#archive" id="nav-archive">Архив</a>
     </nav>
     <a class="logo" href="#top" aria-label="News Reference, начало">
@@ -357,7 +357,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       <small id="dateline">&nbsp;</small>
     </a>
     <div class="nav-group">
-      <a class="nav-link" href="#outlets">Медии</a>
       <a class="nav-link" href="#about">За проекта</a>
       <a class="nav-link search-link" id="nav-search" href="tarsene.html" aria-label="Търсене" title="Търсене">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
@@ -602,9 +601,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     });
     document.getElementById("support").hidden = false;
     document.getElementById("cta-sub").setAttribute("aria-current", "page");
-    document.querySelector('.nav-link[href="#outlets"]').href = `${base}index.html#outlets`;
+    document.getElementById("nav-outlets").href = `${base}index.html#outlets`;
     document.querySelector(".logo").href = `${base}index.html`;
-    document.querySelector('.nav-link[href="#stories"]').href = `${base}index.html#stories`;
     document.getElementById("nav-archive").href = `${base}index.html#archive`;
   }
 
@@ -623,9 +621,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.getElementById("search").hidden = false;
     document.getElementById("nav-search").setAttribute("aria-current", "page");
     document.querySelector(".logo").href = `${base}index.html`;
-    document.querySelector('.nav-link[href="#stories"]').href = `${base}index.html#stories`;
     document.getElementById("nav-archive").href = `${base}index.html#archive`;
-    document.querySelector('.nav-link[href="#outlets"]').href = `${base}index.html#outlets`;
+    document.getElementById("nav-outlets").href = `${base}index.html#outlets`;
   }
 
   const stats = document.getElementById("stats");
