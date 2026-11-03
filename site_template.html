@@ -294,7 +294,7 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
       <a class="nav-link search-link" id="nav-search" href="tarsene.html" aria-label="Търсене" title="Търсене">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
       </a>
-      <a class="cta" id="cta-sub" href="abonament.html">Абонамент</a>
+      <a class="cta" id="cta-sub" href="abonament.html">Подкрепи</a>
     </div>
   </header>
 
@@ -345,17 +345,11 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
 
     <section id="support" hidden>
       <div class="tiers">
-        <div class="tier">
-          <h3>Читател</h3>
-          <p class="price"><strong>3 €</strong>на месец</p>
-          <p>Помагаш сайтът да остане безплатен за всички и без реклами.</p>
-          <button class="cta" type="button" disabled>Абонирай се</button>
-        </div>
         <div class="tier featured">
-          <h3>Поддръжник</h3>
-          <p class="price"><strong>7 €</strong>на месец</p>
-          <p>Покриваш част от разходите за сървъри и за добавяне на още медии, включително регионални.</p>
-          <button class="cta" type="button" disabled>Абонирай се</button>
+          <h3>Всеки месец</h3>
+          <p class="price"><strong>3 €</strong>или повече на месец</p>
+          <p>Редовна подкрепа. С нея сайтът остава безплатен и без реклами за всички и можем да добавяме още медии, включително регионални.</p>
+          <button class="cta" type="button" disabled>Подкрепи</button>
         </div>
         <div class="tier">
           <h3>Еднократно</h3>
@@ -364,7 +358,7 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
           <button class="cta" type="button" disabled>Дари</button>
         </div>
       </div>
-      <p class="pay-note">Плащанията още не са включени. Скоро тук ще можеш да се абонираш с карта.</p>
+      <p class="pay-note">Плащанията още не са включени. Скоро тук ще можеш да подкрепиш сайта с карта.</p>
     </section>
 
     <section class="section" id="archive" hidden>
@@ -487,10 +481,10 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
   // the subscription page: same header and design, its own intro, no story list
   const isSupport = data.page === "support";
   if (isSupport) {
-    document.title = "Абонамент · News Reference";
+    document.title = "Подкрепи · News Reference";
     document.getElementById("intro-title").textContent = "Подкрепи News Reference.";
     document.getElementById("intro-text").textContent =
-      "Сайтът е безплатен и без реклами. Абонаментът покрива сървърите и времето, нужно да следим още медии и да показваме кой какво отразява.";
+      "Сайтът е безплатен и без реклами и всичко в него е достъпно за всеки. Подкрепата покрива сървърите и времето, нужно да следим още медии и да показваме кой какво отразява.";
     ["stories", "view-note", "list", "more-wrap", "archive", "stats"].forEach(id => {
       document.getElementById(id).hidden = true;
     });
