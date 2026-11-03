@@ -58,7 +58,8 @@ NOW = datetime.now(timezone.utc)
 # Outlets marked "local" in feeds.py refuse GitHub's servers. On GitHub we don't ask them at all;
 # we use what David's PC read for them (fetch_local.py), downloaded by the workflow into local_in/.
 # On David's own PC (run_all.bat) they are read directly as usual.
-ON_GITHUB = os.environ.get("GITHUB_ACTIONS") == "true"
+# True only on GitHub's own servers (not on David's PC, which also runs GitHub jobs: "self-hosted")
+ON_GITHUB = os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get("RUNNER_ENVIRONMENT") != "self-hosted"
 LOCAL_FILE = os.path.join("local_in", "local_articles.json")
 LOCAL_MAX_AGE = timedelta(minutes=75)   # older than this = the PC is probably off
 
