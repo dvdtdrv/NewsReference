@@ -191,9 +191,8 @@ def page_image(url, headers):
             raw += chunk
             if len(raw) > HEAD_BYTES:
                 break
-            at = raw.find(b"og:image")
-            if at >= 0 and raw.find(b">", at) > 0:
-                break
+            if b"og:image" in raw and OG_TAG.search(raw.decode("utf-8", errors="ignore")):
+                break     # the real <meta property="og:image" ...> tag has arrived (not just the words)
         enc = r.encoding if r.encoding and r.encoding.lower() not in ("iso-8859-1", "latin-1") else "utf-8"
     text = raw.decode(enc, errors="replace")
     found = {}
@@ -339,7 +338,7 @@ def apply_page_images_to_months(cache):
                 save_json(path, items)
 
 
-PAGE_IMAGES_VERSION = 2   # bump to ask again every page that earlier gave no photo
+PAGE_IMAGES_VERSION = 3   # bump to ask again every page that earlier gave no photo
 
 
 def load_page_images():
