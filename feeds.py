@@ -26,7 +26,7 @@ OUTLETS = [
     {"name": "BTA", "domain": "bta.bg", "type": "news agency",
      "feed": "https://www.bta.bg/bg/rss/free", "gentle": True, "as_browser": True},
     {"name": "BNT", "domain": "bntnews.bg", "type": "public TV",
-     "feed": "http://news.bnt.bg/bg/rss/news.xml"},
+     "feed": "https://news.bnt.bg/bg/rss/news.xml"},
     # BNR's news moved to bnrnews.bg, which has a feed (found 1 Nov 2026)
     {"name": "BNR", "domain": "bnrnews.bg", "type": "public radio",
      "feed": "https://bnrnews.bg/api/rss/main"},
