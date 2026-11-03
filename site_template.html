@@ -476,7 +476,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       <div class="od-stats" id="od-stats"></div>
       <div class="od-grid">
         <section class="od-section">
-          <h3>Собственост</h3>
+          <h3>Собственост и управление</h3>
           <p id="od-owner"></p>
         </section>
         <section class="od-section">
@@ -1018,11 +1018,17 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       li.append(x); list.append(li);
     });
     if (!list.children.length) list.append(el("li", null, "Няма статии в тези истории."));
-    const src = (i.sources || []).map(safeUrl).filter(Boolean);
+    // sources: a plain address, or {label, url}
+    const src = (i.sources || []).map(x => typeof x === "string" ? { url: x, label: x } : x).filter(x => safeUrl(x.url));
     document.getElementById("od-sources-wrap").hidden = !src.length;
     const sl = document.getElementById("od-sources");
     sl.replaceChildren();
-    src.forEach(u => { const li = el("li"), x = el("a"); x.href = u; x.target = "_blank"; x.rel = "noopener noreferrer"; x.append(el("span", null, u)); li.append(x); sl.append(li); });
+    src.forEach(x => {
+      const li = el("li"), a = el("a");
+      a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.append(el("time", null, new URL(x.url).hostname.replace(/^www\./, "")), el("span", null, x.label || x.url));
+      li.append(a); sl.append(li);
+    });
     setSize(false);
     od.querySelector(".od-scroll").scrollTop = 0;
     if (typeof od.showModal === "function") od.showModal(); else od.setAttribute("open", "");
