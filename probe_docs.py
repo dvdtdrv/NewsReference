@@ -7,8 +7,8 @@ import os, sys, requests
 import collect
 
 URLS = [
-    "https://www.baca.bg/wp-content/uploads/2026/08/BACA_Media_Market_2026.pdf.pdf",
-    "https://mediaconnection.bg/download/report/107",
+    "https://cadmus.eui.eu/bitstreams/f233f694-c9c6-4b6d-87fa-98f9cc27b6d1/download",
+    "https://cadmus.eui.eu/bitstreams/b8901241-08c8-4b54-9709-f3a16f6476e0/download",
 ]
 
 def main():
@@ -17,7 +17,7 @@ def main():
     for i, u in enumerate(URLS):
         try:
             r = requests.get(u, headers=collect.BROWSER_HEADERS, timeout=60)
-            path = os.path.join(out, f"more{i}.pdf")
+            path = os.path.join(out, f"mpm2026_{i}.pdf")
             with open(path, "wb") as f:
                 f.write(r.content)
             print(r.status_code, len(r.content), u)
