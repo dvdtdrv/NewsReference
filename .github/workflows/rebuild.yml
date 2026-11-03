@@ -1,0 +1,67 @@
+# Quick rebuild: makes the website pages again from the data already saved, and publishes them.
+# It does NOT read the outlets or look for photos, so it takes about 1-2 minutes.
+#
+# Starts by itself when the site's design or texts change (site_template.html, build_site.py, web/),
+# or by hand: Actions tab -> "Rebuild the site only" -> Run workflow.
+# The news itself is still updated every 30 minutes by "Update News Reference".
+
+name: Rebuild the site only
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - site_template.html
+      - build_site.py
+      - build_search.mjs
+      - web/**
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: rebuild-site
+  cancel-in-progress: true    # a newer change replaces an older rebuild that hasn't finished
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Get the saved data
+        run: |
+          mkdir -p data
+          git fetch --depth 1 origin data
+          git archive FETCH_HEAD | tar -x -C data
+
+      - name: Build the pages
+        run: python3 build_site.py
+
+      - name: Set up Node.js (for the search index)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Build the search index
+        run: |
+          npm ci --no-audit --no-fund
+          node build_search.mjs
+
+      - name: Package the website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Publish the website
+        id: deploy
+        uses: actions/deploy-pages@v4
