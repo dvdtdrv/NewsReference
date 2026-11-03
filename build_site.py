@@ -18,7 +18,7 @@ import json
 import os
 import shutil
 
-from feeds import UNTRACKED
+from feeds import OUTLETS, UNTRACKED
 
 TEMPLATE = "site_template.html"
 OUT_DIR = "site"
@@ -99,12 +99,23 @@ def total_articles():
     return total
 
 
+def outlet_info():
+    """What the outlet window shows about each outlet: its website, plus what's written in outlets_info.json."""
+    try:
+        with open("outlets_info.json", encoding="utf-8") as f:
+            written = json.load(f)
+    except (OSError, ValueError):
+        written = {}
+    return {o["name"]: {"domain": o.get("domain", ""), **written.get(o["name"], {})} for o in OUTLETS}
+
+
 def front_page_data():
     with open(os.path.join("data", "stories.json"), encoding="utf-8") as f:
         data = json.load(f)
     slim(data["stories"])
     data["archive_days"] = archive_days()
     data["articles_total"] = total_articles()
+    data["outlet_info"] = outlet_info()
     data["base"] = ""
     return data
 
@@ -147,6 +158,7 @@ def main():
             "untracked_outlets": UNTRACKED,
             "stories": slim(saved["stories"]),
             "archive_days": days,
+            "outlet_info": front["outlet_info"],
             "base": "../",
         }
         with open(os.path.join(OUT_DIR, "archive", f"{day['date']}.html"), "w", encoding="utf-8") as f:
