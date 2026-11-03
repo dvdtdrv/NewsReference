@@ -7,9 +7,11 @@ import requests
 import collect
 
 LINKS = [
-    "https://novini.bg/article/2026110213225899834",
-    "https://novini.bg/article/2026110213565372954",
-    "https://euronews.bg/news/zaradi-bombena-zaplaha-samolet-na-wizz-air-ot-london-za-sofiya-beshe-prenasochen-kam-budapeshta/",
+    "https://novini.bg/article/2026110311430837925",
+    "https://novini.bg/article/2026110312051563355",
+    "https://novini.bg/article/2026110311175427945",
+    "https://novini.bg/article/2026110311593317482",
+    "https://novini.bg/article/2026110311483751605"
 ]
 
 def main():
