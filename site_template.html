@@ -192,6 +192,11 @@ a { color: inherit; }
 /* ---------- outlets, method, footer ---------- */
 .section { padding-block: 56px; border-top: 1px solid var(--ink); }
 .section h2 { margin: 0 0 28px; font: 200 clamp(40px, 6vw, 72px)/.95 var(--display); }
+/* a short explanation after a section title, in smaller type on the same line */
+.h2-note { display: inline; margin-left: .6em;
+  font: 300 clamp(15px, 1.5vw, 19px)/1.25 var(--display); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.h2-note::before { content: "— "; }
+@media (max-width: 700px) { .h2-note { display: block; margin: 10px 0 0; vertical-align: 0; } .h2-note::before { content: none; } }
 .outlets { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 32px; }
 .outlet { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--rule); min-width: 0; }
 .outlet span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
@@ -475,7 +480,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     </section>
 
     <section class="section" id="outlets">
-      <h2>Медии</h2>
+      <h2>Медии<span class="h2-note">произход, собственост, финансиране, договори и натиск от и към медиите</span></h2>
       <div class="outlets" id="outlet-list"></div>
       <p class="subhead" id="untracked-head">Още не следим</p>
       <div class="outlets" id="untracked-list"></div>
