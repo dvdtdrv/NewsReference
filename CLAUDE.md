@@ -77,7 +77,12 @@ Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / 
 - 4 Nov: Media Pluralism Monitor 2026 (CMPF/EUI, Bulgaria) read in full via the PC browser (pdf.js from jsdelivr inside
   the cadmus.eui.eu tab; PDF at /server/api/core/bitstreams/<id>/content). Its findings, each checked against the cited
   source, were added to bTV, Nova (first 3 disputes), BNT, BNR and BTA. Still unread: IPI/MJRC "Media Capture Monitoring
-  Report: Bulgaria" (Nov 2025) and the CoE/MFRR report (Oct 2025). Nova's owner/founded still empty (next outlet).
+  Report: Bulgaria" (Nov 2025) and the CoE/MFRR report (Oct 2025).
+- 4 Nov: Nova done. The workspace shell (curl) reaches the official Commercial Register JSON:
+  https://portal.registryagency.bg/CR/api/Deeds/<EIK>; filed documents (financial statements, the yearly
+  Ministry of Culture art. 7a declarations listing state/EU/party contracts) download from
+  /CR/api/Documents/<token from the DocumentAccess/ links in that JSON>. CEM register: cem.bg/linear_reg.php?cat=2.
+  Scanned PDFs: render with pdftoppm and read the image (no Bulgarian OCR installed). Use this for every outlet.
 
 ## Search (2 Nov 2026)
 - Header magnifier -> `site/tarsene.html` (template `data.page == "search"`, body.compact: no sliding stage).
