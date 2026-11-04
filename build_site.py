@@ -6,6 +6,8 @@ Takes site_template.html and writes:
   site/abonament.html           the subscription page
   site/tarsene.html             the search page (the index itself is made by build_search.mjs)
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
+  site/periods/top-week.json    the most covered stories of the last week / month / year (also -month, -year),
+                                which the front page loads when someone picks that period
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
 
 The stories are put inside each page itself, so the pages work straight from your folder:
@@ -14,9 +16,11 @@ double-click site/index.html to open the site.
 Run with:   python build_site.py
 """
 
+import copy
 import json
 import os
 import shutil
+from datetime import datetime, timedelta
 
 from feeds import OUTLETS, UNTRACKED
 
@@ -25,6 +29,8 @@ OUT_DIR = "site"
 WEB_DIR = "web"   # manifest, icons and offline helper that make the site installable on phones
 DAYS_DIR = os.path.join("data", "stories")
 KEEP = ("outlet", "title", "link", "published", "image")
+PERIODS = {"week": 7, "month": 30, "year": 365}   # the longer periods on the front page, in days
+TOP_N = 100        # how many of the most covered stories each longer period keeps
 PHOTOS_FILE = os.path.join("data", "page_images.json")   # each article's own photo (see collect.py)
 _photos = None
 
@@ -68,6 +74,36 @@ def archive_days():
             with open(os.path.join(DAYS_DIR, name), encoding="utf-8") as f:
                 days.append({"date": name[:-5], "count": len(json.load(f)["stories"])})
     return days
+
+
+def period_tops(days, generated_at):
+    """The most covered stories of the last week, month and year, from the archive.
+
+    A story counts for a period if it was still being reported in it (its newest article is inside).
+    Same order as the front page: most outlets first, then the most recently updated.
+    Goes through the archive one day at a time and keeps only the best TOP_N, so a year fits in memory.
+    """
+    now = datetime.fromisoformat(generated_at)
+    cutoffs = {k: now - timedelta(days=n) for k, n in PERIODS.items()}
+    oldest_day = (now - timedelta(days=max(PERIODS.values()) + 1)).date().isoformat()
+    key = lambda s: (s["outlet_count"], s["last_updated"])
+    best = {k: {} for k in PERIODS}
+    for day in days:                                   # newest first
+        if day["date"] < oldest_day:
+            break
+        with open(os.path.join(DAYS_DIR, f"{day['date']}.json"), encoding="utf-8") as f:
+            stories = json.load(f)["stories"]
+        for s in stories:
+            updated = datetime.fromisoformat(s["last_updated"])
+            for k, cut in cutoffs.items():
+                if updated >= cut:
+                    old = best[k].get(s["id"])          # a story can sit in two archive days: keep the bigger one
+                    if old is None or key(s) > key(old):
+                        best[k][s["id"]] = s
+        for k in best:                                 # keep memory small
+            if len(best[k]) > TOP_N * 3:
+                best[k] = dict(sorted(best[k].items(), key=lambda kv: key(kv[1]), reverse=True)[:TOP_N])
+    return {k: slim(copy.deepcopy(sorted(v.values(), key=key, reverse=True)[:TOP_N])) for k, v in best.items()}
 
 
 def render(data, template, fragment_only=False):
@@ -148,6 +184,14 @@ def main():
         f.write(render({**front, "page": "search", "stories": []}, template))
 
     days = front["archive_days"]
+
+    # the longer periods on the front page (week, month, year): loaded only when someone picks one
+    os.makedirs(os.path.join(OUT_DIR, "periods"), exist_ok=True)
+    for name, stories in period_tops(days, front["generated_at"]).items():
+        with open(os.path.join(OUT_DIR, "periods", f"top-{name}.json"), "w", encoding="utf-8") as f:
+            json.dump({"generated_at": front["generated_at"], "stories": stories}, f,
+                      ensure_ascii=False, separators=(",", ":"))
+
     for day in days:
         with open(os.path.join(DAYS_DIR, f"{day['date']}.json"), encoding="utf-8") as f:
             saved = json.load(f)
