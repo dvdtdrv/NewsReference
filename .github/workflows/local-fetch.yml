@@ -37,9 +37,19 @@ jobs:
       - name: Wait for the next round
         if: ${{ github.event.inputs.wait && github.event.inputs.wait != '0' }}
         shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           $m = [int]"${{ github.event.inputs.wait }}"
           if ($m -gt 30) { $m = 30 }
+          # If this request already waited on GitHub (the PC was off or asleep), don't wait again:
+          # subtract the minutes it spent in the queue.
+          try {
+            $h = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = "application/vnd.github+json" }
+            $run = Invoke-RestMethod -Headers $h -Uri "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            $queued = ([DateTimeOffset]::UtcNow - [DateTimeOffset]::Parse($run.created_at)).TotalMinutes
+            $m = [math]::Max(0, $m - [math]::Floor($queued))
+          } catch { Write-Host "Could not read the queue time; using the full wait." }
           Write-Host "Waiting $m minutes so updates stay about 30 minutes apart..."
           Start-Sleep -Seconds ($m * 60)
 
