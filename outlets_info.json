@@ -3223,9 +3223,368 @@
   ]
  },
  "Mediapool": {
-  "owner": "",
-  "founded": "",
-  "sources": []
+  "owner": "Частен новинарски сайт. Mediapool.bg се издава от „Медияпул“ ООД (ЕИК 130862381, вписано като „МЕДИЯПУЛ“), чийто предмет на дейност изрично включва издаването на електронното издание Mediapool с адреси mediapool.bg и mediapoolbg.com. Капиталът е 5000 лв.: Стояна Георгиева – 3500 лв. (70%) и Фондация „Инфоспейс“ („Инфо спейс“, ЕИК 130629854) – 1500 лв. (30%). Стояна Георгиева е управител на дружеството и главен редактор на сайта, а също директор на фондацията; в настоятелството на фондацията са Стояна Георгиева, Ясен Бояджиев (управляващ редактор на Mediapool) и Диана Михова, с мандат до 31.01.2028 г. В декларациите си пред Министерството на културата дружеството посочва Стояна Георгиева като действителен собственик. С окончателно решение № 460 от 16.07.2025 г. Върховният касационен съд приема, че собственик на сайта и издател на публикациите е самото дружество, а Георгиева и фондацията са собственици на капитала му, но не и на сайта.",
+  "founded": "2000 г., „от група независими журналисти“, като първия български информационно-аналитичен сайт (по думите на самата медия). Дружеството „Медияпул“ ООД е регистрирано през 2002 г. (фирмено дело 1729/2002), а фондацията – през октомври 2001 г.",
+  "sources": [
+   {
+    "label": "Mediapool: начална страница",
+    "url": "https://www.mediapool.bg/"
+   },
+   {
+    "label": "Mediapool: „За нас“ (собственици, екип, финансиране)",
+    "url": "https://www.mediapool.bg/about-us/"
+   },
+   {
+    "label": "Mediapool: контакти",
+    "url": "https://www.mediapool.bg/contacts/"
+   },
+   {
+    "label": "Търговски регистър: „Медияпул“ ООД, ЕИК 130862381",
+    "url": "https://portal.registryagency.bg/CR/Reports/ActiveConditionTabResult?uic=130862381"
+   },
+   {
+    "label": "Търговски регистър: Фондация „Инфоспейс“, ЕИК 130629854",
+    "url": "https://portal.registryagency.bg/CR/Reports/ActiveConditionTabResult?uic=130629854"
+   },
+   {
+    "label": "ВКС: решение № 460 от 16.07.2025 г. по гр. д. № 5021/2023 г. (PDF)",
+    "url": "https://www.vks.bg/dela-jurnalisti-i-medii-reshenia/2025-07-16-delo-5021-2023.pdf"
+   },
+   {
+    "label": "Finansi.bg: „Медиапул“ ООД (не сме го прочели)",
+    "url": "https://www.finansi.bg/mediapul"
+   },
+   {
+    "label": "Finansi.bg: Фондация „Инфо спейс“ (не сме го прочели)",
+    "url": "https://www.finansi.bg/infospejs"
+   },
+   {
+    "label": "CompanyBook: „Медиапул“ ООД (не сме го прочели)",
+    "url": "https://companybook.bg/companies/130862381"
+   },
+   {
+    "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а",
+    "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
+   }
+  ],
+  "extra": [
+   {
+    "title": "Приходи и реклама",
+    "text": "Според годишния финансов отчет на „Медияпул“ ООД за 2024 г. нетните приходи от продажби (услуги) са 476 хил. лв. при 359 хил. лв. за 2023 г., други приходи – 186 хил. лв. (29 хил. лв.), общо приходи 662 хил. лв. (388 хил. лв., ръст 70,6%). Разходите са 308 хил. лв., от тях 245 хил. лв. за външни услуги и 53 хил. лв. за персонал. Печалбата преди данъци е 354 хил. лв. (228 хил. лв., ръст 55,3%), а след данъци 318 хил. лв.; собственият капитал в края на годината е 1,108 млн. лв. Това са данни само за дружеството; фондацията има отделни отчети.\n\nПо публикуваната тарифа (без ДДС) банерите струват 20 – 30 лв. (10,23 – 15,34 €) на 1000 показвания, авторски платен материал – 3000 лв. (1533,88 €), публикация – 2000 лв. (1022,58 €), интерактивна статия – 2200 лв. (1124,84 €), а интервюта и видеоподкасти – по запитване. На страницата за реклама Mediapool публикува и договорите си за политическа реклама за изборите от 2019 до 2026 г.\n\nЧитателите могат да даряват (карта, PayPal, банков превод). В декларациите по чл. 7а дружеството изброява даренията поименно: за 2023 г. 42 дарения за общо 8735, за 2024 г. 41 дарения за 4689 и за 2025 г. 139 дарения за 84 772,52 (валутата не е посочена). От сумата за 2025 г. 48 277,40 са от Асоциацията на европейските журналисти – България (в три превода, сред тях 34 000 от кампанията на АЕЖ за плащане на обезщетението по делото на съдия Светлин Михайлов), а останалите са от частни лица и фирми.",
+    "sources": [
+     {
+      "label": "Годишен финансов отчет на „Медияпул“ ООД за 2024 г., Търговски регистър (PDF, сканиран)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmM2FmOGM2NmQzYjcyNDVlYzg5NDkxMjk2M2NiZGYwZTCrCfv1lb4fzfLJ-QjoAi6NhihdYpCFm6OCL2-vLV0Isg"
+     },
+     {
+      "label": "Годишен финансов отчет на „Медияпул“ ООД за 2023 г., Търговски регистър (PDF, сканиран) (не сме го прочели)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmNzdkY2MwMmQyMTM1NDFiZThlMWE0MDE2YTlhYzFhMzMiAgtFPZhtbmDyyfa1yjDRmvLdFZ3ewoiqlXmfVvMLpQ"
+     },
+     {
+      "label": "Mediapool: реклама (тарифа и договори за политическа реклама)",
+      "url": "https://www.mediapool.bg/reklama/"
+     },
+     {
+      "label": "Mediapool: рекламна тарифа (PDF)",
+      "url": "https://www.mediapool.bg/content/uploads/2026/09/Mediapool.bg-рекламна-тарифа.pdf"
+     },
+     {
+      "label": "Mediapool: дарения",
+      "url": "https://www.mediapool.bg/donations/"
+     },
+     {
+      "label": "Декларация по чл. 7а за 2023 г., Търговски регистър (PDF, сканирана)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmMjU1MDU4MzY4MjViNDRiNDlhYWQwNjY5MThhOGE5OTjJtZpIpBVZ6_S4YQ5ngds8cSZ81aJJwLyvM2GWlrxJIQ"
+     },
+     {
+      "label": "Декларация по чл. 7а за 2024 г., Търговски регистър (PDF, сканирана)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmYmEyYWMxZWJjZGM3NGQ1NDgyNmVhYWRhZjU4ZTljZWItTegHa__yT9M4m-LzBxxuLKFSYas_k83KXbrhiWoARA"
+     },
+     {
+      "label": "Декларация по чл. 7а за 2025 г., Търговски регистър (PDF)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmNTUyMmVkYzEyYmFlNGFiOWJjYzkxYzAxYTA4M2M1NTJ5XIE39qQkgMFjmyH9_K9XQxICY3mqwGiUUqlqEzn7QA"
+     },
+     {
+      "label": "Mediapool, 1.08.2025: „Подкрепа за Mediapool.bg и Борис Митов: 421 души дариха…“",
+      "url": "https://www.mediapool.bg/bulgaria/podkrepa-za-mediapoolbg-i-boris-mitov-421-dushi-dariha-nadezhda-za-smelata-zhurnalistika/"
+     },
+     {
+      "label": "Finansi.bg: финансови показатели на „Медиапул“ ООД (не сме го прочели)",
+      "url": "https://www.finansi.bg/mediapul"
+     }
+    ]
+   },
+   {
+    "title": "Фондация „Инфо спейс“ и грантове",
+    "text": "Фондация „Инфо спейс“ е отделно юридическо лице с нестопанска цел (регистрирана през октомври 2001 г.) и съдружник с 30% в „Медияпул“ ООД. В доклада си за 2022 г. тя пише, че „от създаването си досега Инфо спейс фокусира усилията си по проекта Mediapool.bg“. По отчета за 2022 г. приходите ѝ са 588 хил. лв. (2021: 388 хил. лв.), изцяло от дарения под условие от „предприятия, организации и други“, разходите – 598 хил. лв., резултатът – загуба от 10 хил. лв. Последният подаден в Търговския регистър отчет на фондацията е за 2022 г. (обявен на 28.04.2025 г.).\n\nФондация „Америка за България“ финансира два проекта на „Инфо спейс“ по регистъра си: „Подкрепа за свободни медии в защита на обществения интерес“ (октомври 2014 – декември 2017 г., 1 152 600 лв.) за повече оригинално съдържание и онлайн присъствие на Mediapool.bg и „Укрепване на демокрацията чрез силна и устойчива журналистика“ (октомври 2024 – октомври 2027 г., 2 215 378 лв.) за дигиталната трансформация на Mediapool.bg. В доклада на фондацията за 2022 г. е посочен и проектът „Independent Journalism for Stronger Democracy“, стартирал през 2022 г. с финансиране от „Америка за България“, а в годишните отчети на „Америка за България“ за 2018 – 2019 г. – проектът „Independent Journalism is a Mission Possible“ (853 928 долара).\n\nРубриката „Реформирай това!“ (2016) е създадена с подкрепата на Програмата за подкрепа на НПО по Финансовия механизъм на Европейското икономическо пространство 2009 – 2014 г., като отговорността за съдържанието е на „Инфо спейс“. Сайтът има и рубрика Civitates (европейски фонд за демокрация). На всяка страница Mediapool посочва, че „Америка за България“ финансира проект на „Инфо спейс“ и че мненията в сайта отразяват редакционната политика, а не непременно възгледите на фондацията. Наличието на грант само по себе си не доказва редакционна зависимост; за такава оценка биха били нужни договорите, бюджетите и отчетите по проектите.",
+    "sources": [
+     {
+      "label": "Годишен финансов отчет на Фондация „Инфоспейс“ за 2022 г., Търговски регистър (PDF, сканиран)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwNjI5ODU0JmUmY2Y1Y2ZhZTcxYThlNDEyMWE1ZjMzM2JmMGUxMjZjY2WZKwvbaqwD30m8s_noB1uvN2unaPRdB4bcd1xS1d1ajA"
+     },
+     {
+      "label": "Доклад за дейността на Фондация „Инфоспейс“ за 2022 г., Търговски регистър (PDF, сканиран)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwNjI5ODU0JmUmMDE5NzJhMGFhNjZhNDRiODk3ZjhmZWViMzcyYzZjZmJcW0gFvJXVaFOsMZgMf9RBxDbunEm9Eu-bqz3_-LWWOA"
+     },
+     {
+      "label": "Търговски регистър: Фондация „Инфоспейс“, ЕИК 130629854",
+      "url": "https://portal.registryagency.bg/CR/Reports/ActiveConditionTabResult?uic=130629854"
+     },
+     {
+      "label": "„Америка за България“: проект 2014 – 2017 г.",
+      "url": "https://us4bg.org/bg/our-projects/?project_id=59"
+     },
+     {
+      "label": "„Америка за България“: проект 2024 – 2027 г.",
+      "url": "https://us4bg.org/bg/our-projects/?project_area=8&project_id=2371&project_year=all"
+     },
+     {
+      "label": "„Америка за България“: годишен отчет за 2018 г. (PDF) (не сме го прочели)",
+      "url": "https://us4bg.org/wp-content/uploads/2019/07/abf-annual-report-2018.pdf"
+     },
+     {
+      "label": "„Америка за България“: годишен отчет за 2019 г. (PDF) (не сме го прочели)",
+      "url": "https://us4bg.org/wp-content/uploads/2020/07/ABF-Annual-Report-2019.pdf"
+     },
+     {
+      "label": "Mediapool: рубрика „Реформирай това!“ (ЕИП)",
+      "url": "https://www.mediapool.bg/reformirai-tova/"
+     },
+     {
+      "label": "Mediapool: пример за материал по проекта на ЕИП (не сме го прочели)",
+      "url": "https://www.mediapool.bg/reformirai-tova/cherven-flag-za-targove-s-edin-dvama-kandidati/"
+     },
+     {
+      "label": "Mediapool: рубрика Civitates",
+      "url": "https://www.mediapool.bg/civitates-cat127.html"
+     },
+     {
+      "label": "Mediapool: рубрика Civitates (стар адрес) (не сме го прочели)",
+      "url": "https://old.mediapool.bg/civitates-cat127.html"
+     },
+     {
+      "label": "Finansi.bg: Фондация „Инфо спейс“ и финансови отчети (не сме го прочели)",
+      "url": "https://www.finansi.bg/infospejs"
+     }
+    ]
+   },
+   {
+    "title": "Договори с държавата, общини, фирми и партии",
+    "text": "В декларациите по чл. 7а „Медияпул“ ООД посочва: за 2023 г. четири договора за общо 29 525 – с „Продължаваме промяната“ за 2000 (21.03.2023 г., предизборна кампания) и 8025 (05.10.2023 г., предизборна кампания), с Министерството на земеделието за 7500 (21.03.2023 г., рекламна кампания) и със „Софийска вода“ АД за 12 000 (27.04.2023 г., публикуване на материали за дейността на дружеството). За 2024 г. – един договор със „Софийска вода“ за 12 000 (27.04.2024 г.), за 2025 г. – със „Софийска вода“ за 15 600 (05.05.2025 г.). Валутата не е посочена. Наличието на договор само по себе си не доказва зависимост на редакцията.",
+    "sources": [
+     {
+      "label": "Декларация по чл. 7а за 2023 г., Търговски регистър (PDF, сканирана)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmMjU1MDU4MzY4MjViNDRiNDlhYWQwNjY5MThhOGE5OTjJtZpIpBVZ6_S4YQ5ngds8cSZ81aJJwLyvM2GWlrxJIQ"
+     },
+     {
+      "label": "Декларация по чл. 7а за 2024 г., Търговски регистър (PDF, сканирана)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmYmEyYWMxZWJjZGM3NGQ1NDgyNmVhYWRhZjU4ZTljZWItTegHa__yT9M4m-LzBxxuLKFSYas_k83KXbrhiWoARA"
+     },
+     {
+      "label": "Декларация по чл. 7а за 2025 г., Търговски регистър (PDF)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwODYyMzgxJmUmNTUyMmVkYzEyYmFlNGFiOWJjYzkxYzAxYTA4M2M1NTJ5XIE39qQkgMFjmyH9_K9XQxICY3mqwGiUUqlqEzn7QA"
+     },
+     {
+      "label": "Mediapool: договори за политическа реклама (OneDrive и PDF)",
+      "url": "https://www.mediapool.bg/reklama/"
+     },
+     {
+      "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а",
+      "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
+     }
+    ]
+   }
+  ],
+  "disputes": [
+   {
+    "date": "2018 – 2025",
+    "title": "Делото на съдия Светлин Михайлов: окончателно осъждане за клевета и обида",
+    "summary": "През февруари 2018 г., докато бившият председател на Софийския градски съд (2004 – 2009) Светлин Михайлов отново се кандидатира за поста, журналистът на Mediapool Борис Митов публикува четири статии за кандидатурата, имуществото и кариерата му. Михайлов съди „Медияпул“ ООД, Митов, Стояна Георгиева и Фондация „Инфоспейс“. През декември 2021 г. Софийският градски съд (съдия Даниела Попова) им присъжда 60 000 лв. обезщетение (с разноските около 67 000 лв.); през ноември 2022 г. Софийският апелативен съд го намалява на 4000 лв. и оставя само твърдението за близост на съдията с ДПС.\n\nС окончателно решение № 460 от 16.07.2025 г. Върховният касационен съд увеличава обезщетението на 20 000 лв., дължими солидарно от „Медияпул“ ООД и Митов, плюс лихви и разноски (общо 43 901,51 лв. по сметката на Mediapool), и отхвърля исковете срещу Георгиева и фондацията. Съдът приема за клеветнически твърденията, че Михайлов е търсил подкрепа от високопоставени политици за вота във Висшия съдебен съвет, за „спазаряване“ и за близостта му с ДПС, както и внушенията, че е натрупал имуществото си чрез служебното си положение, „като не е доказано някое от тези твърдения да отговаря на истината“; многократното наричане „скандален“ съдът приема за обида. Съдът отчита и въздействието на статиите върху здравето на Михайлов. Това е установено от съда.\n\nДругата страна: Mediapool твърди, че статиите се основават на публични факти – напр. че като председател на СГС Михайлов е карал откраднат в Германия джип и че е разрешил специални разузнавателни средства по разработката на ДАНС „Галерия“, за което по делото са представени разсекретени документи. „Репортери без граници“ определя делото като SLAPP (дело за сплашване), а АЕЖ – България събира за плащането 34 394,58 лв. и 4134,73 евро от 421 души (34 000 лв. за по-малко от денонощие). Според RSF единственият оставащ път за Митов е ЕСПЧ.",
+    "sources": [
+     {
+      "label": "ВКС: решение № 460 от 16.07.2025 г. по гр. д. № 5021/2023 г. (PDF)",
+      "url": "https://www.vks.bg/dela-jurnalisti-i-medii-reshenia/2025-07-16-delo-5021-2023.pdf"
+     },
+     {
+      "label": "RSF (на английски), 6.08.2025: „RSF condemns the conviction of journalist Boris Mitov in a SLAPP case“",
+      "url": "https://rsf.org/en/bulgaria-rsf-condemns-conviction-journalist-boris-mitov-slapp-case"
+     },
+     {
+      "label": "RSF (на английски), 14.01.2022: „Alarming SLAPP cases endanger fragile media freedom“",
+      "url": "https://rsf.org/en/bulgaria-alarming-slapp-cases-endanger-fragile-media-freedom"
+     },
+     {
+      "label": "Mediapool, 7.01.2022: „Предупреждение: Ако журналист нарече съдия Светлин Михайлов „скандален“, това струва 60 000 лв.“",
+      "url": "https://www.mediapool.bg/bulgaria/preduprezhdenie-ako-zhurnalist-nareche-sadiya-svetlin-mihailov-skandalen-tova-struva-60-000-lv/"
+     },
+     {
+      "label": "Mediapool, 11.01.2022: европейските институции ще бъдат сезирани (не сме го прочели)",
+      "url": "https://www.mediapool.bg/bulgaria/evropeiskite-institutsii-shte-badat-sezirani-za-osazhdaneto-na-mediapool/"
+     },
+     {
+      "label": "Mediapool, 5.01.2023: „Смразяващ ефект: Споменаване за близост с ДПС струва 4000 лв. на журналисти“",
+      "url": "https://www.mediapool.bg/bulgaria/smrazyavasht-efekt-spomenavane-za-blizost-s-dps-struva-4000-lv-na-zhurnalisti/"
+     },
+     {
+      "label": "Mediapool, 1.08.2025: „Подкрепа за Mediapool.bg и Борис Митов: 421 души дариха…“",
+      "url": "https://www.mediapool.bg/bulgaria/podkrepa-za-mediapoolbg-i-boris-mitov-421-dushi-dariha-nadezhda-za-smelata-zhurnalistika/"
+     },
+     {
+      "label": "Mediapool, 6.08.2025: „Репортери без граници“: делото може да предизвика автоцензура (не сме го прочели)",
+      "url": "https://www.mediapool.bg/kultura/reporteri-bez-granitsi-deloto-sreshtu-mediapool-i-mitov-mozhe-da-predizvika-avtotsenzura-pri-kolegite-im/"
+     },
+     {
+      "label": "Novinite (на английски): окончателно решение – над 43 000 лв. (не сме го прочели)",
+      "url": "https://www.novinite.com/articles/233527/Final+Ruling+in+Bulgaria%3A+Journalist+and+Media+Outlet+Ordered+to+Pay+Over+43%2C000+Leva+in+Defamation+Case"
+     },
+     {
+      "label": "Novinite (на английски): АЕЖ – България осъжда решението (не сме го прочели)",
+      "url": "https://m.novinite.com/view_news.php?id=233540"
+     },
+     {
+      "label": "Mediapool, 12.02.2018: „Градските съдии не подкрепят Светлин Михайлов за нов управленски мандат“ (една от статиите по делото) (не сме го прочели)",
+      "url": "https://www.mediapool.bg/bulgaria/gradskite-sadii-ne-podkrepyat-svetlin-mihailov-za-nov-upravlenski-mandat/"
+     },
+     {
+      "label": "Mediapool, 20.02.2018: „Светлин Михайлов влезе по спешност в правителствена болница и отложи вота за СГС“ (една от статиите по делото) (не сме го прочели)",
+      "url": "https://www.mediapool.bg/bulgaria/svetlin-mihailov-vleze-po-speshnost-v-pravitelstvena-bolnitsa-i-otlozhi-vota-za-sgs/"
+     }
+    ]
+   },
+   {
+    "date": "2023 – 2025",
+    "title": "Искът на „Лев инс“ за 1 млн. лв.",
+    "summary": "Застрахователната компания „Лев инс“ съди Mediapool за 1 млн. лв. обезщетение заради статия на финансовата журналистка Цветелина Соколова от 27.09.2022 г. „България пак е заплашена да бъде изключена от системата „Зелена карта““, която цитира стенограма от заседание на Министерския съвет с думи на служебния финансов министър Росица Велкова за преговори с „Лев инс“ за задълженията ѝ към националното бюро „Зелена карта“. Това е най-големият иск срещу медия за статия в най-новата история на страната според Mediapool. Компанията твърди, че статията ѝ е нанесла огромни вреди, отрича, че води SLAPP дело, и в писмо до редакцията обяснява проблема със „Зелена карта“ с „корупционна схема“ с участието на чуждестранни кореспонденти и висши държавни служители.\n\nИзход: Софийският градски съд (съдия Стилияна Григорова) отхвърля иска на 11.01.2024 г. и приема, че статията „не съдържа нито клевети, нито обиди“; Софийският апелативен съд потвърждава на 7.04.2025 г. с друг мотив – че юридическите лица не могат да претендират неимуществени вреди. Двете инстанции присъждат на Mediapool разноски 40 000 и 20 000 лв. През юни 2025 г. „Лев инс“ подава касационна жалба; решение на ВКС по нея не открихме. Делото е включено в доклада на Европейската комисия за върховенството на закона за 2023 г., а Коалицията срещу SLAPP (CASE) дава на „Лев инс“ антинаграда за корпоративно дело шамар (февруари 2024 г.). АЕЖ – България и фондация „Манол Пейков и приятели“ събират дарения за разноските.\n\nКой стои зад делото: действителен собственик на „Лев инс“ по Търговския регистър е Ива Павлова. Съосновател на компанията (по нейно собствено съобщение) е Алексей Петров – бивша барета, съветник на председателя на ДАНС през 2008 – 2009 г., подсъдим по делото „Октопод“ и оправдан, изпълнителен директор на Съюза за стопанска инициатива, убит в София на 16.08.2023 г. Заради провалената акция „Октопод“ от 2010 г. съдът присъжда на „Лев инс“ 48,3 млн. лв. обезщетение от прокуратурата и МВР (потвърдено на втора инстанция през януари 2025 г.). Адвокатката на „Лев инс“ по делото Мария Даскалова е номинирана през юли 2025 г. от депутати от ГЕРБ, ИТН и БСП за член на антикорупционната комисия.",
+    "sources": [
+     {
+      "label": "Mediapool: рубрика „Дело срещу Mediapool“",
+      "url": "https://www.mediapool.bg/category/delo-sreshtu-mediapool/"
+     },
+     {
+      "label": "Mediapool, 12.01.2024: „Лев инс“ загуби делото… на първа инстанция",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/lev-ins-zagubi-deloto-sreshtu-mediapool-po-bezpretsedentniya-isk-za-1-mln-leva/"
+     },
+     {
+      "label": "Mediapool, 10.04.2025: „Лев инс“ загуби делото… и на втора инстанция",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/lev-ins-zagubi-deloto-sreshtu-mediapool-za-1-mln-lv-i-na-vtora-instantsiya/"
+     },
+     {
+      "label": "Mediapool, 27.06.2025: „Лев инс“ ще съди Mediapool… и на трета инстанция",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/lev-ins-shte-sadi-mediapool-za-1-mln-lv-i-na-treta-instantsiya/"
+     },
+     {
+      "label": "Mediapool, 4.04.2023: „Лев инс“: Поведението на министъра на финансите легитимира корупционна схема (позицията на компанията)",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/lev-ins-povedenieto-na-ministara-na-finansite-legitimira-koruptsionna-shema/"
+     },
+     {
+      "label": "Mediapool, 14.03.2023: АЕЖ започва кампания и фонд срещу делата шамари",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/iskat-na-lev-ins-sreshtu-mediapool-slaga-nachaloto-na-fond-sreshtu-delata-shamari/"
+     },
+     {
+      "label": "Mediapool, 15.03.2023: „Подкрепа за Mediapool“",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/podkrepa-za-mediapool/"
+     },
+     {
+      "label": "Mediapool, 7.02.2024: „Лев инс“ с европейска антинаграда за корпоративно дело шамар (не сме го прочели)",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/balgarskata-lev-ins-s-evropeiska-antinagrada-za-korporativno-delo-shamar/"
+     },
+     {
+      "label": "Mediapool, 5.07.2023: делото влезе в доклада на ЕК (не сме го прочели)",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/deloto-shamar-za-1-mln-lv-sreshtu-mediapool-vleze-v-doklada-na-ek/"
+     },
+     {
+      "label": "Mediapool, 10.03.2023: Международният прес институт – делото е „шокиращо“ (не сме го прочели)",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/mezhdunarodniyat-pres-institut-deloto-sreshtu-mediapool-e-shokirashto/"
+     },
+     {
+      "label": "Mediapool, 29.03.2023: Световната асоциация на издателите призова „Лев инс“ да се откаже (не сме го прочели)",
+      "url": "https://www.mediapool.bg/delo-sreshtu-mediapool/svetovnata-asotsiatsiya-na-izdatelite-prizova-lev-ins-da-se-otkazhe-ot-deloto-sreshtu-mediapool/"
+     },
+     {
+      "label": "БНР (на английски): застрахователна компания съди медия за 1 млн. лв. (не сме го прочели)",
+      "url": "https://bnr.bg/en/post/101790999/insurance-company-sues-media-outlet-for-1-million-leva"
+     },
+     {
+      "label": "БТА (на английски): „Лев инс“ губи делото срещу Mediapool (не сме го прочели)",
+      "url": "https://bta.bg/en/news/600245-lev-ins-insurer-loses-libel-case-against-mediapool-e-zine"
+     },
+     {
+      "label": "Търговски регистър: ЗК „Лев инс“ АД, ЕИК 121130788 (действителен собственик)",
+      "url": "https://portal.registryagency.bg/CR/Reports/ActiveConditionTabResult?uic=121130788"
+     },
+     {
+      "label": "Mediapool, 16.08.2023: „Лев инс“ за убийството на Алексей Петров (съосновател на компанията)",
+      "url": "https://www.mediapool.bg/aleksei-petrov-e-ubit/lev-ins-za-ubiystvoto-na-aleksei-petrov-tova-e-bezskrupulen-i-varvarski-akt/"
+     },
+     {
+      "label": "БНР (на английски), 16.08.2023: Алексей Петров е застрелян в София",
+      "url": "https://bnrnews.bg/en/post/90821/famous-businessman-alexey-petrov-shot-dead-in-sofia"
+     },
+     {
+      "label": "БТА (на английски), 16.08.2023: Алексей Петров е убит (не сме го прочели)",
+      "url": "https://bta.bg/en/news/bulgaria/507163-businessman-alexey-petrov-killed-in-sofia"
+     },
+     {
+      "label": "Mediapool, 25.01.2025: прокуратурата и МВР осъдени да платят към 95 млн. лв. на „Лев инс“",
+      "url": "https://www.mediapool.bg/bulgaria/prokuraturata-i-mvr-sa-osadeni-da-platyat-kam-95-mln-lv-na-lev-ins/"
+     },
+     {
+      "label": "Mediapool, 23.07.2025: адвокатката на „Лев инс“ сред номинираните за антикорупционната комисия",
+      "url": "https://www.mediapool.bg/bulgaria/advokatkata-na-lev-ins-sreshtu-mediapool-e-sred-nominiranite-za-antikoruptsionnata-komisiya-vizhte-koi-oshte/"
+     },
+     {
+      "label": "Уикипедия: Алексей Петров (на английски) (не сме го прочели)",
+      "url": "https://en.wikipedia.org/wiki/Aleksei_Petrov_(businessman)"
+     }
+    ]
+   },
+   {
+    "date": "Края на 2014 – 2015",
+    "title": "Комисията за финансов надзор отправя искания към Mediapool",
+    "summary": "В края на 2014 г., по време на банковата криза, Комисията за финансов надзор (КФН) отправя към Mediapool и „Биволъ“ заплахи във връзка с техни публикации, подобни на тези към „Икономедиа“, която глобява през януари 2015 г. (глобите са отменени от съда). „Репортери без граници“ заявява, че КФН „си придава власт, която далеч надхвърля правомощията ѝ“. Mediapool пише, че и двете медии са сред малкото, отразили появата на името на председателя на КФН Стоян Мавродиев в делото за пране на пари срещу Евелин Банев – Брендо. Санкция срещу Mediapool не открихме.\n\nКой стои зад действията: председател на КФН тогава е Стоян Мавродиев, бивш депутат от ГЕРБ, избран през юни 2010 г.; през 2024 г. е обвинен заради заем на Българската банка за развитие, а на 4 юни 2026 г. е задържан в Белград (обвинението не е доказано в съд).",
+    "sources": [
+     {
+      "label": "Mediapool, 14.01.2015: „КФН наложи безпрецедентни глоби на „Икономедия““",
+      "url": "https://www.mediapool.bg/biznes/kfn-nalozhi-bezpretsedentni-globi-na-ikonomediya/"
+     },
+     {
+      "label": "RSF (на английски), 21.01.2015: властите засилват натиска върху медиите заради банкови разкрития",
+      "url": "https://rsf.org/en/authorities-ramp-pressure-media-over-banking-disclosures"
+     },
+     {
+      "label": "Novinite (на английски), 16.06.2010: Стоян Мавродиев оглавява КФН",
+      "url": "https://m.novinite.com/view_news.php?id=117203"
+     },
+     {
+      "label": "БНТ (на английски), 4.06.2026: Мавродиев е задържан в Белград",
+      "url": "https://bntnews.bg/news/former-bulgarian-development-bank-chief-stoyan-mavrodiev-detained-in-belgrade-his-extradition-is-being-prepared-1396772news.html"
+     }
+    ]
+   },
+   {
+    "date": "Април 2013",
+    "title": "Прокуратурата разпитва Борис Митов и иска източниците му",
+    "summary": "На 5 април 2013 г. Mediapool публикува статия на Борис Митов „Българският Уотъргейт. А кой ще разследва разследващите?“, в която по съдебни документи пише, че заместник градският прокурор Роман Василев, натоварен с проверката за незаконно подслушване при вътрешния министър Цветан Цветанов, не е подходящ за нея. Час след публикацията прокурор Драгомир Янчев от Софийската градска прокуратура го вика на разпит, иска да разкрие източниците си и според медийни съобщения му казва, че може да получи до 5 години затвор за разгласяване на държавна тайна. Митов отказва и заявява, че документите са разсекретени от съда и са част от публичното дело. На 8 април десетки журналисти протестират със залепени уста пред Съдебната палата; Български хелзинкски комитет и SEEMO осъждат разпита. Градският прокурор Николай Кокинов казва, че самият Митов „не представлява интерес“ за прокуратурата; обвинение не е повдигнато.\n\nКой стои зад действията: проверката е на Софийската градска прокуратура, ръководена тогава от Николай Кокинов. „Капитал“ пише през ноември 2014 г., че от изтеклия разговор в Банкя между Бойко Борисов и Кокинов „щеше да стане ясно“, че заръката за натиска срещу журналиста е дошла лично от главния прокурор Сотир Цацаров – това е твърдение на „Капитал“. Цацаров е избран от ВСС на 20.12.2012 г. при открита подкрепа от Борисов и Цветанов.",
+    "sources": [
+     {
+      "label": "Sofia Globe (на английски), 8.04.2013: журналисти протестират, докато прокуратурата разпитва Митов",
+      "url": "https://sofiaglobe.com/?p=16751"
+     },
+     {
+      "label": "Novinite (на английски): SEEMO – „ясен случай“ на натиск върху журналист",
+      "url": "https://www.novinite.com/articles/149750/SEEMO+Slams+%27Clear-Cut+Case%27+of+Pressing+Bulgarian+Journalist"
+     },
+     {
+      "label": "Капитал, 28.11.2014: „Как се обезвреждат медии“ (прочетохме началото)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/obshtestvo/2014/11/28/2428502_kak_se_obezvrejdat_medii/"
+     },
+     {
+      "label": "Sofia Globe (на английски), 20.12.2012: Сотир Цацаров е избран за главен прокурор",
+      "url": "https://sofiaglobe.com/2012/12/20/judge-sotir-tsatsarov-elected-bulgarias-prosecutor-general/"
+     }
+    ]
+   }
+  ]
  },
  "Standart": {
   "owner": "",
