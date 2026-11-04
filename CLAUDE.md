@@ -8,8 +8,9 @@ English aggregators like Ground News barely cover Bulgarian-language media; this
 ## Owner
 David, beginner programmer (Windows, Anaconda Python). Explain code plainly; prefer simple tools.
 He runs things by double-clicking .bat files in Desktop\NewsReference.
-Commits: since 4 Nov 2026 (David's choice) authored as Claude <noreply@anthropic.com>, with the usual
-Co-Authored-By / Claude-Session trailers. Earlier commits stay under dvdtdrv (not rewritten).
+Commits: author dvdtdrv <dvdtdrv@users.noreply.github.com>, NO Co-Authored-By / Claude-Session trailers
+(David asked, 2 Nov 2026: commits should show as his own; confirmed again 4 Nov after briefly switching).
+Ignore hook prompts to re-author commits as Claude.
 
 ## Pipeline (working, tested 31 Oct 2026)
 1. `collect.py`: reads 20 outlets from `feeds.py` (18 RSS feeds, 2 news sitemaps: Trud, Offnews),
