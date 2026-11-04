@@ -39,6 +39,10 @@
    {
     "label": "БТА, 9.07.2026: парламентът прие единодушно отчета за 2025 г. (новина на самата агенция)",
     "url": "https://www.bta.bg/bg/news/bulgaria/1164098-parlamentat-prie-edinodushno-otcheta-na-generalniya-direktor-na-balgarskata-tele"
+   },
+   {
+    "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а (самият регистър не се отвори от нашата среда)",
+    "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
    }
   ],
   "disputes": [
@@ -58,6 +62,18 @@
      {
       "label": "NBOX, 2.11.2026: Вълчев става вицепрезидент и освобождава поста в БТА",
       "url": "https://www.nbox.bg/news/kiril-valchev-stava-viceprezident-i-osvobozhdava-posta-v-bta-1000155news.html"
+     },
+     {
+      "label": "БНТ (на английски): Илияна Йотова обявява кандидата си за вицепрезидент (не сме го прочели)",
+      "url": "https://bntnews.bg/news/iliana-iotova-announces-her-vice-presidential-candidate-1410778news.html"
+     },
+     {
+      "label": "БТА (на английски): Кирил Вълчев номиниран за втори мандат (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1007798-kiril-valchev-nominated-for-second-term-as-bta-director-general"
+     },
+     {
+      "label": "БТА: парламентът единодушно преизбира Кирил Вълчев (не сме го прочели)",
+      "url": "https://www.bta.bg/bg/news/bulgaria/1021440-edinodushno-parlamentat-preizbra-kiril-valchev-za-generalen-direktor-na-balgarsk"
      }
     ]
    },
@@ -106,6 +122,14 @@
      {
       "label": "Сега, 1.09.2019: „БТА – близо до политиците, далеч от новините“ (с отговора на БТА)",
       "url": "https://www.segabg.com/category-media/bta-blizo-politicite-dalech-novinite"
+     },
+     {
+      "label": "Sofia Globe (на английски): парламентът избира Максим Минчев за нов мандат (не сме го прочели)",
+      "url": "https://sofiaglobe.com/?p=67746"
+     },
+     {
+      "label": "Sofia Globe (на английски): почина Максим Минчев, дългогодишен шеф на БТА (не сме го прочели)",
+      "url": "https://sofiaglobe.com/?p=94513"
      }
     ]
    }
@@ -146,6 +170,22 @@
    {
     "label": "Постановление № 147 от 17.09.2026 г. (ДВ, бр. 87 от 24.09.2026): допълнителни 10 млн. евро за просрочени задължения",
     "url": "https://dv.parliament.bg/DVWeb/showMaterialDV.jsp?idMat=246011"
+   },
+   {
+    "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а (самият регистър не се отвори от нашата среда)",
+    "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
+   },
+   {
+    "label": "State Media Monitor (на английски), 2026: профил на БНТ",
+    "url": "https://statemediamonitor.com/?p=1801"
+   },
+   {
+    "label": "БНР (на английски): БНТ има нов генерален директор след седем години (не сме го прочели)",
+    "url": "https://bnrnews.bg/en/post/430951/bulgarian-national-television-has-new-director-general-after-seven-years"
+   },
+   {
+    "label": "БТА (на английски): СЕМ единодушно одобрява програмата за управление на Милотинова (не сме го прочели)",
+    "url": "https://www.bta.bg/en/news/1146066-cem-unanimously-approves-bnt-director-general-milotinova-s-management-programme"
    }
   ],
   "disputes": [
@@ -191,6 +231,18 @@
      {
       "label": "Европейска комисия: Доклад за върховенството на закона 2026, глава за България",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026SC0902"
+     },
+     {
+      "label": "Съвет на ЕС: Доклад за върховенството на закона 2026, глава за България (PDF, на английски) (не сме го прочели)",
+      "url": "https://data.consilium.europa.eu/doc/document/ST-11674-2026-ADD-3/en/pdf"
+     },
+     {
+      "label": "Merlin/Европейска аудиовизуална обсерватория (на английски): доклад за върховенството на закона 2026 (не сме го прочели)",
+      "url": "https://merlin.obs.coe.int/article/10606"
+     },
+     {
+      "label": "State Media Monitor (на английски), 2026: профил на БНТ",
+      "url": "https://statemediamonitor.com/?p=1801"
      }
     ]
    },
@@ -214,6 +266,26 @@
      {
       "label": "СЕМ, 24.02.2026: изборът на Милена Милотинова и отказът на съда",
       "url": "https://www.cem.bg/displaynewsbg/1110"
+     },
+     {
+      "label": "Капитал, 27.06.2025 (коментар): „И вечен мандат за Кошлуков“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/redakcionni_komentari/2025/06/27/4800314_i_vechen_mandat_za_koshlukov/"
+     },
+     {
+      "label": "Капитал, 5.08.2025: „Кошлуков се готви да векува в БНТ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes-zakuska/2025/08/05/4815557_biznes_zakuska_koshlukov_se_gotvi_da_vekuva_v_bnt/"
+     },
+     {
+      "label": "БТА: СЕМ продължава процедурата за избор на генерален директор (не сме го прочели)",
+      "url": "https://www.bta.bg/bg/news/lik/1066423-savetat-za-elektronni-medii-prodalzhava-protsedurata-za-izbor-na-generalen-direk"
+     },
+     {
+      "label": "БТА: СЕМ изпраща в съда преписката за избор на генерален директор (не сме го прочели)",
+      "url": "https://www.bta.bg/bg/news/lik/1070558-sem-izprati-v-administrativniya-sad-sofiya-oblast-prepiskata-za-izbor-na-general"
+     },
+     {
+      "label": "БТА (на английски): Кошлуков обжалва избора на Милотинова (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1068777-emil-koshlukov-challenges-cem-decision-to-appoint-milena-milotinova-as-director-"
      }
     ]
    },
@@ -252,6 +324,10 @@
      {
       "label": "Media Pluralism Monitor 2026, България (CMPF/EUI, юни 2026; на английски, PDF)",
       "url": "https://cadmus.eui.eu/bitstreams/b8901241-08c8-4b54-9709-f3a16f6476e0/download"
+     },
+     {
+      "label": "БТА, галерия: Васил Терзиев – интервю (не сме го прочели)",
+      "url": "https://www.bta.bg/bg/galleries/456548"
      }
     ]
    },
@@ -297,6 +373,44 @@
      {
       "label": "СЕМ: протокол № 35 от заседанието на 9.10.2025 г. (PDF)",
       "url": "https://www.cem.bg/files/1763021013_251009_protokol_35_za_publikuvane.pdf"
+     },
+     {
+      "label": "БНТ (на английски): протестиращи пред БНТ искат оставката на генералния директор (не сме го прочели)",
+      "url": "https://bntnews.bg/news/protesters-outside-bnt-continue-to-demand-the-resignation-of-director-general-1310019news.html"
+     }
+    ]
+   },
+   {
+    "date": "Юли – август 2021",
+    "title": "Пристрастно предизборно отразяване в полза на ГЕРБ",
+    "summary": "Според мисията на ОССЕ, цитирана от „Репортери без граници“ (RSF), преди изборите на 11 юли 2021 г. всички участници получават общо 28 минути в основните новини на БНТ 1, от които 17 минути са главно за ГЕРБ и в положителен тон. След изборите на 4 април правителството на Борисов дава на БНТ допълнително равностойността на 10 млн. евро за дълговете ѝ, което част от събеседниците на ОССЕ възприемат като „награда“ за благосклонна редакционна политика. Министърът на културата Велислав Минеков иска оставката на Кошлуков, а членът на СЕМ Ивелина Димитрова подава оставка на 28 юни, като казва, че регулаторът е „безсилен“. RSF призовава за реформа в избора на ръководството. В материала на RSF няма отговор от БНТ.",
+    "sources": [
+     {
+      "label": "RSF (на английски), 10.08.2021: пристрастното предизборно отразяване в обществената телевизия",
+      "url": "https://rsf.org/en/news/public-tvs-biased-election-coverage-highlights-urgent-need-strong-safeguards-bulgaria"
+     },
+     {
+      "label": "Капитал, 11.08.2021: „Международни наблюдатели: ГЕРБ получи по-голямо отразяване в БНТ в предизборната кампания“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2021/08/11/4241817_mejdunarodni_nabljudateli_gerb_poluchi_po-goliamo/"
+     },
+     {
+      "label": "ОССЕ/БДИПЧ: доклади за изборите в България (на английски) (не сме го прочели)",
+      "url": "https://www.osce.org/odihr/elections/bulgaria"
+     }
+    ]
+   },
+   {
+    "date": "Април 2020",
+    "title": "Водещи на „Култура.БГ“ извадени от ефир в извънредното положение",
+    "summary": "По време на извънредното положение БНТ вади от ефир двама от тримата водещи на сутрешното предаване за култура „Култура.БГ“, Александра Гюзелева и Димитър Стоянович, за срока на извънредното положение. „Капитал“ пише за случая под заглавие „Денят (не) започва с култура“. В материала на „Сега“ няма обяснение от БНТ.",
+    "sources": [
+     {
+      "label": "Сега, 14.04.2020: „Нова телевизия сваля от екран още известни лица“ (съобщава и за БНТ)",
+      "url": "https://www.segabg.com/hot/category-media/nova-televiziya-svalya-ekran-oshte-izvestni-lica"
+     },
+     {
+      "label": "Капитал, 16.04.2020: „Денят (не) започва с култура“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2020/04/16/4055686_deniat_ne_zapochva_s_kultura/"
      }
     ]
    },
@@ -331,6 +445,26 @@
      {
       "label": "Капитал, 12.05.2016: „Съдът обяви неплатежоспособността на TV7“",
       "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2016/05/12/2758626_sudut_obiavi_neplatejosposobnostta_na_tv7_obnovena/"
+     },
+     {
+      "label": "Капитал, 3.05.2019: „Проблемът Кошлуков“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2019/05/03/3427803_problemut_koshlukov/"
+     },
+     {
+      "label": "Капитал, 4.07.2019: „Сашо Диков иска да направи БНТ по-информационна, Кошлуков – по-технологична“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2019/07/04/3934071_sasho_dikov_iska_da_napravi_bnt/"
+     },
+     {
+      "label": "Капитал, 5.07.2019: „Очаквано СЕМ избра Емил Кошлуков за генерален директор на БНТ“ (не сме го прочели)",
+      "url": "https://www.capital.bg/kakvo_stava/2019/07/05/3934502_ochakvano_sem_izbra_emil_koshlukov_za_generalen/"
+     },
+     {
+      "label": "Капитал, 8.07.2019: „Първо решение на Кошлуков – да назначи конкурента си Сашо Йовков за директор спорт“ (не сме го прочели)",
+      "url": "https://www.capital.bg/kakvo_stava/2019/07/08/3935662_purvo_reshenie_na_koshlukov_-_da_naznachi_konkurenta/"
+     },
+     {
+      "label": "Уикипедия: Емил Кошлуков (на английски) (не сме го прочели)",
+      "url": "https://en.wikipedia.org/wiki/Emil_Koshlukov"
      }
     ]
    },
@@ -346,6 +480,30 @@
      {
       "label": "Mediapool, 5.07.2019: позицията на „Демократична България“",
       "url": "https://www.mediapool.bg/bez-iznenada-sem-izbra-emil-koshlukov-za-shef-na-bnt-news295314.html"
+     },
+     {
+      "label": "Капитал, 22.05.2019: „Скъпа БНТ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2019/05/22/3909561_skupa_bnt/"
+     },
+     {
+      "label": "Капитал, 7.06.2019: „БНТ фалира“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2019/06/07/3921331_bnt_falira/"
+     },
+     {
+      "label": "Капитал, 9.08.2019: „Есента на БНТ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2019/08/09/3948688_esenta_na_bnt/"
+     },
+     {
+      "label": "Капитал, 30.08.2019: „Колко души работят в БНТ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2019/08/30/3956649_kolko_dushi_rabotiat_v_bnt/"
+     },
+     {
+      "label": "СЕМ: отчет на БНТ за февруари – юни 2019 г. (PDF) (не сме го прочели)",
+      "url": "https://old.cem.bg/files/1560503185_otchet-fev-june-19-edit-382680.pdf"
+     },
+     {
+      "label": "Broadband TV News (на английски), 17.02.2020: БНТ е пред фалит (не сме го прочели)",
+      "url": "https://www.broadbandtvnews.com/2020/02/17/bulgarian-pubcaster-facing-bankruptcy/"
      }
     ]
    },
@@ -357,6 +515,14 @@
      {
       "label": "Mediapool, 22.01.2018: „Журналисти в БНТ се надигнаха срещу Кошлуков“",
       "url": "https://www.mediapool.bg/zhurnalisti-v-bnt-se-nadignaha-sreshtu-koshlukov-news274556.html"
+     },
+     {
+      "label": "Капитал, 5.01.2018: „Смущения в БНТ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2018/01/05/3106994_smushteniia_v_bnt/"
+     },
+     {
+      "label": "Капитал, 1.04.2018: „Програмни промени в БНТ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2018/04/01/3156402_programni_promeni_v_bnt/"
      }
     ]
    }
@@ -409,6 +575,10 @@
    {
     "label": "БНР, 28.11.2025: „bnrnews.bg – новият дом на новините на БНР“",
     "url": "https://bnr.bg/about-us/post/392916/bnrnewsbg-noviyat-dom-na-novinite-na-balgarskoto-nacionalno-radio"
+   },
+   {
+    "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а (самият регистър не се отвори от нашата среда)",
+    "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
    }
   ],
   "disputes": [
@@ -454,6 +624,14 @@
      {
       "label": "Свободна Европа, 17.10.2024: „Милен Митев беше преизбран за генерален директор на БНР“",
       "url": "https://bulgaria.rferl.org/a/milen-mitev-generalen-direktor-bnr/33162025.html"
+     },
+     {
+      "label": "БТА (на английски): СЕМ преизбира Милен Митев за генерален директор на БНР (не сме го прочели)",
+      "url": "https://bta.bg/en/news/763262-council-for-electronic-media-re-elects-milen-mitev-as-bulgarian-national-radio-d"
+     },
+     {
+      "label": "БНР (на английски): СЕМ избира Милен Митев за генерален директор (не сме го прочели)",
+      "url": "https://bnr.bg/en/post/102060876/council-for-electronic-media-elects-milen-mitev-as-director-general-of-bnr"
      }
     ]
    },
@@ -492,6 +670,26 @@
      {
       "label": "Свободна Европа, 17.10.2024: реакцията на Пеевски",
       "url": "https://bulgaria.rferl.org/a/milen-mitev-generalen-direktor-bnr/33162025.html"
+     },
+     {
+      "label": "Капитал, 18.12.2023: „Канселира ли Пеевски Митрофанова“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2023/12/18/4567554_kanselira_li_peevski_mitrofanova/"
+     },
+     {
+      "label": "БТА (на английски): БНР сваля интервюто с руския посланик заради нарушени стандарти (не сме го прочели)",
+      "url": "https://bta.bg/en/news/588379-bnr-takes-down-interview-with-russian-ambassador-over-violation-of-journalistic-"
+     },
+     {
+      "label": "БНР (на английски): генералният директор обяснява решението (не сме го прочели)",
+      "url": "https://bnr.bg/en/post/101923121/bnr-director-general-the-decision-not-to-air-the-interview-with-the-russian-ambassador-is-because-of-non-compliance-with-journalistic-standards"
+     },
+     {
+      "label": "Sofia Globe (на английски): БНР отменя излъчването на интервюто (не сме го прочели)",
+      "url": "https://sofiaglobe.com/?p=116598"
+     },
+     {
+      "label": "Европейска правда (на английски): БНР маха интервюто след възмущение от Украйна (не сме го прочели)",
+      "url": "https://www.pravda.com.ua/eng/news/2023/12/16/7433362"
      }
     ]
    },
@@ -503,6 +701,10 @@
      {
       "label": "Сметна палата: извлечение от одитен доклад № 1000200119 за БНР",
       "url": "https://www.bulnao.government.bg/media/documents/Izvl_BNR_0623-1.pdf"
+     },
+     {
+      "label": "БНР (на английски): парламентарната комисия възлага на Сметната палата проверка на БНР (не сме го прочели)",
+      "url": "https://new.bnr.bg/en/post/101171138/national-assembly-committee-on-culture-and-media-approves-draft-decision-to-assign-national-audit-office-the-task-to-check-bulgarian-national-radio"
      }
     ]
    },
@@ -518,13 +720,53 @@
      {
       "label": "БНР (на английски): СЕМ освобождава генералния директор, 17.10.2019",
       "url": "https://new.bnr.bg/en/post/101179500/council-for-electronic-has-dismissed-bnr-director-general"
+     },
+     {
+      "label": "Капитал, 12.09.2019: „БНР свали от ефир Силвия Великова“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2019/09/12/3962481_bnr_svali_ot_efir_silviia_velikova/"
+     },
+     {
+      "label": "Капитал, 19.09.2019: „Замлъкването на „Хоризонт““ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2019/09/19/3965662_zamlukvaneto_na_horizont/"
+     },
+     {
+      "label": "Капитал, 27.09.2019 (коментар): „Долу Костов“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/redakcionni_komentari/2019/09/27/3968736_dolu_kostov/"
+     },
+     {
+      "label": "БТА (на английски): шефът на БНР освободен след безпрецедентното спиране (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/75939-National-Radio-Chief-Sacked-after-Unprecedented-Broadcast-Stoppage"
+     },
+     {
+      "label": "Sofia Globe (на английски): СЕМ сезира прокуратурата за натиск върху БНР (не сме го прочели)",
+      "url": "https://sofiaglobe.com/?p=86077"
+     },
+     {
+      "label": "Sofia Globe (на английски): СЕМ дава седмица на шефа на БНР да подаде оставка (не сме го прочели)",
+      "url": "https://sofiaglobe.com/?p=86198"
+     },
+     {
+      "label": "Euronews (на английски), 10.10.2019: регулаторът действа за отстраняване на шефа на БНР (не сме го прочели)",
+      "url": "https://www.euronews.com/2019/10/10/bulgaria-regulator-acts-to-oust-state-radio-chief-in-free-speech-row"
+     },
+     {
+      "label": "RFE/RL (на английски): шефът на БНР освободен (не сме го прочели)",
+      "url": "https://www.rferl.org/amp/bulgarian-national-radio-chief-sacked-in-free-speech-row/30221988.html"
+     },
+     {
+      "label": "bne IntelliNews (на английски): БНР спира за часове след отстраняването на журналистка (не сме го прочели)",
+      "url": "https://www.intellinews.com/bulgarian-national-broadcaster-bnr-shut-down-for-hours-after-prominent-journalist-suspended-167903"
+     },
+     {
+      "label": "БНТ (на английски): редакционният съвет на БНР иска оставката на директора (не сме го прочели)",
+      "url": "https://bntnews.bg/news/bulgarian-national-radios-editorial-board-calls-for-resignation-of-its-director-1311328news.html"
      }
     ]
    }
   ]
  },
  "bTV Novinite": {
-  "owner": "Частна търговска телевизия. bTV и сайтът bTV Новините са на „БТВ Медиа Груп“ ЕАД (ЕИК 130081393). Едноличен собственик на капитала е CME Bulgaria B.V. (Нидерландия), част от Central European Media Enterprises (CME), която от 13 октомври 2020 г. е изцяло собственост на чешката група PPF. Действителен собственик по Закона за мерките срещу изпирането на пари, според самата bTV, е Рената Келнерова. Управителен съвет: Ралф Бартолайт, Боян Калчев, Велимира Петрова. Надзорен съвет: Красимир Гергов, Клара Брахтлова, Самюел Барнет. Преди 2020 г. bTV е на News Corporation на Рупърт Мърдок, а от февруари 2010 г. на CME.",
+  "owner": "Частна търговска телевизия. bTV и сайтът bTV Новините са на „БТВ Медиа Груп“ ЕАД (ЕИК 130081393). Едноличен собственик на капитала е CME Bulgaria B.V. (Нидерландия), част от Central European Media Enterprises (CME), която от 13 октомври 2020 г. е изцяло собственост на чешката група PPF. Действителен собственик по Закона за мерките срещу изпирането на пари, според самата bTV, е Рената Келнерова. Управителен съвет: Ралф Бартолайт, Боян Калчев, Велимира Петрова. Надзорен съвет: Красимир Гергов, Клара Брахтлова, Самюел Барнет. Преди 2020 г. bTV е на News Corporation на Рупърт Мърдок, а от февруари 2010 г. на CME. В Търговския регистър (вписване от 11.03.2025 г.) като дружества, чрез които се упражнява контролът, са посочени CME Bulgaria B.V. и чешкото Amalar Holding s.r.o.; Келнерова е вписана като лице с „възможност за упражняване на решаващо влияние“ (от 14.12.2022 г.).",
   "founded": "1 юни 2000 г., когато телевизията започва да излъчва.",
   "sources": [
    {
@@ -550,6 +792,14 @@
    {
     "label": "Global Voices, 10.03.2010: CME купува bTV",
     "url": "https://globalvoices.org/2010/03/10/bulgaria-cme-buys-bulgarias-most-watched-tv-channel/"
+   },
+   {
+    "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а (самият регистър не се отвори от нашата среда)",
+    "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
+   },
+   {
+    "label": "Търговски регистър: „БТВ Медиа Груп“ ЕАД, ЕИК 130081393",
+    "url": "https://portal.registryagency.bg/CR/Reports/ActiveConditionTabResult?uic=130081393"
    }
   ],
   "disputes": [
@@ -573,6 +823,10 @@
      {
       "label": "Тоест (мнение), 13.07.2026: „Има ли кой да ги накаже? За забранителните списъци в bTV“",
       "url": "https://www.toest.bg/ima-li-koy-da-gi-nakazhe-za-zabranitelnite-spisutsi-v-btv-i-kebapchetata-v-mediite/"
+     },
+     {
+      "label": "Novinite (на английски): bTV обвинена, че заглушава дебата за разходите в здравеопазването (не сме го прочели)",
+      "url": "https://www.novinite.com/view_news.php?id=239518"
      }
     ]
    },
@@ -620,6 +874,58 @@
      {
       "label": "Media Pluralism Monitor 2026, България (CMPF/EUI, юни 2026; на английски, PDF)",
       "url": "https://cadmus.eui.eu/bitstreams/b8901241-08c8-4b54-9709-f3a16f6476e0/download"
+     },
+     {
+      "label": "Капитал, 19.12.2025: „bTV сваля от екран водещата Мария Цънцарова“ (платен, прочетохме само началото)",
+      "url": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2025/12/19/4866477_btv_svalia_ot_ekran_vodeshtata_mariia_cuncarova/"
+     },
+     {
+      "label": "Капитал, 29.12.2025: „Водещият твърде много питаше: защо случаят…“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2025/12/29/4867957_vodeshtiiat_tvurde_mnogo_pitashe_zashto_sluchaiat/"
+     },
+     {
+      "label": "БТА (на английски): протест заради водещите Цънцарова и Йочев (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1031948-btv-shake-up-sparks-protest-over-morning-show-hosts-tsantsarova-yochev"
+     },
+     {
+      "label": "БТА (на английски): журналисти застават зад водещите на bTV (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1031886-journalists-stand-up-for-btv-hosts-as-media-freedom-concerns-rise"
+     },
+     {
+      "label": "БТА (на английски): нов протест след освобождаването на водещата (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1033003-journalists-to-stage-new-protest-amid-media-freedom-concerns-after-btv-releases-"
+     },
+     {
+      "label": "БТА (на английски): Цънцарова е освободена, нови протести в София (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1033153-btv-journalist-maria-tsantsarova-dismissed-sparking-fresh-protests-in-sofia"
+     },
+     {
+      "label": "БТА (на английски): журналисти и граждани пред сградата на bTV (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/1033296-journalists-citizens-gather-to-defend-freedom-of-speech-outside-btv-offices"
+     },
+     {
+      "label": "БТА, видео: протест пред bTV в подкрепа на Цънцарова (не сме го прочели)",
+      "url": "https://www.bta.bg/bg/videos/33227"
+     },
+     {
+      "label": "БТА, видео: протест пред редакцията на bTV (не сме го прочели)",
+      "url": "https://www.bta.bg/bg/videos/33263"
+     },
+     {
+      "label": "EFJ (на английски), 22.12.2025: водеща свалена от ефир при твърдения за политическа намеса (не сме го прочели)",
+      "url": "https://europeanjournalists.org/?p=46033"
+     },
+     {
+      "label": "Радио България (на английски): протест в защита на журналисти (не сме го прочели)",
+      "url": "https://bnrnews.bg/en/post/404365/protest-organised-in-defense-of-bulgarian-journalists"
+     },
+     {
+      "label": "EUalive (на английски): „Bulgaria's power stranglehold on TV“ (не сме го прочели)",
+      "url": "https://eualive.net/bulgarias-power-stranglehold-on-tv-the-ousting-of-a-top-anchor-signals-deeper-media-woes/"
+     },
+     {
+      "label": "БТА (на английски), 20.12.2025: зам.-председател на ПП–ДБ: частните медии не бива да уволняват журналисти произволно (не сме го прочели)",
+      "url": "https://www.bta.bg/en/news/bulgaria/1032078-cc-db-deputy-floor-leader-says-private-media-must-not-fire-journalists-at-will-"
      }
     ]
    },
@@ -631,6 +937,10 @@
      {
       "label": "Дарик, 20.12.2025: „Венелин Петков с истината за Цънцарова, bTV, Пеевски, Борисов и цензурата!“",
       "url": "https://darik.bg/venelin-petkov-s-istinata-za-cancarova-btv-peevski-borisov-i-cenzurata~510888.html"
+     },
+     {
+      "label": "Капитал, 29.12.2025: „Водещият твърде много питаше: защо случаят…“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2025/12/29/4867957_vodeshtiiat_tvurde_mnogo_pitashe_zashto_sluchaiat/"
      }
     ]
    },
@@ -680,6 +990,22 @@
      {
       "label": "bTV, 8.10.2023: „Ралф Бартолайт: bTV държи политическа дистанция и оставяме журналистите ни да бъдат журналисти“",
       "url": "https://www.btv.bg/za-btv/spetsialno/ralf-bartolajt-btv-darzhi-politicheska-distancija-i-ostavjame-zhurnalistite-ni-da-badat-zhurnalisti.html"
+     },
+     {
+      "label": "Капитал, 29.09.2023: „От bTV, та на ГЕРБ“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2023/09/29/4533050_ot_btv_ta_na_gerb/"
+     },
+     {
+      "label": "Капитал Insights (на английски), 25.09.2023: „GERB's controversial choice for Sofia race“ (не сме го прочели)",
+      "url": "https://kinsights.capital.bg/politics_and_society/2023/09/25/4532037_the_day_in_3_news_former_btv_news_chief_is_gerbs/"
+     },
+     {
+      "label": "БТА (на английски): ГЕРБ–СДС издига Антон Хекимян (не сме го прочели)",
+      "url": "https://bta.bg/en/news/528312-gerb-udf-names-anton-hekimyan-as-sofia-mayoral-candidate"
+     },
+     {
+      "label": "eurotopics (на английски): журналист кандидат за висок политически пост (не сме го прочели)",
+      "url": "https://eurotopics.net/en/308113/sofia-journalist-running-for-top-political-post"
      }
     ]
    },
@@ -691,6 +1017,10 @@
      {
       "label": "Plovdiv24 (по „Биволъ“ и OpenLux), 22.03.2021",
       "url": "https://www.plovdiv24.bg/novini/Bylgaria/OpenLux-Medien-bos-na-bTV-prodal-na-medien-bos-na-Nova-vila-na-Lazurniya-bryag-1065053"
+     },
+     {
+      "label": "Биволъ (на английски): „Красимир Гергов с имоти за милиони в чужбина…“ (не сме го прочели)",
+      "url": "https://bird.bg/en/krassimir-gergov-with-properties-for-millions-abroad-owes-half-a-million-to-the-nra-and-absorbs-millions-of-crown-subsidies/"
      }
     ]
    },
@@ -702,6 +1032,14 @@
      {
       "label": "Свободна Европа, 11.02.2020: „Бих пратил прокуратурата“",
       "url": "https://bulgaria.rferl.org/a/30428758.html"
+     },
+     {
+      "label": "Balkanmedia/KAS (на английски): шеф в bTV обещава да съди депутата (не сме го прочели)",
+      "url": "https://www.kas.de/en/web/balkanmedia/media-news/detail/-/content/btv-executive-vows-to-sue-bulgarian-nationalist-mp"
+     },
+     {
+      "label": "Sofia Globe (на английски): „Репортери без граници“: журналисти заплашвани и осмивани от висши служители (не сме го прочели)",
+      "url": "https://sofiaglobe.com/?p=88578"
      }
     ]
    },
@@ -739,6 +1077,10 @@
      {
       "label": "Свободна Европа, 22.12.2025: „Не е само Цънцарова“ (преглед на случаите през годините)",
       "url": "https://bulgaria.rferl.org/a/svaleni-zhurnalisti-pogled-nazad/33629869.html"
+     },
+     {
+      "label": "Уикипедия: Иво Инджев (на английски) (не сме го прочели)",
+      "url": "https://en.wikipedia.org/wiki/Ivo_Indzhev"
      }
     ]
    }
@@ -746,7 +1088,7 @@
   "extra": [
    {
     "title": "Приходи и рекламодатели",
-    "text": "bTV се издържа от търговска дейност: реклама и спонсорство в телевизията, платени репортажи и интернет реклама (стандартни, мултимедийни, видео и „native“ формати). Отстъпките за интернет реклама през 2026 г. растат с размера на нетния бюджет, който рекламодателят се ангажира да вложи. Оборотът на „БТВ Медиа Груп“ ЕАД за 2020 г. е 66,1 млн. евро (последната година, посочена в Папагал.бг).\n\nСпоред Reuters Institute новините на bTV и Nova заедно получават над 90% от рекламните бюджети в България. По оценка на БАКА през 2025 г. телевизионният рекламен пазар е 189,4 млн. евро (при 175,3 млн. евро през 2024 г.), а интернет рекламата е 138 млн. евро, което потвърждава и IAB България, а водещите дигитални рекламодатели на пазара са Coca-Cola България, eFbet, Банка ДСК, Kaufland България и Vivacom. Това са данни за целия пазар, не за клиентите на bTV. Публична разбивка кои фирми колко плащат конкретно на bTV няма.",
+    "text": "bTV се издържа от търговска дейност: реклама и спонсорство в телевизията, платени репортажи и интернет реклама (стандартни, мултимедийни, видео и „native“ формати). Отстъпките за интернет реклама през 2026 г. растат с размера на нетния бюджет, който рекламодателят се ангажира да вложи. Според индивидуалния финансов отчет приходите на „БТВ Медиа Груп“ ЕАД за 2024 г. са 175,3 млн. лв. (около 89,6 млн. евро) при 165,5 млн. лв. за 2023 г., а печалбата е 31,1 млн. лв. (около 15,9 млн. евро) при 26,7 млн. лв. Най-големият разход са програмните права: 82,1 млн. лв. Отчетът за 2025 г. още не е обявен. За сравнение, оборотът за 2020 г. е 66,1 млн. евро по Папагал.бг.\n\nСпоред Reuters Institute новините на bTV и Nova заедно получават над 90% от рекламните бюджети в България. По оценка на БАКА през 2025 г. телевизионният рекламен пазар е 189,4 млн. евро (при 175,3 млн. евро през 2024 г.), а интернет рекламата е 138 млн. евро, което потвърждава и IAB България, а водещите дигитални рекламодатели на пазара са Coca-Cola България, eFbet, Банка ДСК, Kaufland България и Vivacom. Това са данни за целия пазар, не за клиентите на bTV. Публична разбивка кои фирми колко плащат конкретно на bTV няма.",
     "sources": [
      {
       "label": "bTV: интернет реклама, формати и общи условия",
@@ -771,6 +1113,14 @@
      {
       "label": "bTV Новините (съдържание от партньори), 16.09.2026: IAB AdEx 2025",
       "url": "https://btvnovinite.bg/sudurjanie-ot-partnyori/138-mln-evro-dostigat-bjudzhetite-za-internet-reklama-v-balgarija-prez-2025-g-objavi-iab-balgarija.html"
+     },
+     {
+      "label": "Индивидуален годишен финансов отчет за 2024 г., Търговски регистър (PDF)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwMDgxMzkzJmUmYzM2ZGI0YjZiNjU1NGE2NWI3NmQ5NDhlMGNlY2JiM2WEjg6r3nCnfE7jJ6jrMebRS8GhKnFFIQQMvniwY5OcbA"
+     },
+     {
+      "label": "Капитал, 17.12.2025: „Разпределение на телевизионния пазар в България“ (платен, не сме го прочели)",
+      "url": "https://www.capital.bg/biznes/media_i_reklama/2025/12/17/4840221_razpredelenie_na_televizionniia_pazar_v_bulgariia/"
      }
     ]
    },
@@ -791,6 +1141,40 @@
      {
       "label": "bTV: условия и тарифи за изборите 2026",
       "url": "https://www.btv.bg/reklama/izbori-2026/"
+     }
+    ]
+   },
+   {
+    "title": "Договори с държавата, ЕС и партиите",
+    "text": "По закон медиите декларират пред Министерството на културата договорите си с държавни и общински органи, с европейски институции и с партии. В декларациите не е посочена валута. За 2024 г. bTV декларира 32 договора за общо 3 646 613,63; за 2025 г. 13 договора за общо 1 713 278,84. Най-големите:",
+    "items": [
+     "Министерство на финансите: 1 168 585,36 (април 2025) и 114 514,99 (март 2024)",
+     "ДП „Български спортен тотализатор“: 1 002 448,56 (декември 2023, в декларацията за 2024)",
+     "Министерство на туризма: 758 044,89 (март 2024)",
+     "Представителството на Европейската комисия: общо 391 948,38 в пет договора през 2025; Европейският парламент чрез „Дистинкт груп“: 58 672,46 (април 2024)",
+     "ЦИК, информационни клипове: 176 498,91 (май 2024) и 169 655,16 (октомври 2024)",
+     "НАТО чрез EV/TI Marketing: 337 688,99 (май 2024)",
+     "Министерство на здравеопазването: 293 188,65 (ноември 2024)",
+     "Фондация „Америка за България“: 66 714,56, „отпускане на финансиране по проект „2024 US presid…““ (текстът е отрязан в декларацията)",
+     "Партии на изборите през 2024 г.: ИТН 231 497,40 (чрез „Аргент 2002“); „Възраждане“ 156 448,62; „Продължаваме промяната“ 74 848,45; ДПС 11 200; „ДПС – Ново начало“ 16 000; „Синя България“ 5655,83",
+     "Други: ДП „Ръководство на въздушното движение“, Агенция „Безопасност на движението“, МВР, МВнР, Прокуратурата, Софийска опера и балет, общини Кърджали, Враца и район „Люлин“, Технически университет – София, „Юлен“ АД"
+    ],
+    "sources": [
+     {
+      "label": "Декларация по чл. 7а за 2024 г., Търговски регистър (PDF, сканирана)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwMDgxMzkzJmUmZWY2NjYxMWQwNzc0NDcxM2JkZDRhOTI5NDQzZDU0ZGJmEhgDG1ISWVNpif_gjwckfacfabN68zlygvdeqpDLog"
+     },
+     {
+      "label": "Декларация по чл. 7а за 2025 г., Търговски регистър (PDF, сканирана)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwMDgxMzkzJmUmOTY4Njk3ODU1ZWFlNDM1Y2IwZTU3NTU4ZWEzOWFmOWPY_EKFd9J12fx5Cufd0N1P9aJ-eKhxB-7AC1CSfyKN8Q"
+     },
+     {
+      "label": "Пояснения на bTV към декларацията за 2024 г. (PDF)",
+      "url": "https://portal.registryagency.bg/CR/api/Documents/MTMwMDgxMzkzJmUmYTFjMTBhYTYwYzg2NDJkNTk2Y2I5MjM0MDllN2Q3NGU9t7Cr4ZxteeUjXMI_y2Vyx9hnL6hTWFA1RhSKKr_hOw"
+     },
+     {
+      "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а (самият регистър не се отвори от нашата среда)",
+      "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
      }
     ]
    },
@@ -875,6 +1259,10 @@
    {
     "label": "EMIS: фирмен профил на „Нова Броудкастинг Груп“ (не се отвори, не сме го прочели)",
     "url": "https://www.emis.com/php/company-profile/BG/Nova_Broadcasting_Group_EAD__Нова_Броудкастинг_Груп_ЕАД__bg_1403446.html"
+   },
+   {
+    "label": "Министерство на културата: публичен медиен регистър, декларации по чл. 7а (самият регистър не се отвори от нашата среда)",
+    "url": "https://mc.government.bg/регистри/публичен-медиен-регистър/"
    }
   ],
   "disputes": [
