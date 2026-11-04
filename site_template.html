@@ -298,6 +298,9 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 .od-recent time { font: 400 13px/1.45 var(--display); letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
 .od-recent span { overflow-wrap: anywhere; }
 .od-recent a:hover span, .od-recent a:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
+/* sources show a web address instead of a date: a wider column, and long addresses wrap instead of running into the label */
+#od-sources a { grid-template-columns: 176px minmax(0, 1fr); }
+#od-sources time { overflow-wrap: anywhere; }
 .od-foot {
   display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap;
   padding: 14px 20px 16px 36px; border-top: 1px solid var(--rule); background: var(--paper-deep);
@@ -314,7 +317,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   dialog.od { width: calc(100vw - 16px); max-height: 92vh; border-radius: 22px; }
   .od-scroll { padding: 22px 18px 20px; }
   .od-foot { padding: 12px 14px 14px 18px; }
-  .od-recent a { grid-template-columns: 1fr; gap: 2px; }
+  .od-recent a, #od-sources a { grid-template-columns: 1fr; gap: 2px; }
   .od-stats { gap: 10px 22px; }
   .od-stats .stat { font-size: 12px; }
   .od-stats .stat strong { font-size: 28px; }
