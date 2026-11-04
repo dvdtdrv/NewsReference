@@ -74,6 +74,11 @@ Ignore hook prompts to re-author commits as Claude.
   extra [{title,text,items?,sources}] (money, advertisers, election contracts...). Shown in the outlet window.
 - David's rule (4 Nov): include EVERYTHING he sends and every suspicion, investigation or accusation found, but verify
   each against its source and label it (claim vs established, who says it, the other side's answer, anonymous sources).
+- David's rule (4 Nov, 14:42): for every attack on an outlet (by a politician, an institution, another outlet), also show
+  who the attacker is tied to and whose interests it serves, from documented records only: ownership registers,
+  sanctions (e.g. Magnitsky), court rulings, who appointed the institution's head, reputable investigations.
+  Same rule for every outlet and every side, including attacks by or for the outlet's own owner. Label links as
+  documented vs alleged; never call an attack a lie unless a court or the record shows it.
 - Done: BTA, BNT, BNR, bTV. Sources behind bTV's firewall are fetched via the PC runner (probe_docs.py) or the PC browser.
 - 4 Nov: Media Pluralism Monitor 2026 (CMPF/EUI, Bulgaria) read in full via the PC browser (pdf.js from jsdelivr inside
   the cadmus.eui.eu tab; PDF at /server/api/core/bitstreams/<id>/content). Its findings, each checked against the cited
