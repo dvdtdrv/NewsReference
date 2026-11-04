@@ -115,6 +115,19 @@ a { color: inherit; }
   border-bottom: 1px solid transparent;
 }
 .tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+/* sorting on top, the period (24 hours ... 1 year) in a smaller row under it */
+.sorters { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.periods { gap: 2px 0; }
+.periods .tab { font-size: 13px; letter-spacing: .08em; padding: 6px 0; }
+.periods .tab + .tab::before { content: "|"; display: inline-block; margin: 0 10px; color: var(--rule); }
+.periods .tab[aria-pressed="true"] { border-bottom-color: transparent; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.periods .tab + .tab[aria-pressed="true"]::before { text-decoration: none; }
+@media (max-width: 700px) {
+  .sorters { align-items: flex-start; }
+  .periods { flex-wrap: nowrap; }
+  .periods .tab { font-size: 12px; letter-spacing: .04em; }
+  .periods .tab + .tab::before { margin: 0 6px; }
+}
 
 .story { padding-block: 36px 40px; border-bottom: 1px solid var(--rule); }
 .story-meta {
@@ -122,7 +135,7 @@ a { color: inherit; }
   font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
 }
 .story-meta .count { color: var(--ink); }
-.squares { display: inline-flex; gap: 3px; }
+.squares { display: inline-flex; flex-wrap: wrap; gap: 3px; max-width: 100%; }   /* wraps on phones instead of widening the page */
 .sq { width: 9px; height: 9px; border: 1px solid var(--rule); }
 .sq.on { background: var(--ink); border-color: var(--ink); }
 .story h3 {
@@ -403,9 +416,18 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
  <div class="wrap">
     <div class="list-head" id="stories">
       <h2 id="list-title">Истории</h2>
-      <div class="tabs" role="group" aria-label="Подреждане">
-        <button class="tab" type="button" data-view="top" aria-pressed="true">Най-отразявани</button>
-        <button class="tab" type="button" data-view="new" aria-pressed="false">Най-нови</button>
+      <div class="sorters">
+        <div class="tabs" role="group" aria-label="Подреждане">
+          <button class="tab" type="button" data-view="top" aria-pressed="true">Най-отразявани</button>
+          <button class="tab" type="button" data-view="new" aria-pressed="false">Най-нови</button>
+        </div>
+        <div class="tabs periods" id="periods" role="group" aria-label="Период">
+          <button class="tab" type="button" data-period="24h" aria-pressed="false">24 часа</button>
+          <button class="tab" type="button" data-period="48h" aria-pressed="true">48 часа</button>
+          <button class="tab" type="button" data-period="week" aria-pressed="false">1 седмица</button>
+          <button class="tab" type="button" data-period="month" aria-pressed="false">1 месец</button>
+          <button class="tab" type="button" data-period="year" aria-pressed="false">1 година</button>
+        </div>
       </div>
     </div>
     <p class="view-note" id="view-note" hidden></p>
@@ -774,14 +796,33 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     return art;
   }
 
-  // views
-  const views = {
-    top: { note: "", list: () => [...data.stories] },
-    new: { note: "", list: () => [...data.stories].sort((a, b) => b.last_updated.localeCompare(a.last_updated)) }
+  // which stories to list: sorting (most covered / newest) and period (24 hours ... 1 year).
+  // 24 and 48 hours come from this page; a week, month or year come from the archive:
+  // the most covered from periods/top-*.json, the newest day by day from the archive pages.
+  const PERIOD_HOURS = { "24h": 24, "48h": 48 };
+  const PERIOD_DAYS = { week: 7, month: 30, year: 365 };
+  const byTop = (a, b) => (b.outlet_count - a.outlet_count) || b.last_updated.localeCompare(a.last_updated);
+  const byNew = (a, b) => new Date(b.last_updated) - new Date(a.last_updated);
+  const cutoff = p => new Date(generated.getTime() - (PERIOD_HOURS[p] ? PERIOD_HOURS[p] * 36e5 : PERIOD_DAYS[p] * 864e5));
+  const topFiles = {}, dayFiles = {};
+  const loadTop = p => topFiles[p] || (topFiles[p] = fetch(`${base}periods/top-${p}.json`)
+    .then(r => r.ok ? r.json() : Promise.reject(r.status)).then(j => j.stories));
+  const loadDay = d => dayFiles[d] || (dayFiles[d] = fetch(`${base}archive/${d}.html`)
+    .then(r => r.ok ? r.text() : Promise.reject(r.status))
+    .then(t => JSON.parse(t.match(/<script type="application\/json" id="data">([\s\S]*?)<\/script>/)[1]).stories));
+  const NOTES = {
+    top: "Най-отразяваните 100 истории за периода, от архива.",
+    new: "От архива, по деня, в който са започнали: най-новите дни първо.",
+    offline: "Този период се зарежда от сайта и не работи, когато страницата е отворена от папката. Отворете я в интернет.",
+    empty: "Няма истории за този период."
   };
-  let current = "top", shown = 0, items = [];
+
+  let current = "top", period = "48h", shown = 0, items = [], token = 0, nextDays = null, loading = false, failed = false;
   const list = document.getElementById("list");
   const more = document.getElementById("more");
+  const periods = document.getElementById("periods");
+  if (archiveDate) periods.hidden = true;            // an archive page is one day: no periods
+  const setNote = t => { const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
   // pin each title's note right after the end of the title's first line
   const narrow = window.matchMedia("(max-width: 700px)");
@@ -808,24 +849,66 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   window.addEventListener("resize", queuePlace);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(queuePlace);
 
-  function renderMore() {
+  function paintMore() {
     const frag = document.createDocumentFragment();
     items.slice(shown, shown + PAGE).forEach(s => frag.append(storyNode(s)));
     list.append(frag);
     queuePlace();
     shown = Math.min(shown + PAGE, items.length);
-    more.hidden = shown >= items.length;
+    more.hidden = shown >= items.length && !(nextDays && nextDays.length);
   }
-  function setView(v) {
-    current = v; items = views[v].list(); shown = 0;
+  // the newest stories of a long period: load archive days until there is a page full (or no days left)
+  async function renderMore() {
+    if (!nextDays) return paintMore();
+    if (loading) return;
+    const my = token, cut = cutoff(period), seen = new Set(items.map(s => s.id));
+    loading = true; more.disabled = true;
+    try {
+      while (items.length < shown + PAGE && nextDays.length) {
+        const day = await loadDay(nextDays[0]);
+        if (my !== token) return;
+        nextDays.shift();
+        items.push(...day.filter(s => !seen.has(s.id) && seen.add(s.id) && new Date(s.last_updated) >= cut).sort(byNew));
+      }
+    } catch (e) {
+      if (my === token) { nextDays = []; failed = true; if (!items.length) setNote(NOTES.offline); }
+    } finally {
+      if (my === token) { loading = false; more.disabled = false; }
+    }
+    if (my !== token) return;
+    if (!items.length && !nextDays.length && !failed) setNote(NOTES.empty);
+    paintMore();
+  }
+  function setView(v, p = period) {
+    current = v; period = p;
+    const my = ++token;
+    shown = 0; items = []; nextDays = null; loading = false; failed = false; more.disabled = false;
     list.replaceChildren();
-    const note = document.getElementById("view-note");
-    note.textContent = views[v].note;
-    note.hidden = !views[v].note;
     document.querySelectorAll(".tab[data-view]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.view === v)));
-    renderMore();
+    document.querySelectorAll(".tab[data-period]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.period === p)));
+    if (PERIOD_HOURS[p]) {                           // from this page
+      const cut = cutoff(p);
+      items = data.stories.filter(s => p === "48h" || new Date(s.last_updated) >= cut).sort(v === "top" ? byTop : byNew);
+      setNote(items.length ? "" : NOTES.empty);
+      return paintMore();
+    }
+    if (v === "new") {                               // the newest: day by day from the archive
+      const first = dayKey(cutoff(p));
+      nextDays = days.map(d => d.date).filter(d => d >= first);
+      setNote(NOTES.new);
+      return renderMore();
+    }
+    setNote("Зареждане…");                           // the most covered: one file per period
+    more.hidden = true;
+    loadTop(p).then(st => {
+      if (my !== token) return;
+      items = st;
+      setNote(items.length ? NOTES.top : NOTES.empty);
+      paintMore();
+    }).catch(() => { if (my === token) setNote(NOTES.offline); });
   }
   document.querySelectorAll(".tab[data-view]").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
+  document.querySelectorAll(".tab[data-period]").forEach(t => t.addEventListener("click", () => setView(current, t.dataset.period)));
   more.addEventListener("click", renderMore);
   setView("top");
 

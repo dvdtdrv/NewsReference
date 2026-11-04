@@ -101,6 +101,14 @@ Ignore hook prompts to re-author commits as Claude.
 - Size: ~850 bytes per record (6.8 MB for 8k records); ~75k articles/month -> Pages 1 GB limit in about a year.
   Before then: index only recent months, or move search to a server.
 
+## Periods on the front page (4 Nov 2026)
+- Under Най-отразявани | Най-нови: 24 часа | 48 часа (default) | 1 седмица | 1 месец | 1 година (hidden on archive pages).
+- 24/48 h filter the page's own stories (last_updated in the period). Week/month/year: "top" loads
+  site/periods/top-{week,month,year}.json (build_site.py `period_tops`, best TOP_N=100 by outlet_count from the archive,
+  story counts if its last article is in the period); "new" loads archive/DAY.html pages one day at a time and reads their
+  embedded JSON (no extra storage). Needs http(s), not file://.
+- Also fixed: coverage squares now wrap on phones (they made the page 445 px wide at 390 px).
+
 ## Decisions
 - Never store or show full article text: headline, short summary, link only.
 - Google News RSS fallback is NOT allowed (Google's robots.txt disallows it).
