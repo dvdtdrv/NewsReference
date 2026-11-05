@@ -63,7 +63,9 @@ def merge(keep, newer):
         return False
     before = (keep.get("title"), keep.get("link"), list(keep.get("versions", [])))
     history = list(keep.get("versions", [])) + list(newer.get("versions", []))
-    history.append({"title": keep.get("title"), "link": keep.get("link")})
+    # "until": when we first saw the newer headline (so: the old one was replaced by then)
+    history.append({"title": keep.get("title"), "link": keep.get("link"),
+                    **({"until": newer["collected"]} if newer.get("collected") else {})})
     for k in ("title", "link", "summary", "image"):
         if newer.get(k):
             keep[k] = newer[k]
@@ -76,7 +78,7 @@ def merge(keep, newer):
     for v in history:                     # one entry per earlier headline
         if v.get("title") and v["title"] not in seen:
             seen.add(v["title"])
-            versions.append({"title": v["title"], "link": v.get("link")})
+            versions.append({k: v[k] for k in ("title", "link", "until") if v.get(k)})
     if versions:
         keep["versions"] = versions
     else:
@@ -140,3 +142,44 @@ def collapse(articles, prefer=None):
     for i in range(len(articles)):
         first.setdefault(id(owner[i]), i)
     return sorted(kept, key=lambda a: first[id(a)])
+
+
+# ---------------------------------------------------------------- what kind of change
+
+TAGS = re.compile(r"[\(\[][^)\]]*(видео|снимк|галерия|на живо|обновен|допълнен|карта|update|live)[^)\]]*[\)\]]", re.I)
+LIVE_CHANGES = 3     # an article renamed this many times is a running ("live") story
+
+
+def _plain(title):
+    """Lower case, without tags like (ВИДЕО) and without punctuation."""
+    t = TAGS.sub(" ", (title or "").lower())
+    return re.sub(r"[^\w]+", " ", t).strip()
+
+
+def change_kind(old, new, live=False):
+    """minor / update / live / major - the rules shown in the legend on the site:
+    minor  - after removing tags like (ВИДЕО) and punctuation, the headlines are the same or differ
+             by a few letters (90%+ of the text matches) and no number changed;
+    update - at least half of the text stayed, but a number changed (390 -> 400 signals) or words
+             were added or replaced;
+    live   - the outlet changed this article's headline 3+ times (a running story);
+    major  - less than half of the text stayed (an almost entirely different headline)."""
+    a, b = _plain(old), _plain(new)
+    nums_a, nums_b = re.findall(r"\d+", a), re.findall(r"\d+", b)
+    if live:
+        return "live"
+    score = similar(a, b)
+    if score < 0.5:
+        return "major"
+    if nums_a != nums_b or score < 0.9:
+        return "update"
+    return "minor"
+
+
+def changes_of(a):
+    """[(kind, old title, new title, when we saw the new one or "")] for one article."""
+    v = a.get("versions") or []
+    chain = [x.get("title") for x in v] + [a.get("title")]
+    times = [x.get("until", "") for x in v]
+    live = len(v) >= LIVE_CHANGES
+    return [(change_kind(o, n, live), o, n, t) for o, n, t in zip(chain, chain[1:], times)]

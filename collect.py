@@ -29,6 +29,7 @@ import requests
 
 from feeds import OUTLETS
 from versions import Index, collapse, merge
+import link_check
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -513,9 +514,13 @@ def save_monthly(articles):
                 stored.append(a)
                 index[a["link"]] = a
                 changed = True
-            elif a.get("image") and old.get("image") != a["image"]:
-                old["image"] = a["image"]
-                changed = True
+            else:
+                if a.get("image") and old.get("image") != a["image"]:
+                    old["image"] = a["image"]
+                    changed = True
+                if a.get("title") != old.get("title") or a.get("versions") != old.get("versions"):
+                    old.update(title=a["title"], versions=a.get("versions", []))   # renamed, same link
+                    changed = True
         # an outlet that renamed an article gives it a new link: keep one copy, the newest
         # (the recent archive's version wins), with the earlier headlines in "versions"
         merged = collapse(stored, prefer={a["link"] for a in items})
@@ -582,6 +587,15 @@ def main():
                 old = by_link.get(a["link"])
                 if old is not None and a.get("image") and old.get("image") != a["image"]:
                     old["image"] = a["image"]   # fill in (or repair) the photo of an article we already have
+                if (old is not None and a["title"].strip() and a["title"].strip() != old["title"].strip()
+                        and a["title"].strip() not in {v.get("title") for v in old.get("versions", [])}):
+                    # same link, new headline: the outlet renamed the article without changing its link
+                    # (a headline it used before is ignored, so a feed that flips between two never counts)
+                    a["collected"] = NOW.isoformat()
+                    a.pop("raw_date", None)
+                    merge(old, a)
+                    seen_titles.add(key)
+                    renamed += 1
                 continue
             a["collected"] = NOW.isoformat()
             a.pop("raw_date", None)
@@ -625,6 +639,13 @@ def main():
     print(f"\nPhotos: upgraded {done} older articles from their own pages; {left} still to do.")
     saved_forever = save_monthly(archive)
     apply_page_images_to_months(photos)
+
+    # are older articles still online? (a few checks per article over 30 days, see link_check.py)
+    checked, gone = link_check.run(
+        OUTLETS, MONTHS_DIR, NOW, allowed, crawl_delay,
+        lambda o: BROWSER_HEADERS if o.get("as_browser") else HEADERS,
+        local if ON_GITHUB else None)
+    print(f"Deleted articles: checked {checked} links; {gone} newly found deleted.")
 
     archive = [a for a in archive if datetime.fromisoformat(a["published"]) >= oldest_allowed]
     archive.sort(key=lambda a: a["published"], reverse=True)

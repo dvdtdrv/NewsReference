@@ -35,6 +35,12 @@ def main():
             result["photos"].update(found)
             print(f"{status:<8} {outlet['name']:<14} {len(found):>4} photos only  {note}")
             time.sleep(1)
+    # are older articles of these outlets still online? GitHub says which links are due (link_check.py)
+    import link_check
+    result["link_checks"] = link_check.check_on_pc(
+        lambda o: collect.BROWSER_HEADERS if o.get("as_browser") else collect.HEADERS,
+        OUTLETS, collect.allowed, collect.crawl_delay)
+    print(f"Checked {len(result['link_checks'])} older links of these outlets")
     collect.save_page_images(photos)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False)
