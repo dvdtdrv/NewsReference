@@ -1000,7 +1000,15 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.querySelectorAll(".tab[data-period]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.period === p)));
     if (PERIOD_HOURS[p]) {                           // from this page
       const cut = cutoff(p);
-      items = data.stories.filter(s => p === "48h" || new Date(s.last_updated) >= cut).sort(v === "top" ? byTop : byNew);
+      if (v === "top" && p !== "48h") {
+        // most covered IN this period: count only the outlets that wrote about it within the last 12/24 hours,
+        // so 12 and 24 hours differ (a big story from yesterday morning doesn't top the last 12 hours)
+        const inWindow = s => new Set(s.articles.filter(a => new Date(a.published) >= cut).map(a => a.outlet)).size;
+        items = data.stories.map(s => [s, inWindow(s)]).filter(([, n]) => n >= 2)
+          .sort((a, b) => (b[1] - a[1]) || b[0].last_updated.localeCompare(a[0].last_updated)).map(([s]) => s);
+      } else {
+        items = data.stories.filter(s => p === "48h" || new Date(s.last_updated) >= cut).sort(v === "top" ? byTop : byNew);
+      }
       setNote(items.length ? "" : NOTES.empty);
       return paintMore();
     }
