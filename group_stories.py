@@ -29,6 +29,7 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from feeds import OUTLETS, UNTRACKED
+from versions import all_links, collapse, first_link
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -94,7 +95,7 @@ def archive_stories(stories, tracked):
     for s in stories:
         if datetime.fromisoformat(s["first_seen"]) < cutoff:
             continue
-        links = {a["link"] for a in s["articles"]}
+        links = {l for a in s["articles"] for l in all_links(a)}
         s = dict(s)
         # find the saved copy of this story (it may sit on a neighbouring day) and merge with it:
         # the window may have cut the story's oldest articles, and the archive must keep them
@@ -102,16 +103,18 @@ def archive_stories(stories, tracked):
         for d in (start - timedelta(days=1), start, start + timedelta(days=1)):
             kept = []
             for old in day_list(d):
-                old_links = {a["link"] for a in old["articles"]}
-                if len(links & old_links) >= 0.5 * min(len(links), len(old_links)):
+                old_links = {l for a in old["articles"] for l in all_links(a)}
+                if len(links & old_links) >= 0.5 * min(len(s["articles"]), len(old["articles"])):
                     extra = [a for a in old["articles"] if a["link"] not in links]
                     if extra:
-                        arts = sorted(s["articles"] + extra, key=lambda a: a["published"])
+                        # an old copy of an article the outlet has since renamed merges into the new one
+                        arts = collapse(s["articles"] + extra, prefer={a["link"] for a in s["articles"]})
+                        arts = sorted(arts, key=lambda a: a["published"])
                         outlets = list(dict.fromkeys(a["outlet"] for a in arts))
                         s.update(articles=arts, outlets=outlets, outlet_count=len(outlets),
                                  first_seen=arts[0]["published"], last_updated=arts[-1]["published"],
                                  not_covered=[o for o in s["not_covered"] if o not in outlets])
-                        links |= {a["link"] for a in extra}
+                        links |= {l for a in extra for l in all_links(a)}
                     continue   # the merged version is saved below
                 kept.append(old)
             days[d] = kept
@@ -127,6 +130,48 @@ def archive_stories(stories, tracked):
                           "tracked_outlets": tracked, "stories": items})
     total_days = sum(1 for n in os.listdir(STORY_DAYS_DIR) if n.endswith(".json"))
     return saved, total_days
+
+
+def clean_saved_versions():
+    """Once: merge renamed articles inside every saved story (added 5 Nov 2026, see versions.py).
+    Later runs keep stories clean as they save them; this fixes the days saved before."""
+    marker = os.path.join(DATA, "versions_cleaned.json")
+    if os.path.exists(marker) or not os.path.isdir(STORY_DAYS_DIR):
+        return 0
+    # the monthly archive (collect.py ran first) already knows which version of each article is
+    # the newest; use it, so a story shows the outlet's latest headline
+    latest = {}
+    months = os.path.join(DATA, "articles")
+    for name in (os.listdir(months) if os.path.isdir(months) else []):
+        if name.endswith(".json"):
+            for a in read_json(os.path.join(months, name), []):
+                for link in all_links(a):
+                    latest[link] = a
+    merged = 0
+    for name in sorted(os.listdir(STORY_DAYS_DIR)):
+        if not name.endswith(".json"):
+            continue
+        path = os.path.join(STORY_DAYS_DIR, name)
+        day = read_json(path, {"stories": []})
+        changed = False
+        for st in day["stories"]:
+            arts, touched = [], False
+            for a in st["articles"]:
+                m = latest.get(a["link"])
+                if m is not None and (m["link"] != a["link"] or (m.get("versions") and not a.get("versions"))):
+                    a = {**a, "title": m["title"], "link": m["link"], "image": m.get("image") or a.get("image", ""),
+                         "versions": m.get("versions", [])}
+                    touched = True
+                arts.append(a)
+            arts = collapse(arts)
+            if touched or len(arts) < len(st["articles"]):
+                merged += len(st["articles"]) - len(arts)
+                st["articles"] = sorted(arts, key=lambda a: a["published"])
+                changed = True
+        if changed:
+            write_json(path, day)
+    write_json(marker, {"done": NOW.isoformat(), "merged_articles": merged})
+    return merged
 
 
 def load(name, default):
@@ -208,7 +253,8 @@ def main():
                        if o["name"] not in outlets and o["name"] in active
                        and covered_since.get(o["name"], "9999") <= first_seen]
         stories.append({
-            "id": hashlib.sha1(items[0]["link"].encode()).hexdigest()[:10],
+            # the id stays the same when the first article is renamed (its first link is kept)
+            "id": hashlib.sha1(first_link(items[0]).encode()).hexdigest()[:10],
             "headline": clean_headline(central["title"]),
             "headline_source": "selected",   # picked from the outlets' headlines; "ai" once AI summaries exist
             "first_seen": first_seen,
@@ -216,7 +262,8 @@ def main():
             "outlet_count": len(outlets),
             "outlets": outlets,
             "not_covered": not_covered,
-            "articles": [{k: a.get(k, "") for k in ("outlet", "title", "link", "published", "image")}
+            "articles": [{**{k: a.get(k, "") for k in ("outlet", "title", "link", "published", "image")},
+                          **({"versions": a["versions"]} if a.get("versions") else {})}
                          for a in items],
         })
 
@@ -234,6 +281,9 @@ def main():
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=1)
     os.replace(tmp, os.path.join(DATA, "stories.json"))
+    cleaned = clean_saved_versions()
+    if cleaned:
+        print(f"Archive: merged {cleaned} renamed articles in saved stories.")
     saved, total_days = archive_stories(stories, result["tracked_outlets"])
 
     print(f"Story archive (data\\stories\\): {saved} fresh stories saved; {total_days} days kept.")

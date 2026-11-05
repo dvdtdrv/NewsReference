@@ -23,6 +23,7 @@ import shutil
 from datetime import datetime, timedelta
 
 from feeds import OUTLETS, UNTRACKED
+from versions import collapse
 
 TEMPLATE = "site_template.html"
 OUT_DIR = "site"
@@ -59,8 +60,11 @@ def spare_photo(a):
 def slim(stories):
     """Keep only what the page uses, so it loads fast."""
     for s in stories:
-        s["articles"] = [{**{k: a.get(k, "") for k in KEEP}, "image": photo_for(a), "image2": spare_photo(a)}
-                         for a in s["articles"]]
+        # one card per article even if the outlet renamed it (older saved stories may hold both)
+        arts = collapse(s["articles"])
+        s["articles"] = [{**{k: a.get(k, "") for k in KEEP}, "image": photo_for(a), "image2": spare_photo(a),
+                          **({"was": [v["title"] for v in a["versions"]]} if a.get("versions") else {})}
+                         for a in arts]
     return stories
 
 
