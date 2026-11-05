@@ -497,8 +497,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         </div>
         <div class="tabs periods" id="periods" role="group" aria-label="Период">
           <button class="tab" type="button" data-period="12h" aria-pressed="false">12 часа</button>
-          <button class="tab" type="button" data-period="24h" aria-pressed="false">24 часа</button>
-          <button class="tab" type="button" data-period="48h" aria-pressed="true">48 часа</button>
+          <button class="tab" type="button" data-period="24h" aria-pressed="true">24 часа</button>
+          <button class="tab" type="button" data-period="48h" aria-pressed="false">48 часа</button>
           <button class="tab" type="button" data-period="week" aria-pressed="false">1 седмица</button>
           <button class="tab" type="button" data-period="month" aria-pressed="false">1 месец</button>
         </div>
@@ -929,7 +929,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     empty: "Няма истории за този период."
   };
 
-  let current = "top", period = "48h", shown = 0, items = [], token = 0, nextDays = null, loading = false, failed = false;
+  let current = "top", period = "24h", shown = 0, items = [], token = 0, nextDays = null, loading = false, failed = false;
   const list = document.getElementById("list");
   const more = document.getElementById("more");
   const periods = document.getElementById("periods");
@@ -1022,7 +1022,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   document.querySelectorAll(".tab[data-view]").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
   document.querySelectorAll(".tab[data-period]").forEach(t => t.addEventListener("click", () => setView(current, t.dataset.period)));
   more.addEventListener("click", renderMore);
-  setView("top");
+  setView("top", archiveDate ? "48h" : "24h");
 
   // a link to one story (from search: archive/DAY.html#s-ID): show it even if it's further down the list
   const target = /^#s-[\w-]+$/.test(location.hash) ? location.hash.slice(1) : null;
