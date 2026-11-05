@@ -1182,12 +1182,12 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const SRC_NOTES = [
     [/\s*\(платен(?: репортаж)?(?:, не сме го прочели)?\)$/, "платен достъп", "paid"],
     [/\s*\(платен, прочетохме (?:само )?началото\)$/, "платен достъп", "paid"],
-    [/\s*\(не сме го прочели\)$/, "непрочетен от нас", ""],
-    [/\s*\(прочетохме (?:само )?началото\)$/, "прочетено частично", ""],
+    [/\s*\(не сме го прочели\)$/, null, ""],
+    [/\s*\(прочетохме (?:само )?началото\)$/, null, ""],
   ];
   function srcParts(x) {
     let label = String(x.label || x.url), tag = null;
-    for (const [re, text, cls] of SRC_NOTES) if (re.test(label)) { label = label.replace(re, ""); tag = el("span", "src-tag" + (cls ? " " + cls : ""), text); break; }
+    for (const [re, text, cls] of SRC_NOTES) if (re.test(label)) { label = label.replace(re, ""); if (text) tag = el("span", "src-tag" + (cls ? " " + cls : ""), text); break; }
     return [label, tag];
   }
   function srcLink(x) {
