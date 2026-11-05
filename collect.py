@@ -28,6 +28,7 @@ import feedparser
 import requests
 
 from feeds import OUTLETS
+from versions import Index, collapse, merge
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -515,6 +516,11 @@ def save_monthly(articles):
             elif a.get("image") and old.get("image") != a["image"]:
                 old["image"] = a["image"]
                 changed = True
+        # an outlet that renamed an article gives it a new link: keep one copy, the newest
+        # (the recent archive's version wins), with the earlier headlines in "versions"
+        merged = collapse(stored, prefer={a["link"] for a in items})
+        if len(merged) != len(stored):
+            stored, changed = merged, True
         if changed:
             stored.sort(key=lambda a: a["published"])
             save_json(path, stored)
@@ -533,8 +539,14 @@ def main():
     state = load_json(STATE_FILE, {})
     old_status = {s["outlet"]: s for s in load_json(STATUS_FILE, [])}
 
+    # one article per story an outlet wrote, even if it renamed it (see versions.py)
+    before = len(archive)
+    archive = collapse(archive)
+    if len(archive) < before:
+        print(f"Merged {before - len(archive)} renamed articles into their earlier versions.")
+    index = Index(archive)
     by_link = {a["link"]: a for a in archive}
-    seen_links = set(by_link)
+    seen_links = {link for a in archive for link in [a["link"]] + [v["link"] for v in a.get("versions", [])]}
     seen_titles = {(a["outlet"], a["title"].lower()) for a in archive}
     oldest_allowed = NOW - timedelta(days=KEEP_DAYS)
     newest_allowed = NOW + timedelta(hours=6)   # ignore articles dated in the future
@@ -550,7 +562,7 @@ def main():
             fetched, word, note = from_local(outlet, local)
         else:
             fetched, word, note = fetch_outlet(outlet, state, photos, seen_links)
-        added = 0
+        added = renamed = 0
         skipped = {"no link/title": 0, "no date": 0, "too old/future": 0}
         example_date = ""
         for a in fetched:
@@ -573,12 +585,25 @@ def main():
                 continue
             a["collected"] = NOW.isoformat()
             a.pop("raw_date", None)
+            earlier = index.find(a)
+            if earlier is not None:
+                # the outlet renamed an article we already have: update it instead of adding a copy
+                merge(earlier, a)
+                index.add(earlier)
+                by_link[earlier["link"]] = earlier
+                seen_links.add(a["link"])
+                seen_titles.add(key)
+                renamed += 1
+                continue
             archive.append(a)
+            index.add(a)
             by_link[a["link"]] = a
             seen_links.add(a["link"])
             seen_titles.add(key)
             added += 1
         reasons = ", ".join(f"{n} skipped: {why}" for why, n in skipped.items() if n)
+        if renamed:
+            reasons = ", ".join(x for x in (f"{renamed} renamed (headline changed)", reasons) if x)
         note = "; ".join(x for x in (note, reasons, example_date) if x)
 
         prev = old_status.get(outlet["name"], {})

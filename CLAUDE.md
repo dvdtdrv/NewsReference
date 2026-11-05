@@ -110,6 +110,14 @@ Ignore hook prompts to re-author commits as Claude.
   embedded JSON (no extra storage). Needs http(s), not file://.
 - Also fixed: coverage squares now wrap on phones (they made the page 445 px wide at 390 px).
 
+## Renamed articles (5 Nov 2026)
+- Outlets change headlines after publishing and the link changes with them (Darik .../slug-2471203 -> .../new-slug-2471203);
+  ~2% of the archive were such copies. `versions.py`: same outlet + same article number at the end of the link
+  (+ same minute or similar title), or same minute + title similarity >= 0.6 -> one article; newest headline/link kept,
+  earlier ones in `versions` [{title, link}]. Used by collect.py (archive, monthly files, new articles), group_stories.py
+  (saved stories; story id uses the first link; one-time cleanup of saved days, marker data/versions_cleaned.json)
+  and build_site.py (safety net; cards get `was` = old titles -> "Заглавието е сменяно N пъти", old titles on hover).
+
 ## Decisions
 - Never store or show full article text: headline, short summary, link only.
 - Google News RSS fallback is NOT allowed (Google's robots.txt disallows it).
