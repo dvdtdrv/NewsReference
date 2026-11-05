@@ -115,7 +115,7 @@ a { color: inherit; }
   border-bottom: 1px solid transparent;
 }
 .tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
-/* sorting on top, the period (24 hours ... 1 year) in a smaller row under it */
+/* sorting on top, the period (12 hours ... 1 month) in a smaller row under it */
 .sorters { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
 .periods { gap: 2px 0; }
 .periods .tab { font-size: 13px; letter-spacing: .08em; padding: 6px 0; }
@@ -496,11 +496,11 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
           <button class="tab" type="button" data-view="new" aria-pressed="false">Най-нови</button>
         </div>
         <div class="tabs periods" id="periods" role="group" aria-label="Период">
+          <button class="tab" type="button" data-period="12h" aria-pressed="false">12 часа</button>
           <button class="tab" type="button" data-period="24h" aria-pressed="false">24 часа</button>
           <button class="tab" type="button" data-period="48h" aria-pressed="true">48 часа</button>
           <button class="tab" type="button" data-period="week" aria-pressed="false">1 седмица</button>
           <button class="tab" type="button" data-period="month" aria-pressed="false">1 месец</button>
-          <button class="tab" type="button" data-period="year" aria-pressed="false">1 година</button>
         </div>
       </div>
     </div>
@@ -908,10 +908,10 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     return art;
   }
 
-  // which stories to list: sorting (most covered / newest) and period (24 hours ... 1 year).
+  // which stories to list: sorting (most covered / newest) and period (12 hours ... 1 month; 1 year hidden for now).
   // 24 and 48 hours come from this page; a week, month or year come from the archive:
   // the most covered from periods/top-*.json, the newest day by day from the archive pages.
-  const PERIOD_HOURS = { "24h": 24, "48h": 48 };
+  const PERIOD_HOURS = { "12h": 12, "24h": 24, "48h": 48 };
   const PERIOD_DAYS = { week: 7, month: 30, year: 365 };
   const byTop = (a, b) => (b.outlet_count - a.outlet_count) || b.last_updated.localeCompare(a.last_updated);
   const byNew = (a, b) => new Date(b.last_updated) - new Date(a.last_updated);
