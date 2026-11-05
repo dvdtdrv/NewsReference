@@ -79,6 +79,7 @@ Ignore hook prompts to re-author commits as Claude.
   sanctions (e.g. Magnitsky), court rulings, who appointed the institution's head, reputable investigations.
   Same rule for every outlet and every side, including attacks by or for the outlet's own owner. Label links as
   documented vs alleged; never call an attack a lie unless a court or the record shows it.
+- Source labels (5 Nov): data keeps notes like "(не сме го прочели)", "(прочетохме началото)", "(платен, ...)" for us, but the site shows only a "платен достъп" tag for paywalled links (David: don't show read/unread).
 - Done: BTA, BNT, BNR, bTV. Sources behind bTV's firewall are fetched via the PC runner (probe_docs.py) or the PC browser.
 - 4 Nov: Media Pluralism Monitor 2026 (CMPF/EUI, Bulgaria) read in full via the PC browser (pdf.js from jsdelivr inside
   the cadmus.eui.eu tab; PDF at /server/api/core/bitstreams/<id>/content). Its findings, each checked against the cited
