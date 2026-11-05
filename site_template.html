@@ -304,6 +304,10 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 .od-case-src { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
 .od-case-src a { color: var(--muted); text-underline-offset: 3px; overflow-wrap: anywhere; }
 .od-case-src a:hover, .od-case-src a:focus-visible { color: var(--ink); }
+/* reading-status note after a source: paywall, unread, partly read */
+.src-tag { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--rule); border-radius: 3px;
+  font-size: 11px; line-height: 17px; color: var(--muted); white-space: nowrap; text-decoration: none; vertical-align: 1px; }
+.src-tag.paid { border-color: #C9B98F; color: #6E5A2A; background: #F1E7CC; }
 @media (max-width: 600px) { .od-cases > li { grid-template-columns: 1fr; } }
 /* the spectrum: a scale to be filled with a measured position (axes and method still to decide) */
 .od-scale { position: relative; height: 34px; margin-top: 4px; }
@@ -1137,7 +1141,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       }
       const links = el("div", "od-case-src");
       (x.sources || []).filter(y => safeUrl(y.url)).forEach(y => {
-        const a = el("a", null, `${y.label} ↗`); a.href = y.url; a.target = "_blank"; a.rel = "noopener noreferrer"; links.append(a);
+        links.append(srcLink(y));
       });
       if (links.children.length) sec.append(links);
       extra.append(sec);
@@ -1151,7 +1155,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     cases.forEach(c => {
       const li = el("li"), body = el("div"), links = el("div", "od-case-src");
       (c.sources || []).filter(x => safeUrl(x.url)).forEach(x => {
-        const a = el("a", null, `${x.label} ↗`); a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer"; links.append(a);
+        links.append(srcLink(x));
       });
       body.append(el("h4", null, c.title), el("p", null, c.summary), links);
       li.append(el("div", "od-case-date", c.date), body);
@@ -1165,12 +1169,32 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     src.forEach(x => {
       const li = el("li"), a = el("a");
       a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
-      a.append(el("time", null, new URL(x.url).hostname.replace(/^www\./, "")), el("span", null, x.label || x.url));
+      const [label, tag] = srcParts(x), span = el("span", null, label);
+      if (tag) span.append(tag);
+      a.append(el("time", null, new URL(x.url).hostname.replace(/^www\./, "")), span);
       li.append(a); sl.append(li);
     });
     setSize(false);
     od.querySelector(".od-scroll").scrollTop = 0;
     if (typeof od.showModal === "function") od.showModal(); else od.setAttribute("open", "");
+  }
+  // a source label may end in a reading note, e.g. "(платен, не сме го прочели)"; show it as a small tag
+  const SRC_NOTES = [
+    [/\s*\(платен(?: репортаж)?(?:, не сме го прочели)?\)$/, "платен достъп", "paid"],
+    [/\s*\(платен, прочетохме (?:само )?началото\)$/, "платен достъп · прочетена е свободната част", "paid"],
+    [/\s*\(не сме го прочели\)$/, "непрочетен от нас", ""],
+    [/\s*\(прочетохме (?:само )?началото\)$/, "прочетено частично", ""],
+  ];
+  function srcParts(x) {
+    let label = String(x.label || x.url), tag = null;
+    for (const [re, text, cls] of SRC_NOTES) if (re.test(label)) { label = label.replace(re, ""); tag = el("span", "src-tag" + (cls ? " " + cls : ""), text); break; }
+    return [label, tag];
+  }
+  function srcLink(x) {
+    const [label, tag] = srcParts(x);
+    const a = el("a", null, `${label} ↗`); a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    if (tag) a.append(tag);
+    return a;
   }
   const closeOd = () => { if (od.open) od.close ? od.close() : od.removeAttribute("open"); };
   document.getElementById("od-close").addEventListener("click", closeOd);
