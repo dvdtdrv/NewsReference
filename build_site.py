@@ -23,7 +23,7 @@ import shutil
 from datetime import datetime, timedelta
 
 from feeds import OUTLETS, UNTRACKED
-from versions import collapse
+from versions import changes_of, collapse
 
 TEMPLATE = "site_template.html"
 OUT_DIR = "site"
@@ -149,6 +149,63 @@ def outlet_info():
     return {o["name"]: {"domain": o.get("domain", ""), **written.get(o["name"], {})} for o in OUTLETS}
 
 
+MIN_ARTICLES = 100   # fewer articles than this in the period: shown, but not ranked ("малко данни")
+EXAMPLES = 150       # how many of each outlet's latest changes the page can show
+
+
+def headline_changes():
+    """For the ranking under „Медии“: per outlet, how many articles it renamed after publishing,
+    what kind of changes they were (versions.change_kind) and how many it deleted.
+    The rows go into the page; the examples go into site/changes.json, loaded on a click."""
+    folder = os.path.join("data", "articles")
+    if not os.path.isdir(folder):
+        return None, {}
+    try:
+        with open(os.path.join("data", "deleted.json"), encoding="utf-8") as f:
+            deleted = json.load(f)
+        deleted.pop("_meta", None)
+    except (OSError, ValueError):
+        deleted = {}
+    checked_outlets = {e.get("outlet") for e in deleted.values()}
+    rows, examples, first, last, total = {}, {}, None, None, 0
+    for name in sorted(os.listdir(folder)):
+        if not name.endswith(".json"):
+            continue
+        with open(os.path.join(folder, name), encoding="utf-8") as f:
+            month = json.load(f)
+        for a in (month["articles"] if isinstance(month, dict) else month):
+            o = a.get("outlet")
+            r = rows.setdefault(o, {"outlet": o, "articles": 0, "renamed": 0, "changes": 0,
+                                    "minor": 0, "update": 0, "live": 0, "major": 0, "deleted": 0})
+            r["articles"] += 1
+            total += 1
+            p = a.get("published", "")
+            first = min(first or p, p)
+            last = max(last or p, p)
+            ch = changes_of(a)
+            if ch:
+                r["renamed"] += 1
+                for kind, old, new, when in ch:
+                    r["changes"] += 1
+                    r[kind] += 1
+                    examples.setdefault(o, []).append({"kind": kind, "old": old, "new": new, "seen": when,
+                                                      "published": p, "link": a.get("link")})
+            g = deleted.get(a.get("link")) or next((deleted[v["link"]] for v in a.get("versions", [])
+                                                    if v.get("link") in deleted), None)
+            if g and g.get("gone"):
+                r["deleted"] += 1
+                examples.setdefault(o, []).append({"kind": "deleted", "new": a.get("title"), "seen": g["gone"],
+                                                  "published": p, "link": a.get("link")})
+    for r in rows.values():
+        r["deleted_checked"] = r["outlet"] in checked_outlets
+    for o, items in examples.items():
+        items.sort(key=lambda x: (x.get("seen") or x["published"]), reverse=True)
+        examples[o] = items[:EXAMPLES]
+    summary = {"from": first, "to": last, "articles": total, "min_articles": MIN_ARTICLES,
+               "deleted_checked": bool(deleted), "rows": sorted(rows.values(), key=lambda r: r["outlet"])}
+    return summary, examples
+
+
 def front_page_data():
     with open(os.path.join("data", "stories.json"), encoding="utf-8") as f:
         data = json.load(f)
@@ -156,6 +213,7 @@ def front_page_data():
     data["archive_days"] = archive_days()
     data["articles_total"] = total_articles()
     data["outlet_info"] = outlet_info()
+    data["headline_changes"], _ = headline_changes()
     data["base"] = ""
     return data
 
@@ -178,6 +236,11 @@ def main():
     front = front_page_data()
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(render(front, template))
+
+    # the examples behind the headline-change ranking, loaded when someone opens an outlet's row
+    _, examples = headline_changes()
+    with open(os.path.join(OUT_DIR, "changes.json"), "w", encoding="utf-8") as f:
+        json.dump(examples, f, ensure_ascii=False, separators=(",", ":"))
 
     # the subscription page: same template and data, shown in "support" mode
     with open(os.path.join(OUT_DIR, "abonament.html"), "w", encoding="utf-8") as f:
@@ -207,6 +270,7 @@ def main():
             "stories": slim(saved["stories"]),
             "archive_days": days,
             "outlet_info": front["outlet_info"],
+            "headline_changes": front["headline_changes"],
             "base": "../",
         }
         with open(os.path.join(OUT_DIR, "archive", f"{day['date']}.html"), "w", encoding="utf-8") as f:

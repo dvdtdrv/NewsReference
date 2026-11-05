@@ -81,7 +81,7 @@ jobs:
         # never publishes an older look over a newer quick rebuild
         run: |
           git fetch -q --depth 1 origin main
-          git checkout FETCH_HEAD -- site_template.html build_site.py build_search.mjs outlets_info.json web
+          git checkout FETCH_HEAD -- site_template.html build_site.py versions.py build_search.mjs outlets_info.json web
 
       - name: Collect, group, build
         run: |

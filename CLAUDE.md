@@ -117,6 +117,18 @@ Ignore hook prompts to re-author commits as Claude.
   earlier ones in `versions` [{title, link}]. Used by collect.py (archive, monthly files, new articles), group_stories.py
   (saved stories; story id uses the first link; one-time cleanup of saved days, marker data/versions_cleaned.json)
   and build_site.py (safety net; cards get `was` = old titles -> "Заглавието е сменяно N пъти", old titles on hover).
+- Headline-change ranking (5 Nov): collect.py also records a new headline on the SAME link (renamed without new link;
+  a headline used before is ignored). versions `until` = when we saw the newer headline. `versions.change_kind`:
+  minor (>=90% same after removing (ВИДЕО) etc. + punctuation, no number changed) / update (>=50% same, or a number
+  changed) / live (3+ changes on one article) / major (<50% same). build_site.py `headline_changes()` -> rows in the page
+  (Медии section, table "По процент | По брой", legend) + site/changes.json (examples, loaded on click).
+- Deleted articles (5 Nov): link_check.py, run at the end of collect.py. Each article checked ~1, 3, 7, 14, 30 days
+  after publishing (40 per outlet per run, 4 min cap, robots + crawl-delay). Gone = 404/410, redirect to front or to a
+  shallower section page, a "404" title (Novini.bg answers 200), or canonical/og:url = front/section page; needs 2 checks
+  in a row (6 h apart). data/deleted.json. Skipped: BTA, Dnevnik, Capital; Moreto (JS challenge) and Nova fakes (500)
+  give "can't tell". Local outlets: GitHub writes data/link_check_local.json, fetch_local.py fetches it from
+  raw.githubusercontent (data branch), checks for up to 3 min and returns "link_checks"; each PC batch applied once.
+  First real find in testing: PIK deleted a poll article (404).
 
 ## Decisions
 - Never store or show full article text: headline, short summary, link only.

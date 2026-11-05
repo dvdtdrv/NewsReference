@@ -203,6 +203,69 @@ a { color: inherit; }
 .outlet { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--rule); min-width: 0; }
 .outlet span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
 .outlet span:last-child { font-size: 13px; color: var(--muted); text-align: right; }
+
+/* ---------- headline changes: ranking under „Медии“ ---------- */
+.hc { margin-top: 56px; }
+.hc-title { margin: 0 0 10px; font: 300 clamp(24px, 3vw, 34px)/1.1 var(--display); }
+.hc-lead { max-width: 820px; margin: 0 0 22px; color: var(--ink-soft); }
+.hc-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin-bottom: 12px; }
+.hc-tabs button { margin-right: 14px; padding: 8px 0; border: 0; border-bottom: 2px solid transparent; background: none; cursor: pointer;
+  font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.hc-tabs button.on { color: var(--ink); border-color: var(--ink); }
+.hc-period { font: 400 12px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.hc-scroll { overflow-x: auto; }
+.hc-table { width: 100%; border-collapse: collapse; }
+.hc-table th { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--ink); white-space: nowrap;
+  font: 400 11.5px/1.2 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.hc-table th.num, .hc-table td.num { text-align: right; }
+.hc-table th.sorted { color: var(--ink); }
+.hc-table th.sorted::after { content: " ▼"; }
+.hc-table td { padding: 9px 8px; border-bottom: 1px solid var(--rule); vertical-align: middle; font-variant-numeric: tabular-nums; }
+.hc-row { cursor: pointer; }
+.hc-row:hover td, .hc-row.open td, .hc-ex td { background: var(--paper-2); }
+.hc-rk { width: 28px; color: var(--muted); font-family: var(--display); }
+.hc-o { font: 400 15px/1.1 var(--display); letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+.hc-o em { margin-left: 6px; font: 400 10px var(--display); color: var(--muted); }
+.hc-row.low { color: var(--muted); }
+.hc-pct { white-space: nowrap; }
+.hc-meter { display: inline-block; width: 60px; height: 6px; margin-left: 10px; vertical-align: middle; background: var(--paper-deep); }
+.hc-meter i { display: block; height: 100%; background: var(--ink); }
+.hc-mix { white-space: nowrap; }
+.k { display: inline-block; padding: 2px 6px; border-radius: 3px; font: 500 12px/1.4 var(--body); text-align: center; }
+.hc-mix .k { min-width: 26px; margin-right: 4px; }
+.k.minor { background: #E3DDCC; color: #6B6870; }
+.k.update { background: #D9E2EC; color: #2B4A6B; }
+.k.live { background: #DCE6D5; color: #3D5A2E; }
+.k.major { background: #F1D9C9; color: #8A3B12; }
+.k.deleted { background: #2A2B40; color: #F3EFE4; }
+.hc-ex td { padding: 4px 8px 16px; }
+.hc-ex ul { list-style: none; margin: 0; padding: 0; }
+.hc-ex li { display: grid; grid-template-columns: 110px minmax(0, 1fr) 18px minmax(0, 1fr) 92px; gap: 10px; align-items: baseline;
+  padding: 8px 0; border-top: 1px dashed var(--rule); font-size: 13.5px; }
+.hc-ex li .k { font: 400 10.5px/1.6 var(--display); letter-spacing: .08em; text-transform: uppercase; justify-self: start; }
+.hc-old { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+.hc-arr { color: var(--muted); }
+.hc-new { color: var(--ink); overflow-wrap: anywhere; }
+.hc-when { font-size: 12px; color: var(--muted); text-align: right; }
+.hc-more { margin-top: 8px; padding: 6px 0; border: 0; background: none; cursor: pointer; color: var(--ink);
+  font: 400 12px var(--display); letter-spacing: .1em; text-transform: uppercase; }
+.hc-legend { margin-top: 26px; max-width: 900px; }
+.hc-legend-head { margin: 0 0 10px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.hc-legend dl { margin: 0; }
+.hc-legend dl > div { display: grid; grid-template-columns: 150px 1fr; gap: 14px; padding: 9px 0; border-top: 1px solid var(--rule); }
+.hc-legend dt .k { font: 400 11px/1.6 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+.hc-legend dd { margin: 0; font-size: 14px; color: var(--ink-soft); }
+.hc-how { margin: 14px 0 0; font-size: 13px; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 14px; }
+@media (max-width: 700px) {
+  .hc-wide, .hc-meter { display: none; }
+  .hc-table td, .hc-table th { padding-inline: 5px; }
+  .hc-table th { white-space: normal; letter-spacing: .05em; }
+  .hc-o { white-space: normal; }
+  .hc-ex li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .hc-ex li .hc-arr { display: none; }
+  .hc-ex li .hc-when { text-align: left; }
+  .hc-legend dl > div { grid-template-columns: 1fr; gap: 4px; }
+}
 .outlet.off span:first-child { color: var(--muted); }
 .subhead { margin: 40px 0 12px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 48px; }
@@ -490,6 +553,39 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       <div class="outlets" id="outlet-list"></div>
       <p class="subhead" id="untracked-head">Още не следим</p>
       <div class="outlets" id="untracked-list"></div>
+
+      <div class="hc" id="hc" hidden>
+        <p class="subhead">Смени на заглавия и изтрити статии</p>
+        <h3 class="hc-title">Кои медии най-често сменят заглавията си след публикуване</h3>
+        <p class="hc-lead">Всяко заглавие, което една медия смени, след като вече сме го видели, се записва заедно с предишното. Щракни върху медия, за да видиш самите смени.</p>
+        <div class="hc-bar">
+          <div class="hc-tabs" role="tablist">
+            <button type="button" class="on" data-sort="pct">По процент</button>
+            <button type="button" data-sort="count">По брой</button>
+          </div>
+          <span class="hc-period" id="hc-period"></span>
+        </div>
+        <div class="hc-scroll"><table class="hc-table">
+          <thead><tr>
+            <th>#</th><th>Медия</th><th class="num hc-wide">Статии</th><th class="num hc-wide">Сменени</th>
+            <th class="num" data-col="pct">% сменени</th><th class="num" data-col="count">Смени общо</th>
+            <th class="hc-wide">Дребни · обнов. · живо · съществени</th><th class="num">Изтрити</th>
+          </tr></thead>
+          <tbody id="hc-body"></tbody>
+        </table></div>
+        <div class="hc-legend">
+          <p class="hc-legend-head">Как се класифицира една смяна</p>
+          <dl>
+            <div><dt><b class="k minor">Дребна</b></dt><dd>След като махнем отбелязвания като „(ВИДЕО)“, „(СНИМКИ)“, „(ОБНОВЕНА)“ и препинателните знаци, двете заглавия съвпадат поне на 90% и нито едно число не е сменено. Например поправена правописна грешка: „партньора“ → „партньорът“.</dd></div>
+            <div><dt><b class="k update">Обновяване</b></dt><dd>Поне половината от заглавието е запазена, но е сменено число („Над 390 сигнала“ → „Над 400 сигнала“) или са добавени или заменени думи („…три полета до София“ → „…три полета до София, единият кацна в Пловдив“). Обикновено новината се развива.</dd></div>
+            <div><dt><b class="k live">Живо отразяване</b></dt><dd>Заглавието на една и съща статия е сменяно 3 или повече пъти – медията я ползва като поток от новини (например избирателната активност към 8:00, 10:00, 11:00). Всички смени на такава статия се броят тук, а не като съществени.</dd></div>
+            <div><dt><b class="k major">Съществена</b></dt><dd>Запазена е по-малко от половината от заглавието – новото е почти изцяло друго.</dd></div>
+            <div><dt><b class="k deleted">Изтрита</b></dt><dd>Връзката към статията вече води до „няма такава страница“ (грешка 404 или 410) или пренасочва към началото на сайта – при две поредни проверки, за да не броим временни сривове. Всяка статия се проверява около 1, 3, 7, 14 и 30 дни след публикуването. „—“ значи, че статиите на медията не се проверяват (БТА – разрешението ни е само за емисията; Dnevnik и Capital – страниците им не ни допускат) или още не са проверени. Проверката започна на 5 ноември 2026 г.</dd></div>
+          </dl>
+          <p class="hc-how">Сходството между две заглавия се мери като дял от буквите, които съвпадат в същия ред. Класацията „По процент“ подрежда медиите по дела на статиите с поне една смяна; „По брой“ – по общия брой смени. Медии с по-малко от <span id="hc-min"></span> статии за периода се показват, но не се класират.</p>
+          <p class="hc-how">Смяната на заглавие не е доказателство за цензура – най-често е обновяване на развиваща се новина. Показателят е сигнал, който си струва да се провери, затова всяка смяна се вижда. Виждаме само смени, докато статията е в емисията на медията (обикновено от няколко часа до ден); медии с къси емисии или четени по-рядко може да показват по-малко смени. Смени, при които връзката към статията остава същата, записваме от 5 ноември 2026 г.</p>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="about">
@@ -1207,6 +1303,111 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   document.getElementById("od-close").addEventListener("click", closeOd);
   sizeBtn.addEventListener("click", () => setSize(!od.classList.contains("full")));
   od.addEventListener("click", e => { if (e.target === od) closeOd(); });   // a click on the dimmed page closes it
+  // ---------- headline changes: ranking under „Медии“ ----------
+  (function headlineChanges() {
+    const hc = data.headline_changes;
+    if (!hc || !hc.rows || !hc.rows.length) return;
+    document.getElementById("hc").hidden = false;
+    document.getElementById("hc-min").textContent = hc.min_articles;
+    const fmtFull = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "numeric", year: "numeric" });
+    const nf = new Intl.NumberFormat("bg-BG");
+    document.getElementById("hc-period").textContent =
+      `${fmtDay.format(new Date(hc.from))} – ${fmtFull.format(new Date(hc.to))} · ${nf.format(hc.articles)} статии · ${hc.rows.length} медии`;
+    const KIND = { minor: "дребна", update: "обновяване", live: "живо", major: "съществена", deleted: "изтрита" };
+    const body = document.getElementById("hc-body");
+    const pct = r => r.articles ? 100 * r.renamed / r.articles : 0;
+    let sortBy = "pct", examples = null, openRow = null;
+    const loadExamples = () => examples || (examples = fetch(`${base}changes.json`).then(r => r.json()).catch(() => ({})));
+    const after = (from, to) => {   // how long after publishing we saw the change
+      if (!to) return "";
+      const h = (new Date(to) - new Date(from)) / 3600000;
+      if (!(h >= 0)) return "";
+      return h < 1 ? "до 1 ч след публ." : h < 48 ? `~${Math.round(h)} ч след публ.` : `~${Math.round(h / 24)} дни след публ.`;
+    };
+    function exampleRow(r, tr) {
+      const ex = el("tr", "hc-ex"), td = el("td");
+      td.colSpan = 8;
+      ex.append(td);
+      td.append(el("span", "hc-when", "Зареждам…"));
+      loadExamples().then(all => {
+        const items = all[r.outlet] || [];
+        td.replaceChildren();
+        if (!items.length) { td.append(el("span", "hc-when", "Няма записани смени.")); return; }
+        const ul = el("ul");
+        let shown = 0;
+        const more = el("button", "hc-more");
+        more.type = "button";
+        const add = n => {
+          items.slice(shown, shown + n).forEach(x => {
+            const li = el("li");
+            const link = safeUrl(x.link);
+            const now = el(link ? "a" : "span", "hc-new", x.new || "");
+            if (link) { now.href = link; now.target = "_blank"; now.rel = "noopener noreferrer"; }
+            const when = x.kind === "deleted" ? `изчезнала ${fmtDay.format(new Date(x.seen))}` : after(x.published, x.seen);
+            li.append(el("span", `k ${x.kind}`, KIND[x.kind] || x.kind),
+                      el("span", "hc-old", x.kind === "deleted" ? "" : (x.old || "")),
+                      el("span", "hc-arr", x.kind === "deleted" ? "" : "→"), now,
+                      el("span", "hc-when", when || fmtDay.format(new Date(x.published))));
+            ul.append(li);
+          });
+          shown = Math.min(items.length, shown + n);
+          more.textContent = `Покажи още (${items.length - shown})`;
+          more.hidden = shown >= items.length;
+        };
+        more.addEventListener("click", () => add(20));
+        add(8);
+        td.append(ul, more);
+      });
+      return ex;
+    }
+    function draw() {
+      body.replaceChildren();
+      openRow = null;
+      document.querySelectorAll(".hc-table th[data-col]").forEach(th => th.classList.toggle("sorted", th.dataset.col === sortBy));
+      const ok = hc.rows.filter(r => r.articles >= hc.min_articles), low = hc.rows.filter(r => r.articles < hc.min_articles);
+      const key = sortBy === "pct" ? (r => pct(r)) : (r => r.changes + r.deleted);
+      ok.sort((a, b) => key(b) - key(a) || b.articles - a.articles);
+      low.sort((a, b) => key(b) - key(a));
+      const maxPct = Math.max(1, ...ok.map(pct));
+      [...ok, ...low].forEach((r, i) => {
+        const isLow = r.articles < hc.min_articles;
+        const tr = el("tr", "hc-row" + (isLow ? " low" : ""));
+        const name = el("td", "hc-o", r.outlet);
+        if (isLow) name.append(el("em", null, "малко данни"));
+        const meter = el("span", "hc-meter"), bar = el("i");
+        bar.style.width = `${Math.round(100 * pct(r) / maxPct)}%`;
+        meter.append(bar);
+        const p = el("td", "num hc-pct", `${pct(r).toFixed(1).replace(".", ",")}%`);
+        p.append(meter);
+        const mix = el("td", "hc-mix hc-wide");
+        [["minor", "дребни"], ["update", "обновявания"], ["live", "живо отразяване"], ["major", "съществени"]].forEach(([k, t]) => {
+          const b = el("b", `k ${k}`, String(r[k])); b.title = t; mix.append(b);
+        });
+        tr.append(el("td", "hc-rk", isLow ? "–" : String(i + 1)), name, el("td", "num hc-wide", nf.format(r.articles)),
+                  el("td", "num hc-wide", String(r.renamed)), p, el("td", "num", String(r.changes)), mix,
+                  el("td", "num", r.deleted_checked ? String(r.deleted) : "—"));
+        tr.tabIndex = 0;
+        const toggle = () => {
+          const was = openRow;
+          if (openRow) { openRow.tr.classList.remove("open"); openRow.ex.remove(); openRow = null; }
+          if (was && was.tr === tr) return;
+          const ex = exampleRow(r, tr);
+          tr.after(ex); tr.classList.add("open");
+          openRow = { tr, ex };
+        };
+        tr.addEventListener("click", toggle);
+        tr.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+        body.append(tr);
+      });
+    }
+    document.querySelectorAll(".hc-tabs button").forEach(b => b.addEventListener("click", () => {
+      sortBy = b.dataset.sort;
+      document.querySelectorAll(".hc-tabs button").forEach(x => x.classList.toggle("on", x === b));
+      draw();
+    }));
+    draw();
+  })();
+
   const ul = document.getElementById("untracked-list");
   const untracked = data.untracked_outlets || [];
   document.getElementById("untracked-head").hidden = !untracked.length;
