@@ -204,6 +204,22 @@ a { color: inherit; }
 .outlet span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
 .outlet span:last-child { font-size: 13px; color: var(--muted); text-align: right; }
 
+/* ---------- back to the top: a small round button, bottom right, once you've scrolled down ---------- */
+.to-top {
+  position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 20; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; background: var(--ink); color: var(--paper);
+  box-shadow: 0 4px 14px rgba(21, 22, 43, .22);
+  opacity: 0; transform: translateY(10px); transition: opacity .2s, transform .2s;
+}
+.to-top.show { opacity: 1; transform: none; }
+.to-top[hidden] { display: none; }
+.to-top svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.to-top:hover { background: var(--ink-soft); }
+.to-top:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .to-top { transition: none; } }
+@media (max-width: 700px) { .to-top { right: max(16px, env(safe-area-inset-right)); bottom: max(22px, env(safe-area-inset-bottom)); width: 44px; height: 44px; } }
+
 /* ---------- headline changes: ranking under „Медии“ ---------- */
 .hc { margin-top: 56px; }
 .hc-title { margin: 0 0 10px; font: 300 clamp(24px, 3vw, 34px)/1.1 var(--display); }
@@ -607,6 +623,10 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   </footer>
  </div>
 </main>
+
+<button class="to-top" id="to-top" type="button" aria-label="Обратно най-горе" title="Обратно най-горе" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+</button>
 
 <dialog class="od" id="od" aria-labelledby="od-name">
   <div class="od-scroll">
@@ -1311,6 +1331,27 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   document.getElementById("od-close").addEventListener("click", closeOd);
   sizeBtn.addEventListener("click", () => setSize(!od.classList.contains("full")));
   od.addEventListener("click", e => { if (e.target === od) closeOd(); });   // a click on the dimmed page closes it
+  // ---------- back to the top ----------
+  (function toTop() {
+    const btn = document.getElementById("to-top");
+    let shown = false, ticking = false;
+    const update = () => {
+      ticking = false;
+      const want = window.scrollY > Math.max(600, window.innerHeight);
+      if (want === shown) return;
+      shown = want;
+      if (want) { btn.hidden = false; requestAnimationFrame(() => btn.classList.add("show")); }
+      else { btn.classList.remove("show"); setTimeout(() => { if (!shown) btn.hidden = true; }, 200); }
+    };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    btn.addEventListener("click", () => {
+      const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    });
+    update();
+  })();
+
   // ---------- headline changes: ranking under „Медии“ ----------
   (function headlineChanges() {
     const hc = data.headline_changes;
