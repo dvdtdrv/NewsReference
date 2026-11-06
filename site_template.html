@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&family=Golos+Text:wght@400;500;600&display=swap">
 <style>
 /* Layout: newspaper column on egg-white paper. Clean spread header, a big condensed
-   statement, then one band per story: summary title, coverage strip, the outlets' own articles. */
+   statement, then one band per story: summary title, how many outlets, the outlets' own articles. */
 :root {
   --paper: #F3EFE4;        /* egg white: the stories */
   --paper-deep: #E6DFCC;   /* a shade darker: the first screen, under the sliding sheet */
@@ -135,9 +135,6 @@ a { color: inherit; }
   font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
 }
 .story-meta .count { color: var(--ink); }
-.squares { display: inline-flex; flex-wrap: wrap; gap: 3px; max-width: 100%; }   /* wraps on phones instead of widening the page */
-.sq { width: 9px; height: 9px; border: 1px solid var(--rule); }
-.sq.on { background: var(--ink); border-color: var(--ink); }
 .story h3 {
   margin: 0; max-width: 26ch; font: 300 clamp(30px, 3.8vw, 50px)/1.02 var(--display);
   letter-spacing: -.01em; text-wrap: balance;
@@ -855,14 +852,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     if (s.id) art.id = `s-${s.id}`;
     const meta = el("div", "story-meta");
     meta.append(el("span", "count", `${s.outlet_count} ${s.outlet_count === 1 ? "медия" : "медии"}`));
-    const sq = el("span", "squares");
-    sq.setAttribute("aria-hidden", "true");
-    active.forEach(o => {
-      const b = el("i", "sq" + (s.outlets.includes(o.name) ? " on" : ""));
-      b.title = o.name;
-      sq.append(b);
-    });
-    meta.append(sq, el("time", null, dateSpan(s.first_seen, s.last_updated)));
+    meta.append(el("time", null, dateSpan(s.first_seen, s.last_updated)));
     // the story title, with a hand-drawn arrow pointing to a note on where the title comes from
     const titleRow = el("div", "title-row");
     const note = el("span", "title-note");
