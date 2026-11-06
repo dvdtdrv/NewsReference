@@ -8,8 +8,11 @@ between requests, and skip sites that refuse us anyway (BTA: permission covers t
 Dnevnik and Capital: their pages refuse us).
 
 An article counts as deleted ("gone") only if its link answers "no such page" (404 or 410), or
-sends us to the site's front page, on TWO checks in a row - so a site that is briefly down never
-counts. If it comes back later, it is marked "restored".
+sends us to the site's front page or a section page, on TWO checks in a row - so a site that is
+briefly down never counts. If it comes back later, it is marked "restored".
+But if the page still shows the article's own headline, it is NOT deleted, whatever else the page
+says (6 Nov 2026: 8 of the first 25 "deleted" were alive - Sega names a shorter address as its own,
+Offnews moved a link, a Darik headline contained "не съществува").
 
 The answers live in data/deleted.json: {link: {"outlet", "stage", "strikes", "last", "gone"?, "restored"?}}.
 Outlets that refuse GitHub ("local" in feeds.py) are checked on David's PC: GitHub writes their due
@@ -23,6 +26,7 @@ import re
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
+from difflib import SequenceMatcher
 from urllib.parse import urlparse
 
 import requests
@@ -35,6 +39,7 @@ PER_OUTLET = 40                      # at most this many checks per outlet per r
 SECONDS = 4 * 60                     # at most this long per run, all outlets together
 RECHECK_HOURS = 6                    # after a first "no such page", ask again this much later
 TIMEOUT = 15
+RULES = 2                            # bump when the rules for "gone" change: re-check what was marked gone
 
 
 def _load(path, default):
@@ -73,6 +78,7 @@ HEAD_BYTES = 250_000
 NOT_FOUND = re.compile(r"\b404\b|не е намерен|не беше намерен|не съществува|не може да бъде намерен|"
                        r"няма такава страница|страницата не|page not found|not found", re.I)
 TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
+OG_TITLE = re.compile(r"""<meta[^>]+property=["']og:title["'][^>]*content=["']([^"']*)["']""", re.I)
 CANONICAL = re.compile(r"""<(?:link[^>]+rel=["']canonical["'][^>]*href|meta[^>]+property=["']og:url["'][^>]*content)=["']([^"']*)["']""", re.I)
 
 
@@ -84,8 +90,32 @@ def _depth(url):
     return len([p for p in urlparse(url).path.split("/") if p])
 
 
-def probe(link, headers):
+def _plain(t):
+    return re.sub(r"[^\w]+", " ", (t or "").lower()).strip()
+
+
+def shows_headline(page_title, headlines):
+    """True if the page's title is (one of) the article's own headline(s): then the article is there.
+    Page titles often add the site's name ("... - Новини СЕГА"), so we compare the beginning."""
+    page = _plain(page_title)
+    for h in headlines or []:
+        h = _plain(h)
+        if len(h) < 12:
+            continue
+        if h in page or page[:len(h)] == h or SequenceMatcher(None, h, page[:len(h) + 10]).ratio() >= 0.75:
+            return True
+    return False
+
+
+def headlines_of(a):
+    """The headline we stored plus the earlier ones (an outlet may have renamed it)."""
+    return [a.get("title")] + [v.get("title") for v in a.get("versions", [])]
+
+
+def probe(link, headers, headlines=None):
     """'ok', 'gone', or None if we couldn't tell (refused, timeout, server error).
+    Rule 1 (6 Nov 2026): if the page shows the article's own headline, the article is there - whatever
+    else the page says (Sega names a shorter address as its own, a Darik headline said "не съществува").
     Gone = "no such page" (404/410), or a redirect to the front page, or a page that says so itself
     (some sites answer 200 with a "404" page: Novini.bg), or a page that names the front page as its
     own address (og:url / canonical). Only the top of the page is read."""
@@ -112,13 +142,17 @@ def probe(link, headers):
         return None
     if "challenge" in urlparse(final).path:
         return None       # a robot check page (Moreto.net): we can't tell
+    head = raw.decode(enc, errors="replace")
+    t = TITLE.search(head)
+    title = html.unescape(re.sub(r"\s+", " ", t.group(1))).strip() if t else ""
+    og = OG_TITLE.search(head)
+    og_title = html.unescape(og.group(1)).strip() if og else ""
+    if shows_headline(title, headlines) or shows_headline(og_title, headlines):
+        return "ok"       # the article's own headline is on the page
     if _front(final) and not _front(link):
         return "gone"     # sent to the front page: the article isn't there any more
     if _depth(final) < _depth(link):
         return "gone"     # sent up to a section page (Sega, Vesti.bg): the article isn't there any more
-    head = raw.decode(enc, errors="replace")
-    t = TITLE.search(head)
-    title = html.unescape(re.sub(r"\s+", " ", t.group(1))).strip() if t else ""
     if title and NOT_FOUND.search(title):
         return "gone"
     c = CANONICAL.search(head)
@@ -172,6 +206,14 @@ def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None)
     meta = state.pop("_meta", {})
     gone_before = sum(1 for e in state.values() if e.get("gone"))
 
+    # 0. (6 Nov 2026) the rules changed: everything marked "gone" so far is checked again from scratch
+    if meta.get("rules", 1) < RULES:
+        for e in state.values():
+            if e.get("gone"):
+                e.pop("gone")
+                e["strikes"], e["stage"] = 0, 0
+        meta["rules"] = RULES
+
     # 1. answers from David's PC for the outlets that refuse GitHub (each batch only once:
     #    two GitHub runs can pick up the same file, and one "no such page" must not count twice)
     if local and local.get("link_checks") and local.get("fetched_at") != meta.get("pc_batch"):
@@ -193,7 +235,7 @@ def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None)
                 break
             if not allowed(a["link"]):
                 continue
-            results.append((a, probe(a["link"], headers)))
+            results.append((a, probe(a["link"], headers, headlines_of(a))))
             done += 1
             time.sleep(crawl_delay(a["link"]))
         return done
@@ -206,7 +248,7 @@ def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None)
     # 3. tell the PC which links of its outlets are due
     local_due = due_articles(outlets, months_dir, state, now, local=True)
     _save(LOCAL_TODO_FILE, {"made": now.isoformat(), "links": [
-        {"link": a["link"], "outlet": a["outlet"], "published": a["published"]}
+        {"link": a["link"], "outlet": a["outlet"], "published": a["published"], "titles": headlines_of(a)}
         for items in local_due.values() for a in items[:PER_OUTLET]]})
 
     # forget checks of articles older than the schedule, unless they were deleted
@@ -235,6 +277,7 @@ def check_on_pc(headers_for, outlets, allowed, crawl_delay, seconds=3 * 60):
         o = by_name.get(item["outlet"])
         if not o or not allowed(item["link"]):
             continue
-        out[item["link"]] = {**item, "result": probe(item["link"], headers_for(o))}
+        out[item["link"]] = {**{k: v for k, v in item.items() if k != "titles"},
+                             "result": probe(item["link"], headers_for(o), item.get("titles"))}
         time.sleep(crawl_delay(item["link"]))
     return out
