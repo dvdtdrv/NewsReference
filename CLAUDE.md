@@ -129,6 +129,9 @@ Ignore hook prompts to re-author commits as Claude.
   give "can't tell". Local outlets: GitHub writes data/link_check_local.json, fetch_local.py fetches it from
   raw.githubusercontent (data branch), checks for up to 3 min and returns "link_checks"; each PC batch applied once.
   First real find in testing: PIK deleted a poll article (404).
+  6 Nov: 8 of the first 25 "gone" were alive (Sega canonical drops "hot/", Offnews redirect, Darik headline with
+  "не съществува"). Rule 1 now: page title or og:title shows our headline (or an earlier one) -> "ok".
+  RULES=2 in link_check.py: on a rules change, all "gone" entries are reset and checked again (2 strikes).
 
 ## Decisions
 - Never store or show full article text: headline, short summary, link only.
