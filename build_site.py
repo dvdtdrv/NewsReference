@@ -214,6 +214,8 @@ def front_page_data():
     data["articles_total"] = total_articles()
     data["outlet_info"] = outlet_info()
     data["headline_changes"], _ = headline_changes()
+    # every article we ever collected from each outlet (the whole archive, not just these 48 hours)
+    data["outlet_totals"] = {r["outlet"]: r["articles"] for r in (data["headline_changes"] or {}).get("rows", [])}
     data["base"] = ""
     return data
 
@@ -271,6 +273,7 @@ def main():
             "archive_days": days,
             "outlet_info": front["outlet_info"],
             "headline_changes": front["headline_changes"],
+            "outlet_totals": front["outlet_totals"],
             "base": "../",
         }
         with open(os.path.join(OUT_DIR, "archive", f"{day['date']}.html"), "w", encoding="utf-8") as f:

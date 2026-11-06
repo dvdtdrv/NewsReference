@@ -712,6 +712,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const tz = "Europe/Sofia";
   const fmtTime = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, hour: "2-digit", minute: "2-digit" });
   const fmtDay = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "short" });
+  const nf = new Intl.NumberFormat("bg-BG");   // 12 345
   const fmtLong = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, weekday: "long", day: "numeric", month: "long" });
   const dayKey = d => new Intl.DateTimeFormat("en-CA", { timeZone: tz }).format(d);
   const generated = new Date(data.generated_at);
@@ -1202,7 +1203,9 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   tracked.forEach(o => {
     const row = el("button", "outlet" + (o.active ? "" : " off"));
     row.type = "button";
-    const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${counts[o.name] || 0} ист.` : "временно недостъпна";
+    // all the articles we have collected from this outlet so far (the whole archive)
+    const all = (data.outlet_totals || {})[o.name] || 0;
+    const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${nf.format(all)} ${all === 1 ? "статия" : "статии"}` : "временно недостъпна";
     row.append(el("span", null, o.name), el("span", null, right));
     row.addEventListener("click", () => openOutlet(o));
     ol.append(row);
@@ -1241,7 +1244,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const n = counts[o.name] || 0, total = data.stories.length;
     const stats = document.getElementById("od-stats");
     stats.replaceChildren();
-    [[n, archiveDate ? "истории този ден" : "истории"],
+    [[nf.format((data.outlet_totals || {})[o.name] || 0), "статии събрани общо"],
+     [n, archiveDate ? "истории този ден" : "истории"],
      [total ? `${Math.round(100 * n / total)}%` : "–", "от всички истории"],
      [recent.length ? when(recent[0].published) : "–", "последна статия"]].forEach(([v, label]) => {
       const st = el("div", "stat"); st.append(el("strong", null, v), label); stats.append(st);
@@ -1359,7 +1363,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.getElementById("hc").hidden = false;
     document.getElementById("hc-min").textContent = hc.min_articles;
     const fmtFull = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "numeric", year: "numeric" });
-    const nf = new Intl.NumberFormat("bg-BG");
     document.getElementById("hc-period").textContent =
       `${fmtDay.format(new Date(hc.from))} – ${fmtFull.format(new Date(hc.to))} · ${nf.format(hc.articles)} статии · ${hc.rows.length} медии`;
     const KIND = { minor: "дребна", update: "обновяване", live: "живо", major: "съществена", deleted: "изтрита" };
