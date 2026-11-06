@@ -206,6 +206,23 @@ def headline_changes():
     return summary, examples
 
 
+def outlet_story_totals():
+    """In how many stories of the whole archive each outlet took part, and how many stories there are.
+    A story can sit in two archive days (it went on past midnight): it counts once, by its id."""
+    seen = {}
+    if os.path.isdir(DAYS_DIR):
+        for name in sorted(os.listdir(DAYS_DIR)):
+            if name.endswith(".json"):
+                with open(os.path.join(DAYS_DIR, name), encoding="utf-8") as f:
+                    for s in json.load(f)["stories"]:
+                        seen.setdefault(s["id"], set()).update(a["outlet"] for a in s["articles"])
+    counts = {}
+    for outlets in seen.values():
+        for o in outlets:
+            counts[o] = counts.get(o, 0) + 1
+    return {"stories": len(seen), "by_outlet": counts}
+
+
 def front_page_data():
     with open(os.path.join("data", "stories.json"), encoding="utf-8") as f:
         data = json.load(f)
@@ -216,6 +233,7 @@ def front_page_data():
     data["headline_changes"], _ = headline_changes()
     # every article we ever collected from each outlet (the whole archive, not just these 48 hours)
     data["outlet_totals"] = {r["outlet"]: r["articles"] for r in (data["headline_changes"] or {}).get("rows", [])}
+    data["story_totals"] = outlet_story_totals()
     data["base"] = ""
     return data
 
@@ -274,6 +292,7 @@ def main():
             "outlet_info": front["outlet_info"],
             "headline_changes": front["headline_changes"],
             "outlet_totals": front["outlet_totals"],
+            "story_totals": front["story_totals"],
             "base": "../",
         }
         with open(os.path.join(OUT_DIR, "archive", f"{day['date']}.html"), "w", encoding="utf-8") as f:
