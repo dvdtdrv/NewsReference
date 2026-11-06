@@ -1197,15 +1197,15 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   }
 
   // outlets
-  const counts = {};
-  data.stories.forEach(s => s.outlets.forEach(o => { counts[o] = (counts[o] || 0) + 1; }));
   const ol = document.getElementById("outlet-list");
   tracked.forEach(o => {
     const row = el("button", "outlet" + (o.active ? "" : " off"));
     row.type = "button";
     // all the articles we have collected from this outlet so far (the whole archive)
     const all = (data.outlet_totals || {})[o.name] || 0;
-    const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${nf.format(all)} ${all === 1 ? "статия" : "статии"}` : "временно недостъпна";
+    // and in how many stories of the whole archive it took part
+    const st = ((data.story_totals || {}).by_outlet || {})[o.name] || 0;
+    const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"} · ${nf.format(st)}\u00a0ист.` : "временно недостъпна";
     row.append(el("span", null, o.name), el("span", null, right));
     row.addEventListener("click", () => openOutlet(o));
     ol.append(row);
@@ -1241,11 +1241,12 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     data.stories.forEach(s => s.articles.forEach(a => { if (a.outlet === o.name) mine.push(a); }));
     const seen = new Set();
     const recent = mine.filter(a => !seen.has(a.link) && seen.add(a.link)).sort((a, b) => b.published.localeCompare(a.published));
-    const n = counts[o.name] || 0, total = data.stories.length;
+    // stories of the whole archive (not just this page): every story this outlet took part in
+    const n = ((data.story_totals || {}).by_outlet || {})[o.name] || 0, total = (data.story_totals || {}).stories || 0;
     const stats = document.getElementById("od-stats");
     stats.replaceChildren();
     [[nf.format((data.outlet_totals || {})[o.name] || 0), "статии събрани общо"],
-     [n, archiveDate ? "истории този ден" : "истории"],
+     [nf.format(n), "истории общо"],
      [total ? `${Math.round(100 * n / total)}%` : "–", "от всички истории"],
      [recent.length ? when(recent[0].published) : "–", "последна статия"]].forEach(([v, label]) => {
       const st = el("div", "stat"); st.append(el("strong", null, v), label); stats.append(st);
