@@ -201,8 +201,8 @@ a { color: inherit; }
 @media (max-width: 700px) { .h2-note { display: block; margin: 10px 0 0; vertical-align: 0; } .h2-note::before { content: none; } }
 .outlets { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 32px; }
 .outlet { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--rule); min-width: 0; }
-.outlet span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
-.outlet span:last-child { font-size: 13px; color: var(--muted); text-align: right; }
+.outlet > span:first-child { font: 400 17px/1.2 var(--display); text-transform: uppercase; letter-spacing: .03em; }
+.outlet > span:last-child { font-size: 13px; color: var(--muted); text-align: right; }
 
 /* ---------- back to the top: a small round button, bottom right, once you've scrolled down ---------- */
 .to-top {
@@ -282,7 +282,8 @@ a { color: inherit; }
   .hc-ex li .hc-when { text-align: left; }
   .hc-legend dl > div { grid-template-columns: 1fr; gap: 4px; }
 }
-.outlet.off span:first-child { color: var(--muted); }
+.outlet.off > span:first-child { color: var(--muted); }
+.outlet .unavail { display: block; margin-top: 3px; font: 400 12px/1.2 var(--body); text-transform: none; letter-spacing: 0; color: var(--muted); white-space: nowrap; }
 .subhead { margin: 40px 0 12px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 48px; }
 .cols p { margin: 0; max-width: 60ch; color: var(--ink-soft); }
@@ -340,7 +341,7 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
 
 /* ---------- outlet window: opens from „Медии“, same deep paper as the top of the site ---------- */
 button.outlet { width: 100%; background: none; border: 0; border-bottom: 1px solid var(--rule); color: inherit; font: inherit; text-align: left; cursor: pointer; }
-button.outlet:hover span:first-child, button.outlet:focus-visible span:first-child { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+button.outlet:hover .nm, button.outlet:focus-visible .nm { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 dialog.od {
   border: 0; padding: 0; color: var(--ink); background: var(--paper-deep);
   width: min(780px, calc(100vw - 24px)); max-height: min(88vh, 920px); border-radius: 26px;
@@ -1205,8 +1206,12 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const all = (data.outlet_totals || {})[o.name] || 0;
     // and in how many stories of the whole archive it took part
     const st = ((data.story_totals || {}).by_outlet || {})[o.name] || 0;
-    const right = o.active ? `${TYPE_BG[o.type] || o.type} · ${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"} · ${nf.format(st)}\u00a0ист.` : "временно недостъпна";
-    row.append(el("span", null, o.name), el("span", null, right));
+    const right = `${TYPE_BG[o.type] || o.type} · ${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"} · ${nf.format(st)}\u00a0ист.`;
+    // the name; an outlet we can't read right now is greyed out, with a small note under its name
+    const name = el("span");
+    name.append(el("span", "nm", o.name));
+    if (!o.active) name.append(el("small", "unavail", "временно недостъпна"));
+    row.append(name, el("span", null, right));
     row.addEventListener("click", () => openOutlet(o));
     ol.append(row);
   });
