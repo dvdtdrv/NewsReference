@@ -1370,7 +1370,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const body = document.getElementById("hc-body");
     const pct = r => r.articles ? 100 * r.renamed / r.articles : 0;
     let sortBy = "pct", examples = null, openRow = null;
-    const loadExamples = () => examples || (examples = fetch(`${base}changes.json`).then(r => r.json()).catch(() => ({})));
+    const loadExamples = () => examples || (examples = fetch(`${base}changes.json?v=${encodeURIComponent(data.generated_at || "")}`, { cache: "no-cache" }).then(r => r.json()).catch(() => ({})));
     const after = (from, to) => {   // how long after publishing we saw the change
       if (!to) return "";
       const h = (new Date(to) - new Date(from)) / 3600000;
