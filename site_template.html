@@ -858,7 +858,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const note = el("span", "title-note");
     note.innerHTML = ARROW_SVG;   // a constant drawing, no outside text in it
     const ai = s.headline_source === "ai";
-    note.append(el("span", "title-note-text", ai ? "Обобщено от AI" : "Автоматично избрано заглавие"));
+    note.append(el("span", "title-note-text", ai ? "Обобщено от AI" : "Автоматично подбрано заглавие"));
     note.title = ai
       ? "Това заглавие е написано от изкуствен интелект въз основа на заглавията на медиите. Оригиналните заглавия са под него."
       : "Това заглавие е избрано автоматично измежду заглавията на медиите. Оригиналните заглавия са под него.";
