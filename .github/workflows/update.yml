@@ -32,9 +32,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+    # no "environment" here: the Pages publishing slot is only taken by the short "publish" job below,
+    # so a quick outlet-info rebuild (rebuild.yml) never has to wait for this long job (9 Nov 2026)
     steps:
       - name: Get the code
         uses: actions/checkout@v4
@@ -119,10 +118,6 @@ jobs:
         with:
           path: site
 
-      - name: Publish the website
-        id: deploy
-        uses: actions/deploy-pages@v4
-
       - name: Ask David's PC for the next round
         if: always()
         env:
@@ -135,3 +130,15 @@ jobs:
           gh workflow run local-fetch.yml --repo "$GITHUB_REPOSITORY" -f wait=$wait || \
             gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/local-fetch.yml/dispatches" -f ref=main -f "inputs[wait]=$wait"
           echo "Asked the PC to read again in $wait minutes."
+
+  publish:
+    needs: update
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publish the website
+        id: deploy
+        uses: actions/deploy-pages@v4
