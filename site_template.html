@@ -1196,7 +1196,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const all = (data.outlet_totals || {})[o.name] || 0;
     // and in how many stories of the whole archive it took part
     const st = ((data.story_totals || {}).by_outlet || {})[o.name] || 0;
-    const right = `${TYPE_BG[o.type] || o.type} · ${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"} · ${nf.format(st)}\u00a0ист.`;
+    // the kind of outlet (агенция, телевизия…) is shown only in the outlet window, on click
+    const right = `${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"} · ${nf.format(st)}\u00a0ист.`;
     // the name; an outlet we can't read right now is greyed out, with a small note under its name
     const name = el("span");
     name.append(el("span", "nm", o.name));
