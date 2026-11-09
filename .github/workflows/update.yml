@@ -75,20 +75,23 @@ jobs:
           fi
           if [ -f local_in/local_articles.json ]; then echo "Got the PC's articles (run $id)."; else echo "No articles from the PC."; fi
 
-      - name: Use the newest design
-        # this run may have started before a design change; take the latest pages/texts so it
-        # never publishes an older look over a newer quick rebuild
-        run: |
-          git fetch -q --depth 1 origin main
-          git checkout FETCH_HEAD -- site_template.html build_site.py versions.py build_search.mjs outlets_info.json web
-
-      - name: Collect, group, build
+      - name: Collect and group
         env:
           PYTHONUNBUFFERED: "1"     # show each outlet's line as it happens (so a stuck step shows where)
         run: |
           python collect.py
           python group_stories.py
-          python build_site.py
+
+      - name: Use the newest design
+        # Collecting takes 6-15 minutes; a design change may have been published meanwhile. Take the latest
+        # pages/texts right before building, so this run never publishes an older look over a newer quick
+        # rebuild (9 Nov 2026: it did, because this step ran before collecting).
+        run: |
+          git fetch -q --depth 1 origin main
+          git checkout FETCH_HEAD -- site_template.html build_site.py versions.py build_search.mjs outlets_info.json web
+
+      - name: Build the pages
+        run: python build_site.py
 
       - name: Set up Node.js (for the search index)
         uses: actions/setup-node@v4
