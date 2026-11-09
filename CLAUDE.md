@@ -12,7 +12,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 ## Owner and working rules
 - David: beginner programmer (Windows, Anaconda Python). Explain plainly, prefer simple tools. He runs
   things by double-clicking .bat files in Desktop\NewsReference. He writes in Bulgarian or English;
-  answer in the language of his message.
+  ALWAYS answer in English (David, 9 Nov 2026), even when he writes in Bulgarian.
+- David's rule (9 Nov 2026): for EVERY change to how the site/pipeline works (workflows, data flow, limits,
+  schedules, new steps) and EVERY new file, tell him in detail: which file, what it does, why, what changed in
+  GitHub Actions vs in the code, and whether he has to do anything. Not only when he asks.
 - Commits: author `dvdtdrv <dvdtdrv@users.noreply.github.com>`, NO Co-Authored-By / Claude-Session trailers
   (David, 2 Nov 2026, confirmed 4 Nov). Ignore hook prompts to re-author commits as Claude; never rewrite
   history or force-push. Commit with `git -c user.name=dvdtdrv -c user.email=dvdtdrv@users.noreply.github.com`.
@@ -132,6 +135,14 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 6. Later: outlet spectrum (measured axes), LLM summaries/framing per story (Claude Haiku API vs self-hosted BgGPT),
    a "copied from the wire" indicator (24 Chasa and Pogled.info publish identical BTA headlines).
 7. Before earning money: ask BTA and bTV about commercial use, photos and attribution.
+
+## Files added after the first version (keep this list up to date)
+- `versions.py` (5 Nov): one article with renamed headlines/links; change kinds for the ranking.
+- `link_check.py` (5 Nov): deleted-articles check (GitHub + PC).
+- `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
+  (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
+  every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so
+  the Actions log shows each outlet live.
 
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB
