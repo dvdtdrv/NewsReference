@@ -280,6 +280,7 @@ a { color: inherit; }
   .hc-legend dl > div { grid-template-columns: 1fr; gap: 4px; }
 }
 .outlet.off > span:first-child { color: var(--muted); }
+.outlet .counts span { display: block; white-space: nowrap; }
 .outlet .unavail { display: block; margin-top: 3px; font: 400 12px/1.2 var(--body); text-transform: none; letter-spacing: 0; color: var(--muted); white-space: nowrap; }
 .subhead { margin: 40px 0 12px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 48px; }
@@ -1197,12 +1198,15 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     // and in how many stories of the whole archive it took part
     const st = ((data.story_totals || {}).by_outlet || {})[o.name] || 0;
     // the kind of outlet (агенция, телевизия…) is shown only in the outlet window, on click
-    const right = `${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"} · ${nf.format(st)}\u00a0ист.`;
+    // two lines on the right: the articles, then the stories
+    const right = el("span", "counts");
+    right.append(el("span", null, `${nf.format(all)}\u00a0${all === 1 ? "статия" : "статии"}`),
+                 el("span", null, `${nf.format(st)}\u00a0${st === 1 ? "история" : "истории"}`));
     // the name; an outlet we can't read right now is greyed out, with a small note under its name
     const name = el("span");
     name.append(el("span", "nm", o.name));
     if (!o.active) name.append(el("small", "unavail", "временно недостъпна"));
-    row.append(name, el("span", null, right));
+    row.append(name, right);
     row.addEventListener("click", () => openOutlet(o));
     ol.append(row);
   });
