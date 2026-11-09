@@ -45,7 +45,19 @@ a { color: inherit; }
   position: sticky; top: 0; z-index: 0; overflow: hidden;
   height: calc(100vh - 72px); height: calc(100svh - 72px);   /* the sheet's top edge peeks in below */
 }
-.stage-inner { height: 100%; display: flex; flex-direction: column; transform-origin: 50% 35%; will-change: transform, opacity; }
+.stage-inner { height: 100%; display: flex; flex-direction: column; will-change: transform, opacity; transform: translateZ(0); }
+/* the sliding (9 Nov 2026, smoother): the first screen rises a little slower than the page and fades, instead of
+   shrinking (shrinking text shimmers). Where the browser can tie an animation to scrolling, it runs on the
+   graphics chip (no script); elsewhere the script below does the same with an eased curve. */
+@keyframes stage-out { to { transform: translate3d(0, -9vh, 0); opacity: .2; } }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 861px) and (min-height: 621px) and (prefers-reduced-motion: no-preference) {
+    body:not(.compact) .stage-inner {
+      animation: stage-out linear both; animation-timeline: scroll(root block); animation-range: 0 90vh;
+      animation-timing-function: cubic-bezier(.3, 0, .25, 1);
+    }
+  }
+}
 .stage .intro { flex: 1; align-content: center; }
 .sheet {
   position: relative; z-index: 1; min-height: 100vh;
@@ -191,6 +203,11 @@ a { color: inherit; }
 /* ---------- outlets, method, footer ---------- */
 .section { padding-block: 56px; border-top: 1px solid var(--ink); }
 body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32px; }   /* „Медии“ / „Архив“ pages */
+.day-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 28px; }
+.day-pick label { font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.day-pick input { font: 300 22px/1.1 var(--display); color: var(--ink); background: transparent; border: 0;
+  border-bottom: 1px solid var(--ink); border-radius: 0; padding: 6px 2px; min-width: 0; }
+.day-msg { font-size: 14px; color: var(--muted); }
 .section h2 { margin: 0 0 28px; font: 200 clamp(40px, 6vw, 72px)/.95 var(--display); }
 /* a short explanation after a section title, in smaller type on the same line */
 .h2-note { display: inline; margin-left: .6em;
@@ -561,6 +578,11 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     <section class="section" id="archive" hidden>
       <h2>Архив</h2>
       <p class="view-note">Всички истории остават тук, подредени по деня, в който са започнали.</p>
+      <div class="day-pick" id="day-pick" hidden>
+        <label for="day-input">Избери дата</label>
+        <input type="date" id="day-input">
+        <span class="day-msg" id="day-msg" aria-live="polite"></span>
+      </div>
       <div class="days" id="day-list"></div>
     </section>
 
@@ -845,6 +867,17 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       list.append(a);
     });
     document.getElementById("archive").hidden = false;
+    // pick a date: opens that day's page; the browser's own date picker, limited to the archive's days
+    const have = new Set(days.map(d => d.date));
+    const input = document.getElementById("day-input"), msg = document.getElementById("day-msg");
+    input.min = days[days.length - 1].date; input.max = days[0].date; input.value = days[0].date;
+    input.addEventListener("change", () => {
+      if (!input.value) return;
+      if (have.has(input.value)) location.href = `${base}archive/${input.value}.html`;
+      else msg.textContent = "Няма истории от тази дата.";
+    });
+    input.addEventListener("input", () => { msg.textContent = ""; });
+    document.getElementById("day-pick").hidden = false;
   }
   document.getElementById("updated").textContent = `Данни към ${fmtLong.format(generated)}, ${fmtTime.format(generated)}`;
 
@@ -855,6 +888,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const inner = stage.querySelector(".stage-inner");
     const still = window.matchMedia("(prefers-reduced-motion: reduce)");
     let queued = false;
+    if (window.CSS && CSS.supports("animation-timeline: scroll()")) return;   // the browser does it (CSS above)
     const paint = () => {
       queued = false;
       if (still.matches || getComputedStyle(stage).position !== "sticky") {
@@ -862,8 +896,9 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         return;
       }
       const p = Math.min(1, Math.max(0, window.scrollY / stage.offsetHeight));
-      inner.style.transform = `scale(${(1 - 0.06 * p).toFixed(4)})`;
-      inner.style.opacity = (1 - 0.75 * p).toFixed(3);
+      const e = 1 - (1 - p) * (1 - p);             // eased: starts at once, settles softly
+      inner.style.transform = `translate3d(0, ${(-0.09 * window.innerHeight * e).toFixed(1)}px, 0)`;
+      inner.style.opacity = (1 - 0.8 * e).toFixed(3);
     };
     const queue = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
     window.addEventListener("scroll", queue, { passive: true });
