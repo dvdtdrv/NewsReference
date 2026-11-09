@@ -804,7 +804,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   }
   const isMedia = data.page === "media", isArchive = data.page === "archive";
   if (isMedia || isArchive) {
-    document.body.classList.add("compact", "page-own");
+    document.body.classList.add("page-own");   // not "compact": the sheet slides over the intro, as on the front page
     document.querySelector(".logo").href = `${base}index.html`;
     ["stories", "view-note", "list", "more-wrap", "stats"].forEach(id => {
       document.getElementById(id).hidden = true;
