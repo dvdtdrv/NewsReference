@@ -149,6 +149,7 @@ def outlet_info():
     return {o["name"]: {"domain": o.get("domain", ""), **written.get(o["name"], {})} for o in OUTLETS}
 
 
+MEDIA_ONLY = ("outlet_info", "headline_changes", "outlet_totals", "story_totals")   # data only medii.html needs
 MIN_ARTICLES = 100   # fewer articles than this in the period: shown, but not ranked ("малко данни")
 EXAMPLES = 150       # how many of each outlet's latest changes the page can show
 
@@ -254,8 +255,10 @@ def main():
         shutil.copyfile(os.path.join(WEB_DIR, name), os.path.join(OUT_DIR, name))
 
     front = front_page_data()
+    # everything except what only „Медии“ shows (the outlet info and the ranking are the biggest part)
+    light = {k: v for k, v in front.items() if k not in MEDIA_ONLY}
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(front, template))
+        f.write(render(light, template))
 
     # the examples behind the headline-change ranking, loaded when someone opens an outlet's row
     _, examples = headline_changes()
@@ -264,11 +267,26 @@ def main():
 
     # the subscription page: same template and data, shown in "support" mode
     with open(os.path.join(OUT_DIR, "abonament.html"), "w", encoding="utf-8") as f:
-        f.write(render({**front, "page": "support"}, template))
+        f.write(render({**light, "page": "support", "stories": []}, template))
 
     # the search page: same template, "search" mode; it needs no stories of its own
     with open(os.path.join(OUT_DIR, "tarsene.html"), "w", encoding="utf-8") as f:
-        f.write(render({**front, "page": "search", "stories": []}, template))
+        f.write(render({**light, "page": "search", "stories": []}, template))
+
+    # „Медии“ (9 Nov 2026): its own page; the only page that carries the outlet info and the
+    # headline-change ranking, so the front page and the archive pages stay small and fast
+    # each outlet's newest articles from the front page's stories (the outlet window lists them)
+    recent = {}
+    for st in front["stories"]:
+        for a in st["articles"]:
+            recent.setdefault(a["outlet"], {})[a["link"]] = {k: a[k] for k in ("title", "link", "published")}
+    recent = {o: sorted(v.values(), key=lambda a: a["published"], reverse=True)[:6] for o, v in recent.items()}
+    with open(os.path.join(OUT_DIR, "medii.html"), "w", encoding="utf-8") as f:
+        f.write(render({**front, "page": "media", "stories": [], "outlet_recent": recent}, template))
+
+    # „Архив“ (9 Nov 2026): its own page with the list of days
+    with open(os.path.join(OUT_DIR, "arhiv.html"), "w", encoding="utf-8") as f:
+        f.write(render({**light, "page": "archive", "stories": []}, template))
 
     days = front["archive_days"]
 
@@ -289,10 +307,6 @@ def main():
             "untracked_outlets": UNTRACKED,
             "stories": slim(saved["stories"]),
             "archive_days": days,
-            "outlet_info": front["outlet_info"],
-            "headline_changes": front["headline_changes"],
-            "outlet_totals": front["outlet_totals"],
-            "story_totals": front["story_totals"],
             "base": "../",
         }
         with open(os.path.join(OUT_DIR, "archive", f"{day['date']}.html"), "w", encoding="utf-8") as f:

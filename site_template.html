@@ -190,6 +190,7 @@ a { color: inherit; }
 
 /* ---------- outlets, method, footer ---------- */
 .section { padding-block: 56px; border-top: 1px solid var(--ink); }
+body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32px; }   /* „Медии“ / „Архив“ pages */
 .section h2 { margin: 0 0 28px; font: 200 clamp(40px, 6vw, 72px)/.95 var(--display); }
 /* a short explanation after a section title, in smaller type on the same line */
 .h2-note { display: inline; margin-left: .6em;
@@ -469,8 +470,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
  <div class="wrap stage-inner">
   <header class="masthead">
     <nav class="nav-group" aria-label="Раздели">
-      <a class="nav-link" href="#outlets" id="nav-outlets">Медии</a>
-      <a class="nav-link" href="#archive" id="nav-archive">Архив</a>
+      <a class="nav-link" href="medii.html" id="nav-outlets">Медии</a>
+      <a class="nav-link" href="arhiv.html" id="nav-archive">Архив</a>
     </nav>
     <a class="logo" href="#top" aria-label="News Reference, начало">
       <b>News<br>Reference</b>
@@ -563,7 +564,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       <div class="days" id="day-list"></div>
     </section>
 
-    <section class="section" id="outlets">
+    <section class="section" id="outlets" hidden>
       <h2>Медии<span class="h2-note">произход, собственост, финансиране, пристрастия и натиск от и към медиите</span></h2>
       <div class="outlets" id="outlet-list"></div>
       <p class="subhead" id="untracked-head">Още не следим</p>
@@ -774,9 +775,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     });
     document.getElementById("support").hidden = false;
     document.getElementById("cta-sub").setAttribute("aria-current", "page");
-    document.getElementById("nav-outlets").href = `${base}index.html#outlets`;
     document.querySelector(".logo").href = `${base}index.html`;
-    document.getElementById("nav-archive").href = `${base}index.html#archive`;
   }
 
   // the search page: same header and design, a search box in the intro, results below
@@ -794,8 +793,39 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.getElementById("search").hidden = false;
     document.getElementById("nav-search").setAttribute("aria-current", "page");
     document.querySelector(".logo").href = `${base}index.html`;
-    document.getElementById("nav-archive").href = `${base}index.html#archive`;
-    document.getElementById("nav-outlets").href = `${base}index.html#outlets`;
+  }
+
+  // „Медии“ and „Архив“ are pages of their own since 9 Nov 2026 (medii.html, arhiv.html):
+  // same header and design, their own intro, no story list
+  document.getElementById("nav-outlets").href = `${base}medii.html`;
+  document.getElementById("nav-archive").href = `${base}arhiv.html`;
+  if (!data.page && !archiveDate && (location.hash === "#outlets" || location.hash === "#archive")) {
+    location.replace(location.hash === "#outlets" ? "medii.html" : "arhiv.html");   // old links still work
+  }
+  const isMedia = data.page === "media", isArchive = data.page === "archive";
+  if (isMedia || isArchive) {
+    document.body.classList.add("compact", "page-own");
+    document.querySelector(".logo").href = `${base}index.html`;
+    ["stories", "view-note", "list", "more-wrap", "stats"].forEach(id => {
+      document.getElementById(id).hidden = true;
+    });
+  }
+  if (isMedia) {
+    document.title = "Медии · News Reference";
+    document.getElementById("intro-title").textContent = "Медии.";
+    document.getElementById("intro-text").textContent =
+      "Кой стои зад всяка медия: собственост, пари, спорове и натиск. И колко често сменя заглавията си или трие статии.";
+    document.getElementById("outlets").hidden = false;
+    document.querySelector("#outlets > h2").hidden = true;          // the intro already says „Медии.“
+    document.getElementById("nav-outlets").setAttribute("aria-current", "page");
+  }
+  if (isArchive) {
+    document.title = "Архив · News Reference";
+    document.getElementById("intro-title").textContent = "Архив.";
+    document.getElementById("intro-text").textContent =
+      "Всички истории остават тук, подредени по деня, в който са започнали.";
+    document.getElementById("nav-archive").setAttribute("aria-current", "page");
+    document.querySelectorAll("#archive > h2, #archive > .view-note").forEach(n => { n.hidden = true; });   // said in the intro
   }
 
   const stats = document.getElementById("stats");
@@ -805,13 +835,12 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 
   // archive: the list of days
   const days = data.archive_days || [];
-  if (days.length && !isSupport && !isSearch) {
+  if (days.length && isArchive) {
     const fmtDayName = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, weekday: "short", day: "numeric", month: "short" });
     const list = document.getElementById("day-list");
     days.forEach(d => {
       const a = el("a", "day");
-      a.href = (archiveDate ? "" : "archive/") + `${d.date}.html`;
-      if (d.date === archiveDate) a.setAttribute("aria-current", "page");
+      a.href = `${base}archive/${d.date}.html`;
       a.append(el("span", null, fmtDayName.format(dayDate(d.date))), el("span", null, `${d.count} ист.`));
       list.append(a);
     });
@@ -947,7 +976,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const more = document.getElementById("more");
   const periods = document.getElementById("periods");
   if (archiveDate) periods.hidden = true;            // an archive page is one day: no periods
-  const setNote = t => { const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
+  const noList = isSupport || isSearch || isMedia || isArchive;   // pages without the story list
+  const setNote = t => { if (noList) return; const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
   // pin each title's note right after the end of the title's first line
   const narrow = window.matchMedia("(max-width: 700px)");
@@ -1240,7 +1270,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const mine = [];
     data.stories.forEach(s => s.articles.forEach(a => { if (a.outlet === o.name) mine.push(a); }));
     const seen = new Set();
-    const recent = mine.filter(a => !seen.has(a.link) && seen.add(a.link)).sort((a, b) => b.published.localeCompare(a.published));
+    const recent = (data.outlet_recent || {})[o.name]    // on medii.html: given by build_site.py
+      || mine.filter(a => !seen.has(a.link) && seen.add(a.link)).sort((a, b) => b.published.localeCompare(a.published));
     // stories of the whole archive (not just this page): every story this outlet took part in
     const n = ((data.story_totals || {}).by_outlet || {})[o.name] || 0, total = (data.story_totals || {}).stories || 0;
     const stats = document.getElementById("od-stats");
