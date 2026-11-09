@@ -31,7 +31,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30         # normal runs take 6-9 minutes; 30 leaves room after a long pause
     # no "environment" here: the Pages publishing slot is only taken by the short "publish" job below,
     # so a quick outlet-info rebuild (rebuild.yml) never has to wait for this long job (9 Nov 2026)
     steps:

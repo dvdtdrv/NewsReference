@@ -48,6 +48,17 @@ BROWSER_HEADERS = {
 }
 TIMEOUT = 20
 PAGE_SECONDS = 45      # the most one article page may take in total (limits.py)
+# Time budget for one run (9 Nov 2026): GitHub stops a run after 30 minutes. After a long pause
+# (e.g. hours without updates) there are hundreds of new articles; reading all their pages for photos
+# would take too long, so after these many minutes we stop reading photo pages and skip the extras
+# (older photos, deleted-articles check). Articles are still collected; photos come in later runs.
+RUN_START = time.monotonic()
+PHOTO_MINUTES = 8      # new articles' photo pages: only during the first 8 minutes of a run
+EXTRAS_MINUTES = 11    # older photos and the deleted-articles check: only if we're not past 11 minutes
+
+
+def minutes_spent():
+    return (time.monotonic() - RUN_START) / 60
 KEEP_DAYS = 7               # how long articles stay in the archive
 DEFAULT_WAIT = 30 * 60      # if a site says "too many requests" without saying how long, wait 30 min
 
@@ -238,7 +249,7 @@ def add_page_images(outlet, articles, cache, known=()):
         if link in cache:
             apply_page_images([a], cache)
             continue
-        if reads >= MAX_PAGE_READS or failed >= 3 or not a.get("published"):
+        if reads >= MAX_PAGE_READS or failed >= 3 or not a.get("published") or minutes_spent() > PHOTO_MINUTES:
             continue
         when = datetime.fromisoformat(a["published"])
         if when < oldest:
@@ -641,18 +652,24 @@ def main():
         print(f"{word:<8} {outlet['name']:<14} +{added:<4} {note}")
         time.sleep(1)  # one outlet at a time, with a pause
 
-    done, left = backfill_page_images(photos)
+    extras = minutes_spent() <= EXTRAS_MINUTES     # time left for the extras in this run?
+    if extras:
+        done, left = backfill_page_images(photos)
+        print(f"\nPhotos: upgraded {done} older articles from their own pages; {left} still to do.")
+    else:
+        print(f"\nPhotos of older articles and the deleted-articles check skipped this run "
+              f"({minutes_spent():.0f} min spent already); they continue next run.")
     apply_page_images(archive, photos)
-    print(f"\nPhotos: upgraded {done} older articles from their own pages; {left} still to do.")
     saved_forever = save_monthly(archive)
     apply_page_images_to_months(photos)
 
     # are older articles still online? (a few checks per article over 30 days, see link_check.py)
-    checked, gone = link_check.run(
-        OUTLETS, MONTHS_DIR, NOW, allowed, crawl_delay,
-        lambda o: BROWSER_HEADERS if o.get("as_browser") else HEADERS,
-        local if ON_GITHUB else None)
-    print(f"Deleted articles: checked {checked} links; {gone} newly found deleted.")
+    if extras:
+        checked, gone = link_check.run(
+            OUTLETS, MONTHS_DIR, NOW, allowed, crawl_delay,
+            lambda o: BROWSER_HEADERS if o.get("as_browser") else HEADERS,
+            local if ON_GITHUB else None)
+        print(f"Deleted articles: checked {checked} links; {gone} newly found deleted.")
 
     archive = [a for a in archive if datetime.fromisoformat(a["published"]) >= oldest_allowed]
     archive.sort(key=lambda a: a["published"], reverse=True)
