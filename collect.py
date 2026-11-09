@@ -30,6 +30,7 @@ import requests
 from feeds import OUTLETS
 from versions import Index, collapse, merge
 import link_check
+from limits import within
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -46,6 +47,7 @@ BROWSER_HEADERS = {
     "Accept-Language": "bg-BG,bg;q=0.9,en;q=0.8",
 }
 TIMEOUT = 20
+PAGE_SECONDS = 45      # the most one article page may take in total (limits.py)
 KEEP_DAYS = 7               # how long articles stay in the archive
 DEFAULT_WAIT = 30 * 60      # if a site says "too many requests" without saying how long, wait 30 min
 
@@ -145,7 +147,7 @@ def allowed(url):
     if site not in _robots:
         rp = RobotFileParser()
         try:
-            r = requests.get(site + "/robots.txt", headers=HEADERS, timeout=TIMEOUT)
+            r = within(TIMEOUT + 10, requests.get, site + "/robots.txt", headers=HEADERS, timeout=TIMEOUT)
             rp.parse(r.text.splitlines() if r.status_code == 200 else [])
         except requests.RequestException:
             rp.parse([])
@@ -181,6 +183,11 @@ def good_image(url):
 
 
 def page_image(url, headers):
+    """Like _page_image, but never longer than PAGE_SECONDS in total (see limits.py)."""
+    return within(PAGE_SECONDS, _page_image, url, headers)
+
+
+def _page_image(url, headers):
     """The photo an article page announces for sharing (og:image), "" if it has none,
     or None if the page refused us or couldn't be reached (then we ask again another time)."""
     with requests.get(url, headers=headers, timeout=TIMEOUT, stream=True) as r:
@@ -463,8 +470,8 @@ def fetch_outlet(outlet, state, cache=None, known=()):
     if not allowed(url):
         return [], "blocked", "robots.txt disallows"
     try:
-        r = requests.get(url, headers=BROWSER_HEADERS if outlet.get("as_browser") else HEADERS,
-                         timeout=TIMEOUT)
+        r = within(90, requests.get, url, headers=BROWSER_HEADERS if outlet.get("as_browser") else HEADERS,
+                   timeout=TIMEOUT)
     except requests.RequestException as e:
         return [], "error", f"could not connect ({type(e).__name__})"
 
