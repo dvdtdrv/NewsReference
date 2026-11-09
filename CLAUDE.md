@@ -95,6 +95,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Front page: periods 12 ч | 24 ч (default) | 48 ч | 1 седмица | 1 месец (year hidden for now); 12/24 h rank by
   outlets that published inside the window. Back-to-top button (dark). Coverage squares removed (7 Nov, David
   found them ugly); each story shows „N медии · date", the articles, and „Не отразиха".
+- 9 Nov: „Медии" and „Архив" are own pages (site/medii.html, site/arhiv.html, page modes "media"/"archive" in
+  site_template.html). Only medii.html carries outlet_info, headline_changes, outlet_totals, story_totals and
+  outlet_recent (build_site.py MEDIA_ONLY); front page 3.8 -> 1.7 MB. Old index.html#outlets/#archive redirect.
 - „Медии" section: per outlet, all collected articles and all archived stories it took part in (whole archive,
   not 48 h). Outlets we can't read right now keep their numbers, with a grey name and „временно недостъпна"
   underneath. The outlet window shows totals, % of all stories, outlet info and headline-change examples.
