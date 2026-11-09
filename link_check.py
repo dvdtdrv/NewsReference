@@ -31,6 +31,8 @@ from urllib.parse import urlparse
 
 import requests
 
+from limits import within
+
 STATE_FILE = os.path.join("data", "deleted.json")
 LOCAL_TODO_FILE = os.path.join("data", "link_check_local.json")
 LOCAL_TODO_URL = "https://raw.githubusercontent.com/dvdtdrv/NewsReference/data/link_check_local.json"
@@ -39,6 +41,7 @@ PER_OUTLET = 40                      # at most this many checks per outlet per r
 SECONDS = 4 * 60                     # at most this long per run, all outlets together
 RECHECK_HOURS = 6                    # after a first "no such page", ask again this much later
 TIMEOUT = 15
+PROBE_SECONDS = 40                   # the most one check may take in total
 RULES = 2                            # bump when the rules for "gone" change: re-check what was marked gone
 
 
@@ -113,6 +116,14 @@ def headlines_of(a):
 
 
 def probe(link, headers, headlines=None):
+    """_probe with a hard limit of PROBE_SECONDS in total (see limits.py): a stuck page counts as "can't tell"."""
+    try:
+        return within(PROBE_SECONDS, _probe, link, headers, headlines)
+    except requests.RequestException:
+        return None
+
+
+def _probe(link, headers, headlines=None):
     """'ok', 'gone', or None if we couldn't tell (refused, timeout, server error).
     Rule 1 (6 Nov 2026): if the page shows the article's own headline, the article is there - whatever
     else the page says (Sega names a shorter address as its own, a Darik headline said "не съществува").

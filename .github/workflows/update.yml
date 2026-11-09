@@ -84,6 +84,8 @@ jobs:
           git checkout FETCH_HEAD -- site_template.html build_site.py versions.py build_search.mjs outlets_info.json web
 
       - name: Collect, group, build
+        env:
+          PYTHONUNBUFFERED: "1"     # show each outlet's line as it happens (so a stuck step shows where)
         run: |
           python collect.py
           python group_stories.py
