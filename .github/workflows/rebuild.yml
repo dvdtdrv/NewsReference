@@ -1,7 +1,8 @@
 # Quick rebuild: makes the website pages again from the data already saved, and publishes them.
 # It does NOT read the outlets or look for photos, so it takes about 1-2 minutes.
 #
-# Starts by itself when the site's design or texts change (site_template.html, build_site.py, web/),
+# Starts by itself when the site's design, texts or outlet info change (site_template.html, build_site.py,
+# outlets_info.json, web/),
 # or by hand: Actions tab -> "Rebuild the site only" -> Run workflow.
 # The news itself is still updated every 30 minutes by "Update News Reference".
 
@@ -26,14 +27,13 @@ permissions:
 concurrency:
   group: rebuild-site
   cancel-in-progress: true    # a newer change replaces an older rebuild that hasn't finished
+# Since 9 Nov 2026 it does not wait for "Update News Reference": both only take the Pages slot for the
+# short "publish" job at the end.
 
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Get the code
         uses: actions/checkout@v4
@@ -63,6 +63,14 @@ jobs:
         with:
           path: site
 
+  publish:
+    needs: rebuild
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - name: Publish the website
         id: deploy
         uses: actions/deploy-pages@v4
