@@ -3,7 +3,7 @@
 // show the last copy we saved. Icons and the manifest: kept from the first visit.
 // Photos and fonts come from other websites and are left alone; so is the search index.
 
-const CACHE = "news-reference-v2";
+const CACHE = "news-reference-v3";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", event => {
@@ -24,7 +24,9 @@ self.addEventListener("fetch", event => {
   if (req.method !== "GET" || url.origin !== self.location.origin) return;
   if (url.pathname.includes("/pagefind/")) return;   // search index: always from the internet, not saved
   event.respondWith(
-    fetch(req)
+    // pages are always asked from the server again (cheap: an unchanged page answers "not modified"),
+    // so a copy the browser kept for 10 minutes never shows an older design (9 Nov 2026)
+    fetch(req, req.mode === "navigate" || url.pathname.endsWith(".html") || url.pathname.endsWith("/") ? { cache: "no-cache" } : {})
       .then(res => {
         if (res.ok) {
           const copy = res.clone();
