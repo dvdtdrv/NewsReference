@@ -59,6 +59,12 @@ a { color: inherit; }
   }
 }
 .stage .intro { flex: 1; align-content: center; }
+/* „Медии“ / „Архив“: a shorter first screen (10 Nov 2026) - a title and one sentence don't need the whole
+   screen, and the list should start without a long scroll */
+body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 42svh, 440px); }
+@supports (animation-timeline: scroll()) {
+  body.page-own .stage-inner { animation-range: 0 42vh; }
+}
 .sheet {
   position: relative; z-index: 1; min-height: 100vh;
   background: var(--paper); border-radius: 28px 28px 0 0;
@@ -66,7 +72,7 @@ a { color: inherit; }
 }
 /* small or short screens: no sliding, the page simply scrolls */
 @media (max-width: 860px), (max-height: 620px) {
-  .stage { position: relative; height: auto; overflow: visible; }
+  .stage, body.page-own .stage { position: relative; height: auto; overflow: visible; }
   .sheet { border-radius: 20px 20px 0 0; }
 }
 
