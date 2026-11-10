@@ -836,7 +836,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.title = "Медии · News Reference";
     document.getElementById("intro-title").textContent = "Медии.";
     document.getElementById("intro-text").textContent =
-      "Кой стои зад всяка медия: собственост, пари, спорове и натиск. И колко често сменя заглавията си или трие статии.";
+      "Какво стои зад всяка медия: собственост, финансиране и приходи, спорове и натиск. И колко често сменя заглавията си или трие статии.";
     document.getElementById("outlets").hidden = false;
     document.querySelector("#outlets > h2").hidden = true;          // the intro already says „Медии.“
     document.getElementById("nav-outlets").setAttribute("aria-current", "page");
@@ -1051,14 +1051,18 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   async function renderMore() {
     if (!nextDays) return paintMore();
     if (loading) return;
-    const my = token, cut = cutoff(period), seen = new Set(items.map(s => s.id));
+    // „Най-нови“ has no period (10 Nov 2026): it goes back through the whole archive, taking from each
+    // day only the stories older than the 48 hours this page already holds
+    const allNew = current === "new" && !archiveDate, old48 = cutoff("48h");
+    const my = token, cut = allNew ? new Date(0) : cutoff(period), seen = new Set(items.map(s => s.id));
     loading = true; more.disabled = true;
     try {
       while (items.length < shown + PAGE && nextDays.length) {
         const day = await loadDay(nextDays[0]);
         if (my !== token) return;
         nextDays.shift();
-        items.push(...day.filter(s => !seen.has(s.id) && seen.add(s.id) && new Date(s.last_updated) >= cut).sort(byNew));
+        items.push(...day.filter(s => !seen.has(s.id) && seen.add(s.id) && new Date(s.last_updated) >= cut
+          && (!allNew || new Date(s.last_updated) < old48)).sort(byNew));
       }
     } catch (e) {
       if (my === token) { nextDays = []; failed = true; if (!items.length) setNote(NOTES.offline); }
@@ -1076,6 +1080,14 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     list.replaceChildren();
     document.querySelectorAll(".tab[data-view]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.view === v)));
     document.querySelectorAll(".tab[data-period]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.period === p)));
+    // the period row (12 часа ... 1 месец) belongs to „Най-отразявани“ only
+    periods.hidden = !!archiveDate || v === "new";
+    if (v === "new" && !archiveDate) {               // the newest: this page's stories, then older days on „Още“
+      items = data.stories.slice().sort(byNew);
+      nextDays = days.map(d => d.date);
+      setNote(items.length ? "" : NOTES.empty);
+      return paintMore();
+    }
     if (PERIOD_HOURS[p]) {                           // from this page
       const cut = cutoff(p);
       if (v === "top" && p !== "48h") {
