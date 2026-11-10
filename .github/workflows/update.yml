@@ -60,9 +60,24 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
+          cache-dependency-path: requirements*.txt
 
       - name: Install libraries
         run: pip install -r requirements.txt
+
+      # 10 Nov 2026: the small AI model that lets group_stories.py join stories about one event
+      # (matching.py). If installing or downloading fails, the run goes on and simply joins nothing.
+      - name: Keep the AI model between runs
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-paraphrase-multilingual-MiniLM-L12-v2
+
+      - name: Install the AI library (for joining stories)
+        continue-on-error: true
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements-ai.txt
 
       - name: Get the articles David's PC read
         env:

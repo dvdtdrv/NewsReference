@@ -8,6 +8,7 @@ How the grouping works, in plain words:
   2. Two articles are compared by how many of those sequences they share (a score from 0 to 1).
   3. Articles are joined into a group when, on average, they score above SIMILARITY with the group.
   4. A group becomes a story when at least 2 different outlets are in it.
+  5. Stories that are one event told in different words are joined (see matching.py).
 
 Reads data/articles.json and data/outlet_status.json (written by collect.py).
 Writes data/stories.json (the last 48 hours, for the front page) and saves each story into
@@ -266,6 +267,15 @@ def main():
                           **({"versions": a["versions"]} if a.get("versions") else {})}
                          for a in items],
         })
+
+    # 5. join stories that are one event told in different words (matching.py, 10 Nov 2026).
+    #    If the AI model is not available, the stories stay as they are.
+    try:
+        from matching import join_stories
+        stories, note = join_stories(stories, DATA, NOW)
+    except Exception as e:
+        note = f"skipped ({type(e).__name__})"
+    print(f"Joining stories about one event: {note}")
 
     stories.sort(key=lambda s: (s["outlet_count"], s["last_updated"]), reverse=True)
     result = {
