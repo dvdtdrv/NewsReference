@@ -117,7 +117,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   others' (57% vs 64%, Bloomberg TV and Marica lower because they cover business/Varna).
   Fixes: PC never sleeps when plugged in; a catch-up reader (older feed pages / sitemaps for the missed hours);
   long-term a small EU server (Hetzner ~4 EUR/mo; test the 7 outlets from it first).
-- **Grouping misses paraphrases** (e.g. two Wall Street crash headlines in different words). Fix: embeddings model.
+- **Grouping misses paraphrases**: partly fixed 10 Nov by joining stories (matching.py); single articles in other words still stay out.
 - **Few business outlets**, so business pieces rarely find a partner (only Bloomberg TV, Capital, Banker, partly
   Dnevnik).
 - **Re-clustering can put one article into two archived stories** (5 of 245 in a test).
@@ -142,6 +142,15 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 ## Files added after the first version (keep this list up to date)
 - `versions.py` (5 Nov): one article with renamed headlines/links; change kinds for the ranking.
 - `link_check.py` (5 Nov): deleted-articles check (GitHub + PC).
+- `matching.py` + `places.json` + `requirements-ai.txt` (10 Nov): after the normal grouping, stories that are one
+  event told in different words are joined (the Trakia crash of 10 Nov showed as ~25 stories). Rule: meaning >= 0.70
+  (AI model paraphrase-multilingual-MiniLM-L12-v2, run on GitHub only; update.yml installs it and caches it) AND
+  wording >= 0.30 AND started within 12 h (whole joined story within 24 h) AND a shared name/place AND no different
+  Bulgarian places/motorways (places.json = EKATTE settlements). Weather forecasts join only for the same day.
+  Without the model (David's PC, failed install) nothing is joined. Fingerprints: data/embeddings.json; every join:
+  data/merge_log.json (14 days) - review it to tune. Tested 5-10 Nov: ~2-3 wrong joins per 50-90 (same place, e.g.
+  two plane stories at Ben Gurion); rejected designs: "story memory" (snowballed), rare-names-only (blocked big
+  events), cross-encoder reranker (missed most). Next: let Haiku confirm only the proposed joins.
 - `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
   (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so
