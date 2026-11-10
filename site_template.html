@@ -165,21 +165,18 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
   margin: 0; max-width: 26ch; font: 300 clamp(30px, 3.8vw, 50px)/1.02 var(--display);
   letter-spacing: -.01em; text-wrap: balance;
 }
-/* title + a hand-drawn arrow to a small note saying how the title was made */
-.title-row { position: relative; display: flex; align-items: flex-start; gap: 4px; margin-bottom: 24px; }
+/* title + a small (i) that opens a line on how the title was made */
+.title-row { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 24px; }
 .title-row h3 { min-width: 0; }
-/* once measured, the note is pinned right after the end of the title's first line */
-.title-row.placed .title-note { position: absolute; margin-top: 10px; }
-.title-note {
-  display: flex; align-items: flex-end; gap: 3px; flex-shrink: 0; white-space: nowrap;
-  margin-top: .35em; color: var(--muted); cursor: help;
+.title-info {
+  display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; padding: 0;
+  margin-left: 6px; position: relative; top: -.35em; vertical-align: middle; cursor: pointer;
+  border: 1px solid var(--muted); border-radius: 50%; background: none; color: var(--muted);
+  font: 500 12px/1 var(--body); letter-spacing: 0;
 }
-.title-arrow { width: 40px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.title-note-text { font: 400 10.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; padding-bottom: 1px; }
-@media (max-width: 700px) {
-  .title-row { flex-direction: column; gap: 6px; }
-  .title-note { margin-top: 0; }
-}
+.title-info:hover, .title-info:focus-visible, .title-info[aria-expanded="true"] { color: var(--ink); border-color: var(--ink); }
+.title-tip { margin: 0; max-width: 60ch; font-size: 14px; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 12px; }
+.title-note-text { font: 400 10.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 /* a story shows one full row of articles; "all N articles" opens the rest */
 .articles { --cols: 5; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 28px 20px; }
 .articles.collapsed > .card:nth-child(n + 6) { display: none; }
@@ -920,11 +917,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     paint();
   })();
 
-  // a hand-drawn loop arrow (our own drawing): sweeps right, loops once, points right
-  const ARROW_SVG = '<svg class="title-arrow" viewBox="0 0 120 56" aria-hidden="true" focusable="false">' +
-    '<path d="M4 40 C 22 14, 56 6, 68 24 C 76 37, 64 49, 56 41 C 48 33, 60 20, 78 23 C 94 26, 104 34, 110 42" />' +
-    '<path d="M95 44 L111 43 L107 28" /></svg>';
-
   // one story
   function storyNode(s) {
     const art = el("article", "story");
@@ -934,16 +926,24 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     meta.append(el("time", null, dateSpan(s.first_seen, s.last_updated)));
     // the story title, with a hand-drawn arrow pointing to a note on where the title comes from
     const titleRow = el("div", "title-row");
-    const note = el("span", "title-note");
-    note.innerHTML = ARROW_SVG;   // a constant drawing, no outside text in it
+    // how the title was made (10 Nov 2026): a small (i) after the title; a click or tap opens the explanation
+    // under it. Before, a hand-drawn arrow pointed to a label beside the title - it looked playful next to
+    // serious news. A title written by AI keeps a label that is always visible.
     const ai = s.headline_source === "ai";
-    note.append(el("span", "title-note-text", ai ? "Обобщено от AI" : "Автоматично подбрано заглавие"));
-    note.title = ai
-      ? "Това заглавие е написано от изкуствен интелект въз основа на заглавията на медиите. Оригиналните заглавия са под него."
-      : "Това заглавие е избрано автоматично измежду заглавията на медиите. Оригиналните заглавия са под него.";
-    // the note sits right next to the end of the title's first line
     const h3 = el("h3", null, s.headline);
-    titleRow.append(h3, note);
+    const info = el("button", "title-info", "i");
+    info.type = "button";
+    info.setAttribute("aria-label", "Как е избрано заглавието");
+    info.setAttribute("aria-expanded", "false");
+    const tip = el("p", "title-tip", ai
+      ? "Това заглавие е написано от изкуствен интелект въз основа на заглавията на медиите. Оригиналните заглавия са под него."
+      : "Това заглавие е избрано автоматично измежду заглавията на медиите. Оригиналните заглавия са под него.");
+    tip.hidden = true;
+    info.addEventListener("click", () => { tip.hidden = !tip.hidden; info.setAttribute("aria-expanded", String(!tip.hidden)); });
+    h3.append(" ", info);
+    titleRow.append(h3);
+    if (ai) titleRow.append(el("span", "title-note-text", "Обобщено от AI"));
+    titleRow.append(tip);
     art.append(meta, titleRow);
 
     const grid = el("div", "articles");
@@ -1039,36 +1039,10 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const noList = isSupport || isSearch || isMedia || isArchive;   // pages without the story list
   const setNote = t => { if (noList) return; const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
-  // pin each title's note right after the end of the title's first line
-  const narrow = window.matchMedia("(max-width: 700px)");
-  function placeNotes() {
-    document.querySelectorAll(".title-row").forEach(row => {
-      const h3 = row.querySelector("h3"), note = row.querySelector(".title-note");
-      row.classList.remove("placed");
-      note.style.left = note.style.top = "";
-      if (narrow.matches) return;                       // on phones the note sits under the title
-      const range = document.createRange();
-      range.selectNodeContents(h3);
-      const first = range.getClientRects()[0];
-      if (!first) return;
-      const box = row.getBoundingClientRect();
-      const left = first.right - box.left + 12;
-      if (left + note.offsetWidth > box.width) return;  // no room: keep it beside the title block
-      row.classList.add("placed");
-      note.style.left = `${left}px`;
-      note.style.top = `${first.top - box.top}px`;
-    });
-  }
-  let placeQueued = false;
-  const queuePlace = () => { if (!placeQueued) { placeQueued = true; requestAnimationFrame(() => { placeQueued = false; placeNotes(); }); } };
-  window.addEventListener("resize", queuePlace);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queuePlace);
-
   function paintMore() {
     const frag = document.createDocumentFragment();
     items.slice(shown, shown + PAGE).forEach(s => frag.append(storyNode(s)));
     list.append(frag);
-    queuePlace();
     shown = Math.min(shown + PAGE, items.length);
     more.hidden = shown >= items.length && !(nextDays && nextDays.length);
   }
