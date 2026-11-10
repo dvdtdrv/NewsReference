@@ -153,6 +153,14 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
   font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
 }
 .story-meta .count { color: var(--ink); }
+/* the small menu that orders a story's articles: plain text with a thin arrow, pushed to the right */
+.story-meta .order {
+  margin-left: auto; appearance: none; -webkit-appearance: none; border: 0; border-radius: 0; cursor: pointer;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2374717A' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 2px center / 9px;
+  padding: 4px 18px 4px 0; color: var(--muted); font: inherit; letter-spacing: inherit; text-transform: inherit;
+}
+.story-meta .order:hover, .story-meta .order:focus-visible { color: var(--ink); }
+.story-meta .order option { text-transform: none; letter-spacing: 0; color: #15162B; background: #fff; }
 .story h3 {
   margin: 0; max-width: 26ch; font: 300 clamp(30px, 3.8vw, 50px)/1.02 var(--display);
   letter-spacing: -.01em; text-wrap: balance;
@@ -939,6 +947,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     art.append(meta, titleRow);
 
     const grid = el("div", "articles");
+    const cards = [];                                // in time order, first published first
     s.articles.forEach(a => {
       const link = safeUrl(a.link);
       const card = el(link ? "a" : "div", "card");
@@ -963,8 +972,18 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         card.append(el("div", "was", `Заглавието е сменяно ${n} ${n === 1 ? "път" : "пъти"}`));
         card.title = "Предишни заглавия:\n" + a.was.map(t => "– " + t).join("\n");
       }
-      grid.append(card);
+      grid.append(card); cards.push(card);
     });
+    // order of the articles inside a story (10 Nov 2026): from the first published (default) or from the latest
+    if (cards.length > 1) {
+      const pick = el("select", "order");
+      pick.setAttribute("aria-label", "Подредба на статиите");
+      pick.append(new Option("От първата статия", "first"), new Option("От последната статия", "last"));
+      pick.addEventListener("change", () => {
+        grid.append(...(pick.value === "last" ? cards.slice().reverse() : cards));
+      });
+      meta.append(pick);
+    }
     art.append(grid);
     // one row shows by default; the CSS decides how many fit (5, 4 or 2 per row)
     if (s.articles.length > 4) {
