@@ -8,6 +8,7 @@ Takes site_template.html and writes:
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
   site/feed/YYYY-MM-DD-HH.json  „Всички новини“: every article of the last 7 days, one file per hour
   site/outlets.json             what the outlet window shows (info, totals), for pages other than medii.html
+  site/version.json             the time of the last update (open pages check it and offer „Обнови“)
   site/periods/top-week.json    the most covered stories of the last week / month / year (also -month, -year),
                                 which the front page loads when someone picks that period
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
@@ -310,6 +311,10 @@ def main():
             json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
     front["feed_files"] = sorted(feed, reverse=True)
     front["feed_outlets"] = sorted({r[1] for rows in feed.values() for r in rows}, key=str.lower)
+
+    # the time of this update, in a tiny file: open pages compare it with their own and offer to refresh
+    with open(os.path.join(OUT_DIR, "version.json"), "w", encoding="utf-8") as f:
+        json.dump({"generated_at": front["generated_at"]}, f)
 
     # everything except what only „Медии“ shows (the outlet info and the ranking are the biggest part)
     light = {k: v for k, v in front.items() if k not in MEDIA_ONLY}
