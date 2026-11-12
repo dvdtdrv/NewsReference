@@ -541,6 +541,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   .od-stats .stat { font-size: 12px; }
   .od-stats .stat strong { font-size: 28px; }
   .od-foot small { display: none; }
+  .od-foot { display: none; }                   /* phones: always full screen, so no size button; × closes */
 }
 @media (prefers-reduced-motion: reduce) { dialog.od[open] { animation: none; } }
 
@@ -1666,7 +1667,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const meta = document.getElementById("od-meta");
     meta.replaceChildren(el("span", null, TYPE_BG[o.type] || o.type));
     if (i.domain) {
-      const a = el("a", null, `${i.domain} ↗`);
+      const a = el("a", null, `${i.domain} ↗\uFE0E`);
       a.href = `https://${i.domain}`; a.target = "_blank"; a.rel = "noopener noreferrer";
       meta.append(a);
     }
@@ -1746,7 +1747,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       a.append(el("time", null, new URL(x.url).hostname.replace(/^www\./, "")), span);
       li.append(a); sl.append(li);
     });
-    setSize(false);
+    setSize(matchMedia("(max-width: 700px)").matches);   // on a phone the small window is useless: open it full
     od.querySelector(".od-scroll").scrollTop = 0;
     if (typeof od.showModal === "function") od.showModal(); else od.setAttribute("open", "");
     history.pushState({ od: 1 }, "");               // so the phone's Back closes the window instead of leaving the page
@@ -1766,7 +1767,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   }
   function srcLink(x) {
     const [label, tag] = srcParts(x);
-    const a = el("a", null, `${label} ↗`); a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    const a = el("a", null, `${label} ↗\uFE0E`); a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
     if (tag) a.append(tag);
     return a;
   }
