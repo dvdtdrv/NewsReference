@@ -17,6 +17,7 @@ on:
       - build_site.py
       - build_search.mjs
       - outlets_info.json
+      - no_photos.json
       - web/**
 
 permissions:

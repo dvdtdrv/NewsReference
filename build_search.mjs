@@ -24,7 +24,9 @@ const jsonFiles = dir => fs.existsSync(dir) ? fs.readdirSync(dir).filter(n => n.
 
 // each article's own photo, if collect.py found it on the article page
 const photos = fs.existsSync(path.join(DATA, "page_images.json")) ? readJson(path.join(DATA, "page_images.json")) : {};
-const photoOf = a => photos[a.link] || a.image || "";
+// outlets that asked us not to show their photos (no_photos.json, also read by build_site.py)
+const noPhotos = new Set(fs.existsSync("no_photos.json") ? readJson("no_photos.json") : []);
+const photoOf = a => noPhotos.has(a.outlet) ? "" : (photos[a.link] || a.image || "");
 
 // 1. stories, and which story each article belongs to
 const storyOf = new Map();   // article link -> { href, title }

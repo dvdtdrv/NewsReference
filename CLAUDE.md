@@ -177,6 +177,17 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   build_site.py, the time of the last update) is newer than the open page. Checked every 5 min and when the app
   comes back to the front. Not on archive day pages.
 
+- Legal page and footer (12 Nov): site/pravila.html (page mode "legal" in site_template.html; the text is in the
+  template, section #legal): За нас и контакти (Давид Тодоров, newsreference.contact@gmail.com), Условия, Поверителност,
+  Бисквитки, Авторски права и премахване, Корекции и право на отговор. Promises made there: removal requests answered
+  in 72 h (photos or the whole outlet switched off without arguing), corrections in 7 days, replies published next to
+  the claim, emails kept at most 3 years. Dark footer on every page links to it. Update „Последна промяна" when the
+  text changes. No cookie banner: the site sets no cookies and loads nothing from third parties except outlet photos.
+- Fonts are our own files (12 Nov): web/oswald-*.woff2, web/golos-text-*.woff2 (from @fontsource, OFL), @font-face in
+  the template with {{BASE}}. Never load fonts or scripts from Google or other third parties (GDPR: LG München 2022).
+- `no_photos.json` (12 Nov): list of outlet names (as in feeds.py) whose photos must not be shown; read by
+  build_site.py and build_search.mjs; rebuild.yml also runs when it changes. Empty now.
+
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB
   down after an early fake "</head>"; Euronews pages refuse GitHub -> photos via the PC (`photos_on_pc`); Marica
