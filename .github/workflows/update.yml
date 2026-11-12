@@ -152,7 +152,9 @@ jobs:
   publish:
     needs: update
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # 15, not 5 (12 Nov 2026): GitHub Pages sometimes needs 6-10 minutes, and a publish cut off at 5 threw
+    # the whole update away until the next run
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}

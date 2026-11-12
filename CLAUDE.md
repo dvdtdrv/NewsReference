@@ -151,6 +151,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   data/merge_log.json (14 days) - review it to tune. Tested 5-10 Nov: ~2-3 wrong joins per 50-90 (same place, e.g.
   two plane stories at Ben Gurion); rejected designs: "story memory" (snowballed), rare-names-only (blocked big
   events), cross-encoder reranker (missed most). Next: let Haiku confirm only the proposed joins.
+  12 Nov: a joined story's title = the headline closest in meaning to all its articles (best_headline), not its
+  largest part's title. Publish jobs in update.yml and rebuild.yml: timeout 15 min, not 5 (slow Pages publishes were cut off).
 - `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
   (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so

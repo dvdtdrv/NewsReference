@@ -213,6 +213,24 @@ def find_joins(stories, vec):
     return [g for g in groups.values() if len(g) > 1], log
 
 
+def best_headline(articles, vec):
+    """The title of a joined story (12 Nov 2026): the headline closest in meaning to ALL its articles,
+    preferring calm ones - the same idea as in group_stories.py. Before, the joined story kept the title
+    of its largest part, so the Trakia crash was titled after the blood-donation appeal."""
+    centre = np.mean([vec[a["link"]] for a in articles], axis=0)
+    centre = centre / (np.linalg.norm(centre) or 1)
+
+    def score(a):
+        s = float(vec[a["link"]] @ centre)
+        if "!" in a["title"] or re.search(r"\b[А-ЯA-Z]{4,}\b", a["title"]):
+            s -= 0.05                                    # shouting headlines lose a little
+        return s
+    title = max(articles, key=score)["title"]
+    # the same cleaning as group_stories.clean_headline: drop tags like (ВИДЕО), tone down "!"
+    title = re.sub(r"\s*[\(\[][^)\]]*(видео|снимк|галерия|на живо|обновена|карта)[^)\]]*[\)\]]", "", title, flags=re.I)
+    return re.sub(r"\s+", " ", re.sub(r"!+", ".", title).strip(" ."))
+
+
 def join_stories(stories, data_dir, now=None):
     """The stories with those about one event joined. On any problem: the stories unchanged."""
     now = now or datetime.now(timezone.utc)
@@ -236,7 +254,8 @@ def join_stories(stories, data_dir, now=None):
         outlets = list(dict.fromkeys(a["outlet"] for a in articles))
         # "didn't cover" is judged at the start of the story, as for every story
         not_covered = [o for o in first["not_covered"] if o not in outlets]
-        joined.append({**main, "id": first["id"], "articles": articles, "outlets": outlets,
+        joined.append({**main, "headline": best_headline(articles, vec), "id": first["id"],
+                       "articles": articles, "outlets": outlets,
                        "outlet_count": len(outlets), "not_covered": not_covered,
                        "first_seen": articles[0]["published"], "last_updated": articles[-1]["published"]})
         gone.update(g)
