@@ -6,6 +6,7 @@ Takes site_template.html and writes:
   site/abonament.html           the subscription page
   site/tarsene.html             the search page (the index itself is made by build_search.mjs)
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
+  site/feed/YYYY-MM-DD-HH.json  „Всички новини“: every article of the last 7 days, one file per hour
   site/periods/top-week.json    the most covered stories of the last week / month / year (also -month, -year),
                                 which the front page loads when someone picks that period
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
@@ -20,7 +21,7 @@ import copy
 import json
 import os
 import shutil
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from feeds import OUTLETS, UNTRACKED
 from versions import changes_of, collapse
@@ -239,6 +240,47 @@ def front_page_data():
     return data
 
 
+FEED_HOURS = 1      # „Всички новини“: one file per hour, so a phone loads little at a time (~30 KB zipped)
+
+
+def feed_files(front):
+    """„Всички новини“ (12 Nov 2026): every article of the last 7 days, newest first, without grouping.
+    Returns {file name: rows}; a row is [published, outlet, headline, link, story id, outlets in the story,
+    archive day of the story ("" = the story is on the front page)]. The headline and the link only."""
+    path = os.path.join("data", "articles.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        articles = json.load(f)
+    # which story each article is in: the archived days first, then the front page's stories on top
+    where = {}
+    for day in front["archive_days"][:10]:
+        with open(os.path.join(DAYS_DIR, f"{day['date']}.json"), encoding="utf-8") as f:
+            for s in json.load(f)["stories"]:
+                for a in s["articles"]:
+                    where[a["link"]] = (s["id"], len(s["outlets"]), day["date"])
+    for s in front["stories"]:
+        for a in s["articles"]:
+            where[a["link"]] = (s["id"], len(s["outlets"]), "")
+    now = front["generated_at"]
+    files = {}
+    for a in articles:
+        if not (a.get("title") and a.get("link") and a.get("published")):
+            continue
+        # a few outlets stamp articles with a time in the future: use the time we first saw the article
+        t = a["published"] if a["published"] <= now else (a.get("collected") or now)
+        try:
+            d = datetime.fromisoformat(t).astimezone(timezone.utc)
+        except ValueError:
+            continue
+        key = d.strftime("%Y-%m-%d-") + f"{d.hour // FEED_HOURS * FEED_HOURS:02d}"
+        sid, n, day = where.get(a["link"], (0, 0, ""))
+        files.setdefault(key, []).append([d.strftime("%Y-%m-%dT%H:%M:%SZ"), a["outlet"], a["title"], a["link"], sid, n, day])
+    for rows in files.values():
+        rows.sort(key=lambda r: r[0], reverse=True)
+    return files
+
+
 def build(fragment_only=False):
     """The front page as one HTML string (used for the preview)."""
     with open(TEMPLATE, encoding="utf-8") as f:
@@ -255,6 +297,17 @@ def main():
         shutil.copyfile(os.path.join(WEB_DIR, name), os.path.join(OUT_DIR, name))
 
     front = front_page_data()
+
+    # „Всички новини“: the articles go into small files in site/feed/, the front page only lists the files
+    feed = feed_files(front)
+    shutil.rmtree(os.path.join(OUT_DIR, "feed"), ignore_errors=True)
+    os.makedirs(os.path.join(OUT_DIR, "feed"), exist_ok=True)
+    for key, rows in feed.items():
+        with open(os.path.join(OUT_DIR, "feed", f"{key}.json"), "w", encoding="utf-8") as f:
+            json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
+    front["feed_files"] = sorted(feed, reverse=True)
+    front["feed_outlets"] = sorted({r[1] for rows in feed.values() for r in rows}, key=str.lower)
+
     # everything except what only „Медии“ shows (the outlet info and the ranking are the biggest part)
     light = {k: v for k, v in front.items() if k not in MEDIA_ONLY}
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
