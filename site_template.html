@@ -226,6 +226,19 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
 .feed-row .st, .feed-row .solo { font: 400 11.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
 .feed-row .st { position: relative; z-index: 1; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
 .feed-row .solo { color: var(--muted); }
+/* refreshing (12 Nov 2026): a small button by the update time, and a notice when the site has newer news */
+.list-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+.refresh { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; padding: 4px 0; cursor: pointer;
+  font: 300 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.refresh svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.refresh:hover, .refresh:focus-visible { color: var(--ink); }
+.fresh { position: fixed; z-index: 30; left: 50%; top: max(14px, env(safe-area-inset-top)); transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; cursor: pointer;
+  background: var(--ink); color: var(--paper); border: 0; border-radius: 999px; padding: 11px 18px;
+  font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; box-shadow: 0 6px 22px rgba(21, 22, 43, .25); }
+.fresh[hidden] { display: none; }
+@media (max-width: 700px) { .fresh { top: auto; bottom: max(24px, env(safe-area-inset-bottom)); } }   /* on phones: at the bottom, clear of the tabs */
+.fresh span { border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .olink { cursor: pointer; position: relative; z-index: 1; }
 .olink:hover, .olink:focus-visible { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .feed-back { display: block; margin: 18px 0 4px; padding: 6px 0; background: none; border: 0; border-bottom: 1px solid var(--ink);
@@ -564,7 +577,10 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 <main class="sheet">
  <div class="wrap">
     <div class="list-head" id="stories">
-      <h2 id="list-title">Истории</h2>
+      <div class="list-title">
+        <h2 id="list-title">Истории</h2>
+        <button class="refresh" id="refresh" type="button" title="Обнови страницата" hidden><span id="refresh-time"></span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3"/></svg></button>
+      </div>
       <div class="sorters">
         <div class="tabs" role="group" aria-label="Подреждане">
           <button class="tab" type="button" data-view="top" aria-pressed="true">Най-отразявани</button>
@@ -697,6 +713,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
 </button>
 
+<button class="fresh" id="fresh" type="button" hidden>Има по-нови новини <span>Обнови</span></button>
 <dialog class="od" id="od" aria-labelledby="od-name">
   <div class="od-scroll">
     <div class="od-body">
@@ -1584,6 +1601,24 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   document.getElementById("od-close").addEventListener("click", closeOd);
   sizeBtn.addEventListener("click", () => setSize(!od.classList.contains("full")));
   od.addEventListener("click", e => { if (e.target === od) closeOd(); });   // a click on the dimmed page closes it
+  // ---------- refreshing without closing the app (12 Nov 2026) ----------
+  // version.json holds the time of the site's last update; when it is newer than this page, offer to reload
+  (function refreshing() {
+    if (archiveDate) return;                         // an archive day doesn't change
+    const btn = document.getElementById("refresh"), note = document.getElementById("fresh");
+    document.getElementById("refresh-time").textContent = `обновено в ${fmtTime.format(generated)}`;
+    btn.hidden = false;
+    const reload = () => location.reload();
+    btn.addEventListener("click", reload); note.addEventListener("click", reload);
+    const check = () => {
+      if (document.hidden || !note.hidden) return;
+      fetch(`${base}version.json`, { cache: "no-store" }).then(r => r.ok ? r.json() : null)
+        .then(j => { if (j && new Date(j.generated_at) > generated) note.hidden = false; }).catch(() => {});
+    };
+    setInterval(check, 5 * 60 * 1000);
+    document.addEventListener("visibilitychange", check);   // coming back to the app: check at once
+  })();
+
   // ---------- back to the top ----------
   (function toTop() {
     const btn = document.getElementById("to-top");

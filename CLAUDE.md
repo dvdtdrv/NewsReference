@@ -172,6 +172,11 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   the first click. Closing (×, Esc, click outside, or the browser's Back) leaves the reader where they were.
   From „Всички новини" a story opens with „← Обратно към „Всички новини"" above it; Back returns to the same row.
 
+- Refreshing without closing the app (12 Nov): „обновено в HH:MM ↻" next to „Истории" reloads the page; a dark
+  pill „Има по-нови новини · Обнови" (top centre, bottom on phones) appears when site/version.json (written by
+  build_site.py, the time of the last update) is newer than the open page. Checked every 5 min and when the app
+  comes back to the front. Not on archive day pages.
+
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB
   down after an early fake "</head>"; Euronews pages refuse GitHub -> photos via the PC (`photos_on_pc`); Marica
