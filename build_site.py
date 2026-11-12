@@ -267,12 +267,14 @@ def feed_files(front):
     for a in articles:
         if not (a.get("title") and a.get("link") and a.get("published")):
             continue
-        # a few outlets stamp articles with a time in the future: use the time we first saw the article
-        t = a["published"] if a["published"] <= now else (a.get("collected") or now)
+        # some outlets stamp articles with a time that hadn't come yet when we read them (BNR: about an hour
+        # ahead on most articles): an article can't be newer than the moment we first saw it, so use that
         try:
-            d = datetime.fromisoformat(t).astimezone(timezone.utc)
+            d = datetime.fromisoformat(a["published"]).astimezone(timezone.utc)
+            seen = datetime.fromisoformat(a.get("collected") or now).astimezone(timezone.utc)
         except ValueError:
             continue
+        d = min(d, seen)
         key = d.strftime("%Y-%m-%d-") + f"{d.hour // FEED_HOURS * FEED_HOURS:02d}"
         sid, n, day = where.get(a["link"], (0, 0, ""))
         files.setdefault(key, []).append([d.strftime("%Y-%m-%dT%H:%M:%SZ"), a["outlet"], a["title"], a["link"], sid, n, day])
