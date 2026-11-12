@@ -466,7 +466,7 @@ dialog.od[open] { display: flex; flex-direction: column; animation: od-in .28s c
 dialog.od::backdrop { background: rgba(21, 22, 43, .42); }
 @keyframes od-in { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
 dialog.od.full { width: 100vw; max-width: 100vw; height: 100vh; height: 100dvh; max-height: none; margin: 0; border-radius: 0; }
-.od-scroll { flex: 1; min-height: 0; overflow: auto; padding: 30px 36px 28px; }
+.od-scroll { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 30px 36px 28px; }
 .od-body { display: flex; flex-direction: column; gap: 28px; }
 dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 .od-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
@@ -1751,8 +1751,16 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     od.querySelector(".od-scroll").scrollTop = 0;
     if (typeof od.showModal === "function") od.showModal(); else od.setAttribute("open", "");
     history.pushState({ od: 1 }, "");               // so the phone's Back closes the window instead of leaving the page
+    // while the window is open the page behind must not scroll: its scroll bar goes, only the window's stays
+    const root = document.documentElement, bar = innerWidth - root.clientWidth;
+    root.style.overflow = "hidden";
+    if (bar > 0) root.style.paddingRight = `${bar}px`;        // computers: no sideways jump when the bar disappears
+    document.querySelector(".od-scroll").scrollTop = 0;
   }
-  od.addEventListener("close", () => { if (history.state && history.state.od) { popSkip = true; history.back(); } });
+  od.addEventListener("close", () => {
+    document.documentElement.style.overflow = ""; document.documentElement.style.paddingRight = "";
+    if (history.state && history.state.od) { popSkip = true; history.back(); }
+  });
   // a source label may end in a reading note, e.g. "(платен, не сме го прочели)"; show it as a small tag
   const SRC_NOTES = [
     [/\s*\(платен(?: репортаж)?(?:, не сме го прочели)?\)$/, "платен достъп", "paid"],
