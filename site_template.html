@@ -226,6 +226,9 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
 .feed-row .st, .feed-row .solo { font: 400 11.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
 .feed-row .st { position: relative; z-index: 1; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
 .feed-row .solo { color: var(--muted); }
+.feed-back { display: block; margin: 18px 0 4px; padding: 6px 0; background: none; border: 0; border-bottom: 1px solid var(--ink);
+  font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); cursor: pointer; scroll-margin-top: 12px; }
+.feed-row.flash { animation: flash 2.4s ease-out; }
 .feed-end { margin: 28px 0 0; font-size: 14px; color: var(--muted); }
 @media (max-width: 700px) {
   .feed-tools { justify-content: flex-start; }
@@ -1079,7 +1082,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const loadFeed = k => feedCache[k] || (feedCache[k] = fetch(`${base}feed/${k}.json?v=${encodeURIComponent(data.generated_at || "")}`)
     .then(r => r.ok ? r.json() : Promise.reject(r.status)));
   const onPage = new Set((data.stories || []).map(s => s.id));
-  let feedLeft = [], feedWait = [], feedDay = "", feedSeen = new Set();
+  let feedLeft = [], feedWait = [], feedDay = "", feedSeen = new Set(), feedBack = null;
   (data.feed_outlets || []).forEach(o => { const x = el("option", null, o); x.value = o; feedOutlet.append(x); });
   if (archiveDate || !(data.feed_files || []).length) document.getElementById("tab-all").hidden = true;
   const feedDayName = iso => {
@@ -1093,8 +1096,24 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     if (at < 0) return;
     while (shown <= at) paintMore();
     const node = document.getElementById(`s-${id}`);
-    if (node) { node.scrollIntoView({ block: "start" }); node.classList.add("flash"); }
+    if (!node) return;
+    if (feedBack) {                                                // came from „Всички новини“: a way back, above the story
+      const b = el("button", "feed-back", "← Обратно към „Всички новини“"); b.type = "button";
+      b.addEventListener("click", () => history.back());
+      node.before(b);
+    }
+    (feedBack ? node.previousSibling : node).scrollIntoView({ block: "start" }); node.classList.add("flash");
   }
+  // back from a story (the button above it or the browser's Back): the same list, at the row we left
+  async function backToFeed() {
+    const b = feedBack; feedBack = null;
+    if (!b) return;
+    await setView("all");
+    while (shown < b.count && !more.hidden && !failed) await feedMore();
+    const row = [...list.querySelectorAll(".feed-row")].find(r => r.querySelector(".h").href === b.link);
+    if (row) { row.scrollIntoView({ block: "center" }); row.classList.add("flash"); }
+  }
+  window.addEventListener("popstate", () => { if (feedBack) backToFeed(); });
   function feedRow([iso, outlet, title, link, sid, n, day]) {
     const row = el("div", "feed-row");
     const t = el("time", null, fmtTime.format(new Date(iso))); t.dateTime = iso;
@@ -1104,7 +1123,13 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     if (sid) {
       s = el("a", "st", `в история с ${n} медии`);
       s.href = day ? `${base}archive/${day}.html#s-${sid}` : `${base}index.html#s-${sid}`;
-      if (onPage.has(sid)) s.addEventListener("click", e => { e.preventDefault(); showStory(sid); });
+      if (onPage.has(sid)) s.addEventListener("click", e => {
+        e.preventDefault();
+        feedBack = { count: shown, link: h.href };
+        history.pushState({ story: sid }, "", `#s-${sid}`);
+        showStory(sid);
+      });
+      else { s.target = "_blank"; s.rel = "noopener"; }            // an older story, on its archive page: a new tab, the list stays here
     } else s = el("span", "solo", "само тази медия");
     row.append(t, el("span", "o", outlet), h, s);
     return row;
@@ -1232,7 +1257,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       paintMore();
     }).catch(() => { if (my === token) setNote(NOTES.offline); });
   }
-  document.querySelectorAll(".tab[data-view]").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
+  document.querySelectorAll(".tab[data-view]").forEach(t => t.addEventListener("click", () => { feedBack = null; setView(t.dataset.view); }));
   document.querySelectorAll(".tab[data-period]").forEach(t => t.addEventListener("click", () => setView(current, t.dataset.period)));
   more.addEventListener("click", renderMore);
   setView("top", archiveDate ? "48h" : "24h");
