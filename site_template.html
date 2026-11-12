@@ -387,7 +387,8 @@ body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32p
   border-top: 1px solid rgba(255, 255, 255, .14); font-size: 13px; color: #9D9AAA; }
 @media (max-width: 800px) { .foot-top { grid-template-columns: 1fr 1fr; gap: 28px 24px; } .foot-about { grid-column: 1 / -1; } }
 @media (max-width: 420px) { .foot-top { grid-template-columns: 1fr; } }
-/* „Правна информация“ */
+/* „Правна информация“: a two-word title, so smaller letters keep it on one line above the sliding sheet */
+body.page-legal .intro h1 { font-size: clamp(40px, 6vw, 88px); }
 .legal { max-width: 760px; padding-block: 28px 8px; }
 .legal-nav { display: flex; flex-wrap: wrap; gap: 8px 22px; padding-bottom: 22px; border-bottom: 1px solid var(--rule);
   font: 400 13px/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; }
@@ -1018,7 +1019,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       document.getElementById(id).hidden = true;
     });
     document.getElementById("legal").hidden = false;
-    document.body.classList.add("page-own");
+    document.body.classList.add("page-own", "page-legal");
     document.querySelector(".logo").href = `${base}index.html`;
   }
   // the subscription page: same header and design, its own intro, no story list
