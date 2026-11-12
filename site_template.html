@@ -472,8 +472,10 @@ dialog.od.full::backdrop { background: var(--paper-deep); }
 .od-scroll { scrollbar-color: var(--ink-soft) transparent; }
 /* phones draw their own scroll bar pale and only while moving: ours is dark, always there, and can be dragged */
 .od-bar { display: none; position: absolute; z-index: 2; top: 10px; bottom: 10px; right: 0; width: 22px; touch-action: none; }
-.od-bar i { position: absolute; right: 4px; width: 5px; min-height: 36px; border-radius: 3px; background: var(--ink); opacity: .6; }
-.od-bar.drag i { opacity: .9; width: 7px; }
+.od-bar i { position: absolute; top: 0; right: 4px; width: 4px; min-height: 36px; border-radius: 4px; background: var(--ink); opacity: .28;
+  will-change: transform; transition: opacity .35s ease, width .18s ease; }
+.od-bar.moving i { opacity: .6; transition-duration: .12s, .18s; }   /* darker while the page moves, calm again after */
+.od-bar.drag i { opacity: .85; width: 8px; }
 @media (pointer: coarse) {
   .od-bar { display: block; }
   .od-scroll { scrollbar-width: none; }
@@ -1773,22 +1775,34 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   // the window's own scroll bar (shown on touch screens): follows the scrolling and can be dragged
   (function odBar() {
     const bar = document.getElementById("od-bar"), thumb = bar.firstElementChild, s = od.querySelector(".od-scroll");
+    let th = 36, frame = 0, calm = 0, grab = 0;
     const place = () => {
+      frame = 0;
       const max = s.scrollHeight - s.clientHeight, h = bar.clientHeight;
       thumb.hidden = max <= 4;
       if (max <= 4 || !h) return;
-      const th = Math.max(36, h * s.clientHeight / s.scrollHeight);
+      th = Math.max(36, h * s.clientHeight / s.scrollHeight);
       thumb.style.height = `${th}px`;
-      thumb.style.top = `${(h - th) * s.scrollTop / max}px`;
+      thumb.style.transform = `translateY(${(h - th) * s.scrollTop / max}px)`;   // moved by the graphics card: no stutter
+    };
+    const ask = () => { if (!frame) frame = requestAnimationFrame(place); };
+    const moved = () => {
+      ask(); bar.classList.add("moving");
+      clearTimeout(calm); calm = setTimeout(() => bar.classList.remove("moving"), 900);
     };
     const drag = e => {
-      const r = bar.getBoundingClientRect(), th = thumb.offsetHeight;
-      s.scrollTop = Math.min(1, Math.max(0, (e.clientY - r.top - th / 2) / (r.height - th))) * (s.scrollHeight - s.clientHeight);
+      const r = bar.getBoundingClientRect();
+      s.scrollTop = Math.min(1, Math.max(0, (e.clientY - r.top - grab) / (r.height - th))) * (s.scrollHeight - s.clientHeight);
     };
-    s.addEventListener("scroll", place, { passive: true });
-    addEventListener("resize", place);
-    if (window.ResizeObserver) new ResizeObserver(place).observe(od.querySelector(".od-body"));
-    bar.addEventListener("pointerdown", e => { bar.setPointerCapture(e.pointerId); bar.classList.add("drag"); drag(e); e.preventDefault(); });
+    s.addEventListener("scroll", moved, { passive: true });
+    addEventListener("resize", ask);
+    if (window.ResizeObserver) new ResizeObserver(ask).observe(od.querySelector(".od-body"));
+    bar.addEventListener("pointerdown", e => {
+      const tr = thumb.getBoundingClientRect();
+      // taking the bar itself: it stays under the finger where it was taken; a touch beside it brings its middle there
+      grab = e.clientY >= tr.top && e.clientY <= tr.bottom ? e.clientY - tr.top : th / 2;
+      bar.setPointerCapture(e.pointerId); bar.classList.add("drag"); drag(e); e.preventDefault();
+    });
     bar.addEventListener("pointermove", e => { if (bar.classList.contains("drag")) drag(e); });
     ["pointerup", "pointercancel"].forEach(n => bar.addEventListener(n, () => bar.classList.remove("drag")));
   })();
