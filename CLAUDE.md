@@ -166,6 +166,12 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   An article stamped later than the moment we first read it (BNR: ~1 h ahead on most) shows that moment instead.
   No new workflow step.
 
+- Outlet names are clickable (12 Nov): in story cards and in „Всички новини" a click on the outlet's name opens the
+  outlet window from „Медии" over the page (`outletLink` / `showOutlet` in site_template.html). Its data comes from
+  site/outlets.json (written by build_site.py: outlet_info, outlet_totals, story_totals, outlet_recent), fetched on
+  the first click. Closing (×, Esc, click outside, or the browser's Back) leaves the reader where they were.
+  From „Всички новини" a story opens with „← Обратно към „Всички новини"" above it; Back returns to the same row.
+
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB
   down after an early fake "</head>"; Euronews pages refuse GitHub -> photos via the PC (`photos_on_pc`); Marica

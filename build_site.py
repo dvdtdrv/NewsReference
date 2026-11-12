@@ -7,6 +7,7 @@ Takes site_template.html and writes:
   site/tarsene.html             the search page (the index itself is made by build_search.mjs)
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
   site/feed/YYYY-MM-DD-HH.json  „Всички новини“: every article of the last 7 days, one file per hour
+  site/outlets.json             what the outlet window shows (info, totals), for pages other than medii.html
   site/periods/top-week.json    the most covered stories of the last week / month / year (also -month, -year),
                                 which the front page loads when someone picks that period
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
@@ -336,6 +337,11 @@ def main():
         for a in st["articles"]:
             recent.setdefault(a["outlet"], {})[a["link"]] = {k: a[k] for k in ("title", "link", "published")}
     recent = {o: sorted(v.values(), key=lambda a: a["published"], reverse=True)[:6] for o, v in recent.items()}
+    # the outlet window on the other pages (12 Nov 2026: a click on an outlet's name opens it in place):
+    # the same data as on medii.html, in a file of its own, loaded on the first click
+    with open(os.path.join(OUT_DIR, "outlets.json"), "w", encoding="utf-8") as f:
+        json.dump({**{k: front[k] for k in ("outlet_info", "outlet_totals", "story_totals")}, "outlet_recent": recent},
+                  f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(OUT_DIR, "medii.html"), "w", encoding="utf-8") as f:
         f.write(render({**front, "page": "media", "stories": [], "outlet_recent": recent}, template))
 
