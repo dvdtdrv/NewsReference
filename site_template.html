@@ -207,6 +207,32 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
 .card:hover .hl, .card:focus-visible .hl { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .missing { margin: 24px 0 0; font-size: 13px; color: var(--muted); }
 .missing b { font: 400 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-right: 6px; }
+/* „Всички новини“: every article in the order it was published, one row each */
+.feed-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px 22px; padding: 6px 0;
+  font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.feed-tools select { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--ink); background: none;
+  border: 0; border-bottom: 1px solid var(--rule); padding: 4px 2px; cursor: pointer; max-width: 100%; }
+.feed-tools label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.feed-tools input { accent-color: var(--ink); margin: 0; }
+.feed-day { display: flex; justify-content: space-between; gap: 12px; padding: 22px 0 8px; border-bottom: 1px solid var(--rule);
+  font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.feed-row { position: relative; display: grid; grid-template-columns: 52px 150px minmax(0, 1fr) auto; gap: 0 18px;
+  align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--rule); }
+.feed-row time { font: 400 14px/1 var(--display); letter-spacing: .06em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.feed-row .o { font: 500 13px/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+.feed-row .h { font-size: 16.5px; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
+.feed-row .h::after { content: ""; position: absolute; inset: 0; }          /* the whole row opens the article */
+.feed-row:hover .h, .feed-row .h:focus-visible { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.feed-row .st, .feed-row .solo { font: 400 11.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.feed-row .st { position: relative; z-index: 1; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+.feed-row .solo { color: var(--muted); }
+.feed-end { margin: 28px 0 0; font-size: 14px; color: var(--muted); }
+@media (max-width: 700px) {
+  .feed-tools { justify-content: flex-start; }
+  .feed-row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "o t" "h h" "s s"; gap: 5px 12px; padding: 12px 0; }
+  .feed-row time { grid-area: t; } .feed-row .o { grid-area: o; } .feed-row .h { grid-area: h; font-size: 16px; }
+  .feed-row .st, .feed-row .solo { grid-area: s; justify-self: start; margin-top: 3px; }
+}
 .more-wrap { display: flex; justify-content: center; padding-block: 40px; }
 .more { background: none; color: var(--ink); border: 1px solid var(--ink); }
 .more:hover, .more:focus-visible { background: var(--ink); color: var(--paper); }
@@ -538,6 +564,11 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         <div class="tabs" role="group" aria-label="Подреждане">
           <button class="tab" type="button" data-view="top" aria-pressed="true">Най-отразявани</button>
           <button class="tab" type="button" data-view="new" aria-pressed="false">Най-нови</button>
+          <button class="tab" type="button" data-view="all" aria-pressed="false" id="tab-all">Всички новини</button>
+        </div>
+        <div class="feed-tools" id="feed-tools" hidden>
+          <select id="feed-outlet" aria-label="Медия"><option value="">Всички медии</option></select>
+          <label><input type="checkbox" id="feed-solo"> Само новини извън истории</label>
         </div>
         <div class="tabs periods" id="periods" role="group" aria-label="Период">
           <button class="tab" type="button" data-period="12h" aria-pressed="false">12 часа</button>
@@ -1039,6 +1070,82 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const noList = isSupport || isSearch || isMedia || isArchive;   // pages without the story list
   const setNote = t => { if (noList) return; const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
+  // ---------- „Всички новини“ (12 Nov 2026): every article, newest first, from the files in feed/ ----------
+  const FEED_PAGE = 60;
+  const feedTools = document.getElementById("feed-tools");
+  const feedOutlet = document.getElementById("feed-outlet");
+  const feedSolo = document.getElementById("feed-solo");
+  const feedCache = {};
+  const loadFeed = k => feedCache[k] || (feedCache[k] = fetch(`${base}feed/${k}.json?v=${encodeURIComponent(data.generated_at || "")}`)
+    .then(r => r.ok ? r.json() : Promise.reject(r.status)));
+  const onPage = new Set((data.stories || []).map(s => s.id));
+  let feedLeft = [], feedWait = [], feedDay = "", feedSeen = new Set();
+  (data.feed_outlets || []).forEach(o => { const x = el("option", null, o); x.value = o; feedOutlet.append(x); });
+  if (archiveDate || !(data.feed_files || []).length) document.getElementById("tab-all").hidden = true;
+  const feedDayName = iso => {
+    const k = dayKey(new Date(iso)), today = dayKey(generated), yest = dayKey(new Date(generated.getTime() - 864e5));
+    const long = fmtLong.format(new Date(iso));                    // "четвъртък, 12 ноември"
+    return k === today ? `Днес, ${long.split(", ")[1] || long}` : k === yest ? `Вчера, ${long.split(", ")[1] || long}` : long;
+  };
+  function showStory(id) {                                         // a story of this page: open „Най-отразявани“, 48 hours, at it
+    setView("top", "48h");
+    const at = items.findIndex(s => s.id === id);
+    if (at < 0) return;
+    while (shown <= at) paintMore();
+    const node = document.getElementById(`s-${id}`);
+    if (node) { node.scrollIntoView({ block: "start" }); node.classList.add("flash"); }
+  }
+  function feedRow([iso, outlet, title, link, sid, n, day]) {
+    const row = el("div", "feed-row");
+    const t = el("time", null, fmtTime.format(new Date(iso))); t.dateTime = iso;
+    const h = el(safeUrl(link) ? "a" : "span", "h", title);
+    if (safeUrl(link)) { h.href = link; h.target = "_blank"; h.rel = "noopener noreferrer"; }
+    let s;
+    if (sid) {
+      s = el("a", "st", `в история с ${n} медии`);
+      s.href = day ? `${base}archive/${day}.html#s-${sid}` : `${base}index.html#s-${sid}`;
+      if (onPage.has(sid)) s.addEventListener("click", e => { e.preventDefault(); showStory(sid); });
+    } else s = el("span", "solo", "само тази медия");
+    row.append(t, el("span", "o", outlet), h, s);
+    return row;
+  }
+  async function feedMore() {
+    if (loading) return;
+    const my = token, want = feedOutlet.value, solo = feedSolo.checked;
+    loading = true; more.disabled = true;
+    try {
+      while (feedWait.length < FEED_PAGE && feedLeft.length) {
+        const rows = await loadFeed(feedLeft[0]);
+        if (my !== token) return;
+        feedLeft.shift();
+        feedWait.push(...rows.filter(r => (!want || r[1] === want) && (!solo || !r[4]) && !feedSeen.has(r[3]) && feedSeen.add(r[3])));
+      }
+    } catch (e) {
+      if (my === token) { feedLeft = []; failed = true; if (!shown && !feedWait.length) setNote(NOTES.offline); }
+    } finally {
+      if (my === token) { loading = false; more.disabled = false; }
+    }
+    if (my !== token) return;
+    const frag = document.createDocumentFragment();
+    feedWait.splice(0, FEED_PAGE).forEach(r => {
+      const k = dayKey(new Date(r[0]));
+      if (k !== feedDay) {
+        const d = el("div", "feed-day"); d.append(el("span", null, feedDayName(r[0])));
+        if (!feedDay) d.append(el("span", null, `обновено в ${fmtTime.format(generated)}`));
+        frag.append(d); feedDay = k;
+      }
+      frag.append(feedRow(r)); shown++;
+    });
+    const done = !feedWait.length && !feedLeft.length;
+    if (done && !failed) {
+      if (!shown) setNote("Няма новини за този избор.");
+      else { const p = el("p", "feed-end", "Това са новините от последните 7 дни. По-старите са в "); const a = el("a", null, "Търсене"); a.href = `${base}tarsene.html`; p.append(a, "."); frag.append(p); }
+    }
+    list.append(frag);
+    more.hidden = done;
+  }
+  [feedOutlet, feedSolo].forEach(n => n.addEventListener("change", () => setView("all")));
+
   function paintMore() {
     const frag = document.createDocumentFragment();
     items.slice(shown, shown + PAGE).forEach(s => frag.append(storyNode(s)));
@@ -1048,6 +1155,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   }
   // the newest stories of a long period: load archive days until there is a page full (or no days left)
   async function renderMore() {
+    if (current === "all") return feedMore();
     if (!nextDays) return paintMore();
     if (loading) return;
     // „Най-нови“ has no period (10 Nov 2026): it goes back through the whole archive, taking from each
@@ -1080,7 +1188,15 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.querySelectorAll(".tab[data-view]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.view === v)));
     document.querySelectorAll(".tab[data-period]").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.period === p)));
     // the period row (12 часа ... 1 месец) belongs to „Най-отразявани“ only
-    periods.hidden = !!archiveDate || v === "new";
+    periods.hidden = !!archiveDate || v !== "top";
+    feedTools.hidden = v !== "all";
+    more.textContent = v === "all" ? "Покажи още новини" : "Покажи още истории";
+    if (!archiveDate) document.getElementById("list-title").textContent = v === "all" ? "Новини" : "Истории";
+    if (v === "all") {                               // every article, newest first, without grouping
+      feedLeft = (data.feed_files || []).slice(); feedWait = []; feedDay = ""; feedSeen = new Set();
+      setNote(""); more.hidden = true;
+      return feedMore();
+    }
     if (v === "new" && !archiveDate) {               // the newest: this page's stories, then older days on „Още“
       items = data.stories.slice().sort(byNew);
       nextDays = days.map(d => d.date);

@@ -158,6 +158,13 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so
   the Actions log shows each outlet live.
 
+- „Всички новини" (12 Nov): third tab on the front page, every article of the last 7 days newest first, no grouping,
+  no photos (David chose the plain rows). build_site.py `feed_files()` writes site/feed/YYYY-MM-DD-HH.json (one file
+  per UTC hour, rows [time, outlet, headline, link, story id, outlets in story, archive day]); the page lists the
+  files in `feed_files` and loads them one by one (60 rows per „Покажи още новини"). Filters: one outlet, only
+  articles outside stories. Each row says „в история с N медии" (opens the story) or „само тази медия".
+  Future-stamped articles use the time we collected them. No new workflow step.
+
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB
   down after an early fake "</head>"; Euronews pages refuse GitHub -> photos via the PC (`photos_on_pc`); Marica
