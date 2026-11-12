@@ -226,6 +226,8 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
 .feed-row .st, .feed-row .solo { font: 400 11.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
 .feed-row .st { position: relative; z-index: 1; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
 .feed-row .solo { color: var(--muted); }
+.olink { cursor: pointer; position: relative; z-index: 1; }
+.olink:hover, .olink:focus-visible { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .feed-back { display: block; margin: 18px 0 4px; padding: 6px 0; background: none; border: 0; border-bottom: 1px solid var(--ink);
   font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); cursor: pointer; scroll-margin-top: 12px; }
 .feed-row.flash { animation: flash 2.4s ease-out; }
@@ -999,7 +1001,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       } else fallback();
       const src = el("div", "src");
       const pub = new Date(a.published);
-      src.append(el("span", null, a.outlet), el("time", null, `${fmtDay.format(pub)}, ${fmtTime.format(pub)}`));
+      src.append(outletLink(a.outlet), el("time", null, `${fmtDay.format(pub)}, ${fmtTime.format(pub)}`));
       card.append(ph, src, el("div", "hl", a.title));
       if (a.was && a.was.length) {
         const n = a.was.length;
@@ -1073,6 +1075,17 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const noList = isSupport || isSearch || isMedia || isArchive;   // pages without the story list
   const setNote = t => { if (noList) return; const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
+  // an outlet's name that opens the outlet window (the one from „Медии“) over the page; closing it leaves you where you were
+  function outletLink(name) {
+    const b = el("span", "olink", name);
+    b.setAttribute("role", "button"); b.tabIndex = 0; b.title = `Повече за ${name}`;
+    const go = e => { e.preventDefault(); e.stopPropagation(); showOutlet(name); };
+    b.addEventListener("click", go);
+    b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") go(e); });
+    return b;
+  }
+  let popSkip = false;
+
   // ---------- „Всички новини“ (12 Nov 2026): every article, newest first, from the files in feed/ ----------
   const FEED_PAGE = 60;
   const feedTools = document.getElementById("feed-tools");
@@ -1113,7 +1126,13 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const row = [...list.querySelectorAll(".feed-row")].find(r => r.querySelector(".h").href === b.link);
     if (row) { row.scrollIntoView({ block: "center" }); row.classList.add("flash"); }
   }
-  window.addEventListener("popstate", () => { if (feedBack) backToFeed(); });
+  // the browser's Back: first it closes the outlet window, otherwise it goes back from a story to the list
+  window.addEventListener("popstate", () => {
+    if (popSkip) { popSkip = false; return; }
+    const d = document.getElementById("od");
+    if (d.open) return d.close ? d.close() : d.removeAttribute("open");
+    if (feedBack) backToFeed();
+  });
   function feedRow([iso, outlet, title, link, sid, n, day]) {
     const row = el("div", "feed-row");
     const t = el("time", null, fmtTime.format(new Date(iso))); t.dateTime = iso;
@@ -1131,7 +1150,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       });
       else { s.target = "_blank"; s.rel = "noopener"; }            // an older story, on its archive page: a new tab, the list stays here
     } else s = el("span", "solo", "само тази медия");
-    row.append(t, el("span", "o", outlet), h, s);
+    const o = outletLink(outlet); o.classList.add("o");
+    row.append(t, o, h, s);
     return row;
   }
   async function feedMore() {
@@ -1430,7 +1450,15 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 
   // ---------- the outlet window ----------
   const od = document.getElementById("od");
-  const info = data.outlet_info || {};
+  let info = data.outlet_info || {};
+  // from a page other than „Медии“: fetch what the window shows (outlets.json) on the first click, then open it
+  let outletData = data.outlet_info ? Promise.resolve() : null;
+  function showOutlet(name) {
+    outletData = outletData || fetch(`${base}outlets.json?v=${encodeURIComponent(data.generated_at || "")}`)
+      .then(r => r.ok ? r.json() : Promise.reject(r.status)).then(j => { Object.assign(data, j); info = data.outlet_info || {}; });
+    outletData.then(() => openOutlet(tracked.find(o => o.name === name) || { name, type: "", active: true }))
+      .catch(() => { outletData = null; location.href = `${base}medii.html`; });   // opened from a folder: go to the page
+  }
   const EXPAND = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg>';
   const SHRINK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>';
   const sizeBtn = document.getElementById("od-size");
@@ -1531,7 +1559,9 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     setSize(false);
     od.querySelector(".od-scroll").scrollTop = 0;
     if (typeof od.showModal === "function") od.showModal(); else od.setAttribute("open", "");
+    history.pushState({ od: 1 }, "");               // so the phone's Back closes the window instead of leaving the page
   }
+  od.addEventListener("close", () => { if (history.state && history.state.od) { popSkip = true; history.back(); } });
   // a source label may end in a reading note, e.g. "(платен, не сме го прочели)"; show it as a small tag
   const SRC_NOTES = [
     [/\s*\(платен(?: репортаж)?(?:, не сме го прочели)?\)$/, "платен достъп", "paid"],
