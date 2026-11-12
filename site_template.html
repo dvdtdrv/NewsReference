@@ -10,9 +10,24 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="News Ref">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&family=Golos+Text:wght@400;500;600&display=swap">
+<!-- fonts (Oswald, Golos Text; SIL Open Font License) are served from this site, not from Google (12 Nov 2026):
+     loading them from Google would send every visitor's IP address there without consent -->
+<style>
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 200; font-display: swap; src: url({{BASE}}oswald-cyrillic-200.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 200; font-display: swap; src: url({{BASE}}oswald-latin-200.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}oswald-cyrillic-300.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}oswald-latin-300.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}oswald-cyrillic-400.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}oswald-latin-400.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}oswald-cyrillic-500.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}oswald-latin-500.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}golos-text-cyrillic-400.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}golos-text-latin-400.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}golos-text-cyrillic-500.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}golos-text-latin-500.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}golos-text-cyrillic-600.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}golos-text-latin-600.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+</style>
 <style>
 /* Layout: newspaper column on egg-white paper. Clean spread header, a big condensed
    statement, then one band per story: summary title, how many outlets, the outlets' own articles. */
@@ -359,7 +374,35 @@ body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32p
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 48px; }
 .cols p { margin: 0; max-width: 60ch; color: var(--ink-soft); }
 .cols h3 { margin: 0 0 8px; font: 400 18px/1.2 var(--display); text-transform: uppercase; letter-spacing: .04em; }
-footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+/* the footer on every page (12 Nov 2026): what the site is, its pages, the legal pages */
+.foot { margin-top: 48px; background: var(--ink); color: #C9C6D3; }
+.foot a { color: inherit; text-decoration: none; }
+.foot a:hover, .foot a:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.foot-top { display: grid; grid-template-columns: minmax(0, 1.6fr) auto auto; gap: 32px 72px; padding-block: 48px 36px; }
+.foot-about strong { display: block; font: 500 24px/1 var(--display); letter-spacing: .02em; text-transform: uppercase; color: #fff; }
+.foot-about p { margin: 14px 0 0; max-width: 46ch; font-size: 15px; line-height: 1.55; }
+.foot nav { display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; }
+.foot nav h2 { margin: 0 0 4px; font: 400 13px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+.foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 28px; padding-block: 20px calc(28px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255, 255, 255, .14); font-size: 13px; color: #9D9AAA; }
+@media (max-width: 800px) { .foot-top { grid-template-columns: 1fr 1fr; gap: 28px 24px; } .foot-about { grid-column: 1 / -1; } }
+@media (max-width: 420px) { .foot-top { grid-template-columns: 1fr; } }
+/* „Правна информация“ */
+.legal { max-width: 760px; padding-block: 28px 8px; }
+.legal-nav { display: flex; flex-wrap: wrap; gap: 8px 22px; padding-bottom: 22px; border-bottom: 1px solid var(--rule);
+  font: 400 13px/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+.legal-nav a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 3px; }
+.legal-nav a:hover { border-bottom-color: var(--ink); }
+.legal article { padding-block: 34px 6px; scroll-margin-top: 12px; }
+.legal article + article { border-top: 1px solid var(--rule); margin-top: 28px; }
+.legal h2 { margin: 0 0 14px; font: 300 34px/1.1 var(--display); color: var(--ink); }
+.legal h3 { margin: 24px 0 8px; font: 500 14px/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
+.legal p, .legal li { font-size: 16px; line-height: 1.6; color: var(--ink-soft); }
+.legal p { margin: 0 0 12px; }
+.legal ul { margin: 0 0 12px; padding-left: 20px; }
+.legal li { margin-bottom: 6px; }
+.legal a { color: var(--ink); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal-date { margin-top: 36px; font-size: 13px; color: var(--muted); }
 
 /* ---------- subscription page ---------- */
 .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; padding-block: 8px 24px; }
@@ -702,11 +745,126 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         <div><h3>„Не отразиха“</h3><p>Медия се показва като „не отрази“ само ако я следим в момента и имаме нейните публикации отпреди началото на историята. Медиите, които още не следим, никога не се броят.</p></div>
       </div>
     </section>
-  <footer>
-    <span>News Reference</span>
-    <span id="updated"></span>
-  </footer>
+
+    <section id="legal" class="legal" hidden>
+      <nav class="legal-nav" aria-label="Раздели">
+        <a href="#za-nas">За нас и контакти</a><a href="#usloviya">Условия за ползване</a><a href="#poveritelnost">Поверителност</a>
+        <a href="#biskvitki">Бисквитки</a><a href="#avtorski-prava">Авторски права и премахване</a><a href="#korektsii">Корекции и право на отговор</a>
+      </nav>
+
+      <article id="za-nas">
+        <h2>За нас и контакти</h2>
+        <p>News Reference е независим, нетърговски студентски проект. Сайтът се поддържа от <strong>Давид Тодоров</strong>, физическо лице, България.</p>
+        <p>Връзка с нас: <a href="mailto:newsreference.contact@gmail.com">newsreference.contact@gmail.com</a>. Отговаряме на всяко писмо; на искания за премахване – до 72 часа, на искания за корекция – до 7 дни.</p>
+        <h3>Собственост и финансиране</h3>
+        <p>Сайтът няма друг собственик, няма реклами, спонсори или платено съдържание и не е получавал държавни или партийни средства. Не се продава нищо: страницата „Подкрепи“ описва бъдеща възможност, плащанията още не са активни. Ако това се промени, ще го обявим тук, преди да влезе в сила.</p>
+      </article>
+
+      <article id="usloviya">
+        <h2>Условия за ползване</h2>
+        <p>С ползването на сайта приемате тези условия.</p>
+        <h3>Какво е сайтът</h3>
+        <p>News Reference е автоматичен указател на публикации от български медии. Показваме заглавието, името на медията, часа и връзка към оригиналната статия и подреждаме публикациите за едно и също събитие в „истории“. Не сме медия, не пишем новини и не носим отговорност за съдържанието на статиите, към които водим: то принадлежи на съответната медия и отговорността за него е нейна.</p>
+        <h3>Автоматизация и изкуствен интелект</h3>
+        <p>Събирането, групирането в истории, броят „медии“, списъкът „Не отразиха“, класацията на сменените заглавия и проверката за изтрити статии се правят от програма, без човек да преглежда всеки резултат. Възможни са грешки: статия в грешна история, пропусната публикация, неточен час. „Не отразиха“ означава само, че не сме открили публикация на тази медия по темата в нейните публични емисии, а не че медията съзнателно е премълчала нещо. „Страницата вече не се отваря“ означава само това, което проверката е установила в съответния момент.</p>
+        <p>Част от заглавията на историите се избират или обобщават автоматично, включително с модел за изкуствен интелект; обобщените от AI заглавия са обозначени. Начинът на работа е описан в „Как работи“.</p>
+        <h3>Информация за медиите</h3>
+        <p>Сведенията за собственост, финансиране и спорове в „Медии“ са събрани от публични регистри, отчети, съдебни актове и публикации и към всяко има посочен източник. Твърденията на трети лица са обозначени като твърдения и не са наша оценка. Информацията е вярна към датата на последната проверка и може да е остаряла.</p>
+        <h3>Без гаранции</h3>
+        <p>Сайтът се предоставя безплатно и „както е“. Не гарантираме, че е пълен, точен, актуален или достъпен по всяко време, и доколкото законът позволява, не отговаряме за вреди от ползването му или от решения, взети въз основа на него. Сайтът не дава правни, финансови или други професионални съвети.</p>
+        <h3>Имена и марки</h3>
+        <p>Имената на медиите се използват единствено за да посочим източника. Те не означават партньорство, одобрение или връзка между News Reference и съответната медия. Търговските марки принадлежат на притежателите си.</p>
+        <h3>Допустимо ползване</h3>
+        <p>Можете свободно да четете сайта и да давате връзки към него. Не е разрешено автоматизирано масово изтегляне, което натоварва сайта, нито представянето му като официален източник на която и да е медия.</p>
+        <h3>Промени и приложимо право</h3>
+        <p>Можем да променяме тези условия; датата на последната промяна е посочена най-долу. Приложимо е българското право, а споровете се решават от компетентния български съд.</p>
+      </article>
+
+      <article id="poveritelnost">
+        <h2>Поверителност</h2>
+        <p>Сайтът няма регистрация, профили, коментари, форми, реклами и инструменти за статистика или проследяване. Ние не събираме и не съхраняваме лични данни за посетителите.</p>
+        <h3>Какво виждат други при посещение</h3>
+        <ul>
+          <li><strong>Хостинг.</strong> Страниците се подават от GitHub Pages (GitHub, Inc., САЩ). Както всеки сървър, той обработва IP адреса и данни за браузъра ви, за да достави страницата и за сигурност. Ние нямаме достъп до тези записи. По данни на GitHub дружеството участва в Рамката за защита на данните ЕС – САЩ.</li>
+          <li><strong>Снимки.</strong> Снимките към статиите не се пазят при нас, а се зареждат направо от сайта на съответната медия. Нейният сървър вижда вашия IP адрес, но не и коя наша страница разглеждате.</li>
+          <li><strong>Връзки.</strong> Когато отворите статия, попадате на сайта на медията, където важат нейните правила за поверителност.</li>
+        </ul>
+        <p>Шрифтовете и всички останали файлове се зареждат от самия сайт, не от трети страни.</p>
+        <h3>Ако ни пишете</h3>
+        <p>Пазим писмото и адреса ви само за да отговорим и да документираме корекция или премахване (основание: законен интерес и изпълнение на законово задължение), не по-дълго от 3 години. Пощата се обслужва от Google (Gmail).</p>
+        <h3>Лица, споменати в сайта</h3>
+        <p>В „Медии“ се посочват имена на собственици, управители и други лица с публична роля в медиите. Данните идват от публични регистри (Търговски регистър, регистри на СЕМ и Министерството на културата), публикувани отчети, съдебни актове и публикации в медиите и се обработват за журналистически цели и в обществен интерес – прозрачност на медийната собственост (чл. 85 от Регламент (ЕС) 2016/679, чл. 25з от ЗЗЛД). Не публикуваме ЕГН, адреси, данни за здраве или семейство, нито имена на частни дарители.</p>
+        <h3>Вашите права</h3>
+        <p>Имате право на достъп, коригиране, изтриване, ограничаване и възражение по Регламент (ЕС) 2016/679. Пишете ни на <a href="mailto:newsreference.contact@gmail.com">newsreference.contact@gmail.com</a>; отговаряме до един месец. Имате право и на жалба до Комисията за защита на личните данни (<a href="https://www.cpdp.bg" target="_blank" rel="noopener noreferrer">cpdp.bg</a>).</p>
+      </article>
+
+      <article id="biskvitki">
+        <h2>Бисквитки</h2>
+        <p>Сайтът не използва бисквитки – нито свои, нито на трети страни, и не ви проследява. Затова не показваме прозорец за съгласие.</p>
+        <p>За да се отваря бързо и да работи като приложение и без връзка, браузърът ви пази на вашето устройство копие от последно отворените страници (технически необходимо съхранение по чл. 4а от Закона за електронната търговия). То не съдържа лични данни и не се изпраща никъде. Можете да го изтриете от настройките на браузъра („Изчистване на данните за сайта“).</p>
+        <p>Ако някога добавим статистика или плащания, ще променим тази страница и ще поискаме съгласие, където законът го изисква.</p>
+      </article>
+
+      <article id="avtorski-prava">
+        <h2>Авторски права и премахване</h2>
+        <p>Заглавията, текстовете и снимките принадлежат на съответните медии и автори. News Reference:</p>
+        <ul>
+          <li>показва само заглавието и връзка към оригинала и никога не публикува текста на статията;</li>
+          <li>не копира и не съхранява снимки – те се показват от адреса, на който медията сама ги е публикувала;</li>
+          <li>чете само публичните емисии (RSS) и списъци с новини (sitemap) на медиите, спазва техните правила за автоматизиран достъп (robots.txt) и не заобикаля защити или платен достъп;</li>
+          <li>изпраща читателя към сайта на медията за пълния текст.</li>
+        </ul>
+        <h3>Ако сте медия, автор или фотограф</h3>
+        <p>Ако не желаете ваши заглавия или снимки да се показват тук или смятате, че е нарушено ваше право, пишете на <a href="mailto:newsreference.contact@gmail.com">newsreference.contact@gmail.com</a>. Посочете кои публикации или снимки имате предвид (адрес на страницата) и в какво качество пишете. Без да спорим, спираме показването на снимките или на цялата медия до 72 часа от получаването и ви потвърждаваме писмено.</p>
+        <p>Собственият текст и оформление на News Reference могат да се цитират с посочване на източника.</p>
+      </article>
+
+      <article id="korektsii">
+        <h2>Корекции и право на отговор</h2>
+        <p>Ако смятате, че нещо в сайта е невярно, непълно или остаряло – сведение за медия, история, групирана погрешно, статия, отбелязана като изтрита – пишете на <a href="mailto:newsreference.contact@gmail.com">newsreference.contact@gmail.com</a> и посочете къде е грешката и, ако е възможно, източник.</p>
+        <ul>
+          <li>Отговаряме до 7 дни. Доказаните грешки поправяме веднага.</li>
+          <li>Всяка медия и всяко споменато лице има право на отговор: публикуваме позицията му до сведението, за което се отнася.</li>
+          <li>Съществените корекции се отбелязват с дата, не се правят мълчаливо.</li>
+          <li>Не променяме сведения с посочен източник само защото са неприятни за някого; при спор показваме и двете гледни точки и източниците им.</li>
+        </ul>
+      </article>
+
+      <p class="legal-date">Последна промяна: 12 ноември 2026 г.</p>
+    </section>
  </div>
+ <footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-about">
+        <strong>News Reference</strong>
+        <p>Кой какво отразява и кой мълчи: заглавията на българските медии на едно място, с връзка към оригинала. Независим проект, без реклами.</p>
+      </div>
+      <nav aria-label="Сайтът">
+        <h2>Сайтът</h2>
+        <a href="{{BASE}}index.html#about">За проекта</a>
+        <a href="{{BASE}}index.html#method">Как работи</a>
+        <a href="{{BASE}}medii.html">Медии</a>
+        <a href="{{BASE}}arhiv.html">Архив</a>
+        <a href="{{BASE}}tarsene.html">Търсене</a>
+      </nav>
+      <nav aria-label="Правна информация">
+        <h2>Правна информация</h2>
+        <a href="{{BASE}}pravila.html#za-nas">За нас и контакти</a>
+        <a href="{{BASE}}pravila.html#usloviya">Условия за ползване</a>
+        <a href="{{BASE}}pravila.html#poveritelnost">Поверителност</a>
+        <a href="{{BASE}}pravila.html#biskvitki">Бисквитки</a>
+        <a href="{{BASE}}pravila.html#avtorski-prava">Авторски права и премахване</a>
+        <a href="{{BASE}}pravila.html#korektsii">Корекции и право на отговор</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 News Reference</span>
+      <span>Заглавията и снимките принадлежат на съответните медии.</span>
+      <span id="updated"></span>
+    </div>
+  </div>
+ </footer>
 </main>
 
 <button class="to-top" id="to-top" type="button" aria-label="Обратно най-горе" title="Обратно най-горе" hidden>
@@ -849,6 +1007,20 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   document.getElementById("cta-sub").href = `${base}abonament.html`;
   document.getElementById("nav-search").href = `${base}tarsene.html`;
 
+  // „Правна информация“ (pravila.html): same header and design, its own intro, no story list
+  const isLegal = data.page === "legal";
+  if (isLegal) {
+    document.title = "Правна информация · News Reference";
+    document.getElementById("intro-title").textContent = "Правна информация.";
+    document.getElementById("intro-text").textContent =
+      "Кой стои зад сайта, по какви правила работи, какво става с данните ви и как да поискате корекция или премахване.";
+    ["stories", "view-note", "list", "more-wrap", "stats", "about"].forEach(id => {
+      document.getElementById(id).hidden = true;
+    });
+    document.getElementById("legal").hidden = false;
+    document.body.classList.add("page-own");
+    document.querySelector(".logo").href = `${base}index.html`;
+  }
   // the subscription page: same header and design, its own intro, no story list
   const isSupport = data.page === "support";
   if (isSupport) {
@@ -1089,7 +1261,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   const more = document.getElementById("more");
   const periods = document.getElementById("periods");
   if (archiveDate) periods.hidden = true;            // an archive page is one day: no periods
-  const noList = isSupport || isSearch || isMedia || isArchive;   // pages without the story list
+  const noList = isSupport || isSearch || isMedia || isArchive || isLegal;   // pages without the story list
   const setNote = t => { if (noList) return; const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
   // an outlet's name that opens the outlet window (the one from „Медии“) over the page; closing it leaves you where you were

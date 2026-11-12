@@ -1,7 +1,7 @@
 // Offline helper for the News Reference web app.
 // Pages: always try the internet first (the news must be fresh); if there's no connection,
 // show the last copy we saved. Icons and the manifest: kept from the first visit.
-// Photos and fonts come from other websites and are left alone; so is the search index.
+// Photos come from the outlets' websites and are left alone; so is the search index. Fonts are our own files.
 
 const CACHE = "news-reference-v3";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];

@@ -9,6 +9,7 @@ Takes site_template.html and writes:
   site/feed/YYYY-MM-DD-HH.json  „Всички новини“: every article of the last 7 days, one file per hour
   site/outlets.json             what the outlet window shows (info, totals), for pages other than medii.html
   site/version.json             the time of the last update (open pages check it and offer „Обнови“)
+  site/pravila.html             the legal page (who runs the site, terms, privacy, cookies, copyright, corrections)
   site/periods/top-week.json    the most covered stories of the last week / month / year (also -month, -year),
                                 which the front page loads when someone picks that period
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
@@ -36,12 +37,22 @@ KEEP = ("outlet", "title", "link", "published", "image")
 PERIODS = {"week": 7, "month": 30, "year": 365}   # the longer periods on the front page, in days
 TOP_N = 100        # how many of the most covered stories each longer period keeps
 PHOTOS_FILE = os.path.join("data", "page_images.json")   # each article's own photo (see collect.py)
+# Outlets (or photographers, through their outlet) that asked us not to show their photos: write the outlet's
+# name, as in feeds.py, into no_photos.json, e.g. ["BTA"]. Its cards then show the outlet's name instead of a photo.
+try:
+    with open("no_photos.json", encoding="utf-8") as f:
+        NO_PHOTOS = set(json.load(f))
+except (OSError, ValueError):
+    NO_PHOTOS = set()
+
 _photos = None
 
 
 def photo_for(a):
     """The photo the article's own page picked, if we know it; else the one we stored."""
     global _photos
+    if a.get("outlet") in NO_PHOTOS:
+        return ""
     if _photos is None:
         try:
             with open(PHOTOS_FILE, encoding="utf-8") as f:
@@ -53,6 +64,8 @@ def photo_for(a):
 
 def spare_photo(a):
     """A second photo to try if the first doesn't load (e.g. the outlet deleted it)."""
+    if a.get("outlet") in NO_PHOTOS:
+        return ""
     first = photo_for(a)
     for other in (a.get("image_feed"), a.get("image")):
         if other and other != first:
@@ -349,6 +362,10 @@ def main():
                   f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(OUT_DIR, "medii.html"), "w", encoding="utf-8") as f:
         f.write(render({**front, "page": "media", "stories": [], "outlet_recent": recent}, template))
+
+    # „Правна информация“ (12 Nov 2026): who runs the site, terms, privacy, cookies, copyright, corrections
+    with open(os.path.join(OUT_DIR, "pravila.html"), "w", encoding="utf-8") as f:
+        f.write(render({**light, "page": "legal", "stories": []}, template))
 
     # „Архив“ (9 Nov 2026): its own page with the list of days
     with open(os.path.join(OUT_DIR, "arhiv.html"), "w", encoding="utf-8") as f:
