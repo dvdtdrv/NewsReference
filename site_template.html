@@ -3,6 +3,7 @@
 <meta name="description" content="Една новина, всички медии: българските медии една до друга.">
 <!-- web app: installable on phones ("Add to Home screen"); {{BASE}} is "" or "../" (filled in by build_site.py) -->
 <link rel="manifest" href="{{BASE}}manifest.webmanifest">
+<meta name="color-scheme" content="only light">
 <meta name="theme-color" content="#E6DFCC">
 <link rel="icon" type="image/png" href="{{BASE}}favicon-48.png">
 <link rel="apple-touch-icon" href="{{BASE}}apple-touch-icon.png">
@@ -42,7 +43,7 @@
   --display: "Oswald", "Arial Narrow", "Roboto Condensed", sans-serif;
   --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
   --max: 1240px;
-  color-scheme: light;
+  color-scheme: only light;   /* "only": asks phones in dark mode not to recolour the page themselves (it came out brown) */
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
