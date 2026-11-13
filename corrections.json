@@ -1,0 +1,42 @@
+[
+ {
+  "name": "2026-11-14: the Kaufland reactions separated from the personal-assistants story",
+  "why": "a shared party name („Прогресивна България“) joined two different events; matching.py now needs meaning >= 0.80 for that",
+  "day": "2026-11-11",
+  "story": "ef789f5be4",
+  "headline": "Управляващите размислиха? Оттеглят спорните промени в Закона за личната помощ",
+  "move": [
+   "https://banker.bg/2026/11/12/dori-da-ima-otliv-tozi-vakuum-barzo-sthe-bade-zapalnen-komentira-ministar-pulev-za-targovskite-verigi/",
+   "https://banker.bg/2026/11/12/progresivna-balgariya-kam-shefa-na-kaufland-nikoj-ne-e-nad-zakona/",
+   "https://bntnews.bg/news/ivailo-mirchev-kaufland-ne-e-nad-zakona-nezavisimo-ot-ikonomicheskata-si-tezhest-1421984news.html",
+   "https://boulevardbulgaria.bg/articles/progresivna-balgariya-otgovori-na-kaufland-nikoy-ne-e-po-silen-ot-darzhavata-",
+   "https://btvnovinite.bg/bulgaria/aleksandar-pulev-za-kazusa-s-kaufland-arogantno-povedenie-no-nie-njama-da-se-oganem.html",
+   "https://business.dir.bg/kompanii/pulev-otgovori-na-shefa-na-kaufland-aroganten-ton-no-nyama-da-otstapim",
+   "https://dnes.dir.bg/politika/progresivna-balgariya-v-analogiyata-s-ktb-menidzharat-na-kaufland-barka-zakona-s-bezzakonieto",
+   "https://eurocom.bg/2026/11/12/aleksandar-pulev-darzhavata-nyama-da-se-ogane-pred-arogantnoto-povedenie-na-kaufland/",
+   "https://fakti.bg/bulgaria/1100222-aleksandar-pulev-otliv-ot-targovskite-verigi-barzo-shte-bade-zapalnen",
+   "https://fakti.bg/bulgaria/1100235-progresivna-balgaria-kaufland-ne-e-nad-zakona",
+   "https://fakti.bg/bulgaria/1100321-mirchev-izkazvaneto-na-direktora-na-kaufland-e-nepriemlivo",
+   "https://novini.bg/article/2026111215202669482",
+   "https://novini.bg/article/2026111217572744148",
+   "https://novini.bg/article/2026111317343687619",
+   "https://offnews.bg/ikonomika/progresivna-balgaria-otvrashta-na-kaufland-878426.html",
+   "https://trud.bg/a/articles/aleksandar-pulev-za-kazusa-s-kaufland-arogantno-povedenie-no-nie-niama-da-se-oganem",
+   "https://trud.bg/a/articles/kolkoto-i-da-si-goliam-ne-si-nad-zakona-progresivna-balgaria-otvarna-na-shefa-na-kaufland",
+   "https://www.24chasa.bg/biznes/article/23922302",
+   "https://www.24chasa.bg/bulgaria/article/23922430",
+   "https://www.bta.bg/bg/news/bulgaria/1245773-nikoy-ne-e-po-silen-ot-darzhavata-kogato-tya-prilaga-zakona-za-da-zashtiti-pra",
+   "https://www.bta.bg/bg/news/bulgaria/1245926-izkazvaneto-na-izpalnitelniya-direktor-na-kaufland-balgariya-e-arogantno-i-nep",
+   "https://www.focus-news.net/novini/Bylgaria/Mirchev-Izkazvaneto-na-shefa-na-Kaufland-Bulgariya-e-arogantno-3055518",
+   "https://www.focus-news.net/novini/Bylgaria/Progresivna-Bulgariya-kum-shefa-na-Kaufland-Kolkoto-i-da-si-golyam-ne-si-nad-zakona-3055428",
+   "https://www.marica.bg/balgariq/obshtestvo/daniela-nikolova-ot-progresivna-balgariq-nikoy-ne-e-po-golqm-ot-zakona-ostra-reakciq-sreshtu-shefa-na-kaufland",
+   "https://www.marica.bg/balgariq/vlast/i-progresivna-balgariq-skochi-sreshtu-shefa-na-kaufland",
+   "https://www.marica.bg/balgariq/vlast/mirchev-izkazvaneto-na-shefa-na-kaufland-balgariq-e-arogantno",
+   "https://www.mediapool.bg/biznes/aleksandar-pulev-za-kaufland-arogantnost-no-nyama-da-se-oganem-pri-otliv-na-edna-veriga-druga-zapalva-vakuuma/"
+  ],
+  "move_headline": "„Прогресивна България“ към шефа на „Кауфланд“: Никой не е над закона",
+  "drop": [
+   "https://banker.bg/2026/11/13/denyat-po-diagonal-13-noemvri-2026-g/"
+  ]
+ }
+]

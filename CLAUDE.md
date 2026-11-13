@@ -188,6 +188,17 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - `no_photos.json` (12 Nov): list of outlet names (as in feeds.py) whose photos must not be shown; read by
   build_site.py and build_search.mjs; rebuild.yml also runs when it changes. Empty now.
 
+- Party-name rule (14 Nov) in matching.py: if the only shared name is a political party's (PARTIES: first 6 letters,
+  e.g. "прогре" = Прогресивна България), the meaning must be >= 0.80 (PARTY_MEANING). „Прогресивна България" had joined
+  the personal-assistants law with the party's reply to Kaufland (0.72-0.74); right party-only joins were 0.74-0.90.
+- `corrections.json` (14 Nov): hand corrections of SAVED stories, applied once each by group_stories.py
+  `apply_corrections()` (done ones in data/corrections_done.json). Needed because saved stories never shrink, so a
+  wrong join stays in the archive. Fields: name, why, day, story (id), headline (new title of what stays), move (links
+  that become their own story on their own start day), move_headline, drop (links removed). Each part gets the id of
+  its own first article. First use: the 11 Nov story mixing personal assistants (97 kept) and Kaufland reactions (27).
+  Use it for reader/outlet correction requests about grouping (promised on the legal page).
+- Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
+
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB
   down after an early fake "</head>"; Euronews pages refuse GitHub -> photos via the PC (`photos_on_pc`); Marica

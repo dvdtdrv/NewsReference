@@ -45,6 +45,7 @@ WORDING = 0.30           # how close the wording must be (0-1)
 START_GAP_HOURS = 12     # two stories must have started within this many hours
 SPAN_HOURS = 24          # all parts of a joined story must have started within this many hours
 COMMON_NAME = 40         # a name found in more stories than this says little about which event it is
+PARTY_MEANING = 0.80     # when the only shared name is a party's, the meaning must be this close (14 Nov 2026)
 LOG_DAYS = 14
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -52,6 +53,11 @@ WORD = re.compile(r"[\w-]+")
 CAP = re.compile(r"[А-ЯA-Z][а-яa-z]{2,}$")
 NOT_NAMES = {"нова", "бтв", "бнт", "бнр", "бта", "снимки", "видео", "обновена", "обновява", "ето", "още",
              "софия", "българия", "български", "българска", "българско", "българските"}
+# Political parties (first 6 letters, as names_in cuts them): a party takes part in many different events on
+# the same day, so a shared party name alone does not show one event. 14 Nov 2026: „Прогресивна България" joined
+# the personal-assistants law with the party's reply to Kaufland (meaning 0.72-0.74); the right party-only joins
+# that day were 0.74-0.90.
+PARTIES = {"прогре", "възраж", "величи", "промян", "продъл", "демокр", "сияние", "единст", "алианс", "социал"}
 BIG_PLACES = {"София", "България"}     # mentioned in passing in too many unrelated stories
 # motorways and passes count as places too: a story about "Хемус" is not joined to one about "Тракия"
 ROADS = {"Тракия", "Хемус", "Струма", "Петрохан", "Витиня"}
@@ -186,6 +192,8 @@ def find_joins(stories, vec):
                 continue                         # they name different towns/villages
             shared = ({x for x in story_names[i] & story_names[j] if in_stories[x] <= COMMON_NAME}
                       | (story_places[i] & story_places[j]))
+            if shared and shared <= PARTIES and meaning[i, j] < PARTY_MEANING:
+                continue                         # only a party in common: not enough unless the meaning is very close
             if shared:
                 candidates.append((float(meaning[i, j] + wording[i, j]), i, j, sorted(shared)[:4]))
 
