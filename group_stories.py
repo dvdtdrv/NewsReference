@@ -196,6 +196,60 @@ def text_for(a):
     return f"{a['title']} . {a['title']} . {(a.get('summary') or '')[:150]}".lower()
 
 
+def apply_corrections():
+    """Hand corrections of saved stories (corrections.json, added 14 Nov 2026), each applied once.
+    Saved stories are never shrunk by the normal runs, so a wrong join stays in the archive for good;
+    a correction takes articles out of a saved story ("move" makes them a story of their own, "drop"
+    just removes them) and can give the story a new headline. Done ones are listed in
+    data/corrections_done.json."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "corrections.json")
+    todo = read_json(path, [])
+    done_path = os.path.join(DATA, "corrections_done.json")
+    done = read_json(done_path, [])
+    applied = 0
+    for c in todo:
+        if c["name"] in done:
+            continue
+        day_path = os.path.join(STORY_DAYS_DIR, f"{c['day']}.json")
+        day = read_json(day_path, None)
+        story = next((s for s in (day or {}).get("stories", []) if s["id"] == c["story"]), None)
+        if story is None:
+            print(f"Correction not applied (story not found): {c['name']}")
+            continue
+        move, drop = set(c.get("move", [])), set(c.get("drop", []))
+
+        def rebuilt(base, arts, headline):
+            arts = sorted(arts, key=lambda a: a["published"])
+            outlets = list(dict.fromkeys(a["outlet"] for a in arts))
+            return {**base, "headline": headline or base["headline"], "first_seen": arts[0]["published"],
+                    "last_updated": arts[-1]["published"], "outlets": outlets, "outlet_count": len(outlets),
+                    "not_covered": [o for o in base.get("not_covered", []) if o not in outlets], "articles": arts}
+
+        keep = [a for a in story["articles"] if a["link"] not in move and a["link"] not in drop]
+        moved = [a for a in story["articles"] if a["link"] in move]
+        day["stories"] = [s for s in day["stories"] if s["id"] != c["story"]]
+        if keep:
+            kept = rebuilt(story, keep, c.get("headline"))
+            # each part is named after its own first article, as in normal runs (two parts must not share an id)
+            kept["id"] = hashlib.sha1(first_link(kept["articles"][0]).encode()).hexdigest()[:10]
+            day["stories"].append(kept)
+        write_json(day_path, day)
+        if moved:
+            new = rebuilt(story, moved, c.get("move_headline"))
+            new["id"] = hashlib.sha1(first_link(new["articles"][0]).encode()).hexdigest()[:10]
+            d = sofia_day(new["first_seen"])
+            other_path = os.path.join(STORY_DAYS_DIR, f"{d}.json")
+            other = read_json(other_path, {"date": str(d), "stories": []})
+            other["stories"] = [s for s in other["stories"] if s["id"] != new["id"]] + [new]
+            write_json(other_path, other)
+        done.append(c["name"])
+        applied += 1
+        print(f"Correction applied: {c['name']} ({len(keep)} kept, {len(moved)} moved, "
+              f"{len(story['articles']) - len(keep) - len(moved)} dropped)")
+    if applied:
+        write_json(done_path, done)
+
+
 def main():
     articles = load("articles.json", [])
     status = {s["outlet"]: s for s in load("outlet_status.json", [])}
@@ -291,6 +345,7 @@ def main():
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=1)
     os.replace(tmp, os.path.join(DATA, "stories.json"))
+    apply_corrections()
     cleaned = clean_saved_versions()
     if cleaned:
         print(f"Archive: merged {cleaned} renamed articles in saved stories.")
