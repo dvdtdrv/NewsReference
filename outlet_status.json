@@ -1,0 +1,362 @@
+[
+ {
+  "outlet": "BTA",
+  "type": "news agency",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 11,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "BNT",
+  "type": "public TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "BNR",
+  "type": "public radio",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "bTV Novinite",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Nova",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 8,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Dnevnik",
+  "type": "online daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Capital",
+  "type": "weekly / business",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Mediapool",
+  "type": "online, politics",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Standart",
+  "type": "daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 4,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "24 Chasa",
+  "type": "mass daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 7,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Trud",
+  "type": "mass daily",
+  "method": "sitemap",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Sega",
+  "type": "daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "16 skipped: too old/future; e.g. date 'Fri, 06 Nov 2026 18:04:33 +0200' read as 2026-11-06T16:04"
+ },
+ {
+  "outlet": "Club Z",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "1 skipped: too old/future; e.g. date 'Fri, 6 Nov 2026 14:50:55 GMT' read as 2026-11-06T14:50"
+ },
+ {
+  "outlet": "Dnes.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Actualno",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 5,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Fakti",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 14,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Offnews",
+  "type": "online portal",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Blitz",
+  "type": "online portal",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Novini.bg",
+  "type": "online portal",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Dir.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "PIK",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "30 skipped: too old/future; e.g. date '2026-10-16 22:35:00' read as 2026-10-16T20:35"
+ },
+ {
+  "outlet": "Banker",
+  "type": "business",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Pogled.info",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Darik",
+  "type": "radio",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Focus",
+  "type": "news agency",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 9,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Vesti.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "News.bg",
+  "type": "online portal",
+  "method": "page",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": "8 skipped: no date"
+ },
+ {
+  "outlet": "BG On Air",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-11-01T20:40:22.455480+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Bloomberg TV",
+  "type": "business TV",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-11-01T20:40:22.455480+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Evrocom",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Euronews BG",
+  "type": "international",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "DW",
+  "type": "international",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Boulevard Bulgaria",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Svobodna Tochka",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Marica",
+  "type": "regional",
+  "method": "feed",
+  "status": "waiting",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T11:14:59.661279+00:00",
+  "first_ok": "2026-11-02T07:32:44.536010+00:00",
+  "note": "waiting for David's PC (it reads this outlet; the PC is off or hasn't run yet)"
+ },
+ {
+  "outlet": "Moreto.net",
+  "type": "regional",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-14T18:10:35.854587+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ }
+]

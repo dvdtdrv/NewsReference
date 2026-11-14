@@ -1,0 +1,226 @@
+{
+ "date": "2026-10-29",
+ "updated_at": "2026-11-01T08:41:32.420377+00:00",
+ "tracked_outlets": [
+  {
+   "name": "BTA",
+   "type": "news agency",
+   "active": true
+  },
+  {
+   "name": "BNT",
+   "type": "public TV",
+   "active": true
+  },
+  {
+   "name": "BNR",
+   "type": "public radio",
+   "active": true
+  },
+  {
+   "name": "bTV Novinite",
+   "type": "commercial TV",
+   "active": false
+  },
+  {
+   "name": "Nova",
+   "type": "commercial TV",
+   "active": true
+  },
+  {
+   "name": "Dnevnik",
+   "type": "online daily",
+   "active": true
+  },
+  {
+   "name": "Capital",
+   "type": "weekly / business",
+   "active": true
+  },
+  {
+   "name": "Mediapool",
+   "type": "online, politics",
+   "active": true
+  },
+  {
+   "name": "Standart",
+   "type": "daily",
+   "active": true
+  },
+  {
+   "name": "24 Chasa",
+   "type": "mass daily",
+   "active": true
+  },
+  {
+   "name": "Trud",
+   "type": "mass daily",
+   "active": false
+  },
+  {
+   "name": "Sega",
+   "type": "daily",
+   "active": true
+  },
+  {
+   "name": "Club Z",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Dnes.bg",
+   "type": "online portal",
+   "active": false
+  },
+  {
+   "name": "Actualno",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Fakti",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Offnews",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Blitz",
+   "type": "online portal",
+   "active": false
+  },
+  {
+   "name": "Novini.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Dir.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "PIK",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Banker",
+   "type": "business",
+   "active": true
+  },
+  {
+   "name": "Pogled.info",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Darik",
+   "type": "radio",
+   "active": true
+  },
+  {
+   "name": "Focus",
+   "type": "news agency",
+   "active": true
+  },
+  {
+   "name": "Vesti.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "News.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "BG On Air",
+   "type": "commercial TV",
+   "active": false
+  },
+  {
+   "name": "Bloomberg TV",
+   "type": "business TV",
+   "active": false
+  },
+  {
+   "name": "Evrocom",
+   "type": "commercial TV",
+   "active": true
+  },
+  {
+   "name": "Euronews BG",
+   "type": "international",
+   "active": true
+  },
+  {
+   "name": "DW",
+   "type": "international",
+   "active": true
+  },
+  {
+   "name": "Boulevard Bulgaria",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Svobodna Tochka",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Marica",
+   "type": "regional",
+   "active": false
+  },
+  {
+   "name": "Moreto.net",
+   "type": "regional",
+   "active": true
+  }
+ ],
+ "stories": [
+  {
+   "id": "90c9102d5e",
+   "headline": "Кирил Петков ще съди Илияна Йотова",
+   "first_seen": "2026-10-29T21:49:54+00:00",
+   "last_updated": "2026-10-30T06:49:43+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Club Z",
+    "Sega",
+    "Offnews"
+   ],
+   "not_covered": [
+    "Trud"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": ";Бяхме в Битоля за откриване на български клуб;. Кирил Петков ще съди Илияна Йотова за лъжа",
+     "link": "https://clubz.bg/181188",
+     "published": "2026-10-29T21:49:54+00:00",
+     "image": "https://clubz.bg/146/kp-podobren111.png"
+    },
+    {
+     "outlet": "Sega",
+     "title": "Кирил Петков ще съди Илияна Йотова",
+     "link": "https://www.segabg.com/hot/category-bulgaria/kiril-petkov-shte-sudi-iliyana-yotova",
+     "published": "2026-10-30T06:16:00+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/01/payimage-706677.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Кирил Петков: Ще се видим в съда, г-жо Йотова",
+     "link": "https://offnews.bg/politika/kiril-petkov-shte-se-vidim-v-sada-g-zho-jotova-877502.html",
+     "published": "2026-10-30T06:49:43+00:00",
+     "image": ""
+    }
+   ]
+  }
+ ]
+}
