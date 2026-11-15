@@ -203,7 +203,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   Net Info 2026 rate card PDF is gone (404), prices left out.
 - Outlet info #25 Focus (15 Nov): full text received. NOT yet added because unverified from the workspace: the 15 public
   contracts (~489k EUR, sigma.midt.bg/contracts?bidder=206912758 answers 500) and the CIK list for 19.04.2026 (cik.bg 403);
-  check both in David's PC browser. Disputes for Darik and Focus still to research (David asked 15 Nov).
+  check both in David's PC browser. Disputes added 15 Nov: Darik + Vesti (2019 Net Info shareholder clash, Христо Христов's
+  claim of editorial interference), Focus (2019 missing 1.5M лв, 2022 closure reports, Налджиев's 'deliberate bankruptcy' claim).
+  News.bg: none found; added previous owner Красен Кралев (2013). Still unread (paywalled): Capital 30.05.2019 on Net Info.
 - Outlet info #26 Vesti.bg (15 Nov): same publisher as Darik (Net Info); shared sections copied, plus budget payments from uic.bg (also added to Darik).
 - Outlet info #27 News.bg (15 Nov): Уеб Медия Груп АД (public company), 73.45% Ню Уеб Маркет -> ... -> Некст Дженерейшън Консулт; no natural person named. CIK tariff lists not checked (cik.bg 403).
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
