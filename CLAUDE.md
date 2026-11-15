@@ -209,6 +209,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Outlet info #26 Vesti.bg (15 Nov): same publisher as Darik (Net Info); shared sections copied, plus budget payments from uic.bg (also added to Darik).
 - Outlet info #27 News.bg (15 Nov): Уеб Медия Груп АД (public company), 73.45% Ню Уеб Маркет -> ... -> Некст Дженерейшън Консулт; no natural person named. CIK tariff lists not checked (cik.bg 403).
 - Outlet info #28 BG On Air (15 Nov): same publisher as Dnes.bg (Инвестор.БГ); ownership/money/Химимпорт sections reused from Dnes.bg; no disputes of its own found. bgonair.bg/p/advertisement was readable from the workspace this time.
+- Deep sweep 15 Nov (scandals, censorship, manipulation, foreign influence) for Darik, Vesti, Focus, News.bg, BG On Air: nothing new beyond
+  the disputes already added. Checked: CEM annual reports 2022/2024, CEM election report 2024, RFE on the CSD Russia report, Club Z on China,
+  StopFake, Actualno, Bivol on ТИМ (none names these outlets). Not readable: Capital (paywall), Marginalia, Banker 18.09.2019 (403).
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
 
 ## Reference (how-tos learned so far)
