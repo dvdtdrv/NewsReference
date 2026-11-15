@@ -201,6 +201,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   feeds.py type changed radio -> online portal. Net Info's art. 7a declaration (06.07.2026) lists 15 ad contracts (2025)
   for all its sites; read with tesseract + bul.traineddata (raw.githubusercontent.com/tesseract-ocr/tessdata_fast).
   Net Info 2026 rate card PDF is gone (404), prices left out.
+- Outlet info #25 Focus (15 Nov): David's text was cut off in section 3 (editorial leadership onward); add the rest when he resends.
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
 
 ## Reference (how-tos learned so far)
