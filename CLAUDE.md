@@ -205,6 +205,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   contracts (~489k EUR, sigma.midt.bg/contracts?bidder=206912758 answers 500) and the CIK list for 19.04.2026 (cik.bg 403);
   check both in David's PC browser. Disputes for Darik and Focus still to research (David asked 15 Nov).
 - Outlet info #26 Vesti.bg (15 Nov): same publisher as Darik (Net Info); shared sections copied, plus budget payments from uic.bg (also added to Darik).
+- Outlet info #27 News.bg (15 Nov): Уеб Медия Груп АД (public company), 73.45% Ню Уеб Маркет -> ... -> Некст Дженерейшън Консулт; no natural person named. CIK tariff lists not checked (cik.bg 403).
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
 
 ## Reference (how-tos learned so far)
