@@ -208,6 +208,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   News.bg: none found; added previous owner Красен Кралев (2013). Still unread (paywalled): Capital 30.05.2019 on Net Info.
 - Outlet info #26 Vesti.bg (15 Nov): same publisher as Darik (Net Info); shared sections copied, plus budget payments from uic.bg (also added to Darik).
 - Outlet info #27 News.bg (15 Nov): Уеб Медия Груп АД (public company), 73.45% Ню Уеб Маркет -> ... -> Некст Дженерейшън Консулт; no natural person named. CIK tariff lists not checked (cik.bg 403).
+- Outlet info #28 BG On Air (15 Nov): same publisher as Dnes.bg (Инвестор.БГ); ownership/money/Химимпорт sections reused from Dnes.bg; no disputes of its own found. bgonair.bg/p/advertisement was readable from the workspace this time.
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
 
 ## Reference (how-tos learned so far)
