@@ -79,7 +79,7 @@ OUTLETS = [
      "feed": "https://pogled.info/rss"},
 
     # --- Added 1 Nov 2026 (found with probe_missing.py and checked in a browser) ---
-    {"name": "Darik", "domain": "dariknews.bg", "type": "radio",
+    {"name": "Darik", "domain": "dariknews.bg", "type": "online portal",   # Net Info, not the radio (15 Nov 2026)
      "feed": "https://dariknews.bg/rss.php"},
     {"name": "Focus", "domain": "focus-news.net", "type": "news agency",
      "feed": "https://www.focus-news.net/rss.php"},

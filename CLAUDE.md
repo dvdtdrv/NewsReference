@@ -197,6 +197,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   that become their own story on their own start day), move_headline, drop (links removed). Each part gets the id of
   its own first article. First use: the 11 Nov story mixing personal assistants (97 kept) and Kaufland reactions (27).
   Use it for reader/outlet correction requests about grouping (promised on the legal page).
+- Outlet info #24 Darik (15 Nov): dariknews.bg = „Нет Инфо“ ЕАД (Nova / United Group), NOT Дарик радио or Darik.bg;
+  feeds.py type changed radio -> online portal. Net Info's art. 7a declaration (06.07.2026) lists 15 ad contracts (2025)
+  for all its sites; read with tesseract + bul.traineddata (raw.githubusercontent.com/tesseract-ocr/tessdata_fast).
+  Net Info 2026 rate card PDF is gone (404), prices left out.
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
 
 ## Reference (how-tos learned so far)
