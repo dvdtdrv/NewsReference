@@ -236,3 +236,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   (filed 28.06.2025; scanned, rotated - read as image): revenue 2,094k, loss 415k лв. Media packages (ИРПС), own 2026 contract list (98,437.50 EUR),
   uic.bg budget payments. Disputes: 2019 Barekov's paid show dropped, 2020 prosecution/DANS/NAP checks of advertisers, 2026 final ruling (Халваджиян).
   Left out as unverified: SIGMA contracts (500), Finansi/CompanyBook/EMIS percentages, 1996 start date (eurocom.bg/za-nas 403; its PDFs open).
+- Outlet info #31 Euronews BG (16 Nov): Телевизия Европа АД (115568068), sole owner Добрин Иванов (via ДИПИ ЕООД); Euronews SA = brand licence only.
+  2023 report (scanned; tables read as images): revenue 1,577k, loss 4,941k, debts to owner's group 18,015k, equity -14,558k; 2022 audit qualified.
+  Disputes: 2023 resignations / who controls the news (RFE, AEJ, CEM report, Stoimenova Jan 2024), 2020 FinCEN/Bivol on the owner. Extra: Direkt36 on
+  who paid for Euronews (Orbán circle). Left out as unverified: CIK decision 4804-НС on the April 2026 exit poll (cik.bg 403), 99%/1% split and
+  Finansi percentages (finansi 403), joint statement text (sbj JS check; old euronewsbulgaria.com link now redirects) - CEM's report quotes it.
