@@ -241,3 +241,6 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   Disputes: 2023 resignations / who controls the news (RFE, AEJ, CEM report, Stoimenova Jan 2024), 2020 FinCEN/Bivol on the owner. Extra: Direkt36 on
   who paid for Euronews (Orbán circle). Left out as unverified: CIK decision 4804-НС on the April 2026 exit poll (cik.bg 403), 99%/1% split and
   Finansi percentages (finansi 403), joint statement text (sbj JS check; old euronewsbulgaria.com link now redirects) - CEM's report quotes it.
+- Outlet info #32 DW (16 Nov): public-law institution, no owner; law (DWG), 2024 accounts, 2025 management report, Evaluationsbericht 2025 (Bulgarian
+  service figures, partners Dnevnik/Dnes/Nova/Fakti). Disputes: 2013 Бедров/Барух after the КТБ letter, 2022 Arabic service dismissals + Russia ban,
+  2026 cuts (Greek service closed). Not readable: bundeshaushalt.de (503), ebu.ch (403), bghelsinki.org (403).
