@@ -257,3 +257,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   NOT verified, left out (check in David's PC browser): Indzhov's study figures (590k / 436k лв; uni-vt.bg TLS error + robots), SBJ 12.06.2026 (JS check),
   SIGMA contracts with Община Пловдив (~208k EUR), North Data (429), marica.bg/reklama; register document downloads returned 500 on 16 Nov
   (2022 report and the 2019 art. 7a declaration not read - retry).
+- Outlet info #36 Moreto.net (16 Nov): two companies - Морето ООД (148107340; Стефанов 50% / Петрова 50%) and Морето Нет ЕООД (208626887, registered
+  29.12.2025, Петрова 100%; issues the 2026 election tariff and contracts, 10,605.54 EUR). НАП lien on Stefanov's share 02.12.2025 (uic.bg history).
+  No disputes found. Not verified (JS check / robots): contacts and terms pages, audience figures, ВАС decision 6315/2026 on the moreto.bg trademark.
+- 16 Nov: outlet info now filled for all 36 outlets. Still to verify in David's PC browser: Focus SIGMA contracts + CIK lists, Evrocom SIGMA,
+  Euronews CIK decision 4804, Boulevard's America for Bulgaria grant, Marica (Indzhov study, SIGMA, SBJ, register documents), Moreto (terms, ВАС).
