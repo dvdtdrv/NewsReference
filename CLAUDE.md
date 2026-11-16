@@ -251,3 +251,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Outlet info #34 Svobodna Tochka (16 Nov): foundation (208740798, public benefit, registered 20.03.2026, 30 EUR initial contribution); director Иван Бедров,
   second representative Ваксберг -> Делчева on 09.11.2026 (uic.bg history). Donor-funded, donors and sums not published. No disputes found; Bedrov's
   remark on early pressure attempts (kultura.bg interview) and the 2013 DW episode are in the independence section.
+- Outlet info #35 Marica (16 Nov): ИК Марица ЕООД (115350662) <- Пресгрупа Утро ЕООД (117017845, since 20.01.2015) <- BG Privatinvest GmbH (Austria);
+  Грозев + Хабсбург named by Club Z / Akcent / Dotbg, not visible in the register. Earlier owner ГМ Прес (КТБ credits, 2012-2015). НАП liens on the shares
+  2020-21 and 2022-23; latest report filed is 2022. Disputes: Russian attacks on Grozev (ФАН 2021, wanted 2022), 2018 unsupported Peevski claim.
+  NOT verified, left out (check in David's PC browser): Indzhov's study figures (590k / 436k лв; uni-vt.bg TLS error + robots), SBJ 12.06.2026 (JS check),
+  SIGMA contracts with Община Пловдив (~208k EUR), North Data (429), marica.bg/reklama; register document downloads returned 500 on 16 Nov
+  (2022 report and the 2019 art. 7a declaration not read - retry).
