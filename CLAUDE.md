@@ -229,3 +229,6 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   Report: Bulgaria" (Nov 2025), CoE/MFRR report (Oct 2025).
 - The workspace reaches 29 outlets directly (David allowed their domains, 3 Nov); the 7 local ones only via the PC.
 - GitHub API through the workspace proxy: runs/jobs/workflow dispatch work; runners and pages/builds are blocked.
+- Outlet info #29 Bloomberg TV (15-16 Nov): „Инвестор ТВ“ ЕООД (201523151), 100% Инвестор.БГ; Bloomberg L.P. = licence only. Own 2025 figures from the
+  group report (revenue 2,524k, net loss 2,018k лв). Ownership chain, money-flow, Химимпорт and 2013 dispute reused from BG On Air. No disputes of its
+  own found. Left out: CIK list 9.03.2026 (cik.bg 403), undated general rate card.
