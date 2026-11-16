@@ -248,3 +248,6 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   manager and managing editor since 10.06.2025. 2023 report: revenue 835k, profit 91k лв. Political contracts 2026 only with Гюров-Кандев IC (2,989 EUR,
   PDF), ПП, ДБ (their PDFs 404). No disputes found. Left out as unverified: America for Bulgaria grant 38,330 лв (us4bg.org JS check - check in David's
   browser), Finansi percentages.
+- Outlet info #34 Svobodna Tochka (16 Nov): foundation (208740798, public benefit, registered 20.03.2026, 30 EUR initial contribution); director Иван Бедров,
+  second representative Ваксберг -> Делчева on 09.11.2026 (uic.bg history). Donor-funded, donors and sums not published. No disputes found; Bedrov's
+  remark on early pressure attempts (kultura.bg interview) and the 2013 DW episode are in the independence section.
