@@ -232,3 +232,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Outlet info #29 Bloomberg TV (15-16 Nov): „Инвестор ТВ“ ЕООД (201523151), 100% Инвестор.БГ; Bloomberg L.P. = licence only. Own 2025 figures from the
   group report (revenue 2,524k, net loss 2,018k лв). Ownership chain, money-flow, Химимпорт and 2013 dispute reused from BG On Air. No disputes of its
   own found. Left out: CIK list 9.03.2026 (cik.bg 403), undated general rate card.
+- Outlet info #30 Evrocom (16 Nov): Телевизия Евроком ООД (121761999), Илчев 51% / Златев 49% (register). Latest annual report in the register is 2022
+  (filed 28.06.2025; scanned, rotated - read as image): revenue 2,094k, loss 415k лв. Media packages (ИРПС), own 2026 contract list (98,437.50 EUR),
+  uic.bg budget payments. Disputes: 2019 Barekov's paid show dropped, 2020 prosecution/DANS/NAP checks of advertisers, 2026 final ruling (Халваджиян).
+  Left out as unverified: SIGMA contracts (500), Finansi/CompanyBook/EMIS percentages, 1996 start date (eurocom.bg/za-nas 403; its PDFs open).
