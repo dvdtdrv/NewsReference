@@ -244,3 +244,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Outlet info #32 DW (16 Nov): public-law institution, no owner; law (DWG), 2024 accounts, 2025 management report, Evaluationsbericht 2025 (Bulgarian
   service figures, partners Dnevnik/Dnes/Nova/Fakti). Disputes: 2013 Бедров/Барух after the КТБ letter, 2022 Arabic service dismissals + Russia ban,
   2026 cuts (Greek service closed). Not readable: bundeshaushalt.de (503), ebu.ch (403), bghelsinki.org (403).
+- Outlet info #33 Boulevard Bulgaria (16 Nov): Публитикс Медиа ЕООД (201501023); founder Асен Григоров died May 2025, his wife Сибина Григорова is owner,
+  manager and managing editor since 10.06.2025. 2023 report: revenue 835k, profit 91k лв. Political contracts 2026 only with Гюров-Кандев IC (2,989 EUR,
+  PDF), ПП, ДБ (their PDFs 404). No disputes found. Left out as unverified: America for Bulgaria grant 38,330 лв (us4bg.org JS check - check in David's
+  browser), Finansi percentages.
