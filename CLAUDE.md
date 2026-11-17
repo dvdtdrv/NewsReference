@@ -260,8 +260,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Outlet info #36 Moreto.net (16 Nov): two companies - Морето ООД (148107340; Стефанов 50% / Петрова 50%) and Морето Нет ЕООД (208626887, registered
   29.12.2025, Петрова 100%; issues the 2026 election tariff and contracts, 10,605.54 EUR). НАП lien on Stefanov's share 02.12.2025 (uic.bg history).
   No disputes found. Not verified (JS check / robots): contacts and terms pages, audience figures, ВАС decision 6315/2026 on the moreto.bg trademark.
-- 16 Nov: outlet info now filled for all 36 outlets. Still to verify in David's PC browser: Focus SIGMA contracts + CIK lists, Evrocom SIGMA,
-  Euronews CIK decision 4804, Boulevard's America for Bulgaria grant, Marica (Indzhov study, SIGMA, SBJ, register documents), Moreto (terms, ВАС).
+- 16 Nov: outlet info now filled for all 36 outlets. 17 Nov: the PC-browser checks are done and added (see below).
 - Deeper sweep 17 Nov (David: scandals, lawsuits, convictions were not really investigated). Method that worked: СЕМ's published penalty orders
   (cem.bg/controlsbg/13, 14 pages, 272 PDFs, 2015-2026) downloaded to the scratchpad and parsed (pdftotext; EIK after "срещу", fine after "НАЛАГАМ").
   Counts: bTV 44 (323k лв), Nova 57 (372k), BNT 18, BNR 16, Evrocom 8 (39k), Телевизия Европа 8 (27k, all before the Euronews rebrand),
@@ -270,3 +269,13 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   against Инвестор.БГ. Svobodna Tochka: Борис Митов's final conviction (ВКС 16.07.2025, Mediapool articles of 2018).
   Still nothing found for Bloomberg TV, Boulevard Bulgaria, Moreto.net, Marica (as a defendant). Court databases vks.bg and legalacts.justice.bg
   do not open from the workspace (proxy / robots) - two ВКС acts mentioning Марица are unread; check in David's PC browser.
+- 17 Nov, read in David's PC browser (built-in browser) and added: SIGMA contracts (Focus 489k EUR, Evrocom 76k, Marica 208k with Plovdiv),
+  CIK tariff list for 19.04.2026 (cik.bg/bg/ns19.04.2026/media_tarif; Euronews not on it), CIK 4804-НС (Euronews exit poll before 20:00),
+  CIK 2019 decisions vs Инвестор.БГ (276/277 violations; 552/554/556 = 2000+1000+2000 лв), Boulevard's America for Bulgaria grant (38,330 лв),
+  Moreto terms/contacts/ad page and the ВАС 6315/2026 trademark case (won by Морето ООД), Indzhov's study (uni-vt.bg PDF, pp. 44-49),
+  SBJ 12.06.2026, North Data (BG Privatinvest terminated 19.10.2022 but still owner in the BG register - open question), Marica's register
+  documents (2019 art. 7a declaration names Grozev + Habsburg; 2022 report). Court finds: ВКС 206/07.12.2023 (PIK + Селевкиди, 10,000 лв,
+  bTV presenter) cites Sofia Appeals 984/2021 against "ИК Марица ООД" (8,000 лв, not read itself). Two other acts were unrelated.
+  How-tos: PDFs in the PC browser - fetch the bytes in page JS, then pdf.js via dynamic import from jsdelivr (works on uni-vt.bg and
+  legalacts, blocked by CSP on the register portal); register documents: fetch /CR/api/Documents/<token> from a portal page, then show
+  them with a blob URL in an <embed> and read by screenshots (they are scans). vks.bg, legalacts, cik.bg, sigma.midt.bg open fine there.
