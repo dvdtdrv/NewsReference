@@ -262,3 +262,11 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   No disputes found. Not verified (JS check / robots): contacts and terms pages, audience figures, ВАС decision 6315/2026 on the moreto.bg trademark.
 - 16 Nov: outlet info now filled for all 36 outlets. Still to verify in David's PC browser: Focus SIGMA contracts + CIK lists, Evrocom SIGMA,
   Euronews CIK decision 4804, Boulevard's America for Bulgaria grant, Marica (Indzhov study, SIGMA, SBJ, register documents), Moreto (terms, ВАС).
+- Deeper sweep 17 Nov (David: scandals, lawsuits, convictions were not really investigated). Method that worked: СЕМ's published penalty orders
+  (cem.bg/controlsbg/13, 14 pages, 272 PDFs, 2015-2026) downloaded to the scratchpad and parsed (pdftotext; EIK after "срещу", fine after "НАЛАГАМ").
+  Counts: bTV 44 (323k лв), Nova 57 (372k), BNT 18, BNR 16, Evrocom 8 (39k), Телевизия Европа 8 (27k, all before the Euronews rebrand),
+  Инвестор.БГ 2 (6k), Инвестор ТВ 0, Дарик радио 8 (not our Darik). Added as dispute entries to Evrocom, Euronews BG, BG On Air, bTV, Nova;
+  BNT/BNR not added yet. ЦИК decisions can be found by title through bta.bg "oficial-messages" (text paywalled): 552/554/556-ЕП of 18.07.2019
+  against Инвестор.БГ. Svobodna Tochka: Борис Митов's final conviction (ВКС 16.07.2025, Mediapool articles of 2018).
+  Still nothing found for Bloomberg TV, Boulevard Bulgaria, Moreto.net, Marica (as a defendant). Court databases vks.bg and legalacts.justice.bg
+  do not open from the workspace (proxy / robots) - two ВКС acts mentioning Марица are unread; check in David's PC browser.
