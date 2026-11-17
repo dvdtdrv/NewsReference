@@ -79,8 +79,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   an outlet, also show the attacker's documented ties (registers, sanctions, court rulings, who appointed whom,
   reputable investigations), the same for every side; label documented vs alleged; never call an attack a lie
   unless a court or the record shows it. Add links for all sources. Don't publish private donors' names or
-  documents with personal ID numbers (ЕГН). Internal notes like "(не сме го прочели)" stay in the data; the site
-  shows only a "платен достъп" tag. No meta-sentences about our own access problems.
+  documents with personal ID numbers (ЕГН). No "(не сме го прочели)" notes on sources (David, 17 Nov: all 326 removed); a paywalled source
+  ends in "(платен)" and the site shows it as a "платен достъп" tag. No meta-sentences about our own access problems.
 - **Classification of outlets**: no bare left/right labels; measured axes with evidence (ownership, geopolitical
   framing, blindspots, sensationalism). „За проекта" announces it as a coming feature.
 - **English-language outlets left out** (Novinite, Sofia Globe): grouping works on Bulgarian text only.
