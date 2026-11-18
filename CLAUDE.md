@@ -131,7 +131,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
    a. newsreference.bg bought at Jump.bg 17 Nov (29.60 EUR/yr, renews 17.11.2027, owner David); waiting for Jump.bg to finish
       the .bg registration (DNS-server change is refused until then).
    b. Cloudflare (David's free account, domain already added): records A @ -> 185.199.108-111.153, AAAA @ -> 2606:50c0:8000-8003::153,
-      CNAME www -> dvdtdrv.github.io, all Proxied (orange); SSL/TLS "Full" + "Always Use HTTPS"; then Jump.bg DNS servers -> Cloudflare's two.
+      CNAME www -> dvdtdrv.github.io, all Proxied (orange) - all 9 added 18 Nov; SSL/TLS "Full" + "Always Use HTTPS"; then Jump.bg
+      DNS servers -> Cloudflare's two: chip.ns.cloudflare.com, vida.ns.cloudflare.com (DNSSEC off at Jump.bg).
    c. GitHub Settings -> Pages -> custom domain newsreference.bg (verify the domain). All site links are relative: no code change.
       Then update the legal page (hosting sentence), CLAUDE.md, and optionally strip GitHub/Fastly headers with a Cloudflare rule.
    d. Hetzner test (hourly billing): can a server read the 7 PC outlets? Also try one Bulgarian VPS. David creates the account;
