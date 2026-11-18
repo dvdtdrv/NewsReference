@@ -49,9 +49,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 ## Decisions and why
 - **Headline, short summary and link only, never full text**: copyright; the site sends readers to outlets.
 - **No Google News RSS fallback**: Google's robots.txt disallows it.
-- **BTA** blocks programs; it allowed us in writing (31 Oct 2026, `permissions/BTA.md`) to read the feed at most
+- **BTA** blocks programs; it allowed us in writing (31 Oct 2026; email + note kept by David, not in the repo) to read the feed at most
   once per 30 min -> `as_browser`, `gentle`. **bTV** allowed reading "from the browser" for this student project
-  (1 Nov, `permissions/bTV.md`). Commercial use, photos and attribution NOT covered: ask both again before
+  (1 Nov; email + note kept by David, not in the repo since 18 Nov). Commercial use, photos and attribution NOT covered: ask both again before
   the project earns money.
 - **7 outlets refuse GitHub's servers** (bTV, Trud, Blitz, Marica: 403; Dnes.bg, BG On Air, Bloomberg TV:
   timeout) -> read from David's PC (self-hosted runner) instead of bypassing. They also refuse Claude's

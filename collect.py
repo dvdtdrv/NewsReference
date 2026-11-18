@@ -39,7 +39,7 @@ except Exception:
 
 USER_AGENT = "NewsReferenceBot/0.1 (student project comparing Bulgarian news coverage)"
 HEADERS = {"User-Agent": USER_AGENT}
-# Used only for outlets marked as_browser in feeds.py, which gave written permission (permissions/).
+# Used only for outlets marked as_browser in feeds.py, which gave written permission (kept by David, outside the repository).
 BROWSER_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",

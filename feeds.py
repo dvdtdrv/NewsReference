@@ -21,7 +21,7 @@ Found with check_feeds.py and probe_missing.py on 31 Oct 2026.
 OUTLETS = [
     # --- Public / state media ---
     # BTA blocks programs, but gave written permission on 31 Oct 2026 to read the feed with our
-    # program in any way, at most once every 30 minutes (see permissions/BTA.md). So for BTA only,
+    # program in any way, at most once every 30 minutes (the email is kept by David, outside the repository). So for BTA only,
     # the program introduces itself as a browser.
     {"name": "BTA", "domain": "bta.bg", "type": "news agency",
      "feed": "https://www.bta.bg/bg/rss/free", "gentle": True, "as_browser": True},
@@ -33,7 +33,7 @@ OUTLETS = [
 
     # --- Commercial TV ---
     # bTV gave written permission on 1 Nov 2026 to read its coverage through a browser for this
-    # project (see permissions/bTV.md), so the program introduces itself as a browser for bTV only.
+    # project (the email is kept by David, outside the repository), so the program introduces itself as a browser for bTV only.
     {"name": "bTV Novinite", "local": True, "domain": "btvnovinite.bg", "type": "commercial TV",
      "feed": "https://btvnovinite.bg/lbin/v3/rss.php", "as_browser": True},
     {"name": "Nova", "domain": "nova.bg", "type": "commercial TV",
