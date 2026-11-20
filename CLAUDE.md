@@ -128,18 +128,28 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 
 ## Next steps
 0. Domain + hosting plan (agreed with David 18 Nov 2026):
-   a. newsreference.bg bought at Jump.bg 17 Nov (29.60 EUR/yr, renews 17.11.2027, owner David); waiting for Jump.bg to finish
-      the .bg registration (DNS-server change is refused until then).
+   a. newsreference.bg bought at Jump.bg 17 Nov (29.60 EUR/yr, renews 17.11.2027, owner David); registered 20 Nov; Jump.bg
+      DNS servers set to Cloudflare's two on 20 Nov ~14:45 Sofia (waiting for .bg to publish it, then Cloudflare "Active").
    b. Cloudflare (David's free account, domain already added): records A @ -> 185.199.108-111.153, AAAA @ -> 2606:50c0:8000-8003::153,
       CNAME www -> dvdtdrv.github.io, all Proxied (orange) - all 9 added 18 Nov; SSL/TLS "Full" + "Always Use HTTPS"; then Jump.bg
       DNS servers -> Cloudflare's two: chip.ns.cloudflare.com, vida.ns.cloudflare.com (DNSSEC off at Jump.bg).
-   c. GitHub Settings -> Pages -> custom domain newsreference.bg (verify the domain). All site links are relative: no code change.
+   c. GitHub account Settings -> Pages -> verified domain: TXT _github-pages-challenge-dvdtdrv added in Cloudflare 20 Nov; press
+      Verify only after Cloudflare is Active. THEN repo Settings -> Pages -> custom domain newsreference.bg. Never before Cloudflare is
+      Active: on 18 and 20 Nov it 301-redirected the whole site to the dead domain (after Remove, GitHub's CDN kept the redirect
+      ~15 min; a rebuild.yml run cleared it). All site links are relative: no code change.
       Then update the legal page (hosting sentence), CLAUDE.md, and optionally strip GitHub/Fastly headers with a Cloudflare rule.
-   d. Hetzner test (hourly billing): can a server read the 7 PC outlets? Also try one Bulgarian VPS. David creates the account;
-      Claude writes a cloud-init setup text (David pastes it in "Cloud config"); server reports status to GitHub.
+   d. Hetzner test (20 Nov, CPX02 Nuremberg 91.98.0.184, project NewsReferenceTest): cloud-init text (kept in the chat, not in the
+      repo) checks the 7 feeds + BNR/Nova every 30 min for 48 h and shows a page at http://<ip>/. Lesson: in cloud-init runcmd never
+      put ": " inside a command (YAML turns it into a mapping and the whole runcmd is skipped). First round 17:06 UTC: Dnes.bg and
+      BG On Air OK; bTV, Trud, Blitz, Marica 403 = Cloudflare bot challenge ("Just a moment", cf-mitigated: challenge; same from
+      Claude's workspace) -> any data-centre server, Bulgarian VPS too, will most likely get it; Bloomberg TV 403 from its own
+      Apache (blocks Hetzner, answers Claude's workspace). Hetzner prices (Nov 2026, incl. 20% VAT): CPX02 1 GB 0.010 EUR/h,
+      CPX22 4 GB ~19.79/mo; Cost-Optimized (CX/CAX) "limited availability". Pipeline needs ~2 GB peak (group_stories + AI model,
+      measured 18 Nov), so 4 GB for the real server.
    e. If good: move the whole pipeline to the server, make the repo private (private repo = no free Actions minutes:
       ~27,000 min/month would cost ~150 $/month), point Cloudflare's records to the server. If some of the 7 still refuse:
-      PC (or a Raspberry Pi at home) keeps reading them, or ask those outlets to allow the server's fixed IP. No residential proxies.
+      PC (or a Raspberry Pi at home) keeps reading them, or ask those outlets to allow the server's fixed IP (on Cloudflare
+      sites the owner can add a WAF skip rule for one IP). Never try to pass the challenge. No residential proxies.
 1. Catch-up reading for the 7 PC outlets after a gap (and ask David to set his PC to never sleep).
 2. Add outlets, checking feed + robots.txt first: BGNES, Telegraph, Monitor, 168 Chasa; business: Pari,
    Economic.bg, Investor.bg (returned 403 to us), Profit.bg, Forbes Bulgaria; regional: Trafficnews (Plovdiv);
