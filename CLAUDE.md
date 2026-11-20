@@ -247,6 +247,12 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   the disputes already added. Checked: CEM annual reports 2022/2024, CEM election report 2024, RFE on the CSD Russia report, Club Z on China,
   StopFake, Actualno, Bivol on ТИМ (none names these outlets). Not readable: Capital (paywall), Marginalia, Banker 18.09.2019 (403).
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
+- Search engines (21 Nov): build_site.py writes site/sitemap.xml (6 main pages + every archive day, lastmod) and
+  site/robots.txt (Allow all + Sitemap line; Cloudflare prepends its AI "content signals" comments). Every page gets
+  `seo_head()`: its own <title>, description, canonical https://newsreference.bg/<page> (so Google ignores the old
+  github.io address), Open Graph + twitter:card (image = icon-512.png for now; a 1200x630 share image would look better).
+  SITE_URL in build_site.py. Google Search Console (Domain property, verified via Cloudflare TXT 21 Nov) and Bing (import
+  from GSC) are David's; the front page was submitted for indexing 21 Nov 01:40; submit sitemap.xml there.
 
 ## Reference (how-tos learned so far)
 - Outlet quirks: News.bg via `read_newsbg_page` (relative times, crawl-delay 10); Novini.bg puts og:image ~180 KB

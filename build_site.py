@@ -13,6 +13,7 @@ Takes site_template.html and writes:
   site/periods/top-week.json    the most covered stories of the last week / month / year (also -month, -year),
                                 which the front page loads when someone picks that period
   site/manifest.webmanifest, sw.js, icons   copied from web/, so phones can install the site as an app
+  site/sitemap.xml, robots.txt  for search engines (21 Nov 2026): the list of all pages, and where that list is
 
 The stories are put inside each page itself, so the pages work straight from your folder:
 double-click site/index.html to open the site.
@@ -21,6 +22,7 @@ Run with:   python build_site.py
 """
 
 import copy
+import html
 import json
 import os
 import shutil
@@ -35,6 +37,10 @@ WEB_DIR = "web"   # manifest, icons and offline helper that make the site instal
 DAYS_DIR = os.path.join("data", "stories")
 KEEP = ("outlet", "title", "link", "published", "image")
 PERIODS = {"week": 7, "month": 30, "year": 365}   # the longer periods on the front page, in days
+SITE_URL = "https://newsreference.bg/"   # the site's official address (21 Nov 2026), used by search engines
+SHARE_IMAGE = SITE_URL + "icon-512.png"  # the picture shown when someone shares a link (Facebook, Viber...)
+MONTHS_BG = ("януари", "февруари", "март", "април", "май", "юни", "юли", "август", "септември", "октомври",
+             "ноември", "декември")
 TOP_N = 100        # how many of the most covered stories each longer period keeps
 PHOTOS_FILE = os.path.join("data", "page_images.json")   # each article's own photo (see collect.py)
 # Outlets (or photographers, through their outlet) that asked us not to show their photos: write the outlet's
@@ -126,10 +132,42 @@ def period_tops(days, generated_at):
     return {k: slim(copy.deepcopy(sorted(v.values(), key=key, reverse=True)[:TOP_N])) for k, v in best.items()}
 
 
-def render(data, template, fragment_only=False):
+def seo_head(path, title, description):
+    """Tags for search engines and link previews (21 Nov 2026): the page's official address (canonical, so
+    Google counts newsreference.bg and not the old github.io address), its title and description, and what
+    Facebook, Viber, X and others show when someone shares the link."""
+    url = SITE_URL + path
+    t, d = html.escape(title, quote=True), html.escape(description, quote=True)
+    return (
+        f"<title>{t}</title>\n"
+        f'<meta name="description" content="{d}">\n'
+        f'<link rel="canonical" href="{url}">\n'
+        '<meta property="og:type" content="website">\n'
+        '<meta property="og:site_name" content="News Reference">\n'
+        '<meta property="og:locale" content="bg_BG">\n'
+        f'<meta property="og:url" content="{url}">\n'
+        f'<meta property="og:title" content="{t}">\n'
+        f'<meta property="og:description" content="{d}">\n'
+        f'<meta property="og:image" content="{SHARE_IMAGE}">\n'
+        '<meta name="twitter:card" content="summary">\n'
+    )
+
+
+def day_bg(day):
+    """2026-11-20 -> 20 ноември 2026"""
+    y, m, d = day.split("-")
+    return f"{int(d)} {MONTHS_BG[int(m) - 1]} {y}"
+
+
+def render(data, template, fragment_only=False, seo=None):
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     payload = payload.replace("</", "<\\/")  # a headline containing "</script>" must not end the script
     page = template.replace("/*__DATA__*/", payload).replace("{{BASE}}", data.get("base", ""))
+    if seo:   # (path, title, description): replaces the template's general title and description
+        start = page.index("<title>")
+        page = page[:start] + seo_head(*seo) + page[page.index("</title>", start) + len("</title>"):].lstrip("\n")
+        d = page.index('<meta name="description"', start + 300)   # the template's own description: drop it
+        page = page[:d] + page[page.index(">", d) + 1:].lstrip("\n")
     if fragment_only:
         return page
     # wrap in a full HTML document: title, fonts and styles go in <head>, the rest in <body>
@@ -304,6 +342,22 @@ def build(fragment_only=False):
         return render(front_page_data(), f.read(), fragment_only)
 
 
+def write_sitemap(generated_at, archive_lastmods):
+    """sitemap.xml lists every page for search engines (21 Nov 2026); robots.txt tells them where it is.
+    (Cloudflare adds its own lines about AI use on top of our robots.txt.)"""
+    main_pages = ("", "medii.html", "arhiv.html", "tarsene.html", "abonament.html", "pravila.html")
+    rows = [(p, generated_at) for p in main_pages] + sorted(archive_lastmods.items(), reverse=True)
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for path, when in rows:
+        lines.append(f"  <url><loc>{SITE_URL}{path}</loc><lastmod>{when}</lastmod></url>")
+    lines.append("</urlset>")
+    with open(os.path.join(OUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    with open(os.path.join(OUT_DIR, "robots.txt"), "w", encoding="utf-8") as f:
+        f.write(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n")
+
+
 def main():
     with open(TEMPLATE, encoding="utf-8") as f:
         template = f.read()
@@ -332,7 +386,9 @@ def main():
     # everything except what only „Медии“ shows (the outlet info and the ranking are the biggest part)
     light = {k: v for k, v in front.items() if k not in MEDIA_ONLY}
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(light, template))
+        f.write(render(light, template, seo=("", "News Reference – една новина, всички медии",
+                                            "Новините от 36 български медии, групирани в истории: кои медии отразиха "
+                                            "всяка новина, с какво заглавие и кои я премълчаха.")))
 
     # the examples behind the headline-change ranking, loaded when someone opens an outlet's row
     _, examples = headline_changes()
@@ -341,11 +397,15 @@ def main():
 
     # the subscription page: same template and data, shown in "support" mode
     with open(os.path.join(OUT_DIR, "abonament.html"), "w", encoding="utf-8") as f:
-        f.write(render({**light, "page": "support", "stories": []}, template))
+        f.write(render({**light, "page": "support", "stories": []}, template,
+                       seo=("abonament.html", "Подкрепи · News Reference",
+                            "Подкрепи News Reference, независимия справочник на българските медии.")))
 
     # the search page: same template, "search" mode; it needs no stories of its own
     with open(os.path.join(OUT_DIR, "tarsene.html"), "w", encoding="utf-8") as f:
-        f.write(render({**light, "page": "search", "stories": []}, template))
+        f.write(render({**light, "page": "search", "stories": []}, template,
+                       seo=("tarsene.html", "Търсене · News Reference",
+                            "Търси във всички истории и заглавия на 36 български медии от архива на News Reference.")))
 
     # „Медии“ (9 Nov 2026): its own page; the only page that carries the outlet info and the
     # headline-change ranking, so the front page and the archive pages stay small and fast
@@ -361,17 +421,25 @@ def main():
         json.dump({**{k: front[k] for k in ("outlet_info", "outlet_totals", "story_totals")}, "outlet_recent": recent},
                   f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(OUT_DIR, "medii.html"), "w", encoding="utf-8") as f:
-        f.write(render({**front, "page": "media", "stories": [], "outlet_recent": recent}, template))
+        f.write(render({**front, "page": "media", "stories": [], "outlet_recent": recent}, template,
+                       seo=("medii.html", "Медии · News Reference",
+                            "36 български медии: кой ги притежава, откъде идват парите им, спорове, колко истории "
+                            "отразяват и колко често сменят или трият заглавия.")))
 
     # „Правна информация“ (12 Nov 2026): who runs the site, terms, privacy, cookies, copyright, corrections
     with open(os.path.join(OUT_DIR, "pravila.html"), "w", encoding="utf-8") as f:
-        f.write(render({**light, "page": "legal", "stories": []}, template))
+        f.write(render({**light, "page": "legal", "stories": []}, template,
+                       seo=("pravila.html", "Правна информация · News Reference",
+                            "Кой стои зад News Reference, условия, поверителност, авторски права и корекции.")))
 
     # „Архив“ (9 Nov 2026): its own page with the list of days
     with open(os.path.join(OUT_DIR, "arhiv.html"), "w", encoding="utf-8") as f:
-        f.write(render({**light, "page": "archive", "stories": []}, template))
+        f.write(render({**light, "page": "archive", "stories": []}, template,
+                       seo=("arhiv.html", "Архив · News Reference",
+                            "Всички истории по дни: кои български медии отразиха всяка новина и с какво заглавие.")))
 
     days = front["archive_days"]
+    lastmods = {}   # archive page -> when its stories last changed (for sitemap.xml)
 
     # the longer periods on the front page (week, month, year): loaded only when someone picks one
     os.makedirs(os.path.join(OUT_DIR, "periods"), exist_ok=True)
@@ -392,8 +460,13 @@ def main():
             "archive_days": days,
             "base": "../",
         }
+        when = day_bg(day["date"])
         with open(os.path.join(OUT_DIR, "archive", f"{day['date']}.html"), "w", encoding="utf-8") as f:
-            f.write(render(data, template))
+            f.write(render(data, template, seo=(f"archive/{day['date']}.html", f"{when} · News Reference",
+                                                f"Новините от {when}: кои български медии отразиха всяка история, "
+                                                "с какво заглавие и кои я премълчаха.")))
+        lastmods[f"archive/{day['date']}.html"] = saved["updated_at"]
+    write_sitemap(front["generated_at"], lastmods)
 
     print(f"Website built: site\\index.html and {len(days)} archive pages in site\\archive\\  "
           "(double-click site\\index.html to open)")
