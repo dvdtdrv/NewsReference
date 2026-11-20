@@ -1,6 +1,6 @@
 # NewsReference (Новинарски справочник)
 
-Live site: https://dvdtdrv.github.io/NewsReference/ · Repo: dvdtdrv/NewsReference (public) ·
+Live site: https://newsreference.bg (since 21 Nov 2026; the old https://dvdtdrv.github.io/NewsReference/ forwards there) · Repo: dvdtdrv/NewsReference (public) ·
 Architecture doc: https://claude.ai/artifact/WMiJigfLkQ3aMtR8eK3eMn
 
 ## Goal
@@ -127,7 +127,18 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Old-titles note is hover-only (not tappable on phones).
 
 ## Next steps
-0. Domain + hosting plan (agreed with David 18 Nov 2026):
+0. Domain + hosting (agreed with David 18 Nov 2026). DONE 21 Nov ~01:20 Sofia: newsreference.bg is live (Cloudflare -> GitHub Pages),
+   domain verified on GitHub, custom domain set in the repo (it needed one rebuild.yml run; the browser had cached GitHub's 404).
+   www.newsreference.bg forwards to newsreference.bg. Checked: no cookies are set (keep it so: do NOT turn on Cloudflare's Bot Fight
+   Mode, "Under Attack" or Turnstile without updating the cookie section of the legal page). Legal page hosting sentence now names
+   Cloudflare (Последна промяна 21 ноември 2026). Cloudflare "Recommendations" asks for email records (SPF/DMARC "no mail"): optional.
+   Paid server dropped for now (David, 20 Nov: too expensive; the 5 Cloudflare/Bloomberg outlets refuse any data centre anyway):
+   site stays on free GitHub; the PC reads the 7 when it is on; David emails the outlets (universal text in the chat: NewsReferenceBot
+   User-Agent skip rule / separate feed address / secret token; open about future commercial plans). bTV replied it allows reading
+   but cannot change Cloudflare and suggested a click-the-check script: declined (never pass the challenge); a reply with the three
+   options was drafted. Feed depth measured 20 Nov evening: Trud sitemap 175 items = 7 days, bTV 51 = ~8.5 h, Blitz 51 = ~6 h,
+   Bloomberg TV 10 = ~3.5 h, Marica 10 = ~2 h, BG On Air 10 = ~2 h, Dnes.bg 10 = ~1 h (Dnes.bg rss.php?today now redirects to /rss/latest).
+   Old plan steps for reference:
    a. newsreference.bg bought at Jump.bg 17 Nov (29.60 EUR/yr, renews 17.11.2027, owner David); registered 20 Nov; Jump.bg
       DNS servers set to Cloudflare's two on 20 Nov ~14:45 Sofia (waiting for .bg to publish it, then Cloudflare "Active").
    b. Cloudflare (David's free account, domain already added): records A @ -> 185.199.108-111.153, AAAA @ -> 2606:50c0:8000-8003::153,
