@@ -251,6 +251,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   the disputes already added. Checked: CEM annual reports 2022/2024, CEM election report 2024, RFE on the CSD Russia report, Club Z on China,
   StopFake, Actualno, Bivol on ТИМ (none names these outlets). Not readable: Capital (paywall), Marginalia, Banker 18.09.2019 (403).
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
+- Headline-change table under „Медии" (21 Nov, David): the four kinds are own columns (Дребни / Обнов. / Живо / Съществ.,
+  coloured headers, 0 faded); every header is a sort button (first click biggest first / names А-Я, again reversed; aria-sort);
+  "малко данни" rows stay at the bottom; the old „По процент / По брой" buttons are gone. Phones show all columns: the
+  table scrolls sideways with the outlet name sticky on the left.
 - `probe_outlets.py` + `.github/workflows/probe-outlets.yml` (21 Nov): by-hand test whether GitHub's servers can read the
   `local` outlets (feed + one article page); no timer, changes nothing. Use it when an outlet says it allowed NewsReferenceBot.
 - Search engines (21 Nov): build_site.py writes site/sitemap.xml (6 main pages + every archive day, lastmod) and
