@@ -150,9 +150,11 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
   font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .viz-tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--ink); }
 .viz-tabs button:hover { color: var(--ink); }
-.viz-hint { margin-left: auto; font: 400 11.5px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.viz-tabs .viz-info { width: 20px; height: 20px; padding: 0; margin: 0 0 0 4px; align-self: center; border: 1px solid var(--muted);
-  border-radius: 50%; font: 400 12px/18px var(--display); letter-spacing: 0; text-transform: none; color: var(--muted); }
+/* 21 Nov 2026 (David): the note and the (i) are quieter than the two tab titles */
+.viz-hint { margin-left: auto; font: 400 9.5px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); opacity: .8; white-space: nowrap; }
+.viz-tabs .viz-info { width: 15px; height: 15px; padding: 0; margin: 0 0 0 2px; align-self: center; border: 1px solid var(--muted);
+  border-radius: 50%; font: 400 9.5px/13px var(--display); letter-spacing: 0; text-transform: none; color: var(--muted); position: relative; }
+.viz-tabs .viz-info::after { content: ""; position: absolute; inset: -12px; }   /* small to see, still easy to tap */
 .viz-tabs .viz-info[aria-expanded="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
 .viz-tabs .viz-info:hover { color: var(--ink); border-color: var(--ink); }
 .viz-tabs .viz-info[aria-expanded="true"]:hover { color: var(--paper); }
