@@ -190,8 +190,11 @@ def apply(state, link, outlet, result, now, published):
 
 
 def due_articles(outlets, months_dir, state, now, local):
-    """{outlet: [articles due for a check]} for outlets on GitHub (local=False) or the PC (local=True)."""
-    names = {o["name"]: o for o in outlets if checkable(o) and bool(o.get("local")) == local}
+    """{outlet: [articles due for a check]} for outlets on GitHub (local=False) or the PC (local=True).
+    Outlets whose article pages refuse GitHub (photos_on_pc: Euronews BG, BG On Air) are checked on the PC too
+    (21 Nov 2026); before, GitHub got "refused" for them every time and could never tell."""
+    names = {o["name"]: o for o in outlets
+             if checkable(o) and bool(o.get("local") or o.get("photos_on_pc")) == local}
     oldest = now - timedelta(days=SCHEDULE_DAYS[-1] + 1)
     due = {}
     for name in sorted(os.listdir(months_dir)) if os.path.isdir(months_dir) else []:

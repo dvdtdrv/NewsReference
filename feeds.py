@@ -56,8 +56,10 @@ OUTLETS = [
      "feed": "https://www.segabg.com/rss"},
     {"name": "Club Z", "domain": "clubz.bg", "type": "online",
      "feed": "https://www.clubz.bg/rss"},
-    {"name": "Dnes.bg", "local": True, "domain": "dnes.bg", "type": "online portal",
-     "feed": "https://www.dnes.bg/rss.php?today"},
+    # Dnes.bg and BG On Air refused GitHub until ~Nov 2026; on 21 Nov 2026 both answered GitHub every time
+    # (probe-outlets.yml), so GitHub reads them again, day and night. rss.php?today now redirects to /rss/latest.
+    {"name": "Dnes.bg", "domain": "dnes.bg", "type": "online portal",
+     "feed": "https://www.dnes.bg/rss/latest"},
     {"name": "Actualno", "domain": "actualno.com", "type": "online portal",
      "feed": "https://www.actualno.com/rss"},
     {"name": "Fakti", "domain": "fakti.bg", "type": "online portal",
@@ -88,8 +90,10 @@ OUTLETS = [
     # News.bg has no feed or sitemap; we read its "latest news" page (robots.txt allows it)
     {"name": "News.bg", "domain": "news.bg", "type": "online portal",
      "page": "https://news.bg/latest"},
-    {"name": "BG On Air", "local": True, "domain": "bgonair.bg", "type": "commercial TV",
-     "feed": "https://www.bgonair.bg/rss/news"},
+    # BG On Air: its feed answers GitHub, but its article pages still refuse GitHub (403), so the PC
+    # sends the photos and does the deleted-articles check (photos_on_pc), like Euronews BG
+    {"name": "BG On Air", "domain": "bgonair.bg", "type": "commercial TV",
+     "feed": "https://www.bgonair.bg/rss/news", "photos_on_pc": True},
     {"name": "Bloomberg TV", "local": True, "domain": "bloombergtv.bg", "type": "business TV",
      "feed": "https://www.bloombergtv.bg/rss/news"},
     {"name": "Evrocom", "domain": "eurocom.bg", "type": "commercial TV",

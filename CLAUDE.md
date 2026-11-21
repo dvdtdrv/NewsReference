@@ -53,9 +53,13 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   once per 30 min -> `as_browser`, `gentle`. **bTV** allowed reading "from the browser" for this student project
   (1 Nov; email + note kept by David, not in the repo since 18 Nov). Commercial use, photos and attribution NOT covered: ask both again before
   the project earns money.
-- **7 outlets refuse GitHub's servers** (bTV, Trud, Blitz, Marica: 403; Dnes.bg, BG On Air, Bloomberg TV:
-  timeout) -> read from David's PC (self-hosted runner) instead of bypassing. They also refuse Claude's
-  workspace, so test them via the PC. Nova works from GitHub now.
+- **5 outlets refuse GitHub's servers** (bTV, Trud, Blitz, Marica: Cloudflare challenge 403; Bloomberg TV: its own
+  403) -> read from David's PC (self-hosted runner) instead of bypassing. 21 Nov 2026: Dnes.bg and BG On Air answered
+  GitHub 4/4 (probe-outlets.yml) and were moved back to GitHub (no `local`); BG On Air's article pages still refuse
+  GitHub (403), so it is `photos_on_pc` (PC sends photos AND, since 21 Nov, does its deleted-articles check, like
+  Euronews BG: link_check.due_articles treats photos_on_pc as PC). bTV answered GitHub 2 of 4 times: not moved.
+  To re-test: run "Test PC outlets from GitHub" (probe-outlets.yml + probe_outlets.py, by hand only; reads each local
+  feed + one article page). Nova works from GitHub (its feed was empty for a few hours on the night of 20-21 Nov).
 - **Novini.bg** via its news sitemap (robots disallows /api/*). **DW** via its news sitemap.
 - **Blindspot rule**: an outlet is "didn't cover" only if we read it in the last 3 h AND our archive of it reaches
   back before the story started, so an outlet we couldn't read is never falsely called silent.
@@ -247,6 +251,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   the disputes already added. Checked: CEM annual reports 2022/2024, CEM election report 2024, RFE on the CSD Russia report, Club Z on China,
   StopFake, Actualno, Bivol on ТИМ (none names these outlets). Not readable: Capital (paywall), Marginalia, Banker 18.09.2019 (403).
 - Known: 7 story ids appear on two archive days (existing before 14 Nov); not fixed yet.
+- `probe_outlets.py` + `.github/workflows/probe-outlets.yml` (21 Nov): by-hand test whether GitHub's servers can read the
+  `local` outlets (feed + one article page); no timer, changes nothing. Use it when an outlet says it allowed NewsReferenceBot.
 - Search engines (21 Nov): build_site.py writes site/sitemap.xml (6 main pages + every archive day, lastmod) and
   site/robots.txt (Allow all + Sitemap line; Cloudflare prepends its AI "content signals" comments). Every page gets
   `seo_head()`: its own <title>, description, canonical https://newsreference.bg/<page> (so Google ignores the old
