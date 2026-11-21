@@ -2367,7 +2367,8 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       if (!to) return "";
       const h = (new Date(to) - new Date(from)) / 3600000;
       if (!(h >= 0)) return "";
-      return h < 1 ? "до 1 ч след публ." : h < 48 ? `~${Math.round(h)} ч след публ.` : `~${Math.round(h / 24)} дни след публ.`;
+      // "видяна": the moment we noticed it; the outlet may have changed it earlier (between two of our looks)
+      return h < 1 ? "видяна до 1 ч след публ." : h < 48 ? `видяна ~${Math.round(h)} ч след публ.` : `видяна ~${Math.round(h / 24)} дни след публ.`;
     };
     function exampleRow(r, tr) {
       const ex = el("tr", "hc-ex"), td = el("td");

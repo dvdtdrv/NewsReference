@@ -122,6 +122,8 @@ def page_headline(parts):
             m = SEP.match(c)
             if m and len(m.group(1)) >= MIN_LEN:
                 c = m.group(1)             # "Headline - Mediapool.bg" -> "Headline"
+            elif m:
+                continue                   # only the site's name ("bTV Новините - Новини"): no headline
         if len(c) >= MIN_LEN:
             return c
     return ""

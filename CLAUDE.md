@@ -227,6 +227,12 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   runs on David's PC; opens every archived article page of ONE outlet once (robots crawl-delay, >= 1 s) and uploads
   headline_audit.json (page <h1>/og:title/<title> next to our stored headlines) as a download; changes nothing. While it runs the
   normal PC round waits. Compare the result with headline_watch.judge.
+  First run 21 Nov (bTV Novinite, 1385 pages in 31 min): 1372 same, 11 real old changes the feed never showed (e.g. „Петима" ->
+  „Шестима са загинали"), 2 deleted pages showing only "bTV Новините - Новини" (page_headline now skips a title that is only the
+  site's name). Verdict: detection works for bTV; bTV just renames little (~49 of 1385 incl. the 38 feed ones).
+  `recheck.json` (repo root, by hand): {"made", "why", "links"} - link_check makes each link due once (until checked after "made"),
+  first in its outlet's queue; a different headline then goes through the normal two looks. Used for the 11 bTV links.
+  Examples under „Медии" now say „видяна ~N ч след публ." (when WE saw the change; it may have happened earlier).
 - `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
   (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so

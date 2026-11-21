@@ -36,6 +36,10 @@ from limits import within
 
 STATE_FILE = os.path.join("data", "deleted.json")
 LOCAL_TODO_FILE = os.path.join("data", "link_check_local.json")
+# Links to look at again now, outside the schedule (in the repo, written by hand, e.g. after headline_audit.py
+# found a headline that differs from ours): {"made": time, "why": ..., "links": [...]}. Each link is due once
+# (until it has been checked after "made"); a different headline then goes through the normal two looks.
+RECHECK_FILE = "recheck.json"
 LOCAL_TODO_URL = "https://raw.githubusercontent.com/dvdtdrv/NewsReference/data/link_check_local.json"
 # 21 Nov 2026: hours, not days, and three early visits: each visit also reads the page's headline
 # (headline_watch.py), and headlines change mostly in the first day or two
@@ -76,7 +80,21 @@ def stage_for(published, now):
     return sum(1 for h in SCHEDULE_HOURS if age >= h)
 
 
-def is_due(entry, published, now):
+def _recheck_list():
+    try:
+        with open(RECHECK_FILE, encoding="utf-8") as f:
+            r = json.load(f)
+        return r.get("made", ""), set(r.get("links", []))
+    except (OSError, ValueError):
+        return "", set()
+
+
+RECHECK_MADE, RECHECK_LINKS = _recheck_list()
+
+
+def is_due(entry, published, now, link=None):
+    if link in RECHECK_LINKS and (entry or {}).get("last", "") < RECHECK_MADE:
+        return True       # asked for by hand (recheck.json)
     soon = entry and (entry.get("soon_at") or entry.get("pending_at"))
     if soon and now - datetime.fromisoformat(soon) >= timedelta(minutes=headline_watch.RECHECK_MINUTES):
         return True       # the headline just changed: look again on the next run (did it change back?)
@@ -99,7 +117,8 @@ def _priority(a, state):
     younger than 4 days (headlines change early), oldest first within each group."""
     e = state.get(a["link"]) or {}
     young = (datetime.now(timezone.utc) - datetime.fromisoformat(a["published"])) < timedelta(days=4)
-    return (0 if e.get("soon_at") or e.get("pending_at") else 1 if young else 2, a["published"])
+    first = e.get("soon_at") or e.get("pending_at") or (a["link"] in RECHECK_LINKS and e.get("last", "") < RECHECK_MADE)
+    return (0 if first else 1 if young else 2, a["published"])
 
 
 HEAD_BYTES = 400_000
@@ -246,7 +265,7 @@ def due_articles(outlets, months_dir, state, now, local):
             if datetime.fromisoformat(a["published"]) < oldest:
                 continue
             e = state.get(a["link"])
-            if is_due(e, a["published"], now):
+            if is_due(e, a["published"], now, a["link"]):
                 due.setdefault(a["outlet"], []).append(a)
     for items in due.values():
         items.sort(key=lambda a: a["published"])     # the oldest first: they are the most overdue
