@@ -95,6 +95,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   header Медии, Архив | NEWS REFERENCE | search, „Подкрепи" (21 Nov 2026, David: „За проекта" left the header to keep it
   uncluttered; it is now a big „За проекта →" block in the footer, next to „Правна информация", with „Как работи" under it). Installable web app
   (`web/`: manifest, icons, sw.js network-first).
+  21 Nov 2026 (David: while scrolling the wheel showed through the stories): body.stage-covered hides .stage-inner once the
+  sheet's top is above the screen (scroll check in site_template.html); fast scrolling showed the first screen through
+  not-yet-drawn parts of the long sheet.
 
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).

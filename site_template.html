@@ -546,6 +546,11 @@ body.page-legal .intro h1 { font-size: clamp(40px, 6vw, 88px); }
 .search-link[aria-current="page"] { color: var(--ink); }
 /* the search page: no sliding first screen, the results follow right under the search box */
 body.compact .stage { position: relative; height: auto; overflow: visible; }
+/* 21 Nov 2026 (David: while scrolling fast the wheel showed through the stories, "mixed" with them). The browser
+   draws the long sheet just in time; for a moment its not-yet-drawn parts are see-through and the first screen behind
+   it showed. Once the sheet covers the first screen completely, the first screen is hidden, so nothing is behind it. */
+body.stage-covered .stage-inner { visibility: hidden; }
+body.stage-covered { background: var(--paper); }
 body.compact .intro { padding-block: 40px 44px; align-items: center; }
 .search-form { display: flex; gap: 10px; align-items: stretch; }
 .search-form input {
@@ -1422,6 +1427,18 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     document.getElementById("day-pick").hidden = false;
   }
   document.getElementById("updated").textContent = `Данни към ${fmtLong.format(generated)}, ${fmtTime.format(generated)}`;
+
+  // hide the first screen once the stories sheet covers it completely (see .stage-covered in the CSS)
+  (() => {
+    const sheet = document.querySelector("main.sheet");
+    if (!sheet) return;
+    let queued = false;
+    const check = () => { queued = false; document.body.classList.toggle("stage-covered", sheet.getBoundingClientRect().top < 0); };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(check); } };
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    check();
+  })();
 
   // the first screen stays in place while the stories sheet slides over it;
   // as it gets covered it shrinks a little and fades, like a slide going into the background
