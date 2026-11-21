@@ -590,7 +590,7 @@ button.outlet { width: 100%; background: none; border: 0; border-bottom: 1px sol
 button.outlet:hover .nm, button.outlet:focus-visible .nm { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 dialog.od {
   border: 0; padding: 0; color: var(--ink); background: var(--paper-deep);
-  width: min(780px, calc(100vw - 24px)); max-height: min(88vh, 920px); border-radius: 26px;
+  width: min(1120px, calc(100vw - 24px)); max-height: min(90vh, 980px); border-radius: 26px;
   box-shadow: 0 30px 90px rgba(21, 22, 43, .30); overflow: hidden;
 }
 dialog.od[open] { display: flex; flex-direction: column; animation: od-in .28s cubic-bezier(.2, .8, .2, 1); }
@@ -613,10 +613,10 @@ dialog.od.full::backdrop { background: var(--paper-deep); }
   .od-scroll::-webkit-scrollbar { display: none; }
 }
 .od-body { display: flex; flex-direction: column; gap: 28px; }
-dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
+dialog.od.full .od-body { max-width: 1120px; margin: 0 auto; }
 .od-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .od-eyebrow { margin: 0 0 6px; font: 400 12px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.od h2 { margin: 0; font: 200 clamp(44px, 7vw, 76px)/.92 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.od h2 { margin: 0; font: 400 clamp(44px, 6vw, 72px)/.95 "Noto Serif Display Narrow", Georgia, serif; letter-spacing: -.01em; text-wrap: balance; }
 .od-meta { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font: 400 14px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 .od-meta a { color: var(--ink); text-underline-offset: 3px; }
 .od-close {
@@ -625,7 +625,44 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 }
 .od-close:hover, .od-close:focus-visible { background: var(--ink); color: var(--paper-deep); }
 .od-stats { display: flex; flex-wrap: wrap; gap: 10px 36px; padding-block: 18px; border-block: 1px solid var(--rule); }
-.od-section h3 { margin: 0 0 10px; font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.od-section h3 { margin: 0 0 10px; font: 600 21px/1.25 "Noto Serif", Georgia, serif; letter-spacing: -.005em; color: var(--ink); }
+/* 21 Nov 2026 redesign (David): key facts on top, a contents list beside the text, long sections and sources folded,
+   numbers in bold so amounts stand out */
+.od-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: -10px 0 0; border: 1px solid var(--rule); background: var(--paper); }
+.od-facts div { padding: 14px 18px 16px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+.od-facts div:nth-child(3n) { border-right: 0; }
+.od-facts div:last-child:nth-child(3n+1) { grid-column: span 3; border-right: 0; }
+.od-facts div:last-child:nth-child(3n+2) { grid-column: span 2; border-right: 0; }
+.od-facts div:nth-last-child(-n+3):nth-child(3n+1), .od-facts div:nth-last-child(-n+2):nth-child(3n+2), .od-facts div:last-child { border-bottom: 0; }
+.od-facts dt { margin: 0 0 5px; font: 400 11.5px/1.2 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.od-facts dd { margin: 0; font: 600 17px/1.3 "Noto Serif", Georgia, serif; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.od-facts dd small { display: block; margin-top: 3px; font: 400 12.5px/1.35 var(--body); color: var(--muted); }
+.od-cols { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 0 40px; align-items: start; }
+.od-nav { position: sticky; top: -30px; padding-top: 30px; margin-top: -30px; display: flex; flex-direction: column; gap: 1px; }
+.od-nav a { display: flex; justify-content: space-between; gap: 8px; padding: 7px 12px 7px 0; border-right: 2px solid var(--rule);
+  font-size: 14px; line-height: 1.3; color: var(--ink-soft); text-decoration: none; }
+.od-nav a:hover { color: var(--ink); }
+.od-nav a.on { color: var(--ink); font-weight: 600; border-color: var(--ink); }
+.od-nav a i { font-style: normal; color: var(--muted); font-weight: 400; }
+.od-main { min-width: 0; }
+.od-main .od-section, #od-extra .od-section { padding-block: 24px; border-bottom: 1px solid var(--rule); scroll-margin-top: 12px; }
+.od-main > .od-section:first-child { padding-top: 0; }
+.od-main > .od-section:last-child { border-bottom: 0; }
+.od-text p { margin: 0; max-width: 68ch; color: var(--ink-soft); line-height: 1.6; }
+.od-text p + p { margin-top: 10px; }
+.od .num { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.od-text.clamp { max-height: 10.2em; overflow: hidden; -webkit-mask: linear-gradient(#000 55%, transparent); mask: linear-gradient(#000 55%, transparent); }
+.od-cases .od-text.clamp { max-height: 6.6em; }
+.od-more { margin-top: 8px; padding: 2px 0; border: 0; border-bottom: 1px solid var(--ink); background: none; cursor: pointer;
+  font: 600 13px/1.4 var(--body); color: var(--ink); }
+details.od-src { margin-top: 12px; }
+details.od-src > summary { display: inline-block; cursor: pointer; list-style: none; padding: 3px 0;
+  font: 400 12px/1.3 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+details.od-src > summary::-webkit-details-marker { display: none; }
+details.od-src > summary::before { content: "+ "; }
+details.od-src[open] > summary::before { content: "– "; }
+details.od-src > summary:hover { color: var(--ink); }
+details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
 .od-section p { margin: 0; max-width: 62ch; color: var(--ink-soft); }
 .od-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px 40px; }
 .od-todo {
@@ -641,7 +678,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
 .od-cases > li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 18px; padding-block: 16px; border-top: 1px solid var(--rule); }
 .od-cases > li:last-child { border-bottom: 1px solid var(--rule); }
 .od-case-date { font: 400 13px/1.4 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.od-cases h4 { margin: 0 0 6px; font: 400 19px/1.2 var(--display); }
+.od-cases h4 { margin: 0 0 6px; font: 600 17px/1.3 "Noto Serif", Georgia, serif; }
 .od-cases p { margin: 0 0 8px; max-width: 66ch; color: var(--ink-soft); }
 .od-case-src { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
 .od-case-src a { color: var(--muted); text-underline-offset: 3px; overflow-wrap: anywhere; }
@@ -682,6 +719,27 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   .od-stats .stat strong { font-size: 28px; }
   .od-foot small { display: none; }
   .od-foot { display: none; }                   /* phones: always full screen, so no size button; × closes */
+}
+@media (max-width: 860px) {
+  .od-facts { grid-template-columns: 1fr 1fr; }
+  .od-facts div:nth-child(3n) { border-right: 1px solid var(--rule); }
+  .od-facts div:nth-child(2n) { border-right: 0; }
+  .od-facts div:last-child:nth-child(n) { grid-column: auto; border-right: 1px solid var(--rule); }
+  .od-facts div:last-child:nth-child(2n+1) { grid-column: span 2; border-right: 0; }
+  .od-facts div:nth-child(2n):last-child { border-right: 0; }
+  .od-facts div { border-bottom: 1px solid var(--rule) !important; }
+  .od-facts div:last-child, .od-facts div:nth-last-child(2):nth-child(2n+1) { border-bottom: 0 !important; }
+  .od-facts dd { font-size: 15.5px; }
+  .od-cols { grid-template-columns: 1fr; }
+  /* the contents list becomes a row of buttons that stays at the top while scrolling */
+  .od-nav { z-index: 3; flex-direction: row; gap: 8px; overflow-x: auto; scrollbar-width: none; top: -22px;
+    margin: 0 -18px; padding: 10px 18px; background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
+  .od-nav::-webkit-scrollbar { display: none; }
+  .od-nav a { flex: 0 0 auto; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 999px; font-size: 13px; white-space: nowrap; }
+  .od-nav a.on { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 400; }
+  .od-nav a.on i { color: var(--paper); }
+  .od-main .od-section, #od-extra .od-section { scroll-margin-top: 64px; }
+  .od-main > .od-section:first-child { padding-top: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { dialog.od[open] { animation: none; } }
 
@@ -1043,30 +1101,34 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         <button class="od-close" id="od-close" type="button" aria-label="Затвори">×</button>
       </div>
       <div class="od-stats" id="od-stats"></div>
-      <div class="od-grid">
-        <section class="od-section">
-          <h3>Собственост и управление</h3>
-          <p id="od-owner"></p>
-        </section>
-        <section class="od-section">
-          <h3>Основана</h3>
-          <p id="od-founded"></p>
-        </section>
+      <dl class="od-facts" id="od-facts" hidden></dl>
+      <div class="od-cols">
+        <nav class="od-nav" id="od-nav" aria-label="Съдържание"></nav>
+        <div class="od-main" id="od-main">
+          <section class="od-section" id="od-s-owner">
+            <h3>Собственост и управление</h3>
+            <div class="od-text" id="od-owner"></div>
+          </section>
+          <section class="od-section" id="od-s-founded">
+            <h3>Основана</h3>
+            <div class="od-text" id="od-founded"></div>
+          </section>
+          <div id="od-extra"></div>
+          <section class="od-section" id="od-disputes-wrap" hidden>
+            <h3>Спорове и дела</h3>
+            <p class="od-note">Публични твърдения и позиции, със страните и източниците им. Не са съдебно установени нарушения, освен ако изрично е казано.</p>
+            <ol class="od-cases" id="od-disputes"></ol>
+          </section>
+          <section class="od-section" id="od-sources-wrap" hidden>
+            <h3>Източници</h3>
+            <details class="od-src"><summary id="od-sources-sum">Всички източници</summary><ul class="od-recent" id="od-sources"></ul></details>
+          </section>
+          <section class="od-section" id="od-s-recent">
+            <h3>Последни статии</h3>
+            <ul class="od-recent" id="od-recent"></ul>
+          </section>
+        </div>
       </div>
-      <div id="od-extra" class="od-body"></div>
-      <section class="od-section" id="od-disputes-wrap" hidden>
-        <h3>Спорове за независимостта и съдебни дела</h3>
-        <p class="od-note">Публични твърдения и позиции, със страните и източниците им. Не са съдебно установени нарушения, освен ако изрично е казано.</p>
-        <ol class="od-cases" id="od-disputes"></ol>
-      </section>
-      <section class="od-section" id="od-sources-wrap" hidden>
-        <h3>Източници</h3>
-        <ul class="od-recent" id="od-sources"></ul>
-      </section>
-      <section class="od-section">
-        <h3>Последни статии тук</h3>
-        <ul class="od-recent" id="od-recent"></ul>
-      </section>
     </div>
   </div>
   <div class="od-foot">
@@ -1999,7 +2061,78 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     sizeBtn.setAttribute("aria-pressed", String(full));
   };
   const todo = () => el("span", "od-todo", "Предстои");
-  const fill = (id, text) => { const n = document.getElementById(id); n.replaceChildren(text ? document.createTextNode(text) : todo()); };
+  // text with blank-line paragraphs; amounts and percentages in bold (built as nodes, never as HTML)
+  const NUM = /(?:минус\s)?\d(?:[\d\u00a0 .,]*\d)?(?:\s?(?:млн\.|млрд\.|хил\.))?\s?(?:лв\.|евро|€|%|\$)/g;
+  function richParas(text) {
+    const frag = document.createDocumentFragment();
+    String(text || "").split(/\n\s*\n/).filter(s => s.trim()).forEach(par => {
+      const p = el("p"); let last = 0, m;
+      NUM.lastIndex = 0;
+      while ((m = NUM.exec(par))) {
+        if (m.index > last) p.append(par.slice(last, m.index));
+        p.append(el("b", "num", m[0])); last = m.index + m[0].length;
+      }
+      if (last < par.length) p.append(par.slice(last));
+      frag.append(p);
+    });
+    return frag;
+  }
+  const fill = (id, text) => { const n = document.getElementById(id); n.replaceChildren(text ? richParas(text) : todo()); };
+  // sources folded into one line: „+ Източници · 9“
+  function srcFold(list) {
+    const ok = (list || []).filter(x => safeUrl(x.url));
+    if (!ok.length) return null;
+    const d = el("details", "od-src"), links = el("div", "od-case-src");
+    d.append(el("summary", null, `Източници · ${ok.length}`));
+    ok.forEach(x => links.append(srcLink(x)));
+    d.append(links);
+    return d;
+  }
+  // long texts show their first lines; „Покажи всичко“ opens the rest (measured once the window is on screen)
+  function foldLong() {
+    od.querySelectorAll(".od-text").forEach(t => {
+      const old = t.nextElementSibling;
+      if (old && old.classList.contains("od-more")) old.remove();
+      t.classList.add("clamp");
+      if (t.scrollHeight <= t.clientHeight + 6) { t.classList.remove("clamp"); return; }
+      const b = el("button", "od-more", t.closest(".od-cases") ? "Прочети ↓" : "Покажи всичко ↓");
+      b.type = "button";
+      b.addEventListener("click", () => { t.classList.remove("clamp"); b.remove(); });
+      t.after(b);
+    });
+  }
+  // the contents list: one link per visible section; the one being read is marked
+  function buildNav() {
+    const nav = document.getElementById("od-nav"), main = document.getElementById("od-main");
+    nav.replaceChildren();
+    const secs = [...main.querySelectorAll(".od-section")].filter(s => !s.hidden && s.id);
+    secs.forEach(s => {
+      const a = el("a"), h = s.querySelector("h3");
+      a.href = `#${s.id}`; a.append(h ? h.textContent : "");
+      if (s.id === "od-disputes-wrap") a.append(el("i", null, String(document.getElementById("od-disputes").children.length)));
+      a.addEventListener("click", e => { e.preventDefault(); s.scrollIntoView({ block: "start" }); });
+      nav.append(a);
+    });
+    nav.hidden = secs.length < 2;
+    spy();
+  }
+  const odScroll = od.querySelector(".od-scroll");
+  let spyFrame = 0;
+  function spy() {
+    spyFrame = 0;
+    const nav = document.getElementById("od-nav"), links = [...nav.querySelectorAll("a")];
+    if (!links.length) return;
+    const top = odScroll.getBoundingClientRect().top + 90;
+    let cur = links[0];
+    links.forEach(a => { const s = document.getElementById(a.hash.slice(1)); if (s && s.getBoundingClientRect().top <= top) cur = a; });
+    if (odScroll.scrollTop + odScroll.clientHeight >= odScroll.scrollHeight - 4) cur = links[links.length - 1];
+    links.forEach(a => a.classList.toggle("on", a === cur));
+    if (nav.scrollWidth > nav.clientWidth) {        // phones: keep the marked button in view
+      const l = cur.offsetLeft - nav.offsetLeft;
+      if (l < nav.scrollLeft || l + cur.offsetWidth > nav.scrollLeft + nav.clientWidth) nav.scrollLeft = l - 18;
+    }
+  }
+  odScroll.addEventListener("scroll", () => { if (!spyFrame) spyFrame = requestAnimationFrame(spy); }, { passive: true });
   function openOutlet(o) {
     const i = info[o.name] || {};
     document.getElementById("od-name").textContent = o.name;
@@ -2028,6 +2161,17 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       const st = el("div", "stat"); st.append(el("strong", null, v), label); stats.append(st);
     });
     fill("od-owner", i.owner); fill("od-founded", i.founded);
+    const ownerSec = document.getElementById("od-s-owner"), oldSrc = ownerSec.querySelector("details.od-src");
+    if (oldSrc) oldSrc.remove();
+    // „Накратко“: the key facts, checked against the outlets' own reports (outlets_info.json "facts")
+    const facts = document.getElementById("od-facts");
+    facts.replaceChildren();
+    (i.facts || []).forEach(([k, v, note]) => {
+      const row = el("div"), dd = el("dd", null, v);
+      if (note) dd.append(el("small", null, note));
+      row.append(el("dt", null, k), dd); facts.append(row);
+    });
+    facts.hidden = !facts.children.length;
     const list = document.getElementById("od-recent");
     list.replaceChildren();
     recent.slice(0, 6).forEach(a => {
@@ -2042,20 +2186,19 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     // extra sections from outlets_info.json: {title, text, items?, sources?}; text paragraphs split by blank lines
     const extra = document.getElementById("od-extra");
     extra.replaceChildren();
-    (i.extra || []).forEach(x => {
-      const sec = el("section", "od-section");
+    (i.extra || []).forEach((x, k) => {
+      const sec = el("section", "od-section"), txt = el("div", "od-text");
+      sec.id = `od-x${k}`;
       sec.append(el("h3", null, x.title));
-      String(x.text || "").split(/\n\s*\n/).filter(Boolean).forEach(t => sec.append(el("p", null, t)));
+      txt.append(richParas(x.text));
       if (x.items && x.items.length) {
         const ul = el("ul", "od-items");
         x.items.forEach(t => ul.append(el("li", null, t)));
-        sec.append(ul);
+        txt.append(ul);
       }
-      const links = el("div", "od-case-src");
-      (x.sources || []).filter(y => safeUrl(y.url)).forEach(y => {
-        links.append(srcLink(y));
-      });
-      if (links.children.length) sec.append(links);
+      sec.append(txt);
+      const f = srcFold(x.sources);
+      if (f) sec.append(f);
       extra.append(sec);
     });
     extra.hidden = !extra.children.length;
@@ -2065,17 +2208,18 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const cl = document.getElementById("od-disputes");
     cl.replaceChildren();
     cases.forEach(c => {
-      const li = el("li"), body = el("div"), links = el("div", "od-case-src");
-      (c.sources || []).filter(x => safeUrl(x.url)).forEach(x => {
-        links.append(srcLink(x));
-      });
-      body.append(el("h4", null, c.title), el("p", null, c.summary), links);
+      const li = el("li"), body = el("div"), txt = el("div", "od-text");
+      txt.append(richParas(c.summary));
+      body.append(el("h4", null, c.title), txt);
+      const f = srcFold(c.sources);
+      if (f) body.append(f);
       li.append(el("div", "od-case-date", c.date), body);
       cl.append(li);
     });
     // sources: a plain address, or {label, url}
     const src = (i.sources || []).map(x => typeof x === "string" ? { url: x, label: x } : x).filter(x => safeUrl(x.url));
     document.getElementById("od-sources-wrap").hidden = !src.length;
+    document.getElementById("od-sources-sum").textContent = `Всички източници · ${src.length}`;
     const sl = document.getElementById("od-sources");
     sl.replaceChildren();
     src.forEach(x => {
@@ -2095,6 +2239,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     root.style.overflow = "hidden";
     if (bar > 0) root.style.paddingRight = `${bar}px`;        // computers: no sideways jump when the bar disappears
     document.querySelector(".od-scroll").scrollTop = 0;
+    requestAnimationFrame(() => { foldLong(); buildNav(); });
   }
   // the window's own scroll bar (shown on touch screens): follows the scrolling and can be dragged
   (function odBar() {

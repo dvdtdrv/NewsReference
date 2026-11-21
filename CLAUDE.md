@@ -354,6 +354,14 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   statement); the text's "непокрита загуба 34,3 млн. лв." was a misread scan - it is 14 335 хил., offset by 14 348 хил. retained profit.
   Fixed in Dnevnik + Capital, explanation added (staff 7,26 млн. for 157 people, services 3,64 млн., EBITDA 490 хил., group loss 41 хил.,
   +500 хил. capital Aug 2025) with the 2024 management report as source. Lesson: scanned figures need a second, zoomed reading.
+- 21 Nov 2026 full audit of every financial figure in outlets_info.json against its original report (register scans read
+  zoomed, OCR'd with tesseract bul, ESEF package of Инвестор.БГ from financialfilings / its own PDF via the PC browser, DW PDF, State
+  Gazette budget act). All matched except: Икономедиа accumulated loss (fixed earlier) and Banker 2019 equity (-296, not -295).
+  Then the outlet window was redesigned (David): each outlet has "facts" in outlets_info.json = [label, value, note?] rows built only
+  from audited figures (shown as the „Накратко“ box); window 1120 px wide, serif name/headings, contents list (left; on phones a
+  sticky row of buttons; marks the section being read), long texts folded („Покажи всичко“ / disputes „Прочети“), every section's
+  sources folded to „+ Източници · N“, amounts/percentages in bold (built as DOM nodes, regex NUM in site_template.html).
+  When a new annual report appears, update both the text and the "facts" row.
 - 16 Nov: outlet info now filled for all 36 outlets. 17 Nov: the PC-browser checks are done and added (see below).
 - Deeper sweep 17 Nov (David: scandals, lawsuits, convictions were not really investigated). Method that worked: СЕМ's published penalty orders
   (cem.bg/controlsbg/13, 14 pages, 272 PDFs, 2015-2026) downloaded to the scratchpad and parsed (pdftotext; EIK after "срещу", fine after "НАЛАГАМ").
