@@ -40,6 +40,7 @@
   --ink-soft: #3E3F55;
   --muted: #74717A;
   --rule: #D8D1BF;
+  --live: #B42318;         /* news red: only for what is happening now (spreading stories) */
   --display: "Oswald", "Arial Narrow", "Roboto Condensed", sans-serif;
   --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
   --max: 1240px;
@@ -169,6 +170,10 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
   font: 400 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
 }
 .story-meta .count { color: var(--ink); }
+/* 21 Nov 2026: a story that more outlets joined in the last hour gets "↑ +N медии за последния час" */
+.story-meta .flag { display: inline-flex; align-items: center; gap: 7px; padding: 4px 8px 3px; border-radius: 2px;
+  font-size: 11.5px; letter-spacing: .12em; line-height: 1; white-space: nowrap; }
+.flag.rising { color: var(--live); box-shadow: inset 0 0 0 1px currentColor; }
 /* the small menu that orders a story's articles: plain text with a thin arrow, pushed to the right */
 .story-meta .order {
   margin-left: auto; appearance: none; -webkit-appearance: none; border: 0; border-radius: 0; cursor: pointer;
@@ -1176,6 +1181,27 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     paint();
   })();
 
+  // „↑ +N медии за последния час“ (21 Nov 2026), only on live pages, measured against the reader's clock
+  const HOUR = 3600000;
+  function liveFlag(s) {
+    if (archiveDate || !s.articles || !s.articles.length) return null;
+    const now = Date.now();
+    const firstOf = {};                              // when each outlet first wrote about the story
+    s.articles.forEach(a => {
+      const t = Math.min(new Date(a.published).getTime(), now);   // an outlet's clock running ahead counts as "now"
+      if (!(a.outlet in firstOf) || t < firstOf[a.outlet]) firstOf[a.outlet] = t;
+    });
+    const start = Math.min(...Object.values(firstOf));
+    // outlets that joined in the last hour; if the story itself began in that hour, the first outlet doesn't count as "+"
+    const joined = Object.values(firstOf).filter(t => now - t < HOUR).length - (now - start < HOUR ? 1 : 0);
+    if (joined >= 2) {
+      const f = el("span", "flag rising", `↑ +${joined} ${joined === 1 ? "медия" : "медии"} за последния час`);
+      f.title = "Толкова медии започнаха да пишат за това през последния час";
+      return f;
+    }
+    return null;
+  }
+
   // one story
   function storyNode(s) {
     const art = el("article", "story");
@@ -1183,6 +1209,8 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     const meta = el("div", "story-meta");
     meta.append(el("span", "count", `${s.outlet_count} ${s.outlet_count === 1 ? "медия" : "медии"}`));
     meta.append(el("time", null, dateSpan(s.first_seen, s.last_updated)));
+    const flag = liveFlag(s);
+    if (flag) meta.insertBefore(flag, meta.firstChild.nextSibling);
     // the story title, with a hand-drawn arrow pointing to a note on where the title comes from
     const titleRow = el("div", "title-row");
     // how the title was made (10 Nov 2026): a small (i) after the title; a click or tap opens the explanation

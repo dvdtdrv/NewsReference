@@ -255,6 +255,12 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   coloured headers, 0 faded); every header is a sort button (first click biggest first / names А-Я, again reversed; aria-sort);
   "малко данни" rows stay at the bottom; the old „По процент / По брой" buttons are gone. Phones show all columns: the
   table scrolls sideways with the outlet name sticky on the left.
+- Spreading label (21 Nov, David chose only this of the "live" ideas): story-meta shows „↑ +N медии за последния час" (red
+  outline, `--live` #B42318) when 2+ outlets first wrote about the story in the last hour, counted on the reader's clock
+  (`liveFlag()` in site_template.html; an outlet whose clock runs ahead counts as "now"; if the story began within the hour
+  its first outlet isn't counted). Not on archive pages. A „Ново" badge was tried and dropped by David. Concept mockup of the
+  other ideas (live strip with ticker, „Днес в числа", lead story with „Мълчаха" box, „Кой пръв" timeline, „Как го озаглавиха",
+  3-column grid) shown 21 Nov as screenshots only; nothing of it is built yet.
 - `probe_outlets.py` + `.github/workflows/probe-outlets.yml` (21 Nov): by-hand test whether GitHub's servers can read the
   `local` outlets (feed + one article page); no timer, changes nothing. Use it when an outlet says it allowed NewsReferenceBot.
 - Search engines (21 Nov): build_site.py writes site/sitemap.xml (6 main pages + every archive day, lastmod) and
