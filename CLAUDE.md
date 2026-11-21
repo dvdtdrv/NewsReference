@@ -294,6 +294,13 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   photo URLs need requoting; Dnevnik and Capital: `page_images: False`; Moreto has a JS challenge.
 - Photos: `add_page_images` / `backfill_page_images` in collect.py, cache `data/page_images.json`
   (PC: NR_CACHE_DIR = actions-runner\cache). The site falls back to `image2` when the page photo 404s.
+  21 Nov 2026 (David: Fakti and Euronews cards without photos): (1) stories don't carry `image_feed`, so `image2` was empty;
+  build_site.py `feed_photo()` now looks it up by link in data/articles/*.json (Fakti's og:image /fb/*.jpg is missing on its
+  server for ~1 in 25 articles, its feed photo /big/*.webp works). (2) The PC sent photos only for the articles in the feed it
+  read at that moment, so articles collected while it was off stayed photo-less (Euronews BG 15/136 in a week): collect.py
+  `save_photo_todo()` writes data/photo_todo_local.json (PC outlets' last-7-day articles with no photo and never asked, max 40
+  per outlet) and fetch_local.py calls `fetch_photo_todo()` (reads it from raw.githubusercontent, max 2 min per run, "" = page
+  has no photo so it leaves the list).
 - Commercial Register: `https://portal.registryagency.bg/CR/api/Deeds/<EIK>` (JSON); filed documents (financial
   statements, Ministry of Culture art. 7a declarations) from `/CR/api/Documents/<token>`. Scanned PDFs: render with
   pdftoppm and read the images (no Bulgarian OCR). Also uic.bg/<EIK>, CEM register cem.bg/linear_reg.php?cat=2,

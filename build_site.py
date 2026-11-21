@@ -71,12 +71,33 @@ def photo_for(a):
     return _photos.get(a.get("link")) or a.get("image", "")
 
 
+_feed_photos = None
+
+
+def feed_photo(link):
+    """The photo the outlet's feed gave for this article (collect.py keeps it as image_feed in the article
+    archive). Stories don't carry it, so before 21 Nov 2026 the spare photo was lost: Fakti's own share photo
+    is missing on its server for ~1 in 25 articles while its feed photo works, and those cards stayed empty."""
+    global _feed_photos
+    if _feed_photos is None:
+        _feed_photos = {}
+        folder = os.path.join("data", "articles")
+        for name in (os.listdir(folder) if os.path.isdir(folder) else []):
+            if name.endswith(".json"):
+                with open(os.path.join(folder, name), encoding="utf-8") as f:
+                    month = json.load(f)
+                for x in (month["articles"] if isinstance(month, dict) else month):
+                    if x.get("image_feed") and x.get("link"):
+                        _feed_photos[x["link"]] = x["image_feed"]
+    return _feed_photos.get(link, "")
+
+
 def spare_photo(a):
     """A second photo to try if the first doesn't load (e.g. the outlet deleted it)."""
     if a.get("outlet") in NO_PHOTOS:
         return ""
     first = photo_for(a)
-    for other in (a.get("image_feed"), a.get("image")):
+    for other in (a.get("image_feed") or feed_photo(a.get("link")), a.get("image")):
         if other and other != first:
             return other
     return ""

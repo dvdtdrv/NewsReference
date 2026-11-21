@@ -35,6 +35,10 @@ def main():
             result["photos"].update(found)
             print(f"{status:<8} {outlet['name']:<14} {len(found):>4} photos only  {note}")
             time.sleep(1)
+    # photos GitHub is still missing for these outlets (articles collected while the PC was off)
+    late = collect.fetch_photo_todo(photos)
+    result["photos"].update(late)
+    print(f"Fetched {sum(1 for v in late.values() if v)} missing photos from GitHub's list ({len(late)} answered)")
     # are older articles of these outlets still online? GitHub says which links are due (link_check.py)
     import link_check
     result["link_checks"] = link_check.check_on_pc(

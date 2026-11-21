@@ -334,6 +334,59 @@ def backfill_page_images(cache):
     return done, left
 
 
+# Photos that only David's PC can fetch (21 Nov 2026): the PC sends photos only for the articles in the feed it
+# reads at that moment, so articles collected while the PC was off (or whose batch arrived too late) stayed without
+# a photo for good (Euronews BG: 15 of 136 in a week). GitHub now lists them here and the PC fetches them next run.
+PHOTO_TODO_FILE = os.path.join(DATA, "photo_todo_local.json")
+PHOTO_TODO_URL = "https://raw.githubusercontent.com/dvdtdrv/NewsReference/data/photo_todo_local.json"
+PHOTO_TODO_PER_OUTLET = 40
+
+
+def save_photo_todo(articles, cache):
+    """GitHub side: the last 7 days' articles of the PC's outlets that have no photo and were never asked about."""
+    pc = {o["name"] for o in OUTLETS if (o.get("local") or o.get("photos_on_pc"))
+          and not o.get("gentle") and o.get("page_images") is not False}
+    todo = {}
+    for a in sorted(articles, key=lambda a: a.get("published") or "", reverse=True):
+        if a.get("outlet") in pc and a.get("link") and not a.get("image") and a["link"] not in cache:
+            items = todo.setdefault(a["outlet"], [])
+            if len(items) < PHOTO_TODO_PER_OUTLET:
+                items.append({"outlet": a["outlet"], "link": a["link"]})
+    save_json(PHOTO_TODO_FILE, {"made": NOW.isoformat(), "links": [x for items in todo.values() for x in items]})
+
+
+def fetch_photo_todo(cache, seconds=120):
+    """PC side: fetch the photos GitHub listed. Returns {link: photo or ""}; "" = the page has no photo
+    (so GitHub stops listing it). Pages that refuse us are left out and asked again next run."""
+    by_name = {o["name"]: o for o in OUTLETS}
+    try:
+        todo = requests.get(PHOTO_TODO_URL, timeout=TIMEOUT).json().get("links", [])
+    except (requests.RequestException, ValueError):
+        return {}
+    out, failed = {}, {}
+    deadline = time.monotonic() + seconds
+    for item in todo:
+        o, link = by_name.get(item.get("outlet")), item.get("link")
+        if not o or not link or time.monotonic() > deadline or failed.get(o["name"], 0) >= 3:
+            continue
+        if link in cache:                  # the PC already knows it (its batch reached GitHub too late)
+            out[link] = cache[link]
+            continue
+        if not allowed(link):
+            continue
+        try:
+            img = page_image(link, BROWSER_HEADERS if o.get("as_browser") else HEADERS)
+        except requests.RequestException:
+            img = None
+        time.sleep(crawl_delay(link))
+        if img is None:
+            failed[o["name"]] = failed.get(o["name"], 0) + 1
+            continue
+        img = fix_image_url(img, link, o.get("domain", ""))
+        cache[link] = out[link] = img if good_image(img) else ""
+    return out
+
+
 def apply_page_images(articles, cache):
     """Put the remembered page photos on these articles. Returns how many changed."""
     changed = 0
@@ -677,6 +730,8 @@ def main():
     save_json(STATUS_FILE, status)
     save_json(STATE_FILE, state)
     save_page_images(photos)
+    if ON_GITHUB:
+        save_photo_todo(archive, photos)
 
     ok = sum(1 for s in status if s["status"] == "ok")
     new = sum(s["added_this_run"] for s in status)
