@@ -222,6 +222,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   PER_OUTLET 60, young articles (< 4 days) and confirmations first, PC to-do 150 per outlet, PC checks side by side too,
   pages decoded with their own <meta charset> (Moreto.net is windows-1251). Test 21 Nov on 2000 checks: 19 confirmed real
   renames (Mediapool, Sega, Evrocom, Boulevard...), 0 false once Moreto's encoding was fixed. BTA, Dnevnik, Capital pages are not opened: feed changes only.
+- `headline_audit.py` + `.github/workflows/headline-audit.yml` (21 Nov, David: bTV still showed almost no changes): by hand only,
+  runs on David's PC; opens every archived article page of ONE outlet once (robots crawl-delay, >= 1 s) and uploads
+  headline_audit.json (page <h1>/og:title/<title> next to our stored headlines) as a download; changes nothing. While it runs the
+  normal PC round waits. Compare the result with headline_watch.judge.
 - `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
   (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so

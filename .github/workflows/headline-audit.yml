@@ -1,0 +1,42 @@
+# Started by hand only: open every archived article page of ONE outlet once, on David's PC, and hand back
+# the headlines the pages show (headline_audit.py -> headline_audit.json, a download on the run's page).
+# Changes nothing in the archive. While it runs (~1 h for ~1,400 pages) the normal PC round waits its turn.
+
+name: Check every headline of one outlet
+
+on:
+  workflow_dispatch:
+    inputs:
+      outlet:
+        description: "Outlet name as in feeds.py"
+        required: true
+        default: "bTV Novinite"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: [self-hosted, Windows]
+    timeout-minutes: 90
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Open every article page once
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $py = "$env:USERPROFILE\anaconda3\python.exe"
+          if (-not (Test-Path $py)) { $py = "python" }
+          & $py -m pip install -q -r requirements.txt
+          & $py headline_audit.py "${{ github.event.inputs.outlet }}"
+
+      - name: Hand back the result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: headline-audit
+          path: headline_audit.json
+          retention-days: 7
