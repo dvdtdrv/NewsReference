@@ -35,6 +35,18 @@ def main():
                   f"{time.monotonic() - t:.1f} s")
             if good:
                 ok.append(outlet["name"])
+                # one article page too: the site opens these for photos and the deleted-articles check
+                entries = feedparser.parse(r.content).entries
+                page = entries[0].get("link") if entries else None
+                if page and collect.allowed(page):
+                    time.sleep(collect.crawl_delay(url))
+                    t = time.monotonic()
+                    try:
+                        p = requests.get(page, headers=headers, timeout=30)
+                        print(f"{'':<14} article page: HTTP {p.status_code}, {len(p.content) // 1024} KB, "
+                              f"{time.monotonic() - t:.1f} s")
+                    except requests.RequestException as e:
+                        print(f"{'':<14} article page: {type(e).__name__} after {time.monotonic() - t:.1f} s")
         except requests.RequestException as e:
             print(f"{outlet['name']:<14} REFUSED {type(e).__name__} after {time.monotonic() - t:.1f} s")
         time.sleep(collect.crawl_delay(url))
