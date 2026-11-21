@@ -1,0 +1,3228 @@
+{
+ "date": "2026-10-30",
+ "updated_at": "2026-11-02T08:45:39.358471+00:00",
+ "tracked_outlets": [
+  {
+   "name": "BTA",
+   "type": "news agency",
+   "active": true
+  },
+  {
+   "name": "BNT",
+   "type": "public TV",
+   "active": true
+  },
+  {
+   "name": "BNR",
+   "type": "public radio",
+   "active": true
+  },
+  {
+   "name": "bTV Novinite",
+   "type": "commercial TV",
+   "active": true
+  },
+  {
+   "name": "Nova",
+   "type": "commercial TV",
+   "active": true
+  },
+  {
+   "name": "Dnevnik",
+   "type": "online daily",
+   "active": true
+  },
+  {
+   "name": "Capital",
+   "type": "weekly / business",
+   "active": true
+  },
+  {
+   "name": "Mediapool",
+   "type": "online, politics",
+   "active": true
+  },
+  {
+   "name": "Standart",
+   "type": "daily",
+   "active": true
+  },
+  {
+   "name": "24 Chasa",
+   "type": "mass daily",
+   "active": true
+  },
+  {
+   "name": "Trud",
+   "type": "mass daily",
+   "active": true
+  },
+  {
+   "name": "Sega",
+   "type": "daily",
+   "active": true
+  },
+  {
+   "name": "Club Z",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Dnes.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Actualno",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Fakti",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Offnews",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Blitz",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Novini.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Dir.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "PIK",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "Banker",
+   "type": "business",
+   "active": true
+  },
+  {
+   "name": "Pogled.info",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Darik",
+   "type": "radio",
+   "active": true
+  },
+  {
+   "name": "Focus",
+   "type": "news agency",
+   "active": true
+  },
+  {
+   "name": "Vesti.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "News.bg",
+   "type": "online portal",
+   "active": true
+  },
+  {
+   "name": "BG On Air",
+   "type": "commercial TV",
+   "active": true
+  },
+  {
+   "name": "Bloomberg TV",
+   "type": "business TV",
+   "active": true
+  },
+  {
+   "name": "Evrocom",
+   "type": "commercial TV",
+   "active": true
+  },
+  {
+   "name": "Euronews BG",
+   "type": "international",
+   "active": true
+  },
+  {
+   "name": "DW",
+   "type": "international",
+   "active": true
+  },
+  {
+   "name": "Boulevard Bulgaria",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Svobodna Tochka",
+   "type": "online",
+   "active": true
+  },
+  {
+   "name": "Marica",
+   "type": "regional",
+   "active": true
+  },
+  {
+   "name": "Moreto.net",
+   "type": "regional",
+   "active": true
+  }
+ ],
+ "stories": [
+  {
+   "id": "ab07e0162c",
+   "headline": "САЩ одобриха продажбата на 500 ракети „Пейтриът“ на Украйна",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T20:27:00+00:00",
+   "last_updated": "2026-10-31T16:34:00+00:00",
+   "outlet_count": 14,
+   "outlets": [
+    "BNT",
+    "Novini.bg",
+    "BNR",
+    "Standart",
+    "Offnews",
+    "Moreto.net",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka",
+    "Euronews BG",
+    "Mediapool",
+    "Club Z",
+    "Fakti",
+    "bTV Novinite",
+    "Vesti.bg"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Pogled.info",
+    "News.bg",
+    "DW"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "САЩ одобри продажбата на 500 ракети „Пейтриът“ на Украйна: Прехващачите са на стойност 2,1 милиарда долара",
+     "link": "https://bntnews.bg/news/sasht-odobri-prodazhbata-na-500-raketi-peitriat-na-ukraina-prehvashtachite-sa-na-stoinost-21-miliarda-dolara-1419766news.html",
+     "published": "2026-10-30T20:27:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Държавният департамент на САЩ одобри възможната продажба на ракети „Пейтриът“ на Украйна за 2,1 млрд. долара",
+     "link": "https://novini.bg/article/2026103020300548636",
+     "published": "2026-10-30T20:30:05+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNR",
+     "title": "САЩ одобряват продажбата на 500 ракети \"Пейтриът\" на Украйна за $2,1 млрд.",
+     "link": "https://bnrnews.bg/main/post/550810/sasht-odobryavat-prodazhbata-na-500-raketi-peytriat-na-ukrayna-za-dollar21-mlrd",
+     "published": "2026-10-30T21:21:49+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Standart",
+     "title": "САЩ продават 500 ракети „Пейтриът“ на Украйна, но Киев може да ги чака с години",
+     "link": "https://www.standartnews.com/svyat/sasht-prodavat-500-raketi-peytriat-na-ukrayna-no-kiev-mozhe-da-gi-chaka-s-godini-651748.html",
+     "published": "2026-10-31T05:44:43+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "САЩ одобри продажбата на ракети \"Пейтриът\" за Украйна",
+     "link": "https://bntnews.bg/news/sasht-odobri-prodazhbata-na-raketi-peitriat-za-ukraina-1419777news.html",
+     "published": "2026-10-31T06:22:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "САЩ одобриха продажбата на 500 ракети ''Пейтриът'' на Украйна",
+     "link": "https://offnews.bg/sviat/sasht-odobriha-prodazhbata-na-500-raketi-pejtriat-na-ukrajna-877563.html",
+     "published": "2026-10-31T06:57:16+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Moreto.net",
+     "title": "САЩ одобриха продажбата на 500 ракети „Пейтриът“ за Украйна за 2,1 млрд. долара",
+     "link": "https://www.moreto.net/novini.php?n=537772",
+     "published": "2026-10-31T07:50:59+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Boulevard Bulgaria",
+     "title": "САЩ одобриха продажбата на 500 ракети „Пейтриът“ на Украйна",
+     "link": "https://boulevardbulgaria.bg/articles/sasht-odobriha-prodazhbata-na-500-raketi-peytriat-na-ukrayna",
+     "published": "2026-10-31T08:14:29+00:00",
+     "image": "https://boulevardbulgaria.bg/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MjczNDk1LCJwdXIiOiJibG9iX2lkIn19--45a02a3803e4d0809d1382566d64821a3800c979/petriot%20.jpg"
+    },
+    {
+     "outlet": "Svobodna Tochka",
+     "title": "САЩ продават 500 ракети „Пейтриът“ на Украйна. Зеленски призова да им бъдат доставени още тази зима",
+     "link": "https://svobodnatochka.bg/novini/sasht-prodavat-500-raketi-peytriat-na-ukrayna-zelenski-prizova-da-im-badat-dostaveni-oshte-tazi-zima/",
+     "published": "2026-10-31T08:45:35+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "САЩ са одобрили продажбата на 500 противоракетни системи „Пейтриът“ за Украйна",
+     "link": "https://euronews.bg/news/sasht-sa-odobrili-prodazhbata-na-500-protivoraketni-sistemi-peitriat-za-ukraina/",
+     "published": "2026-10-31T09:07:54+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Mediapool",
+     "title": "Вашингтон одобри продажбата на 500 ракети за \"Пейтриът\" на Украйна",
+     "link": "https://www.mediapool.bg/svyat/vashington-odobri-prodazhbata-na-500-raketi-za-peitriat-na-ukraina/",
+     "published": "2026-10-31T10:39:42+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Правителството на САЩ одобри доставката на ракети „Пейтриът“ за Украйна",
+     "link": "https://clubz.bg/181245",
+     "published": "2026-10-31T10:41:35+00:00",
+     "image": "https://clubz.bg/147/prs-peitriat-ap-bta~1.jpg"
+    },
+    {
+     "outlet": "Fakti",
+     "title": "САЩ одобриха продажбата на 500 ракети „Пейтриът“ на Украйна",
+     "link": "https://fakti.bg/world/1095932-sasht-odobriha-prodajbata-na-500-raketi-peitriat-na-ukraina",
+     "published": "2026-10-31T15:48:44+00:00",
+     "image": "https://cdn4.focus.bg/fakti/photos/big/7ff/sasht-odobriha-prodajbata-na-500-raketi-peitriat-na-ukraina-1.webp"
+    },
+    {
+     "outlet": "bTV Novinite",
+     "title": "Държавният департамент на САЩ одобри продажба на ракети „Пейтриът“ на Украйна за 2,1 млрд. долара",
+     "link": "https://btvnovinite.bg/svetut/darzhavnijat-departament-na-sasht-odobri-prodazhba-na-raketi-pejtriat-na-ukrajna-za-2-1-mlrd-dolara.html",
+     "published": "2026-10-31T15:55:38+00:00",
+     "image": "https://cdn.btv.bg/media/images/1200x/Oct2026/2113937036.webp"
+    },
+    {
+     "outlet": "Vesti.bg",
+     "title": "САЩ одобриха продажбата на 500 ракети „Пейтриът“ за Украйна за 2,1 млрд. долара",
+     "link": "https://www.vesti.bg/sviat/sasht-odobriha-prodazhbata-na-500-raketi-pejtriyt-za-ukrajna-za-21-mlrd.-dolara-6274798",
+     "published": "2026-10-31T16:34:00+00:00",
+     "image": "https://m3.netinfo.bg/media/images/51405/51405111/896-504-pejtriyt.jpg"
+    }
+   ]
+  },
+  {
+   "id": "cda6c5bc05",
+   "headline": "Зеленски пристигна в Истанбул за среща с Ердоган, ще обсъдят и корабоплаването в Черно море",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T14:48:02+00:00",
+   "last_updated": "2026-11-01T08:54:25+00:00",
+   "outlet_count": 10,
+   "outlets": [
+    "Novini.bg",
+    "24 Chasa",
+    "Dnevnik",
+    "Vesti.bg",
+    "Nova",
+    "Standart",
+    "Offnews",
+    "Banker",
+    "BNT",
+    "Euronews BG"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Mediapool",
+    "Sega",
+    "Club Z",
+    "Dir.bg",
+    "PIK",
+    "Pogled.info",
+    "Darik",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka",
+    "Moreto.net"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Зеленски пристига утре в Истанбул по покана на Ердоган",
+     "link": "https://novini.bg/article/2026103014480252153",
+     "published": "2026-10-30T14:48:02+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "24 Chasa",
+     "title": "Зеленски на среща с Ердоган, сред темите и Черно море",
+     "link": "https://www.24chasa.bg/mezhdunarodni/article/23841143",
+     "published": "2026-10-31T12:45:00+00:00",
+     "image": "https://cache2.24chasa.bg/Images/Cache/164/IMAGE_23841164_2_0.jpg"
+    },
+    {
+     "outlet": "Dnevnik",
+     "title": "Зеленски е в Истанбул заради сигурността на Черно море",
+     "link": "https://www.dnevnik.bg/burzi-novini/2026/10/31/4974307_zelenski_e_v_istanbul_zaradi_sigurnostta_na_cherno_more/?ref=rss",
+     "published": "2026-10-31T13:17:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Vesti.bg",
+     "title": "Зеленски пристигна в Истанбул за важна среща с Ердоган",
+     "link": "https://www.vesti.bg/sviat/zelenski-pristigna-v-istanbul-za-vazhna-sreshta-s-erdogan-6274787",
+     "published": "2026-10-31T13:42:00+00:00",
+     "image": "https://m.netinfo.bg/media/images/50694/50694454/896-504-redzhep-tajip-erdogan-volodimir-zelenski.jpg"
+    },
+    {
+     "outlet": "Nova",
+     "title": "Зеленски пристигна в Истанбул за разговори с Ердоган",
+     "link": "https://nova.bg/news/view/2026/10/31/557543/%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D1%81%D0%BA%D0%B8-%D0%BF%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%B3%D0%BD%D0%B0-%D0%B2-%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%B1%D1%83%D0%BB-%D0%B7%D0%B0-%D1%80%D0%B0%D0%B7%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8-%D1%81-%D0%B5%D1%80%D0%B4%D0%BE%D0%B3%D0%B0%D0%BD/",
+     "published": "2026-10-31T14:31:26+00:00",
+     "image": "https://nstatic.nova.bg/public/pics/nova/article/396x223_1793455907.jpg"
+    },
+    {
+     "outlet": "Standart",
+     "title": "Зеленски в Истанбул. Ердоган го прие в Долмабахче (СНИМКИ)",
+     "link": "https://www.standartnews.com/svyat/zelenski-v-istanbul-erdogan-go-prie-v-dolmabahche-651787.html",
+     "published": "2026-10-31T14:38:12+00:00",
+     "image": "https://cdn.standartnews.com/media/493515/zelenski-v-istanbul.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Зеленски пристигна в Истанбул за среща с Ердоган, ще говорят и за безопасността на Черно море",
+     "link": "https://offnews.bg/sviat/zelenski-pristigna-v-istanbul-za-sreshta-s-erdogan-shte-govoriat-i-za-877583.html",
+     "published": "2026-10-31T14:49:41+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Banker",
+     "title": "Зеленски пристигна в Истанбул за среща с Ердоган, ще обсъдят и корабоплаването в Черно море",
+     "link": "https://banker.bg/2026/10/31/zelenski-pristigna-v-istanbul-erdogan/",
+     "published": "2026-10-31T14:56:50+00:00",
+     "image": "https://banker.bg/wp-content/uploads/17f0a114-6ca8-4ece-9c87-748565cf9a20-150x150.webp"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Сигурността в Черно море: Ердоган се срещна със Зеленски в Истанбул",
+     "link": "https://bntnews.bg/news/sigurnostta-v-cherno-more-erdogan-se-sreshtna-sas-zelenski-v-istanbul-1419844news.html",
+     "published": "2026-10-31T16:12:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "Зеленски в Истанбул: Ердоган призова Русия и Украйна да прекратят атаките в Черно море",
+     "link": "https://euronews.bg/news/zelenski-v-istanbul-erdogan-prizova-rusiya-i-ukraina-da-prekratyat-atakite-v-cherno-more/",
+     "published": "2026-11-01T08:54:25+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "20a6bc6c94",
+   "headline": "Ниска активност в Турция часове преди края на балотажа",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T05:40:21+00:00",
+   "last_updated": "2026-11-01T15:57:19+00:00",
+   "outlet_count": 8,
+   "outlets": [
+    "Trud",
+    "BNT",
+    "Blitz",
+    "Nova",
+    "PIK",
+    "Sega",
+    "Euronews BG",
+    "Fakti"
+   ],
+   "not_covered": [
+    "BNR",
+    "Dnevnik",
+    "Capital",
+    "Mediapool",
+    "Standart",
+    "24 Chasa",
+    "Club Z",
+    "Actualno",
+    "Offnews",
+    "Novini.bg",
+    "Dir.bg",
+    "Banker",
+    "Pogled.info",
+    "Darik",
+    "Vesti.bg",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka",
+    "Moreto.net"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "Загадката - избирателна активност?",
+     "link": "https://trud.bg/a/articles/zagadkata-izbiratelna-aktivnost",
+     "published": "2026-10-30T05:40:21+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998864/conversions/08-01-3-thumb-958x539.webp"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Подготовката на секциите в Турция: Ще има ли по-висока избирателна активност от първия тур?",
+     "link": "https://bntnews.bg/news/podgotovkata-na-sekciite-v-turciya-shte-ima-li-po-visoka-izbiratelna-aktivnost-ot-parviya-tur-1419802news.html",
+     "published": "2026-10-31T10:14:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Blitz",
+     "title": "Подготовката на секциите в Турция: Ще има ли по-висока избирателна активност от първия тур?",
+     "link": "https://blitz.bg/izbori-2026/podgotovkata-na-sekciite-v-turciya-shte-ima-li-po-visoka-izbiratelna-aktivnost-ot-parviya-tur_news1179896.html",
+     "published": "2026-10-31T10:57:00+00:00",
+     "image": "https://static.blitz.bg/media/1/2024/10/01/2185762/1200x675.webp?timer=1773436102"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Турция преди балотажа: Ще се повиши ли избирателната активност утре?",
+     "link": "https://bntnews.bg/news/turciya-predi-balotazha-shte-se-povishi-li-izbiratelnata-aktivnost-utre-1419862news.html",
+     "published": "2026-10-31T17:48:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Nova",
+     "title": "Изборният ден в Турция започна при слаба активност",
+     "link": "https://nova.bg/news/view/2026/11/01/557575/%D0%B8%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D0%B8%D1%8F%D1%82-%D0%B4%D0%B5%D0%BD-%D0%B2-%D1%82%D1%83%D1%80%D1%86%D0%B8%D1%8F-%D0%B7%D0%B0%D0%BF%D0%BE%D1%87%D0%BD%D0%B0-%D0%BF%D1%80%D0%B8-%D1%81%D0%BB%D0%B0%D0%B1%D0%B0-%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82/",
+     "published": "2026-11-01T05:19:17+00:00",
+     "image": "https://nstatic.nova.bg/public/pics/nova/article/396x223_1793510276.jpg"
+    },
+    {
+     "outlet": "PIK",
+     "title": "СЪС СЛАБА АКТИВНОСТ: Започна изборният ден в Турция",
+     "link": "https://pik.bg/със-слаба-активност-започна-изборният-ден-в-турция-news1361121.html",
+     "published": "2026-11-01T05:30:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Слаба избирателна активност в началото на балотажа във Варна",
+     "link": "https://bntnews.bg/news/slaba-izbiratelna-aktivnost-v-nachaloto-na-balotazha-vav-varna-1419913news.html",
+     "published": "2026-11-01T06:11:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Балотажът започна с по-ниска избирателна активност от първия тур",
+     "link": "https://www.segabg.com/hot/category-bulgaria/balotazhut-zapochna-po-niska-izbiratelna-aktivnost-purviya-tur",
+     "published": "2026-11-01T06:39:45+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/72dcc0a4-4570-4014-bafe-347f432a2e6f.jpeg"
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "Ще бъде ли по-висока избирателната активност на балотажа? Данни на социологическите агенции",
+     "link": "https://euronews.bg/news/shte-bade-li-po-visoka-izbiratelnata-aktivnost-na-balotazha-danni-na-sotsiologicheskite-agentsii/",
+     "published": "2026-11-01T08:38:04+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Fakti",
+     "title": "Ниска активност в Турция часове преди края на балотажа",
+     "link": "https://fakti.bg/bulgaria/1096239-niska-aktivnost-v-turcia-chasove-predi-kraa-na-balotaja",
+     "published": "2026-11-01T15:57:19+00:00",
+     "image": "https://cdn4.focus.bg/fakti/photos/big/7c1/niska-aktivnost-v-turcia-chasove-predi-kraa-na-balotaja-1.webp"
+    }
+   ]
+  },
+  {
+   "id": "1cd2c03e50",
+   "headline": "Най-голямата криптокражба в историята: хакери източиха 6,3 млрд. долара от Binance",
+   "first_seen": "2026-10-30T05:49:57+00:00",
+   "last_updated": "2026-10-31T19:33:00+00:00",
+   "outlet_count": 8,
+   "outlets": [
+    "Sega",
+    "Trud",
+    "Offnews",
+    "Capital",
+    "Club Z",
+    "BNT",
+    "24 Chasa",
+    "Dnes.bg"
+   ],
+   "not_covered": [],
+   "articles": [
+    {
+     "outlet": "Sega",
+     "title": "6.3 млрд. долара бяха откраднати от най-голямата криптоборса Binance",
+     "link": "https://www.segabg.com/hot/category-foreign-country/63-mlrd-dolara-byaha-otkradnati-nay-golyamata-kriptoborsa-binance",
+     "published": "2026-10-30T05:49:57+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/hv2lxg3wiaamt3x.jpg"
+    },
+    {
+     "outlet": "Trud",
+     "title": "Криптоудар за 6,3 млрд. долара: Binance спира тегленията след безпрецедентна хакерска атака",
+     "link": "https://trud.bg/a/articles/kriptoudar-za-63-mlrd-dolara-binance-spira-tegleniata-sled-bezpretsedentna-hakerska-ataka",
+     "published": "2026-10-30T06:55:27+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998962/conversions/ХАКЕРИ_6024403030152599505_original-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Binance стана жертва на най-голямата кражба на крипто в историята - засегнати са активи за $6,3 млрд.",
+     "link": "https://offnews.bg/sviat/binance-stana-zhertva-na-naj-goliamata-krazhba-na-kripto-v-istoriata-877508.html",
+     "published": "2026-10-30T08:18:13+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Capital",
+     "title": "Най-големия криптообир: Пробив в сигурността на Binance й струва 6.3 млрд. долара",
+     "link": "https://www.capital.bg/biznes/blockchain/2026/10/30/4973849_nai-golemiia_kripto_obir_probiv_v_sigurnostta_na/?ref=rss",
+     "published": "2026-10-30T08:57:00+00:00",
+     "image": "http://www.capital.bg/shimg/zx640_4973851.jpg"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Най-голямата криптокражба в историята: хакери източиха 6,3 млрд. долара от Binance",
+     "link": "https://clubz.bg/181203",
+     "published": "2026-10-30T09:00:15+00:00",
+     "image": "https://clubz.bg/147/350e7a4a95a846ecbdc65d73745c1aa4-0-3d9bd1aa72444b7f99743e0770dc0498~2.jpg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Най-голямата кражба на криптовалута: Хакери източиха 6,3 милиарда долара за 20 минути",
+     "link": "https://bntnews.bg/news/nai-golyamata-krazhba-na-kriptovaluta-hakeri-iztochiha-63-miliarda-dolara-za-20-minuti-1419706news.html",
+     "published": "2026-10-30T18:48:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "24 Chasa",
+     "title": "Binance възстанови 90% от сумата, открадната при мащабната хакерска атака",
+     "link": "https://www.24chasa.bg/biznes/article/23841997",
+     "published": "2026-10-31T16:51:00+00:00",
+     "image": "https://cache1.24chasa.bg/Images/Cache/033/IMAGE_23842033_2_0.jpg"
+    },
+    {
+     "outlet": "Dnes.bg",
+     "title": "Binance възстановила 90% от криптоактивите на стойност 6,3 млрд. долара",
+     "link": "https://www.dnes.bg/a/3-biznes/740638-binance-vazstanovila-90-ot-kriptoaktivite-na-stoynost-63-mlrd-dolara",
+     "published": "2026-10-31T19:33:00+00:00",
+     "image": "https://dnes.bg/media/files/resized/article/200x113/ca5/363605c31a2ea1d687a95c71aa12aca5-f112128de8beac6a93b308e6f1cf57ea.jpg"
+    }
+   ]
+  },
+  {
+   "id": "dfb1f7c7d2",
+   "headline": "Премиерът Радев: България е извадена от „сивия списък“ за пране на пари",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T14:59:14+00:00",
+   "last_updated": "2026-10-30T16:52:03+00:00",
+   "outlet_count": 8,
+   "outlets": [
+    "Novini.bg",
+    "BNT",
+    "Boulevard Bulgaria",
+    "Club Z",
+    "Capital",
+    "Trud",
+    "Offnews",
+    "Svobodna Tochka"
+   ],
+   "not_covered": [
+    "BNR",
+    "Sega",
+    "News.bg",
+    "DW"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Премиерът Радев: България е извадена от „сивия списък“ за пране на пари",
+     "link": "https://novini.bg/article/2026103014591425590",
+     "published": "2026-10-30T14:59:14+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Премиерът Румен Радев: България е извадена от \"сивия списък\" за пране на пари",
+     "link": "https://bntnews.bg/news/premierat-rumen-radev-balgariya-e-izvadena-ot-siviya-spisak-za-prane-na-pari-1419704news.html",
+     "published": "2026-10-30T15:07:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Boulevard Bulgaria",
+     "title": "България излезе от сивия списък за пране на пари след три години наблюдение",
+     "link": "https://boulevardbulgaria.bg/articles/rumen-radev-prane-na-pari",
+     "published": "2026-10-30T15:08:19+00:00",
+     "image": "https://boulevardbulgaria.bg/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MjczMjcyLCJwdXIiOiJibG9iX2lkIn19--5f37f261b3dfa164b0bff54d5a8e6fc999715296/Screenshot%202026-10-30%20172639.png"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "България е извадена от ;сивия списък; за пране на пари",
+     "link": "https://clubz.bg/181220",
+     "published": "2026-10-30T15:24:50+00:00",
+     "image": "https://clubz.bg/147/mil_6177~1.jpg"
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Георги Георгиев: Голям успех за България, с който лично се гордея - България беше извадена от Сивия списък за пране на пари днес",
+     "link": "https://novini.bg/article/2026103015271032951",
+     "published": "2026-10-30T15:27:10+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Capital",
+     "title": "България излезе официално от \"сивия списък\" за пране на пари",
+     "link": "https://www.capital.bg/politika_i_ikonomika/ikonomika/2026/10/30/4974075_bulgariia_izleze_oficialno_ot_siviia_spisuk_za_prane/?ref=rss",
+     "published": "2026-10-30T15:42:00+00:00",
+     "image": "http://www.capital.bg/shimg/zx640_4974079.jpg"
+    },
+    {
+     "outlet": "Trud",
+     "title": "Премиерът Радев: България е извадена от „сивия списък“ за пране на пари",
+     "link": "https://trud.bg/a/articles/%D0%BF%D1%80%D0%B5%D0%BC%D0%B8%D0%B5%D1%80%D1%8A%D1%82-%D1%80%D0%B0%D0%B4%D0%B5%D0%B2-%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D0%B5-%D0%B8%D0%B7%D0%B2%D0%B0%D0%B4%D0%B5%D0%BD%D0%B0-%D0%BE%D1%82-%D1%81%D0%B8%D0%B2%D0%B8%D1%8F-%D1%81%D0%BF%D0%B8%D1%81%D1%8A%D0%BA-%D0%B7%D0%B0-%D0%BF%D1%80%D0%B0%D0%BD%D0%B5-%D0%BD%D0%B0-%D0%BF%D0%B0%D1%80%D0%B8",
+     "published": "2026-10-30T16:00:45+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999147/conversions/1401-8-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Ивадиха ни от сивия списък за пране на пари",
+     "link": "https://offnews.bg/politika/ivadiha-ni-ot-sivia-spisak-za-prane-na-pari-877553.html",
+     "published": "2026-10-30T16:26:49+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Svobodna Tochka",
+     "title": "„Повече инвестиции, повече работни места“. България вече не е в „сивия списък“ за пране на пари",
+     "link": "https://svobodnatochka.bg/novini/poveche-investitsii-poveche-rabotni-mesta-balgariya-veche-ne-e-v-siviya-spisak-za-prane-na-pari/",
+     "published": "2026-10-30T16:52:03+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "80b3371e0e",
+   "headline": "13 души са арестувани в Стара Загора преди балотажа",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:53:32+00:00",
+   "last_updated": "2026-10-31T18:54:27+00:00",
+   "outlet_count": 7,
+   "outlets": [
+    "Novini.bg",
+    "BNT",
+    "24 Chasa",
+    "Vesti.bg",
+    "Offnews",
+    "Fakti",
+    "Sega"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Mediapool",
+    "Standart",
+    "Club Z",
+    "Dir.bg",
+    "PIK",
+    "Banker",
+    "Pogled.info",
+    "Darik",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka",
+    "Moreto.net"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Спецакция в Софийска област",
+     "link": "https://novini.bg/article/2026103013533268098",
+     "published": "2026-10-30T13:53:32+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "13 души са задържани при акция срещу купуването на гласове в Стара Загора",
+     "link": "https://bntnews.bg/news/13-dushi-sa-zadarzhani-pri-akciya-sreshtu-kupuvaneto-na-glasove-v-stara-zagora-1419820news.html",
+     "published": "2026-10-31T12:54:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "24 Chasa",
+     "title": "13 души са задържани при спецакция в област Стара Загора",
+     "link": "https://www.24chasa.bg/bulgaria/article/23841428",
+     "published": "2026-10-31T13:52:00+00:00",
+     "image": "https://cache2.24chasa.bg/Images/Cache/430/IMAGE_23841430_2_0.jpg"
+    },
+    {
+     "outlet": "Vesti.bg",
+     "title": "Мащабна акция в Старозагорско: 13 задържани и 7 издирвани при полицейска операция",
+     "link": "https://www.vesti.bg/bulgaria/mashtabna-akciia-v-starozagorsko-13-zadyrzhani-i-7-izdirvani-pri-policejska-operaciia-6274790",
+     "published": "2026-10-31T14:19:00+00:00",
+     "image": "https://m.netinfo.bg/media/images/51404/51404904/896-504-policiia.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Полицията в Старозагорско е задържала 13 души при специализирана полицейска операция",
+     "link": "https://offnews.bg/intcidenti/politciata-v-starozagorsko-e-zadarzhala-13-dushi-pri-spetcializirana-p-877581.html",
+     "published": "2026-10-31T14:21:58+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "24 Chasa",
+     "title": "Мащабна полицейска акция срещу купуването на гласове в Монтанско",
+     "link": "https://www.24chasa.bg/bulgaria/article/23841597",
+     "published": "2026-10-31T15:23:00+00:00",
+     "image": "https://cache1.24chasa.bg/Images/Cache/605/IMAGE_23841605_2_0.jpg"
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Мащабна полицейска акция срещу купуването на гласове в Монтанско",
+     "link": "https://novini.bg/article/2026103115381649528",
+     "published": "2026-10-31T15:38:16+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Fakti",
+     "title": "13 души са задържани при акция в Стара Загора",
+     "link": "https://fakti.bg/krimi/1095916-13-dushi-sa-zadarjani-pri-akcia-v-stara-zagora",
+     "published": "2026-10-31T15:51:28+00:00",
+     "image": "https://cdn4.focus.bg/fakti/photos/big/936/13-dushi-sa-zadarjani-pri-akcia-v-stara-zagora-1.webp"
+    },
+    {
+     "outlet": "Fakti",
+     "title": "Акция срещу купуването на гласове в Монтанско",
+     "link": "https://fakti.bg/krimi/1095943-akcia-sreshtu-kupuvaneto-na-glasove-v-montansko",
+     "published": "2026-10-31T16:02:41+00:00",
+     "image": "https://cdn4.focus.bg/fakti/photos/big/436/akcia-sreshtu-kupuvaneto-na-glasove-v-montansko-1.webp"
+    },
+    {
+     "outlet": "Sega",
+     "title": "13 души са арестувани в Стара Загора преди балотажа",
+     "link": "https://www.segabg.com/hot/category-bulgaria/13-dushi-sa-arestuvani-stara-zagora-predi-balotazha",
+     "published": "2026-10-31T16:15:05+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/3caac179-7a93-4177-b452-107338da1606.jpeg"
+    },
+    {
+     "outlet": "Fakti",
+     "title": "139 арестувани на протеста в Лондон за Palestine Action",
+     "link": "https://fakti.bg/world/1095989-139-arestuvani-na-protesta-v-london-za-palestine-action",
+     "published": "2026-10-31T18:54:27+00:00",
+     "image": "https://cdn4.focus.bg/fakti/photos/big/925/139-arestuvani-na-protesta-v-london-za-palestine-action-1.webp"
+    }
+   ]
+  },
+  {
+   "id": "f5f07b9e5b",
+   "headline": "Служителите на Зоопарка в София на протест за по-високи заплати",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T18:51:33+00:00",
+   "last_updated": "2026-10-31T16:58:16+00:00",
+   "outlet_count": 7,
+   "outlets": [
+    "Trud",
+    "Novini.bg",
+    "Offnews",
+    "24 Chasa",
+    "Darik",
+    "BNT",
+    "Euronews BG"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Pogled.info",
+    "Vesti.bg",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "Стачка в зоопарк София за заплати",
+     "link": "https://trud.bg/a/articles/%D1%81%D1%82%D0%B0%D1%87%D0%BA%D0%B0-%D0%B2-%D0%B7%D0%BE%D0%BE%D0%BF%D0%B0%D1%80%D0%BA-%D1%81%D0%BE%D1%84%D0%B8%D1%8F-%D0%B7%D0%B0-%D0%B7%D0%B0%D0%BF%D0%BB%D0%B0%D1%82%D0%B8",
+     "published": "2026-10-30T18:51:33+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999197/conversions/02-2-3-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Служителите на Софийския зоопарк излизат на безсрочен протест",
+     "link": "https://novini.bg/article/2026103105401810674",
+     "published": "2026-10-31T05:41:32+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Служителите на столичния зоопарк в безсрочен протест",
+     "link": "https://offnews.bg/obshtestvo/sluzhitelite-na-stolichnia-zoopark-v-bezsrochen-protest-877572.html",
+     "published": "2026-10-31T10:11:20+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "24 Chasa",
+     "title": "Служителите на Зоопарка в София на протест за по-високи заплати",
+     "link": "https://www.24chasa.bg/bulgaria/article/23841076",
+     "published": "2026-10-31T12:17:00+00:00",
+     "image": "https://cache2.24chasa.bg/Images/Cache/092/IMAGE_23841092_2_0.jpg"
+    },
+    {
+     "outlet": "Darik",
+     "title": "„Не сме в клетки, но сме в капани“ – служители на Зоологическа градина в София излязоха на протест",
+     "link": "https://dariknews.bg/novini/bylgariia/ne-sme-v-kletki-no-sme-v-kapani-sluzhiteli-na-zoologicheska-gradina-v-sofiia-izliazoha-na-protest-2470739",
+     "published": "2026-10-31T14:07:00+00:00",
+     "image": "https://m.netinfo.bg/media/images/51404/51404899/990-552-protest-stolichen-zoopark.jpg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Служители на Столичния зоопарк протестират за по-високи заплати (СНИМКИ)",
+     "link": "https://bntnews.bg/news/sluzhiteli-na-stolichniya-zoopark-protestirat-za-po-visoki-zaplati-snimki-1419839news.html",
+     "published": "2026-10-31T15:46:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "Безсрочен протест в Софийския зоопарк: Настояват за по-високи заплати, предупреждават за загуба на квалифицирани кадри",
+     "link": "https://euronews.bg/news/bezsrochen-protest-v-sofiiskiya-zoopark-nastoyavat-za-po-visoki-zaplati-preduprezhdavat-za-zaguba-na-kvalifitsirani-kadri/",
+     "published": "2026-10-31T16:58:16+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "959c26f4a2",
+   "headline": ";Какъв ден...не е зле за момче от България с големи мечти.; Никола Цолов направи исторически дебют във Ф1",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T18:59:53+00:00",
+   "last_updated": "2026-10-31T14:48:13+00:00",
+   "outlet_count": 7,
+   "outlets": [
+    "Boulevard Bulgaria",
+    "Sega",
+    "Actualno",
+    "Club Z",
+    "Standart",
+    "Offnews",
+    "Fakti"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Mediapool",
+    "24 Chasa",
+    "Novini.bg",
+    "Dir.bg",
+    "PIK",
+    "Banker",
+    "Pogled.info",
+    "Darik",
+    "Vesti.bg",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Svobodna Tochka",
+    "Moreto.net"
+   ],
+   "articles": [
+    {
+     "outlet": "Boulevard Bulgaria",
+     "title": "Никола Цолов дебютира във Формула 1 с отлична сесия в Мексико",
+     "link": "https://boulevardbulgaria.bg/articles/nikola-tsolov-deebyutira-vav-formula-1-s-otlichna-sesiya-v-meksiko",
+     "published": "2026-10-30T18:59:53+00:00",
+     "image": "https://boulevardbulgaria.bg/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MjczMzE3LCJwdXIiOiJibG9iX2lkIn19--2283dc11e02238cc68ca8dc56e8f29e3604e2afc/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%20%D0%A6%D0%BE%D0%BB%D0%BE%D0%B2%20%D0%A41%20%D0%9C%D0%B5%D0%BA%D1%81%D0%B8%D0%BA%D0%BE%20.jpg"
+    },
+    {
+     "outlet": "Sega",
+     "title": "Никола Цолов направи отличен дебют във Формула 1",
+     "link": "https://www.segabg.com/hot/category-sport/nikola-colov-napravi-otlichen-debyut-vuv-formula-1",
+     "published": "2026-10-30T19:42:38+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/05/ad780dee-db1b-4140-9134-e831c16b92da.jpeg"
+    },
+    {
+     "outlet": "Actualno",
+     "title": "Никола Цолов след дебюта във Формула 1: \"Не е зле за българче с големи мечти\"",
+     "link": "https://www.actualno.com/moresport/nikola-colov-sled-debuta-vyv-formula-1-ne-e-zle-za-bylgarche-s-golemi-mechti-news_2657069.html",
+     "published": "2026-10-31T08:37:00+00:00",
+     "image": "https://cdn.actualno.eu/actualno_2013/upload/news/2026/10/31/b9134138a47773fe8914835fbf64d43b_2657069_1920x1080.jpg"
+    },
+    {
+     "outlet": "Actualno",
+     "title": "Никола Цолов с първи впечатления от Формула 1: Атмосферата е невероятна!",
+     "link": "https://www.actualno.com/moresport/nikola-colov-s-pyrvi-vpechatlenija-ot-formula-1-atmosferata-e-neverojatna-news_2657107.html",
+     "published": "2026-10-31T11:04:00+00:00",
+     "image": "https://cdn.actualno.eu/actualno_2013/upload/news/2026/10/31/634272761b3af66e409f1f106956be62_2657107_1920x1080.jpg"
+    },
+    {
+     "outlet": "Actualno",
+     "title": "В Нидерландия: Ред Бул иска даде титулярно място на Никола Цолов във Формула 1",
+     "link": "https://www.actualno.com/moresport/v-niderlandija-red-bul-iska-dade-tituljarno-mjasto-na-nikola-colov-vyv-formula-1-news_2657141.html",
+     "published": "2026-10-31T13:26:00+00:00",
+     "image": "https://cdn.actualno.eu/actualno_2013/upload/news/2026/10/31/d05d9149176c2e1ab30b2acfb960f5b7_2657141_1920x1080.jpg"
+    },
+    {
+     "outlet": "Club Z",
+     "title": ";Какъв ден...не е зле за момче от България с големи мечти.; Никола Цолов направи исторически дебют във Ф1",
+     "link": "https://clubz.bg/181249",
+     "published": "2026-10-31T13:37:58+00:00",
+     "image": "https://clubz.bg/147/nikola-colov-bta.jpg"
+    },
+    {
+     "outlet": "Standart",
+     "title": "Никола Цолов с първи думи за Формула 1",
+     "link": "https://www.standartnews.com/sport/nikola-colov-s-parvi-dumi-za-formula-1-651782.html",
+     "published": "2026-10-31T13:53:16+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "''Какъв ден! Не е зле за момче от България с големи мечти'': Никола Цолов с исторически дебют във Формула 1",
+     "link": "https://offnews.bg/drugi/kakav-den-ne-e-zle-za-momche-ot-balgaria-s-golemi-mechti-nikola-877580.html",
+     "published": "2026-10-31T14:15:01+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Fakti",
+     "title": "Никола Цолов впечатли при дебюта си във Формула 1",
+     "link": "https://fakti.bg/sport/1095865-nikola-colov-vpechatli-pri-debuta-si-vav-formula-1",
+     "published": "2026-10-31T14:48:13+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "8464544567",
+   "headline": "Мелания Тръмп за успешната евакуация в Олешки: Способни сме да поставим човечността над войната",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T14:21:16.324000+00:00",
+   "last_updated": "2026-11-01T15:06:24+00:00",
+   "outlet_count": 6,
+   "outlets": [
+    "DW",
+    "BNT",
+    "Sega",
+    "Actualno",
+    "Nova",
+    "Focus"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Mediapool",
+    "Standart",
+    "24 Chasa",
+    "Club Z",
+    "Offnews",
+    "Novini.bg",
+    "Dir.bg",
+    "PIK",
+    "Banker",
+    "Pogled.info",
+    "Darik",
+    "Vesti.bg",
+    "News.bg",
+    "Euronews BG",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka",
+    "Moreto.net"
+   ],
+   "articles": [
+    {
+     "outlet": "DW",
+     "title": "Започна евакуацията на бедстващите в окупирания Олешки",
+     "link": "https://www.dw.com/bg/zapocna-evakuaciata-na-bedstvasite-v-okupirania-oleski/a-79808455",
+     "published": "2026-10-30T14:21:16.324000+00:00",
+     "image": "https://static.dw.com/image/79804752_605.jpg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Евакуация от окупирания от Русия украински град Олешки – примирието продължава",
+     "link": "https://bntnews.bg/news/evakuaciya-ot-okupiraniya-ot-rusiya-ukrainski-grad-oleshki-–-primirieto-prodalzhava-1419696news.html",
+     "published": "2026-10-30T14:45:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Евакуацията на 750 жители от kill zone в Олешки мина почти успешно",
+     "link": "https://www.segabg.com/hot/category-the-war/evakuaciyata-na-750-zhiteli-kill-zone-oleshki-mina-pochti-uspeshno",
+     "published": "2026-10-31T13:32:01+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/eva.jpg"
+    },
+    {
+     "outlet": "Actualno",
+     "title": "От 1 до 94 години: Евакуацията на Олешки и ужасът на войната",
+     "link": "https://www.actualno.com/europe/ot-1-do-94-godini-evakuacijata-na-oleshki-i-ujasyt-na-vojnata-news_2657184.html",
+     "published": "2026-10-31T15:30:00+00:00",
+     "image": "https://cdn.actualno.eu/actualno_2013/upload/news/2026/10/31/500cbcfd5f9566b525b92c4ddf117a38_2657184_1920x1080.jpg"
+    },
+    {
+     "outlet": "Nova",
+     "title": "След три години раздяла: Евакуирани от окупирания град Олешки се завърнаха в Украйна",
+     "link": "https://nova.bg/news/view/2026/10/31/557563/%D1%81%D0%BB%D0%B5%D0%B4-%D1%82%D1%80%D0%B8-%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8-%D1%80%D0%B0%D0%B7%D0%B4%D1%8F%D0%BB%D0%B0-%D0%B5%D0%B2%D0%B0%D0%BA%D1%83%D0%B8%D1%80%D0%B0%D0%BD%D0%B8-%D0%BE%D1%82-%D0%BE%D0%BA%D1%83%D0%BF%D0%B8%D1%80%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B3%D1%80%D0%B0%D0%B4-%D0%BE%D0%BB%D0%B5%D1%88%D0%BA%D0%B8-%D1%81%D0%B5-%D0%B7%D0%B0%D0%B2%D1%8A%D1%80%D0%BD%D0%B0%D1%85%D0%B0-%D0%B2-%D1%83%D0%BA%D1%80%D0%B0%D0%B9%D0%BD%D0%B0/",
+     "published": "2026-10-31T19:30:48+00:00",
+     "image": "https://nstatic.nova.bg/public/pics/nova/article/396x223_1793472020.jpg"
+    },
+    {
+     "outlet": "Focus",
+     "title": "Мелания Тръмп за успешната евакуация в Олешки: Способни сме да поставим човечността над войната",
+     "link": "https://www.focus-news.net/novini/mejdunarodni/Melaniya-Trump-za-uspeshnata-evakuaciya-v-Oleshki-Sposobni-sme-da-postavim-chovechnostta-nad-voinata-3049498",
+     "published": "2026-11-01T15:06:24+00:00",
+     "image": "https://i.id24.bg/i/3049498.webp"
+    }
+   ]
+  },
+  {
+   "id": "c2d8e6dccf",
+   "headline": "Телевизия 7/8 спира, обяви Слави Трифонов",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T14:55:57+00:00",
+   "last_updated": "2026-10-31T10:22:37+00:00",
+   "outlet_count": 5,
+   "outlets": [
+    "Sega",
+    "Club Z",
+    "Novini.bg",
+    "Trud",
+    "Standart"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Sega",
+     "title": "Слави Трифонов закри телевизия 7/8",
+     "link": "https://www.segabg.com/hot/category-media/slavi-trifonov-zakri-televiziya-78",
+     "published": "2026-10-30T14:55:57+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2023/05/payimage-567842.jpg"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "„7/8“ спира да излъчва, обяви Слави Трифонов",
+     "link": "https://clubz.bg/181218",
+     "published": "2026-10-30T15:06:39+00:00",
+     "image": "https://clubz.bg/147/slavi-trifonov-bta~2.jpg"
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Телевизия 7/8 спира, обяви Слави Трифонов",
+     "link": "https://novini.bg/article/2026103015124664186",
+     "published": "2026-10-30T15:13:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Слави Трифонов обяви, че телевизия „7/8“ спира излъчване",
+     "link": "https://trud.bg/a/articles/%D1%81%D0%BB%D0%B0%D0%B2%D0%B8-%D1%82%D1%80%D0%B8%D1%84%D0%BE%D0%BD%D0%BE%D0%B2-%D0%BE%D0%B1%D1%8F%D0%B2%D0%B8-%D1%87%D0%B5-%D1%82%D0%B5%D0%BB%D0%B5%D0%B2%D0%B8%D0%B7%D0%B8%D1%8F-78-%D1%81%D0%BF%D0%B8%D1%80%D0%B0-%D0%B8%D0%B7%D0%BB%D1%8A%D1%87%D0%B2%D0%B0%D0%BD%D0%B5",
+     "published": "2026-10-30T16:35:53+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999161/conversions/04-01_5347753739945836662_original-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Standart",
+     "title": "Това ли е краят. Човек от екипа на Слави даде надежда",
+     "link": "https://www.standartnews.com/balgariya-obshtestvo/tova-li-e-krayat-chovek-ot-ekipa-na-slavi-dade-nadezhda-651770.html",
+     "published": "2026-10-31T10:22:37+00:00",
+     "image": "https://cdn.standartnews.com/media/493505/tv-slavi.webp"
+    }
+   ]
+  },
+  {
+   "id": "6762f1ec20",
+   "headline": "Козлодуй е в бедствено положение заради хром в питейната вода",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:51:00+00:00",
+   "last_updated": "2026-10-30T15:58:16+00:00",
+   "outlet_count": 5,
+   "outlets": [
+    "BNT",
+    "Offnews",
+    "Sega",
+    "Trud",
+    "Euronews BG"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Club Z",
+    "Novini.bg",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Заради повишения хром във водата: Обявиха бедствено положение в Козлодуй",
+     "link": "https://bntnews.bg/news/zaradi-povisheniya-hrom-vav-vodata-obyaviha-bedstveno-polozhenie-v-kozloduy-1419689news.html",
+     "published": "2026-10-30T13:51:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Обявиха бедствено положение в Козлодуй заради замърсената с хром вода",
+     "link": "https://offnews.bg/obshtestvo/obiaviha-bedstveno-polozhenie-v-kozloduj-zaradi-zamarsenata-s-hrom-vod-877545.html",
+     "published": "2026-10-30T14:49:04+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Козлодуй е в бедствено положение заради хром в питейната вода",
+     "link": "https://www.segabg.com/category-bulgaria/kozloduy-e-bedstveno-polozhenie-zaradi-hrom-piteynata-voda",
+     "published": "2026-10-30T15:37:24+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2020/01/img_9462.jpg"
+    },
+    {
+     "outlet": "Trud",
+     "title": "Обявиха бедствено положение в Козлодуй заради хром във водата",
+     "link": "https://trud.bg/a/articles/%D0%BE%D0%B1%D1%8F%D0%B2%D0%B8%D1%85%D0%B0-%D0%B1%D0%B5%D0%B4%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BE-%D0%BF%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%BA%D0%BE%D0%B7%D0%BB%D0%BE%D0%B4%D1%83%D0%B9-%D0%B7%D0%B0%D1%80%D0%B0%D0%B4%D0%B8-%D1%85%D1%80%D0%BE%D0%BC-%D0%B2%D1%8A%D0%B2-%D0%B2%D0%BE%D0%B4%D0%B0%D1%82%D0%B0",
+     "published": "2026-10-30T15:38:52+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999146/conversions/02-01-3-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "Обявиха бедствено положение в Козлодуй заради завишени нива на хром в питейната вода",
+     "link": "https://euronews.bg/news/obyaviha-bedstveno-polozhenie-v-kozlodui-zaradi-zavisheni-niva-na-hrom-v-piteinata-voda/",
+     "published": "2026-10-30T15:58:16+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "0757cffe22",
+   "headline": "Напрежение в Полша: Навроцки прекрати пътуването си до Сенегал, след като полицията влезе в сградата на Конституционния съд",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T20:48:00+00:00",
+   "last_updated": "2026-10-31T16:08:00+00:00",
+   "outlet_count": 4,
+   "outlets": [
+    "BNT",
+    "Moreto.net",
+    "Trud",
+    "Euronews BG"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "Novini.bg",
+    "Pogled.info",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Напрежение в Полша: Навроцки прекрати пътуването си до Сенегал, след като полицията влезе в сградата на Конституционния съд",
+     "link": "https://bntnews.bg/news/naprezhenie-v-polsha-navrocki-prekrati-patuvaneto-si-do-senegal-sled-kato-policiyata-vleze-v-sgradata-na-konstitucionniya-sa-1419769news.html",
+     "published": "2026-10-30T20:48:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Напрежение в Конституционния трибунал на Полша",
+     "link": "https://bntnews.bg/news/naprezhenie-v-konstitucionniya-tribunal-na-polsha-1419778news.html",
+     "published": "2026-10-31T06:25:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Moreto.net",
+     "title": "Напрежение в Полша: полиция блокира Конституционния съд, президентът се върна спешно във Варшава",
+     "link": "https://www.moreto.net/novini.php?n=537778",
+     "published": "2026-10-31T08:12:59+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Напрежение в Полша: Полиция в Конституционния съд след опит за нахлуване на демонстранти",
+     "link": "https://bntnews.bg/news/naprezhenie-v-polsha-policiya-v-konstitucionniya-sad-sled-opit-za-nahluvane-na-demonstranti-1419794news.html",
+     "published": "2026-10-31T09:14:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Напрежение около Конституционния трибунал във Варшава: Полицията влезе в сградата на съда (ВИДЕО)",
+     "link": "https://trud.bg/a/articles/naprejenie-okolo-konstitutsionnia-tribunal-vav-varshava-politsiata-vleze-v-sgradata-na-sada",
+     "published": "2026-10-31T09:34:40+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999232/conversions/Screenshot-2026-10-31-101918-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "Криза в съдебната система на Полша: Президентът Навроцки прекъсна посещението си до Сенегал",
+     "link": "https://euronews.bg/news/kriza-v-sadebnata-sistema-na-polsha-prezidentat-navrotski-prekasna-poseshtenieto-si-do-senegal/",
+     "published": "2026-10-31T12:42:58+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Напрежение в Полша: Навроцки обвини Туск в превземане на Конституционния съд",
+     "link": "https://bntnews.bg/news/naprezhenie-v-polsha-navrocki-obvini-tusk-v-prevzemane-na-konstitucionniya-sad-1419843news.html",
+     "published": "2026-10-31T16:08:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "3127cf9a33",
+   "headline": "Дара пуска първа нова песен след ''Евровизия'' - чуйте я",
+   "first_seen": "2026-10-30T12:26:40+00:00",
+   "last_updated": "2026-10-30T18:46:00+00:00",
+   "outlet_count": 4,
+   "outlets": [
+    "Club Z",
+    "Offnews",
+    "Sega",
+    "BNT"
+   ],
+   "not_covered": [
+    "Capital",
+    "Trud"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Дара пуска първа нова песен след „Евровизия“",
+     "link": "https://clubz.bg/181209",
+     "published": "2026-10-30T12:26:40+00:00",
+     "image": "https://clubz.bg/147/og-ukitoavnouov~4.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Дара пуска първа нова песен след ''Евровизия'' - чуйте я",
+     "link": "https://offnews.bg/kultura/dara-puska-parva-nova-pesen-sled-evrovizia-chujte-ia-877529.html",
+     "published": "2026-10-30T12:30:39+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Дара пусна първа нова песен след победата на „Евровизия“",
+     "link": "https://www.segabg.com/category-culture/dara-pusna-purva-nova-pesen-sled-pobedata-na-evroviziya",
+     "published": "2026-10-30T15:45:58+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/untitled.jpg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "ДАРА пуска първа нова песен след триумфа на \"Евровизия\" 2026",
+     "link": "https://bntnews.bg/news/dara-puska-parva-nova-pesen-sled-triumfa-na-evroviziya-2026-1419716news.html",
+     "published": "2026-10-30T18:46:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "7026a6a87e",
+   "headline": "Иван Костов и Бойко Борисов с общ призив за подкрепа на Гюров-Кандев на балотажа",
+   "first_seen": "2026-10-30T11:59:37+00:00",
+   "last_updated": "2026-10-30T16:48:04+00:00",
+   "outlet_count": 4,
+   "outlets": [
+    "Club Z",
+    "Offnews",
+    "Sega",
+    "Capital"
+   ],
+   "not_covered": [
+    "BNT",
+    "Trud"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Бойко Борисов, Иван Костов, Николай Денков: Гласувайте за Андрей Гюров и Георги Кандев (ПЪЛЕН ТЕКСТ)",
+     "link": "https://clubz.bg/181207",
+     "published": "2026-10-30T11:59:37+00:00",
+     "image": "https://clubz.bg/147/kasa0959-1-~1.jpeg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Иван Костов и Бойко Борисов с общ призив за подкрепа на Гюров-Кандев на балотажа",
+     "link": "https://offnews.bg/politika/ivan-kostov-i-bojko-borisov-s-obsht-priziv-za-podkrepa-na-giurov-kande-877532.html",
+     "published": "2026-10-30T12:20:26+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Бойко Борисов подкрепи Андрей Гюров за балотажа",
+     "link": "https://www.segabg.com/hot/category-bulgaria/boyko-borisov-podkrepi-andrey-gyurov-za-balotazha",
+     "published": "2026-10-30T13:19:31+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/04/screenshot_2026-04-15_at_19-59-53_2_facebook.png"
+    },
+    {
+     "outlet": "Capital",
+     "title": "Бивши президенти, премиери, министри, висши военни и дипломати призоваха за подкрепа на Андрей Гюров на балотажа",
+     "link": "https://www.capital.bg/politika_i_ikonomika/bulgaria/2026/10/30/4973998_bivshi_prezidenti_premieri_ministri_visshi_voenni_i/?ref=rss",
+     "published": "2026-10-30T13:28:00+00:00",
+     "image": "http://www.capital.bg/shimg/zx640_4973997.jpg"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Как държавните медии ;пропуснаха; подкрепата на Борисов за двойката Гюров-Кандев",
+     "link": "https://clubz.bg/181224",
+     "published": "2026-10-30T16:48:04+00:00",
+     "image": "https://clubz.bg/147/kasa0968-copy.jpg"
+    }
+   ]
+  },
+  {
+   "id": "9e0d2e03ac",
+   "headline": "Ремонт затваря пътя София-Перник при Владая за поне 3 седмици",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T12:06:00+00:00",
+   "last_updated": "2026-10-30T15:32:38+00:00",
+   "outlet_count": 4,
+   "outlets": [
+    "BNT",
+    "Sega",
+    "Offnews",
+    "Boulevard Bulgaria"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Club Z",
+    "Novini.bg",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Затварят пътя София – Перник при Владая за ремонт от понеделник",
+     "link": "https://bntnews.bg/news/zatvaryat-patya-sofiya-–-pernik-pri-vladaya-za-remont-ot-ponedelnik-1419661news.html",
+     "published": "2026-10-30T12:06:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Ремонт затваря за 20 дни пътя София-Перник при Владая",
+     "link": "https://www.segabg.com/hot/category-bulgaria/remont-zatvarya-za-20-dni-putya-sofiya-pernik-pri-vladaya",
+     "published": "2026-10-30T13:56:50+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/put_vladaya_jpg_5.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Ремонт затваря пътя София-Перник при Владая за поне 3 седмици",
+     "link": "https://offnews.bg/obshtestvo/remont-zatvaria-patia-sofia-pernik-pri-vladaia-za-pone-3-sedmitci-877539.html",
+     "published": "2026-10-30T13:58:12+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Boulevard Bulgaria",
+     "title": "Затварят за ремонт пътя София – Перник при Владая за три седмици",
+     "link": "https://boulevardbulgaria.bg/articles/zatvaryat-za-remont-patya-sofiya-pernik-pri-vladaya-za-tri-sedmitsi",
+     "published": "2026-10-30T15:32:38+00:00",
+     "image": "https://boulevardbulgaria.bg/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NjA0OTAsInB1ciI6ImJsb2JfaWQifX0=--21bb3574aa5558ac3927c160cb4d2b5ae27c0abb/%D0%B2%D0%BB%D0%B0%D0%B4%D0%B0%D1%8F_%D0%BF%D0%B5%D1%80%D0%BD%D0%B8%D0%BA.jpg"
+    }
+   ]
+  },
+  {
+   "id": "9b9784a765",
+   "headline": "Канада се стреми да стане първият „асоцииран член“ на ЕС до юни 2027 г",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T17:42:42+00:00",
+   "last_updated": "2026-10-31T12:14:00+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Club Z",
+    "BNR",
+    "Euronews BG"
+   ],
+   "not_covered": [
+    "BNT",
+    "Capital",
+    "Sega",
+    "Offnews",
+    "Novini.bg",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Историческа стъпка: Канада може да стане първата страна със статут на асоцииран член на ЕС",
+     "link": "https://clubz.bg/181227",
+     "published": "2026-10-30T17:42:42+00:00",
+     "image": "https://clubz.bg/147/kosta-karni-ursula-3010.jpg"
+    },
+    {
+     "outlet": "BNR",
+     "title": "ЕС и Канада ще дефинират \"все по-ясно асоцииране\" до среща на върха през 2027 г.",
+     "link": "https://bnrnews.bg/main/post/550789/es-i-kanada-shte-definirat-vse-po-yasno-asotsiirane-do-sreshta-na-varha-prez-2027-g",
+     "published": "2026-10-30T19:17:02+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Euronews BG",
+     "title": "Канада се стреми да стане първият „асоцииран член“ на ЕС до юни 2027 г.",
+     "link": "https://euronews.bg/news/kanada-se-stremi-da-stane-parviyat-asotsiiran-chlen-na-es-do-yuni-2027-g/",
+     "published": "2026-10-31T12:14:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "49b899dcf2",
+   "headline": "\"Сега\": Петричкия Ескобар е отново на свобода и без гаранция",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T11:27:18+00:00",
+   "last_updated": "2026-10-31T09:56:23+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Offnews",
+    "Sega",
+    "Club Z"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Novini.bg",
+    "PIK",
+    "Pogled.info",
+    "Darik",
+    "Vesti.bg",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka",
+    "Moreto.net"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "Надежда Йорданова: Йотова отново излъга за помилването на Петричкия Ескобар",
+     "link": "https://offnews.bg/politika/nadezhda-jordanova-jotova-otnovo-izlaga-za-pomilvaneto-na-petrichkia-877526.html",
+     "published": "2026-10-30T11:27:18+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Излязоха още скандални факти за помилването на Петричкия Ескобар",
+     "link": "https://www.segabg.com/hot/category-bulgaria/izlyazoha-oshte-skandalni-fakti-za-pomilvaneto-na-petrichkiya-eskobar",
+     "published": "2026-10-30T11:31:00+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/d2d19545-f5b4-488e-85bf-e3d5e0e7c961.jpeg"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Лекарската комисия не е препоръчвала помилване на Петричкия Ескобар",
+     "link": "https://clubz.bg/181210",
+     "published": "2026-10-30T12:43:56+00:00",
+     "image": "https://clubz.bg/147/iotoea.jpg"
+    },
+    {
+     "outlet": "Sega",
+     "title": "Петричкия Ескобар е отново на свобода и без гаранция",
+     "link": "https://www.segabg.com/hot/category-bulgaria/petrichkiya-eskobar-e-otnovo-na-svoboda-i-bez-garanciya",
+     "published": "2026-10-31T07:46:27+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/09/screenshot_2026-09-11_at_10-31-32_apelativniyat_sud_v_sofiya_pusna_pod_domashen_arest_petrichkiya_eskobar_ognyan_atanasov_infomrezha.png"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "\"Сега\": Петричкия Ескобар е отново на свобода и без гаранция",
+     "link": "https://offnews.bg/temida/sega-petrichkia-eskobar-e-otnovo-na-svoboda-i-bez-garantcia-877571.html",
+     "published": "2026-10-31T09:56:23+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "58937c1ccb",
+   "headline": "Средиземноморски циклон носи обилни дъждове и риск от наводнения в България",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T16:36:48+00:00",
+   "last_updated": "2026-10-31T07:55:44+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Novini.bg",
+    "Nova",
+    "Club Z"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Sega",
+    "Offnews",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Два мощни циклона приближават България: очакват се опасни валежи и риск от наводнения - ето къде",
+     "link": "https://novini.bg/article/2026103016364865937",
+     "published": "2026-10-30T16:36:48+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Nova",
+     "title": "Циклон с интензивни есенни дъждове",
+     "link": "https://nova.bg/news/view/2026/10/31/557461/%D1%86%D0%B8%D0%BA%D0%BB%D0%BE%D0%BD-%D1%81-%D0%B8%D0%BD%D1%82%D0%B5%D0%BD%D0%B7%D0%B8%D0%B2%D0%BD%D0%B8-%D0%B5%D1%81%D0%B5%D0%BD%D0%BD%D0%B8-%D0%B4%D1%8A%D0%B6%D0%B4%D0%BE%D0%B2%D0%B5/",
+     "published": "2026-10-31T05:01:40+00:00",
+     "image": "https://nstatic.nova.bg/public/pics/nova/article/396x223_1792209073.jpg"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Средиземноморски циклон носи обилни дъждове и риск от наводнения в България",
+     "link": "https://clubz.bg/181241",
+     "published": "2026-10-31T07:55:44+00:00",
+     "image": "https://clubz.bg/147/043-dazd-bura-3~3.jpg"
+    }
+   ]
+  },
+  {
+   "id": "9410011ba0",
+   "headline": "Външните министри от Г-20 пропуснаха общата снимка заради възражения срещу Русия",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T15:31:19+00:00",
+   "last_updated": "2026-10-30T19:32:00+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Club Z",
+    "BNR",
+    "BNT"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Offnews",
+    "Novini.bg",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "На Г-20 в Атланта: Европейците отказват да се снимат с Лавров, заплашват с бойкот, САЩ отменят общата снимка",
+     "link": "https://clubz.bg/181221",
+     "published": "2026-10-30T15:31:19+00:00",
+     "image": "https://clubz.bg/147/g-20-atlanta-sast-30-oktomvri-2026-g.-ap-bta.jpg"
+    },
+    {
+     "outlet": "BNR",
+     "title": "Външните министри от Г-20 пропуснаха общата снимка заради възражения срещу Русия",
+     "link": "https://bnrnews.bg/main/post/550778/vanshnite-ministri-ot-g-20-propusnaha-obshtata-snimka-zaradi-vazrazheniya-sreshtu-rusiya",
+     "published": "2026-10-30T18:51:56+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Войните в Украйна и Иран разделиха Г-20: Напрежение на срещата в Атланта",
+     "link": "https://bntnews.bg/news/voinite-v-ukraina-i-iran-razdeliha-g-20-naprezhenie-na-sreshtata-v-atlanta-1419757news.html",
+     "published": "2026-10-30T19:32:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "c647cf7078",
+   "headline": "ЦИК с нови указания за машинното гласуване преди балотажа",
+   "first_seen": "2026-10-30T07:13:07+00:00",
+   "last_updated": "2026-10-30T16:54:00+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Trud",
+    "Club Z",
+    "BNT"
+   ],
+   "not_covered": [
+    "Sega",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "ЦИК с нови указания за машинното гласуване преди балотажа",
+     "link": "https://trud.bg/a/articles/tsik-s-novi-ukazania-za-mashinnoto-glasuvane-predi-balotaja",
+     "published": "2026-10-30T07:13:07+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998972/conversions/Screenshot-2026-10-30-090855-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Club Z",
+     "title": "ЦИК с нови указания: избирателите да не издърпват разписката от машината преди звуковия сигнал",
+     "link": "https://clubz.bg/181205",
+     "published": "2026-10-30T09:16:43+00:00",
+     "image": "https://clubz.bg/147/balova-31~1.jpeg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Машините за гласуване не запаметиха вота в 14 секции: ЦИК с нови указания преди балотажа",
+     "link": "https://bntnews.bg/news/mashinite-za-glasuvane-ne-zapametiha-vota-v-14-sekcii-cik-s-novi-ukazaniya-predi-balotazha-1419726news.html",
+     "published": "2026-10-30T16:54:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "983ebbc38a",
+   "headline": "България се включва в инициатива на НАТО за противодействие на нисколетящи въздушни заплахи",
+   "first_seen": "2026-10-30T14:01:38+00:00",
+   "last_updated": "2026-10-30T15:38:38+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Offnews",
+    "BNT",
+    "Trud"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Pogled.info"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "В крайна сметка България се включва в антидрон инициатива на НАТО",
+     "link": "https://offnews.bg/obshtestvo/v-krajna-smetka-balgaria-se-vkliuchva-v-antidron-initciativa-na-nato-877538.html",
+     "published": "2026-10-30T14:01:38+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "България се включва в инициатива на НАТО за противодействие на нисколетящи въздушни заплахи",
+     "link": "https://bntnews.bg/news/balgariya-se-vklyuchva-v-iniciativa-na-nato-za-protivodeistvie-na-niskoletyashti-vazdushni-zaplahi-1419702news.html",
+     "published": "2026-10-30T15:05:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "България се присъединява към инициативата на НАТО за противодействие на дронове",
+     "link": "https://trud.bg/a/articles/%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F-%D1%81%D0%B5-%D0%BF%D1%80%D0%B8%D1%81%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B2%D0%B0-%D0%BA%D1%8A%D0%BC-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D1%82%D0%B8%D0%B2%D0%B0%D1%82%D0%B0-%D0%BD%D0%B0-%D0%BD%D0%B0%D1%82%D0%BE-%D0%B7%D0%B0-%D0%BF%D1%80%D0%BE%D1%82%D0%B8%D0%B2%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%B4%D1%80%D0%BE%D0%BD%D0%BE%D0%B2%D0%B5",
+     "published": "2026-10-30T15:38:38+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999144/conversions/368899620_308869781935970_4033375290951209875_n-1-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "47f7120399",
+   "headline": "В крайна сметка България се включва в антидрон инициатива на НАТО",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:21:09+00:00",
+   "last_updated": "2026-10-30T15:30:48+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Novini.bg",
+    "Offnews",
+    "Svobodna Tochka"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "News.bg",
+    "DW"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "България се включва в инициатива на НАТО за противодействие на нисколетящи въздушни заплахи",
+     "link": "https://novini.bg/article/2026103013210941504",
+     "published": "2026-10-30T13:21:09+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "В крайна сметка България се включва в антидрон инициатива на НАТО",
+     "link": "https://offnews.bg/obshtestvo/v-krajna-smetka-balgaria-se-vkliuchva-v-antidron-initciativa-na-nato-877538.html",
+     "published": "2026-10-30T14:01:38+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Svobodna Tochka",
+     "title": "България стана част от антидрон инициативата на НАТО. Проектът цели защита от заплахи под 150 метра височина",
+     "link": "https://svobodnatochka.bg/novini/balgariya-veche-e-chast-ot-antidron-initsiativata-na-nato-proektat-tseli-zashtita-ot-zaplahi-pod-150-metra-visochina/",
+     "published": "2026-10-30T15:30:48+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "093cd1ba25",
+   "headline": "Украйна поднови ударите по руските рафинерии",
+   "first_seen": "2026-10-30T05:50:29+00:00",
+   "last_updated": "2026-10-30T14:22:10+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Club Z",
+    "Trud",
+    "Sega"
+   ],
+   "not_covered": [
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "WSJ: Украйна е спряла ударите срещу руски рафинерии след натиск от Тръмп",
+     "link": "https://clubz.bg/181192",
+     "published": "2026-10-30T05:50:29+00:00",
+     "image": "https://clubz.bg/146/pozar-v-ruska-rafineria-v-krasnodarska-oblast-sled-ukrainska-ataka-s-dronove-4-mai-2023-godina.-ap-bta~2.jpg"
+    },
+    {
+     "outlet": "Trud",
+     "title": "Украйна възобнови ударите по руската нефтопреработка: Гори рафинерията в Новокуйбишевск",
+     "link": "https://trud.bg/a/articles/%D1%83%D0%BA%D1%80%D0%B0%D0%B9%D0%BD%D0%B0-%D0%B2%D1%8A%D0%B7%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8-%D1%83%D0%B4%D0%B0%D1%80%D0%B8%D1%82%D0%B5-%D0%BF%D0%BE-%D1%80%D1%83%D1%81%D0%BA%D0%B0%D1%82%D0%B0-%D0%BD%D0%B5%D1%84%D1%82%D0%BE%D0%BF%D1%80%D0%B5%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%B3%D0%BE%D1%80%D0%B8-%D1%80%D0%B0%D1%84%D0%B8%D0%BD%D0%B5%D1%80%D0%B8%D1%8F%D1%82%D0%B0-%D0%B2-%D0%BD%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B9%D0%B1%D0%B8%D1%88%D0%B5%D0%B2%D1%81%D0%BA",
+     "published": "2026-10-30T13:53:38+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999065/conversions/5415734859117829759-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Sega",
+     "title": "Украйна поднови ударите по руските рафинерии",
+     "link": "https://www.segabg.com/hot/category-the-war/ukrayna-podnovi-udarite-po-ruskite-rafinerii",
+     "published": "2026-10-30T14:22:10+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/wmremove-transformed1.jpeg"
+    }
+   ]
+  },
+  {
+   "id": "68808ed52c",
+   "headline": "Ограничават движението по АМ \"Хемус\" заради ремонти",
+   "first_seen": "2026-10-30T06:40:33+00:00",
+   "last_updated": "2026-10-30T14:16:00+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Club Z",
+    "Trud",
+    "BNT"
+   ],
+   "not_covered": [
+    "Sega",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "И този уикенд ще спират в определени часове тировете по АМ ;Хемус; заради ремонта на ;Топли дол;",
+     "link": "https://clubz.bg/181195",
+     "published": "2026-10-30T06:40:33+00:00",
+     "image": "https://clubz.bg/146/tirove~3.jpg"
+    },
+    {
+     "outlet": "Trud",
+     "title": "Ограничават движението по АМ \"Хемус\" заради ремонти",
+     "link": "https://trud.bg/a/articles/ogranichavat-dvijenieto-po-am-hemus-zaradi-remonti",
+     "published": "2026-10-30T10:49:43+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999016/conversions/Topli-dol-30-10-26--(1)-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Отново ограничават движението на камиони през тунела \"Топли дол\" на АМ \"Хемус\"",
+     "link": "https://bntnews.bg/news/otnovo-ogranichavat-dvizhenieto-na-kamioni-prez-tunela-topli-dol-na-am-hemus-1419694news.html",
+     "published": "2026-10-30T14:16:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "027f27a06e",
+   "headline": "Тежка катастрофа затвори пътя Варвара-Велинград",
+   "first_seen": "2026-10-30T09:01:57+00:00",
+   "last_updated": "2026-10-30T09:28:22+00:00",
+   "outlet_count": 3,
+   "outlets": [
+    "Club Z",
+    "Offnews",
+    "Trud"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Тежка катастрофа на пътя Варвара-Велинград - движението е спряно",
+     "link": "https://clubz.bg/181204",
+     "published": "2026-10-30T09:01:57+00:00",
+     "image": "https://clubz.bg/147/katastrofa~4.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Тежка катастрофа затвори пътя Варвара-Велинград",
+     "link": "https://offnews.bg/intcidenti/tezhka-katastrofa-zatvori-patia-varvara-velingrad-877514.html",
+     "published": "2026-10-30T09:25:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Тежка катастрофа затвори пътя Варвара – Велинград, шофьор е в тежко състояние",
+     "link": "https://trud.bg/a/articles/tejka-katastrofa-zatvori-patia-varvara-velingrad-shofior-e-v-tejko-sastoianie",
+     "published": "2026-10-30T09:28:22+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998996/conversions/876436259_1694522785628682_4229121027217306801_n-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "fe5fad5b2d",
+   "headline": "След атаките по кораби Черно море: България може да получи още 2,2 млрд. евро от ЕС",
+   "first_seen": "2026-10-30T08:03:39+00:00",
+   "last_updated": "2026-10-31T17:47:30+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Trud",
+    "bTV Novinite"
+   ],
+   "not_covered": [
+    "Sega",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "Заради ескалацията в Черно море Делегация на Европейския парламент e на посещение в България",
+     "link": "https://trud.bg/a/articles/zaradi-eskalatsiata-v-cherno-more-delegatsia-na-evropeyskia-parlament-e-na-poseshtenie-v-balgaria",
+     "published": "2026-10-30T08:03:39+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998987/conversions/photo_5397659819961338103_y_2438511958223264982_original-thumb-958x539-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "bTV Novinite",
+     "title": "След атаките по кораби Черно море: България може да получи още 2,2 млрд. евро от ЕС",
+     "link": "https://btvnovinite.bg/bulgaria/sled-atakite-po-korabi-cherno-more-balgarija-mozhe-da-poluchi-oshte-2-2-mlrd-evro-ot-es.html",
+     "published": "2026-10-31T17:47:30+00:00",
+     "image": "https://cdn.btv.bg/media/images/1200x/Oct2026/2113937103.webp"
+    }
+   ]
+  },
+  {
+   "id": "b34cc7628e",
+   "headline": "Смарт камери с изкуствен интелект засичат полярни мечки",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T15:20:31+00:00",
+   "last_updated": "2026-10-31T14:05:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "BNT"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Смарт камери с изкуствен интелект засичат полярни мечки",
+     "link": "https://novini.bg/article/2026103015203195066",
+     "published": "2026-10-30T15:20:31+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Камери с изкуствен интелект ще предупреждават за приближаващи полярни мечки",
+     "link": "https://bntnews.bg/news/kameri-s-izkustven-intelekt-shte-preduprezhdavat-za-priblizhavashti-polyarni-mechki-1419830news.html",
+     "published": "2026-10-31T14:05:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "81f39d996f",
+   "headline": "„Твоите здравни права“: Какво плаща НЗОК за лечението и възстановяването на пациентите с инсулт",
+   "first_seen": "2026-10-30T08:17:47+00:00",
+   "last_updated": "2026-10-31T12:35:38+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Offnews",
+    "Nova"
+   ],
+   "not_covered": [
+    "Trud",
+    "Sega",
+    "Club Z"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "До 20 дни ранна рехабилитация плаща НЗОК при инсулт",
+     "link": "https://offnews.bg/zdrave/do-20-dni-ranna-rehabilitatcia-plashta-nzok-pri-insult-877510.html",
+     "published": "2026-10-30T08:17:47+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Nova",
+     "title": "„Твоите здравни права“: Какво плаща НЗОК за лечението и възстановяването на пациентите с инсулт",
+     "link": "https://nova.bg/news/view/2026/10/31/557523/%D1%82%D0%B2%D0%BE%D0%B8%D1%82%D0%B5-%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BD%D0%B8-%D0%BF%D1%80%D0%B0%D0%B2%D0%B0-%D0%BA%D0%B0%D0%BA%D0%B2%D0%BE-%D0%BF%D0%BB%D0%B0%D1%89%D0%B0-%D0%BD%D0%B7%D0%BE%D0%BA-%D0%B7%D0%B0-%D0%BB%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%D1%82%D0%BE-%D0%B8-%D0%B2%D1%8A%D0%B7%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D1%8F%D0%B2%D0%B0%D0%BD%D0%B5%D1%82%D0%BE-%D0%BD%D0%B0-%D0%BF%D0%B0%D1%86%D0%B8%D0%B5%D0%BD%D1%82%D0%B8%D1%82%D0%B5-%D1%81-%D0%B8%D0%BD%D1%81%D1%83%D0%BB%D1%82/",
+     "published": "2026-10-31T12:35:38+00:00",
+     "image": "https://nstatic.nova.bg/public/pics/nova/article/396x223_1791461248.jpg"
+    }
+   ]
+  },
+  {
+   "id": "30cc9fa9c0",
+   "headline": "Родителски бойкот на училищните екскурзии: Лесни пари на гърба на децата",
+   "first_seen": "2026-10-30T18:33:03+00:00",
+   "last_updated": "2026-10-31T11:47:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Trud",
+    "Blitz"
+   ],
+   "not_covered": [
+    "BNT",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "Pogled.info"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "Родители бойкотират училищни екскурзии",
+     "link": "https://trud.bg/a/articles/%D1%80%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D0%B8-%D0%B1%D0%BE%D0%B9%D0%BA%D0%BE%D1%82%D0%B8%D1%80%D0%B0%D1%82-%D1%83%D1%87%D0%B8%D0%BB%D0%B8%D1%89%D0%BD%D0%B8-%D0%B5%D0%BA%D1%81%D0%BA%D1%83%D1%80%D0%B7%D0%B8%D0%B8",
+     "published": "2026-10-30T18:33:03+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999179/conversions/02-3-6-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Blitz",
+     "title": "Родителски бойкот на училищните екскурзии: Лесни пари на гърба на децата",
+     "link": "https://blitz.bg/obrazovanie/roditelski-boykot-na-uchilishtnite-ekskurzii-lesni-pari-na-garba-na-decata_news1179843.html",
+     "published": "2026-10-31T11:47:00+00:00",
+     "image": "https://static.blitz.bg/media/1/2026/10/31/2376488/1200x675.webp?timer=1793447226"
+    }
+   ]
+  },
+  {
+   "id": "24fb664f6e",
+   "headline": "Първият китайски филм, създаден с ИИ, претърпя фиаско",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:01:00+00:00",
+   "last_updated": "2026-10-31T10:06:13+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Sega"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Club Z",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Първият китайски пълнометражен филм, създаден с изкуствен интелект, се провали в боксофиса",
+     "link": "https://novini.bg/article/2026103012540959089",
+     "published": "2026-10-30T13:01:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Първият китайски филм, създаден с ИИ, претърпя фиаско",
+     "link": "https://www.segabg.com/category-culture/purviyat-kitayski-film-suzdaden-ii-preturpya-fiasko",
+     "published": "2026-10-31T10:06:13+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/1792729439375091118.jpg-cgwapimg.jpg"
+    }
+   ]
+  },
+  {
+   "id": "6dc98b1348",
+   "headline": "Полша обмисля продажба на МиГ-29 на България, Украйна също има интерес",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T18:44:44+00:00",
+   "last_updated": "2026-10-31T08:37:35+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Moreto.net"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Полша дава два самолета МиГ-29 на Украйна, и България е проявила интерес към такива изтребители, каза полският вицепремиер",
+     "link": "https://novini.bg/article/2026103018444410674",
+     "published": "2026-10-30T18:44:44+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Moreto.net",
+     "title": "Полша обмисля продажба на МиГ-29 на България, Украйна също има интерес",
+     "link": "https://www.moreto.net/novini.php?n=537779",
+     "published": "2026-10-31T08:37:35+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "8f4b555942",
+   "headline": "Ударът край Калиакра, чии са дроновете",
+   "first_seen": "2026-10-30T05:57:27+00:00",
+   "last_updated": "2026-10-31T08:29:32+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Offnews",
+    "Trud"
+   ],
+   "not_covered": [
+    "Sega",
+    "Club Z"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "Експерт: Дроновете, потопили кораба край Калиакра, са прецизна руска разработка",
+     "link": "https://offnews.bg/obshtestvo/ekspert-dronovete-potopili-koraba-kraj-kaliakra-sa-pretcizna-ruska-877498.html",
+     "published": "2026-10-30T05:57:27+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Ударът край Калиакра, чии са дроновете",
+     "link": "https://trud.bg/a/articles/%D1%83%D0%B4%D0%B0%D1%80%D1%8A%D1%82-%D0%BA%D1%80%D0%B0%D0%B9-%D0%BA%D0%B0%D0%BB%D0%B8%D0%B0%D0%BA%D1%80%D0%B0-%D1%87%D0%B8%D0%B8-%D1%81%D0%B0-%D0%B4%D1%80%D0%BE%D0%BD%D0%BE%D0%B2%D0%B5%D1%82%D0%B5",
+     "published": "2026-10-31T08:29:32+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999191/conversions/05-01-дронове-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "440262b7bd",
+   "headline": "Акциите на технологичните гиганти в САЩ се сринаха",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T19:25:55+00:00",
+   "last_updated": "2026-10-31T08:21:07+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Sega"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Club Z",
+    "Offnews",
+    "Pogled.info",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Индексите на европейските борси затвориха предимно с понижения след поевтиняване на акциите на технологичните компании",
+     "link": "https://novini.bg/article/2026103019255557579",
+     "published": "2026-10-30T19:25:55+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Акциите на технологичните гиганти в САЩ се сринаха",
+     "link": "https://www.segabg.com/hot/category-economy/akciite-na-tehnologichnite-giganti-sasht-se-srinaha",
+     "published": "2026-10-31T08:21:07+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/techno.png"
+    }
+   ]
+  },
+  {
+   "id": "e86885b63a",
+   "headline": "България прие от Белгия първия от новопридобитите кораби за противоминна борба",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T19:12:26+00:00",
+   "last_updated": "2026-10-31T07:28:35+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Moreto.net"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "Pogled.info",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "България прие от Белгия първия от новопридобитите кораби за противоминна борба",
+     "link": "https://novini.bg/article/2026103019122635362",
+     "published": "2026-10-30T19:12:26+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Moreto.net",
+     "title": "Първият белгийски минен ловец вече е български, получи името „Бриз“",
+     "link": "https://www.moreto.net/novini.php?n=537771",
+     "published": "2026-10-31T07:28:35+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "9a15be2b9c",
+   "headline": "Патрик Стюърт почина на 86 години",
+   "first_seen": "2026-10-29T22:56:39+00:00",
+   "last_updated": "2026-10-31T07:17:58+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Club Z",
+    "Standart"
+   ],
+   "not_covered": [
+    "Trud",
+    "Sega",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Патрик Стюърт почина на 86 години",
+     "link": "https://clubz.bg/181191",
+     "published": "2026-10-29T22:56:39+00:00",
+     "image": "https://clubz.bg/146/patrik-stuart.jpg"
+    },
+    {
+     "outlet": "Standart",
+     "title": "Патрик Стюарт: остава без коса на 17, но това е опасният му чар. Покори Холивуд на 47",
+     "link": "https://www.standartnews.com/kultura/patrik-styuart-ot-belezite-na-detstvoto-do-bezsmartieto-na-ekrana-651757.html",
+     "published": "2026-10-31T07:17:58+00:00",
+     "image": "https://cdn.standartnews.com/media/493487/zzzzzzzzzzzzzzzzzzzz.jpeg"
+    }
+   ]
+  },
+  {
+   "id": "4f2b7bb423",
+   "headline": "Политическо напрежение във Варшава: Полският президент прекрати визита в чужбина след полицейска акция в Конституционния съд",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T19:21:59+00:00",
+   "last_updated": "2026-10-31T05:45:57+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Offnews"
+   ],
+   "not_covered": [
+    "BNT",
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Pogled.info",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Политическо напрежение във Варшава: Полският президент прекрати визита в чужбина след полицейска акция в Конституционния съд",
+     "link": "https://novini.bg/article/2026103019215993611",
+     "published": "2026-10-30T19:21:59+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Извънредна ситуация във Варшава: Полиция обсади Конституционния съд, президентът прекрати визита в чужбина",
+     "link": "https://novini.bg/article/2026103105222050820",
+     "published": "2026-10-31T05:24:14+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Политическа буря във Варшава върна президента от визита",
+     "link": "https://offnews.bg/sviat/politicheska-buria-vav-varshava-varna-prezidenta-ot-vizita-877560.html",
+     "published": "2026-10-31T05:45:57+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "75300a1e05",
+   "headline": "Японската телевизия TBS трябва да се покае, а не да се оправдава",
+   "first_seen": "2026-10-30T13:30:00+00:00",
+   "last_updated": "2026-10-31T01:03:03+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Pogled.info",
+    "Sega"
+   ],
+   "not_covered": [
+    "BNT",
+    "Capital",
+    "Trud",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Pogled.info",
+     "title": "Японската телевизия TBS трябва да се покае, а не да се оправдава",
+     "link": "https://pogled.info/svetoven/yaponskata-televiziya-tbs-tryabva-da-se-pokae-a-ne-da-se-opravdava.199184",
+     "published": "2026-10-30T13:30:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Sega",
+     "title": "Спортът по телевизията - 31 октомври",
+     "link": "https://www.segabg.com/category-sport/sportut-po-televiziyata-31-oktomvri",
+     "published": "2026-10-31T01:03:03+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2020/01/tv_1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "1c5eb5cb20",
+   "headline": "Джип с украинска регистрация навлезе в двор и спря до фасадата на жилищна сграда в Несебър",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T19:19:00+00:00",
+   "last_updated": "2026-10-30T20:48:44+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Novini.bg"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "Pogled.info",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Джип навлезе в двор и спря до фасадата на жилищна сграда в Несебър",
+     "link": "https://bntnews.bg/news/jip-navleze-v-dvor-i-sprya-do-fasadata-na-zhilishtna-sgrada-v-nesebar-1419755news.html",
+     "published": "2026-10-30T19:19:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Джип с украинска регистрация навлезе в двор и спря до фасадата на жилищна сграда в Несебър",
+     "link": "https://novini.bg/article/2026103020484413440",
+     "published": "2026-10-30T20:48:44+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "e3d300b0cf",
+   "headline": "Месечна прогноза за времето: Ноември започва с дъждове, до 19 градуса около 20-и",
+   "first_seen": "2026-10-30T09:33:38+00:00",
+   "last_updated": "2026-10-30T20:38:31+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Offnews",
+    "Trud"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "От минус 7 до 25 градуса през ноември",
+     "link": "https://offnews.bg/obshtestvo/ot-minus-7-do-25-gradusa-prez-noemvri-877517.html",
+     "published": "2026-10-30T09:33:38+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Месечна прогноза за времето: Ноември започва с дъждове, до 19 градуса около 20-и",
+     "link": "https://trud.bg/a/articles/%D0%BC%D0%B5%D1%81%D0%B5%D1%87%D0%BD%D0%B0-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7%D0%B0-%D0%B7%D0%B0-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D1%82%D0%BE-%D0%BD%D0%BE%D0%B5%D0%BC%D0%B2%D1%80%D0%B8-%D0%B7%D0%B0%D0%BF%D0%BE%D1%87%D0%B2%D0%B0-%D1%81-%D0%B4%D1%8A%D0%B6%D0%B4%D0%BE%D0%B2%D0%B5-%D0%B4%D0%BE-19-%D0%B3%D1%80%D0%B0%D0%B4%D1%83%D1%81%D0%B0-%D0%BE%D0%BA%D0%BE%D0%BB%D0%BE-20%D0%B8",
+     "published": "2026-10-30T20:38:31+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999220/conversions/48-2-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "1872aec15c",
+   "headline": "Кучетата в Чернобил имат гени, адаптирани към „края на света“, сочи проучване",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T19:30:00+00:00",
+   "last_updated": "2026-10-30T19:45:33+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Novini.bg"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "Pogled.info",
+    "News.bg",
+    "Euronews BG",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Кучетата в Чернобил имат гени, адаптирани към „края на света“, сочи проучване",
+     "link": "https://bntnews.bg/news/kuchetata-v-chernobil-imat-geni-adaptirani-kam-kraya-na-sveta-sochi-prouchvane-1419659news.html",
+     "published": "2026-10-30T19:30:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Кучетата в Чернобил имат гени, адаптирани към „края на света“, сочи проучване",
+     "link": "https://novini.bg/article/2026103019453326285",
+     "published": "2026-10-30T19:45:33+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "ad8018f078",
+   "headline": "Апелативният съд в Бургас ;пусна; кметовете на Сунгурларе и Белица под „домашен арест“",
+   "first_seen": "2026-10-29T22:27:38+00:00",
+   "last_updated": "2026-10-30T18:15:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Club Z",
+    "BNT"
+   ],
+   "not_covered": [
+    "Trud",
+    "Sega",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Апелативният съд в Бургас ;пусна; кметовете на Сунгурларе и Белица под „домашен арест“",
+     "link": "https://clubz.bg/181190",
+     "published": "2026-10-29T22:27:38+00:00",
+     "image": "https://clubz.bg/146/revanski-sungurlare-sad-marka-29-oktomvri-2026-burgas-bta.jpeg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "В деня на балотажа: Ще излязат ли да гласуват тази неделя хората в Община Белица?",
+     "link": "https://bntnews.bg/news/v-denya-na-balotazha-shte-izlyazat-li-da-glasuvat-tazi-nedelya-horata-v-obshtina-belica-1419699news.html",
+     "published": "2026-10-30T18:15:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "9d1508f610",
+   "headline": "Мирчев: Правителството се страхува да потопи дроновете да не би Русия да му се разсърди",
+   "first_seen": "2026-10-30T11:19:18+00:00",
+   "last_updated": "2026-10-30T17:52:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Offnews",
+    "BNT"
+   ],
+   "not_covered": [
+    "Capital",
+    "Trud",
+    "Sega",
+    "Club Z"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "Мирчев: Правителството се страхува да потопи дроновете да не би Русия да му се разсърди",
+     "link": "https://offnews.bg/politika/mirchev-pravitelstvoto-se-strahuva-da-potopi-dronovete-da-ne-bi-rusia-877525.html",
+     "published": "2026-10-30T11:19:18+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNT",
+     "title": "Ивайло Мирчев: Защо българското правителството не каже, че корабът край Калиакра е потопен от три руски дрона?",
+     "link": "https://bntnews.bg/news/ivailo-mirchev-zashto-balgarskoto-pravitelstvoto-ne-kazhe-che-korabat-krai-kaliakra-e-potopen-ot-tri-ruski-drona-1419710news.html",
+     "published": "2026-10-30T17:52:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "1d89c2c845",
+   "headline": "Кристи Пайк след неуспешната екзекуция: Няма минута, в която да не изпитвам болка",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T14:49:00+00:00",
+   "last_updated": "2026-10-30T17:40:25+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Offnews"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Криста Пайк след неуспешната екзекуция: Няма нито миг без болка",
+     "link": "https://novini.bg/article/2026103014490046608",
+     "published": "2026-10-30T14:49:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Кристи Пайк след неуспешната екзекуция: Няма минута, в която да не изпитвам болка",
+     "link": "https://offnews.bg/sviat/kristi-pajk-sled-neuspeshnata-ekzekutcia-niama-minuta-v-koiato-da-ne-877556.html",
+     "published": "2026-10-30T17:40:25+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "0994138b4e",
+   "headline": "Борисов: Атаките с дронове са пряка заплаха както за националната, така и за европейската сигурност",
+   "first_seen": "2026-10-30T09:01:57+00:00",
+   "last_updated": "2026-10-30T17:34:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Trud",
+    "BNT"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "Борисов: Атаките с дронове са пряка заплаха както за националната, така и за европейската сигурност",
+     "link": "https://trud.bg/a/articles/borisov-atakite-s-dronove-sa-priaka-zaplaha-kakto-za-natsionalnata-taka-i-za-evropeyskata-sigurnost",
+     "published": "2026-10-30T09:01:57+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998994/conversions/863354127_1470351781629198_3541032954573291510_n-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Бойко Борисов: Атаките в Черно море са заплаха за европейската сигурност",
+     "link": "https://bntnews.bg/news/boiko-borisov-atakite-v-cherno-more-sa-zaplaha-za-evropeiskata-sigurnost-1419707news.html",
+     "published": "2026-10-30T17:34:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "48000ca1a5",
+   "headline": "Акция \"Зима\": Засилен контрол на пътя и опашки за смяна на гуми",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T15:47:00+00:00",
+   "last_updated": "2026-10-30T17:30:14+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Novini.bg"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Boulevard Bulgaria",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Акция \"Зима\": Засилен контрол на пътя и опашки за смяна на гуми",
+     "link": "https://bntnews.bg/news/akciya-zima-zasilen-kontrol-na-patya-i-opashki-za-smyana-na-gumi-1419709news.html",
+     "published": "2026-10-30T15:47:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Novini.bg",
+     "title": "Опашки пред сервизите за смяна на гуми на прага на зимата",
+     "link": "https://novini.bg/article/2026103017301476311",
+     "published": "2026-10-30T17:30:14+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "3f2d044ee0",
+   "headline": "Любослав Пенев напусна \"Локомотив 1929\" (Сф)",
+   "first_seen": "2026-10-30T07:24:05+00:00",
+   "last_updated": "2026-10-30T16:23:45+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Trud",
+    "Sega"
+   ],
+   "not_covered": [
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "Любо Пенев вече не е в Локо (Сф)",
+     "link": "https://trud.bg/a/articles/%D0%BB%D1%8E%D0%B1%D0%BE-%D0%BF%D0%B5%D0%BD%D0%B5%D0%B2-%D0%B2%D0%B5%D1%87%D0%B5-%D0%BD%D0%B5-%D0%B5-%D0%B2-%D0%BB%D0%BE%D0%BA%D0%BE-%D1%81%D1%84",
+     "published": "2026-10-30T07:24:05+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998973/conversions/45_1-3-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Sega",
+     "title": "Любослав Пенев напусна \"Локомотив 1929\" (Сф)",
+     "link": "https://www.segabg.com/hot/category-sport/lyuboslav-penev-napusna-lokomotiv-1929-sf",
+     "published": "2026-10-30T16:23:45+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/penev.jpg"
+    }
+   ]
+  },
+  {
+   "id": "29a06b2520",
+   "headline": "Най-интересното от дебата между Йотова и Гюров",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:23:58+00:00",
+   "last_updated": "2026-10-30T15:44:12+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Svobodna Tochka",
+    "Boulevard Bulgaria"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "Novini.bg",
+    "News.bg",
+    "DW"
+   ],
+   "articles": [
+    {
+     "outlet": "Svobodna Tochka",
+     "title": "Най-интересното от дебата между Йотова и Гюров",
+     "link": "https://svobodnatochka.bg/golemiyat-vapros/nay-interesnoto-ot-debata-mezhdu-yotova-i-gyurov/",
+     "published": "2026-10-30T13:23:58+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Boulevard Bulgaria",
+     "title": "Полуистини, опорни точки и манипулации - из дебата Йотова - Гюров",
+     "link": "https://boulevardbulgaria.bg/articles/oporni-tochki-sreshtu-fakti-i-kak-predizboren-debat",
+     "published": "2026-10-30T15:44:12+00:00",
+     "image": "https://boulevardbulgaria.bg/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MjcyOTQwLCJwdXIiOiJibG9iX2lkIn19--c56c6ee7bcd9569af46f33d4932c348254c2f8f7/debat.jpg"
+    }
+   ]
+  },
+  {
+   "id": "0e50bef1fa",
+   "headline": "Антимафиотите от ГДБОП задържаха хакера, ударил сайтовете на БНР, БНТ и държавни институции",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:36:50+00:00",
+   "last_updated": "2026-10-30T15:33:17+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "BNR"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Антимафиотите от ГДБОП задържаха хакера, ударил сайтовете на БНР, БНТ и държавни институции",
+     "link": "https://novini.bg/article/2026103013365003648",
+     "published": "2026-10-30T13:36:50+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "BNR",
+     "title": "Антимафиотите от ГДБОП задържаха хакера, ударил и сайта на БНР",
+     "link": "https://bnrnews.bg/main/post/550627/antimafiotite-ot-gdbop-zadarzhaha-hakera-udaril-i-sayta-na-bnr",
+     "published": "2026-10-30T15:33:17+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "fbb0434474",
+   "headline": "Alphabet загуби половин трилион от пазарната си капитализация в най-лошия ден за акциите си в историята",
+   "first_seen": "2026-10-30T09:17:00+00:00",
+   "last_updated": "2026-10-30T14:47:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Capital",
+    "BNT"
+   ],
+   "not_covered": [
+    "Trud",
+    "Sega",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Capital",
+     "title": "Alphabet загуби половин трилион от пазарната си капитализация в най-лошия ден за акциите си в историята",
+     "link": "https://www.capital.bg/moiat_capital/investments/2026/10/30/4973853_alphabet_zagubi_polovin_trilion_ot_pazarnata_si/?ref=rss",
+     "published": "2026-10-30T09:17:00+00:00",
+     "image": "http://www.capital.bg/shimg/zx640_4973859.jpg"
+    },
+    {
+     "outlet": "BNT",
+     "title": "Alphabet загуби близо 500 млрд. долара от пазарната си стойност за ден",
+     "link": "https://bntnews.bg/news/alphabet-zagubi-blizo-500-mlrd-dolara-ot-pazarnata-si-stoinost-za-den-1419675news.html",
+     "published": "2026-10-30T14:47:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "84ea0ae953",
+   "headline": "Лъв XIV стана първият папа в историята, гласувал на избори в САЩ",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:30:57+00:00",
+   "last_updated": "2026-10-30T14:33:26+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Club Z"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Лъв XIV стана първият папа в историята, гласувал на избори в САЩ",
+     "link": "https://novini.bg/article/2026103013305789833",
+     "published": "2026-10-30T13:30:57+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Папа Лъв XIV - първият понтифик, гласувал на избори в САЩ",
+     "link": "https://clubz.bg/181216",
+     "published": "2026-10-30T14:33:26+00:00",
+     "image": "https://clubz.bg/147/16b5f7306ad744f5b45e2db3846c3ecd~1.jpg"
+    }
+   ]
+  },
+  {
+   "id": "813f7e8edd",
+   "headline": "Прокуратурата протестира мярката \"домашен арест\" на Никола Бургазлиев",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T14:00:19+00:00",
+   "last_updated": "2026-10-30T14:28:04+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Offnews"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Club Z",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Прокуратурата протестира мярката \"домашен арест\" на Никола Бургазлиев",
+     "link": "https://novini.bg/article/2026103014001963573",
+     "published": "2026-10-30T14:00:19+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Прокуратурата протестира домашния арест на Никола Бургазлиев",
+     "link": "https://offnews.bg/temida/prokuraturata-protestira-domashnia-arest-na-nikola-burgazliev-877544.html",
+     "published": "2026-10-30T14:28:04+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "40f12df81e",
+   "headline": "ГДБОП хвана 19-годишен хакер, отива на съд за пробив на БНТ, БНР и институции",
+   "first_seen": "2026-10-30T13:40:00+00:00",
+   "last_updated": "2026-10-30T14:25:55+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Offnews"
+   ],
+   "not_covered": [
+    "Capital",
+    "Trud",
+    "Sega",
+    "Club Z",
+    "Pogled.info"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "ГДБОП задържа 19-годишен за кибератаки срещу БНТ, БНР и държавни институции (СНИМКИ)",
+     "link": "https://bntnews.bg/news/gdbop-zadarzha-19-godishen-za-kiberataki-sreshtu-bnt-bnr-i-darzhavni-institucii-snimki-1419688news.html",
+     "published": "2026-10-30T13:40:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Offnews",
+     "title": "ГДБОП хвана 19-годишен хакер, отива на съд за пробив на БНТ, БНР и институции",
+     "link": "https://offnews.bg/temida/gdbop-hvana-19-godishen-haker-otiva-na-sad-za-probiv-na-bnt-bnr-i-in-877543.html",
+     "published": "2026-10-30T14:25:55+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "52b5324da3",
+   "headline": "К100: А1 e най-голямата технологична компания и лидер в системната интеграция у нас",
+   "first_seen": "2026-10-30T10:41:33+00:00",
+   "last_updated": "2026-10-30T14:25:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Trud",
+    "Offnews"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z"
+   ],
+   "articles": [
+    {
+     "outlet": "Trud",
+     "title": "К100: А1 e най-голямата технологична компания и лидер в системната интеграция у нас",
+     "link": "https://trud.bg/a/articles/k100-a1-e-naygoliamata-tehnologichna-kompania-i-lider-v-sistemnata-integratsia-u-nas",
+     "published": "2026-10-30T10:41:33+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999008/conversions/01_K100_A1_IvanIvanov-2-thumb-958x539.webp"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "К100: А1 e най-голямата технологична компания и лидер в системната интеграция у нас",
+     "link": "https://offnews.bg/obshtestvo/k100-a1-e-naj-goliamata-tehnologichna-kompania-i-lider-v-sistemnata-i-877542.html",
+     "published": "2026-10-30T14:25:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "5d0d2e93a8",
+   "headline": "Тръмп заяви, че войната с Иран скоро ще приключи",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T12:46:00+00:00",
+   "last_updated": "2026-10-30T14:13:27+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Club Z"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "Тръмп заяви, че войната с Иран скоро ще приключи",
+     "link": "https://novini.bg/article/2026103011223465658",
+     "published": "2026-10-30T12:46:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Тръмп пак ще приключва войната с Иран. И пак - скоро",
+     "link": "https://clubz.bg/181215",
+     "published": "2026-10-30T14:13:27+00:00",
+     "image": "https://clubz.bg/147/tramp-dart-ap-bta.jpg"
+    }
+   ]
+  },
+  {
+   "id": "ea7a161601",
+   "headline": "Обърнат камион блокира движението на АМ „Тракия”",
+   "first_seen": "2026-10-30T12:35:00+00:00",
+   "last_updated": "2026-10-30T14:08:48+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Trud"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Катастрофа блокира движението на АМ \"Тракия\" в посока Бургас (СНИМКИ и ВИДЕО)",
+     "link": "https://bntnews.bg/news/katastrofa-blokira-dvizhenieto-na-am-trakiya-v-posoka-burgas-snimki-i-video-1419672news.html",
+     "published": "2026-10-30T12:35:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Обърнат камион блокира движението на АМ „Тракия”",
+     "link": "https://trud.bg/a/articles/obarnat-kamion-blokira-dvijenieto-na-am-trakia",
+     "published": "2026-10-30T14:08:48+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999105/conversions/867286186_10165699828911380_8343301810322292434_n-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "56f47ad98c",
+   "headline": "Земетресение от 4,6 е регистрирано в северната част на Егейско море",
+   "first_seen": "2026-10-30T12:52:00+00:00",
+   "last_updated": "2026-10-30T13:45:39+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Trud"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Земетресение от 4,6 е регистрирано в северната част на Егейско море",
+     "link": "https://bntnews.bg/news/zemetresenie-ot-46-e-registrirano-v-severnata-chast-na-egeisko-more-1419677news.html",
+     "published": "2026-10-30T12:52:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Земетресение край Халкидики: 4,6 по Рихтер и пет вторични труса",
+     "link": "https://trud.bg/a/articles/zemetresenie-kray-halkidiki-46-po-rihter-i-pet-vtorichni-trusa",
+     "published": "2026-10-30T13:45:39+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999082/conversions/Screenshot-2026-10-30-153754-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "285ea6e9dd",
+   "headline": ";Фолксваген” спира дейността по електрическия „Голф”",
+   "headline_source": "selected",
+   "first_seen": "2026-10-30T13:08:39+00:00",
+   "last_updated": "2026-10-30T13:29:18+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Novini.bg",
+    "Club Z"
+   ],
+   "not_covered": [
+    "BNR",
+    "Capital",
+    "Sega",
+    "Offnews",
+    "News.bg",
+    "DW",
+    "Svobodna Tochka"
+   ],
+   "articles": [
+    {
+     "outlet": "Novini.bg",
+     "title": "„Фолквсваген” спира дейността по електрическия „Голф”, а съкращенията достигат и централата на автомобилостроителя",
+     "link": "https://novini.bg/article/2026103013083905912",
+     "published": "2026-10-30T13:08:39+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Club Z",
+     "title": ";Фолксваген” спира дейността по електрическия „Голф”",
+     "link": "https://clubz.bg/181212",
+     "published": "2026-10-30T13:29:18+00:00",
+     "image": "https://clubz.bg/147/21feda3083d24387a4932ddf6d643df6-0-17eb5288a51f4f0d831f9b0174d1b16f~6.jpg"
+    }
+   ]
+  },
+  {
+   "id": "3c3cc7c76d",
+   "headline": "Следят в реално време отпускането на лекарства по здравната каса",
+   "first_seen": "2026-10-30T11:50:00+00:00",
+   "last_updated": "2026-10-30T13:05:43+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "BNT",
+    "Trud"
+   ],
+   "not_covered": [
+    "Capital",
+    "Sega",
+    "Club Z",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "BNT",
+     "title": "Проверки в реално време предотвратяват неоснователни плащания на лекарства по НЗОК",
+     "link": "https://bntnews.bg/news/proverki-v-realno-vreme-predotvratyavat-neosnovatelni-plashtaniya-na-lekarstva-po-nzok-1419660news.html",
+     "published": "2026-10-30T11:50:00+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Следят в реално време отпускането на лекарства по здравната каса",
+     "link": "https://trud.bg/a/articles/%D1%81%D0%BB%D0%B5%D0%B4%D1%8F%D1%82-%D0%B2-%D1%80%D0%B5%D0%B0%D0%BB%D0%BD%D0%BE-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5-%D0%BE%D1%82%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%BD%D0%B5%D1%82%D0%BE-%D0%BD%D0%B0-%D0%BB%D0%B5%D0%BA%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B0-%D0%BF%D0%BE-%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BD%D0%B0%D1%82%D0%B0-%D0%BA%D0%B0%D1%81%D0%B0",
+     "published": "2026-10-30T13:05:43+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1999068/conversions/04-2_4294667429663389697_original_6072634902879888307_original-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "dd9c0feff9",
+   "headline": "Дебатът Йотова – Гюров е гледан от над 1 млн. души, почти толкова са гледали и „Игри на волята“",
+   "first_seen": "2026-10-30T11:11:17+00:00",
+   "last_updated": "2026-10-30T11:38:42+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Offnews",
+    "Club Z"
+   ],
+   "not_covered": [
+    "Capital",
+    "Trud",
+    "Sega"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "Над 1 млн. зрители проследиха дебата по БНТ, също толкова гледаха ''Игри на волята''",
+     "link": "https://offnews.bg/medii/nad-1-mln-zriteli-proslediha-debata-po-bnt-sashto-tolkova-gledaha-877523.html",
+     "published": "2026-10-30T11:11:17+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Club Z",
+     "title": "Дебатът Йотова – Гюров е гледан от над 1 млн. души, почти толкова са гледали и „Игри на волята“",
+     "link": "https://clubz.bg/181206",
+     "published": "2026-10-30T11:38:42+00:00",
+     "image": "https://clubz.bg/147/screenshot-2026-10-30-at-13.41.3.png"
+    }
+   ]
+  },
+  {
+   "id": "19e4a74130",
+   "headline": "Ген. Макмастър: Русия има намерение да превърне Черно море в ;руско езеро;",
+   "first_seen": "2026-10-30T08:38:28+00:00",
+   "last_updated": "2026-10-30T11:10:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Club Z",
+    "Offnews"
+   ],
+   "not_covered": [
+    "Capital",
+    "Trud",
+    "Sega"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Ген. Макмастър: Русия има намерение да превърне Черно море в ;руско езеро;",
+     "link": "https://clubz.bg/181202",
+     "published": "2026-10-30T08:38:28+00:00",
+     "image": "https://clubz.bg/146/44b6e6b026ec49f4b6a3a47a2dbc8744-0-84bf68de10f6410a863cc77d78dd600e.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Ген. Макмастър: Русия иска да превърне Черно море в ''руско езеро''",
+     "link": "https://offnews.bg/politika/gen-makmastar-rusia-iska-da-prevarne-cherno-more-v-rusko-ezero-877521.html",
+     "published": "2026-10-30T11:10:00+00:00",
+     "image": ""
+    }
+   ]
+  },
+  {
+   "id": "2a81ed6970",
+   "headline": ";Пат; в Израел при окончателното преброяване на гласовете след изборите",
+   "first_seen": "2026-10-30T08:02:55+00:00",
+   "last_updated": "2026-10-30T10:05:00+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Club Z",
+    "Sega"
+   ],
+   "not_covered": [
+    "Trud",
+    "Offnews"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": ";Пат; в Израел при окончателното преброяване на гласовете след изборите",
+     "link": "https://clubz.bg/181199",
+     "published": "2026-10-30T08:02:55+00:00",
+     "image": "https://clubz.bg/146/b29f0ee1f8c84a47a8fbbde8823883bf~3.jpg"
+    },
+    {
+     "outlet": "Sega",
+     "title": "Нетаняху печели изборите в Израел, но е без мнозинство в Кнесета",
+     "link": "https://www.segabg.com/hot/category-foreign-country/netanyahu-pecheli-izborite-izrael-no-e-bez-mnozinstvo-kneseta",
+     "published": "2026-10-30T10:05:00+00:00",
+     "image": "https://www.segabg.com/sites/default/files/_sega//styles/focal_medium/public/2026/10/06268bbb-d468-4564-8dd2-9525cfda3b08.jpeg"
+    }
+   ]
+  },
+  {
+   "id": "87f772d335",
+   "headline": "Плащат пенсиите ден по-рано през ноември",
+   "first_seen": "2026-10-30T06:38:08+00:00",
+   "last_updated": "2026-10-30T07:25:26+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Offnews",
+    "Trud"
+   ],
+   "not_covered": [
+    "Sega",
+    "Club Z"
+   ],
+   "articles": [
+    {
+     "outlet": "Offnews",
+     "title": "Плащат пенсиите ден по-рано през ноември",
+     "link": "https://offnews.bg/obshtestvo/plashtat-pensiite-den-po-rano-prez-noemvri-877501.html",
+     "published": "2026-10-30T06:38:08+00:00",
+     "image": ""
+    },
+    {
+     "outlet": "Trud",
+     "title": "Кога започва изплащането на пенсиите за ноември",
+     "link": "https://trud.bg/a/articles/koga-zapochva-izplashtaneto-na-pensiite-za-noemvri",
+     "published": "2026-10-30T07:25:26+00:00",
+     "image": "https://trud.bg/storage/media/2026-10/1998975/conversions/пари-портфейл-евро-сметки-цени-2-thumb-958x539.webp"
+    }
+   ]
+  },
+  {
+   "id": "53e1db9560",
+   "headline": "Путин: Няма да има победител във война между Русия и Европа, искаме пълноценни отношения",
+   "first_seen": "2026-10-30T06:58:01+00:00",
+   "last_updated": "2026-10-30T07:16:08+00:00",
+   "outlet_count": 2,
+   "outlets": [
+    "Club Z",
+    "Offnews"
+   ],
+   "not_covered": [
+    "Trud",
+    "Sega"
+   ],
+   "articles": [
+    {
+     "outlet": "Club Z",
+     "title": "Путин: Готови сме за война с Европа, но не я искаме",
+     "link": "https://clubz.bg/181197",
+     "published": "2026-10-30T06:58:01+00:00",
+     "image": "https://clubz.bg/146/019e96dea0004b1faaaed24f55d4b378-0-fc0ee91d3851465a8f6823a2fcb47ca0~3.jpg"
+    },
+    {
+     "outlet": "Offnews",
+     "title": "Путин: Няма да има победител във война между Русия и Европа, искаме пълноценни отношения",
+     "link": "https://offnews.bg/sviat/putin-niama-da-ima-pobeditel-vav-vojna-mezhdu-rusia-i-evropa-iskame-877503.html",
+     "published": "2026-10-30T07:16:08+00:00",
+     "image": ""
+    }
+   ]
+  }
+ ]
+}

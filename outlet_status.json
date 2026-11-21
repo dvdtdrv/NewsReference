@@ -1,0 +1,362 @@
+[
+ {
+  "outlet": "BTA",
+  "type": "news agency",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 3,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": "1 renamed (headline changed)"
+ },
+ {
+  "outlet": "BNT",
+  "type": "public TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "BNR",
+  "type": "public radio",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "bTV Novinite",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "via David's PC"
+ },
+ {
+  "outlet": "Nova",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "1 renamed (headline changed)"
+ },
+ {
+  "outlet": "Dnevnik",
+  "type": "online daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Capital",
+  "type": "weekly / business",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Mediapool",
+  "type": "online, politics",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Standart",
+  "type": "daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "24 Chasa",
+  "type": "mass daily",
+  "method": "feed",
+  "status": "error",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:01:56.154670+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "HTTP 403"
+ },
+ {
+  "outlet": "Trud",
+  "type": "mass daily",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "via David's PC; 1 skipped: too old/future; e.g. date '' read as 2026-11-13T13:33"
+ },
+ {
+  "outlet": "Sega",
+  "type": "daily",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "14 skipped: too old/future; e.g. date 'Sat, 14 Nov 2026 07:00:55 +0200' read as 2026-11-14T05:00"
+ },
+ {
+  "outlet": "Club Z",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Dnes.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Actualno",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Fakti",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 5,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Offnews",
+  "type": "online portal",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Blitz",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": "via David's PC"
+ },
+ {
+  "outlet": "Novini.bg",
+  "type": "online portal",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Dir.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "PIK",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Banker",
+  "type": "business",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Pogled.info",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-10-31T16:16:43.276166+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Darik",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Focus",
+  "type": "news agency",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 2,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Vesti.bg",
+  "type": "online portal",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 1,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "News.bg",
+  "type": "online portal",
+  "method": "page",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": "8 skipped: no date"
+ },
+ {
+  "outlet": "BG On Air",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T20:40:22.455480+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Bloomberg TV",
+  "type": "business TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T20:40:22.455480+00:00",
+  "note": "via David's PC"
+ },
+ {
+  "outlet": "Evrocom",
+  "type": "commercial TV",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Euronews BG",
+  "type": "international",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "DW",
+  "type": "international",
+  "method": "sitemap",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Boulevard Bulgaria",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Svobodna Tochka",
+  "type": "online",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ },
+ {
+  "outlet": "Marica",
+  "type": "regional",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-02T07:32:44.536010+00:00",
+  "note": "via David's PC"
+ },
+ {
+  "outlet": "Moreto.net",
+  "type": "regional",
+  "method": "feed",
+  "status": "ok",
+  "added_this_run": 0,
+  "last_ok": "2026-11-21T20:18:40.283901+00:00",
+  "first_ok": "2026-11-01T00:20:17.786098+00:00",
+  "note": ""
+ }
+]
