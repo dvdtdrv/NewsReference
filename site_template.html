@@ -272,13 +272,38 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
   font-size: 11.5px; letter-spacing: .12em; line-height: 1; white-space: nowrap; }
 .flag.rising { color: var(--live); box-shadow: inset 0 0 0 1px currentColor; }
 /* the small menu that orders a story's articles: plain text with a thin arrow, pushed to the right */
-.story-meta .order {
-  margin-left: auto; appearance: none; -webkit-appearance: none; border: 0; border-radius: 0; cursor: pointer;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2374717A' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 2px center / 9px;
-  padding: 4px 18px 4px 0; color: var(--muted); font: inherit; letter-spacing: inherit; text-transform: inherit;
-}
-.story-meta .order:hover, .story-meta .order:focus-visible { color: var(--ink); }
-.story-meta .order option { text-transform: none; letter-spacing: 0; color: #15162B; background: #fff; }
+.story-meta .order { margin-left: auto; }
+.story-meta .order .menu-btn { color: var(--ink-soft); padding: 7px 13px 7px 15px; }
+/* 21 Nov 2026 (David): the two menus (story order, „Всички медии“) are our own rounded menus instead of the
+   browser's square lists; the real <select> stays hidden underneath and still holds the value (makeMenu) */
+.menu { position: relative; display: inline-block; }
+.menu > select { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.menu-btn { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; white-space: nowrap;
+  font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+  background: rgba(255,255,255,.45); border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px 8px 16px;
+  transition: border-color .15s, background .15s; }
+.menu-btn:hover, .menu.open .menu-btn { border-color: var(--ink-soft); background: rgba(255,255,255,.7); }
+.menu-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.menu-btn svg { width: 10px; height: 6px; flex: none; transition: transform .15s; }
+.menu.open .menu-btn svg { transform: rotate(180deg); }
+.menu-pop { position: absolute; z-index: 60; top: calc(100% + 8px); left: 0; min-width: 100%; width: max-content;
+  max-width: min(300px, calc(100vw - 32px)); box-sizing: border-box; padding: 6px;
+  background: #FBF9F3; border: 1px solid var(--rule); border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(21,22,43,.16), 0 2px 6px rgba(21,22,43,.06); }
+.menu-pop.right { left: auto; right: 0; }
+.menu-pop[hidden] { display: none; }
+.menu-search { display: block; width: 100%; box-sizing: border-box; margin-bottom: 6px; font: 400 15px/1.2 var(--body); color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px 10px 34px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='7' cy='7' r='5' fill='none' stroke='%2374717A' stroke-width='1.5'/%3E%3Cpath d='M11 11l3.5 3.5' stroke='%2374717A' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat 11px center / 15px; }
+.menu-search:focus { outline: none; border-color: var(--ink-soft); }
+.menu-list { list-style: none; margin: 0; padding: 0; max-height: min(320px, 50vh); overflow: auto; overscroll-behavior: contain; }
+.menu-list li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 9px 12px; border-radius: 9px;
+  font: 400 15px/1.25 var(--body); color: var(--ink); cursor: pointer; text-transform: none; letter-spacing: 0; }
+.menu-list li .c { font: 400 13px/1 var(--display); letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.menu-list li.active { background: var(--paper-2); }
+.menu-list li[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+.menu-list li[aria-selected="true"] .c { color: #C9C6CF; }
+.menu-list li.none { color: var(--muted); cursor: default; }
 /* 21 Nov 2026 (David chose option А): story headlines in Noto Serif SemiBold - easier to read while scrolling than the
    thin condensed Oswald; wider lines so most headlines fit in two or three. Old rule, to go back:
    max-width: 26ch; font: 300 clamp(30px, 3.8vw, 50px)/1.02 var(--display); */
@@ -331,8 +356,6 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 /* „Всички новини“: every article in the order it was published, one row each */
 .feed-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px 22px; padding: 6px 0;
   font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.feed-tools select { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--ink); background: none;
-  border: 0; border-bottom: 1px solid var(--rule); padding: 4px 2px; cursor: pointer; max-width: 100%; }
 .feed-tools label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
 .feed-tools input { accent-color: var(--ink); margin: 0; }
 .feed-day { display: flex; justify-content: space-between; gap: 12px; padding: 22px 0 8px; border-bottom: 1px solid var(--rule);
@@ -1202,6 +1225,92 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
   };
   const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : null;
 
+  // A rounded menu in place of a <select> (21 Nov 2026, David: the browser's own lists looked square and heavy).
+  // The <select> stays (hidden) and keeps the value; choosing an item sets it and fires its "change" event, so the
+  // code that listens to the <select> works unchanged. opts.search: a search box; opts.counts: {value: number}.
+  let openMenu = null;
+  const closeMenu = (focus) => {
+    if (!openMenu) return;
+    const m = openMenu; openMenu = null;
+    m.wrap.classList.remove("open"); m.pop.hidden = true; m.btn.setAttribute("aria-expanded", "false");
+    if (focus) m.btn.focus();
+  };
+  document.addEventListener("click", e => { if (openMenu && !openMenu.wrap.contains(e.target)) closeMenu(false); });
+  function makeMenu(select, opts = {}) {
+    const wrap = el("div", "menu" + (opts.cls ? " " + opts.cls : ""));
+    select.replaceWith(wrap);
+    const btn = el("button", "menu-btn"), label = el("span");
+    btn.type = "button";
+    btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false");
+    if (select.getAttribute("aria-label")) btn.setAttribute("aria-label", select.getAttribute("aria-label"));
+    btn.append(label);
+    btn.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>');
+    const pop = el("div", "menu-pop"); pop.hidden = true;
+    const search = opts.search ? el("input", "menu-search") : null;
+    if (search) { search.type = "text"; search.autocomplete = "off"; search.placeholder = opts.search; search.setAttribute("aria-label", opts.search); pop.append(search); }
+    const list = el("ul", "menu-list"); list.setAttribute("role", "listbox");
+    pop.append(list);
+    select.tabIndex = -1; select.setAttribute("aria-hidden", "true");
+    wrap.append(btn, pop, select);
+    let items = [], active = -1;
+    const show = () => { label.textContent = select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : ""; };
+    const draw = () => {
+      const q = search ? search.value.trim().toLowerCase() : "";
+      list.replaceChildren(); items = [];
+      [...select.options].forEach(o => {
+        if (q && o.value && !o.text.toLowerCase().includes(q)) return;
+        const li = el("li"); li.setAttribute("role", "option");
+        li.setAttribute("aria-selected", String(o.value === select.value));
+        li.append(el("span", null, o.text));
+        const n = opts.counts && o.value ? opts.counts[o.value] : null;
+        if (n != null) li.append(el("span", "c", String(n)));
+        li.addEventListener("click", () => pick(o.value));
+        li.addEventListener("mousemove", () => mark(items.indexOf(li)));
+        list.append(li); items.push(li);
+      });
+      if (!items.length) list.append(el("li", "none", "Няма такава медия"));
+      mark(items.findIndex(li => li.getAttribute("aria-selected") === "true"));
+    };
+    const mark = i => {
+      if (active >= 0 && items[active]) items[active].classList.remove("active");
+      active = i;
+      if (i >= 0 && items[i]) { items[i].classList.add("active"); items[i].scrollIntoView({ block: "nearest" }); }
+    };
+    const pick = v => {
+      const changed = select.value !== v;
+      select.value = v; show(); closeMenu(true);
+      if (changed) select.dispatchEvent(new Event("change"));
+    };
+    const open = () => {
+      if (openMenu) closeMenu(false);
+      openMenu = { wrap, pop, btn };
+      if (search) search.value = "";
+      draw();
+      pop.hidden = false; wrap.classList.add("open"); btn.setAttribute("aria-expanded", "true");
+      // open towards the side with room (the order menu sits at the right edge)
+      pop.classList.toggle("right", !!opts.right);
+      if (pop.getBoundingClientRect().right > document.documentElement.clientWidth - 8) pop.classList.add("right");
+      (search || btn).focus();
+    };
+    btn.addEventListener("click", () => (openMenu && openMenu.wrap === wrap) ? closeMenu(true) : open());
+    const keys = e => {
+      if (e.key === "Escape") { e.preventDefault(); closeMenu(true); }
+      else if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        if (pop.hidden) { open(); return; }
+        const d = e.key === "ArrowDown" ? 1 : -1;
+        mark(Math.max(0, Math.min(items.length - 1, active + d)));
+      } else if (e.key === "Enter" && !pop.hidden && items[active]) {
+        e.preventDefault(); items[active].click();
+      } else if (e.key === "Tab" && !pop.hidden) closeMenu(false);
+    };
+    btn.addEventListener("keydown", keys);
+    if (search) { search.addEventListener("keydown", keys); search.addEventListener("input", draw); }
+    select.addEventListener("change", show);
+    show();
+    return wrap;
+  }
+
   const tracked = data.tracked_outlets || [];
   const active = tracked.filter(o => o.active);
 
@@ -1611,6 +1720,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
         grid.append(...(pick.value === "last" ? cards.slice().reverse() : cards));
       });
       meta.append(pick);
+      makeMenu(pick, { cls: "order", right: true });
     }
     art.append(grid);
     // one row shows by default; the CSS decides how many fit (5, 4 or 2 per row)
@@ -1689,6 +1799,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
   const onPage = new Set((data.stories || []).map(s => s.id));
   let feedLeft = [], feedWait = [], feedDay = "", feedSeen = new Set(), feedBack = null;
   (data.feed_outlets || []).forEach(o => { const x = el("option", null, o); x.value = o; feedOutlet.append(x); });
+  makeMenu(feedOutlet, { search: "Търси медия…", counts: data.feed_counts || {} });
   if (archiveDate || !(data.feed_files || []).length) document.getElementById("tab-all").hidden = true;
   const feedDayName = iso => {
     const k = dayKey(new Date(iso)), today = dayKey(generated), yest = dayKey(new Date(generated.getTime() - 864e5));

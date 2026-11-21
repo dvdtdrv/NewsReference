@@ -113,6 +113,11 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   sheet's top is above the screen (scroll check in site_template.html); fast scrolling showed the first screen through
   not-yet-drawn parts of the long sheet.
 
+  21 Nov 2026 (David): the story order menu („От първата статия") and the „Всички медии" menu are our own rounded menus
+  (`makeMenu(select, {cls, right, search, counts})` in site_template.html: the real <select> stays hidden and keeps the value;
+  picking sets it and fires "change"; keyboard: arrows, Enter, Esc). The outlet menu has a search box and each outlet's article
+  count for the last 7 days (build_site.py front["feed_counts"]). Tabs, periods and the checkbox were left as they were (David).
+
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).
 - 36 outlets. Archive since ~31 Oct: ~26k articles (7 Nov); stories archived per day.

@@ -475,6 +475,8 @@ def main():
             json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
     front["feed_files"] = sorted(feed, reverse=True)
     front["feed_outlets"] = sorted({r[1] for rows in feed.values() for r in rows}, key=str.lower)
+    # how many articles each outlet has in „Всички новини“ (the last 7 days), shown in the outlet menu
+    front["feed_counts"] = dict(Counter(r[1] for rows in feed.values() for r in rows))
 
     # the time of this update, in a tiny file: open pages compare it with their own and offer to refresh
     with open(os.path.join(OUT_DIR, "version.json"), "w", encoding="utf-8") as f:
