@@ -651,11 +651,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   font-size: 11px; line-height: 17px; color: var(--muted); white-space: nowrap; text-decoration: none; vertical-align: 1px; }
 .src-tag.paid { border-color: #C9B98F; color: #6E5A2A; background: #F1E7CC; }
 @media (max-width: 600px) { .od-cases > li { grid-template-columns: 1fr; } }
-/* the spectrum: a scale to be filled with a measured position (axes and method still to decide) */
-.od-scale { position: relative; height: 34px; margin-top: 4px; }
-.od-scale::before { content: ""; position: absolute; left: 0; right: 0; top: 16px; height: 1px; background: var(--ink); }
-.od-scale i { position: absolute; top: 11px; width: 1px; height: 11px; background: var(--ink); }
-.od-scale-labels { display: flex; justify-content: space-between; font: 400 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .od-recent { list-style: none; margin: 0; padding: 0; }
 .od-recent li { border-bottom: 1px solid var(--rule); }
 .od-recent a { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding-block: 11px; text-decoration: none; }
@@ -851,7 +846,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     </section>
 
     <section class="section" id="outlets" hidden>
-      <h2>Медии<span class="h2-note">произход, собственост, финансиране, пристрастия и натиск от и към медиите</span></h2>
+      <h2>Медии<span class="h2-note">произход, собственост, финансиране и натиск от и към медиите</span></h2>
       <div class="outlets" id="outlet-list"></div>
       <p class="subhead" id="untracked-head">Още не следим</p>
       <div class="outlets" id="untracked-list"></div>
@@ -895,7 +890,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     <section class="section" id="about">
       <h2>За проекта</h2>
       <div class="cols">
-        <p>News Reference – Новинарски справочник показва как различните български медии отразяват едни и същи събития и къде се нарежда всяка от тях в спектъра. Позицията на всяка медия ще се основава на измерими данни, с доказателствата видими за всеки.</p>
+        <p>News Reference – Новинарски справочник показва как различните български медии отразяват едни и същи събития: кой пише за тях, как ги озаглавява и кой не ги отразява.</p>
         <p>Заглавията и снимките принадлежат на съответните медии. Всяко заглавие тук води към оригиналната статия на сайта на медията.</p>
       </div>
       <p class="subhead" id="method">Как работи</p>
@@ -1059,12 +1054,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         </section>
       </div>
       <div id="od-extra" class="od-body"></div>
-      <section class="od-section">
-        <h3>Позиция в спектъра</h3>
-        <div class="od-scale" aria-hidden="true"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:calc(100% - 1px)"></i></div>
-        <div class="od-scale-labels"><span>—</span><span>—</span></div>
-        <p style="margin-top:12px"><span class="od-todo">Предстои: измерими данни и метод</span></p>
-      </section>
       <section class="od-section" id="od-disputes-wrap" hidden>
         <h3>Спорове за независимостта и съдебни дела</h3>
         <p class="od-note">Публични твърдения и позиции, със страните и източниците им. Не са съдебно установени нарушения, освен ако изрично е казано.</p>

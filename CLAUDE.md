@@ -86,7 +86,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   documents with personal ID numbers (ЕГН). No "(не сме го прочели)" notes on sources (David, 17 Nov: all 326 removed); a paywalled source
   ends in "(платен)" and the site shows it as a "платен достъп" tag. No meta-sentences about our own access problems.
 - **Classification of outlets**: no bare left/right labels; measured axes with evidence (ownership, geopolitical
-  framing, blindspots, sensationalism). „За проекта" announces it as a coming feature.
+  framing, blindspots, sensationalism). ON HOLD since 21 Nov 2026 (David: to ask the outlets for cooperation, nothing about a
+  spectrum may be on the site): removed the outlet window's empty „Позиция в спектъра" scale, the promise in „За проекта",
+  „пристрастия" from the „Медии" note, and Fakti's Media Bias/Fact Check + Eurotopics left/right ratings. Don't add it back
+  without asking David. (AEJ's documented editorial-line studies of Standart / 24 Chasa were kept: outlet info, not a rating.)
 - **English-language outlets left out** (Novinite, Sofia Globe): grouping works on Bulgarian text only.
 - **Repo stays public** (free Pages + unlimited Actions minutes).
 - **Design**: egg-white `--paper`, darker `--paper-deep` at the top; Oswald display, Golos Text body;
@@ -182,7 +185,7 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 4. Fill outlets_info.json for the remaining 20 outlets (Svobodna Tochka: continues RFE/RL's Bulgarian service,
    publisher foundation „Свободна точка", sources: svobodnaevropa.bg notice of 2 Apr 2026 and its „За нас").
 5. Fix Club Z quotes; make the old-titles note tappable on phones.
-6. Later: outlet spectrum (measured axes), LLM summaries/framing per story (Claude Haiku API vs self-hosted BgGPT),
+6. Later: outlet spectrum (measured axes; ON HOLD, David 21 Nov - ask him first), LLM summaries/framing per story (Claude Haiku API vs self-hosted BgGPT),
    a "copied from the wire" indicator (24 Chasa and Pogled.info publish identical BTA headlines).
 7. Before earning money: ask BTA and bTV about commercial use, photos and attribution.
 
