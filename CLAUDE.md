@@ -207,14 +207,19 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - `headline_watch.py` (21 Nov, David: bTV only 38 renamed vs Nova/BNT 230+): renames used to be seen only when an
   article reappeared in the feed under a new headline, so the ranking measured feed depth and PC uptime (PC read its outlets
   in 36% of the hours, 14-21 Nov). Now link_check.py also reads each page's own headline (<h1>, og:title, <title>) on every
-  visit; a new headline seen on TWO visits (the second >= 3 h later, state "pending" in data/deleted.json) is merged as a
-  version (versions.merge), in data/articles.json (via collect.py's archive) and the monthly files. Noise ignored: site name
+  visit; a new headline is merged at once as a version (versions.merge; 21 Nov 16:40 David: one sighting counts - the
+  first version waited for a 2nd visit 3 h later, "pending" in data/deleted.json, but all 19 test sightings were confirmed), in data/articles.json (via collect.py's archive) and the monthly files.
+  21 Nov evening (David: "can't it be sooner than 3 hours"): after every change the article gets `soon_at` in data/deleted.json and is
+  opened again on the next run (RECHECK_MINUTES 20, so ~30 min, first in its outlet's queue); if the page's main headline is then an
+  EARLIER one, and the headline we hold is one we saw on that page ourselves (`page_title` in data/deleted.json; a feed rename can
+  have its two headlines in the wrong order: test 21 Nov, Vesti.bg), it is recorded as a change back: versions entry gets "back": true, kind "reverted" (column „Върнати", purple,
+  legend: often an A/B headline test). versions.merge keeps the whole A -> B -> A chain once any entry has "back". Noise ignored: site name
   after the headline, Dir.bg's section in <h1>, quotes, Club Z's ";", punctuation, page titles < 20 chars, garbled text.
   link_check.py changes the same day: schedule in hours (3, 12, 36, 72, 168, 336, 720; saved day-stages converted once,
   meta "schedule": 2), all outlets checked side by side (12 at a time starved Nova/Vesti/Darik: 1000+ never checked),
   PER_OUTLET 60, young articles (< 4 days) and confirmations first, PC to-do 150 per outlet, PC checks side by side too,
   pages decoded with their own <meta charset> (Moreto.net is windows-1251). Test 21 Nov on 2000 checks: 19 confirmed real
-  renames (Mediapool, Sega, Evrocom, Boulevard...), 0 false. BTA, Dnevnik, Capital pages are not opened: feed changes only.
+  renames (Mediapool, Sega, Evrocom, Boulevard...), 0 false once Moreto's encoding was fixed. BTA, Dnevnik, Capital pages are not opened: feed changes only.
 - `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
   (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so

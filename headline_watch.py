@@ -10,9 +10,14 @@ aged 1-4 days found real renames the feeds never showed (Nova, Vesti.bg, Mediapo
 How: link_check.py already re-opens every article on a schedule (now 3 h, 12 h, 36 h, 3, 7, 14, 30 days).
 At each visit we also read the page's own headline: the visible <h1> and og:title (and <title> as a
 last resort). If none of them is the headline we know (or one of its earlier versions), the page shows
-a new headline. To avoid counting a test headline or a glitch, the new headline must be seen on TWO
-visits in a row (the second one is scheduled 3 h later); then it is recorded exactly like a rename
-seen in a feed: the newest headline in "title", the old one in "versions" (versions.merge).
+a new headline, and it is recorded at once, exactly like a rename seen in a feed: the newest headline
+in "title", the old one in "versions" (versions.merge). (21 Nov 2026, David: one sighting counts; for a
+few hours that day a second visit had to confirm it, but every first sighting in the test was confirmed.)
+
+After every change we look again on the next run (RECHECK_MINUTES, ~30 min later instead of the next stage
+hours later): if the page then shows an EARLIER headline again, that is recorded too, as a change back
+(kind "reverted" on the site; the version gets "back": True). Some outlets test two headlines against
+each other (A/B tests) or pull a headline and restore the old one, and both are worth seeing.
 
 Noise we ignore: the site's name after the headline ("... - Mediapool.bg", "... | Новини"), a section
 name in <h1> (Dir.bg), quote marks, broken quotes shown as ";" (Club Z), spacing and punctuation, and
@@ -29,7 +34,7 @@ META = re.compile(r"<meta\b[^>]*>", re.I)
 ATTR = re.compile(r"""(property|name|content)\s*=\s*(["'])(.*?)\2""", re.I | re.S)
 SEP = re.compile(r"^(.*\S)\s+[-|—–:/•]\s+([^-|—–]{1,60})$")
 MIN_LEN = 20            # shorter page headlines are generic ("Спорт - Новини СЕГА"), never a rename
-CONFIRM_HOURS = 3       # a new headline is recorded when seen again at least this much later
+RECHECK_MINUTES = 20    # after a change, look again on the next run (updates come every ~30 min)
 
 
 def _text(s):
@@ -130,9 +135,31 @@ def judge(parts, known):
     return new
 
 
-def merge_new_headline(article, new_title, now_iso):
-    """Record a confirmed new headline on one stored article (same link). Returns True if it changed."""
+def went_back(parts, known):
+    """The EARLIER headline the page shows again instead of the current one (known[0]), else None.
+    Only the page's main headline counts (page_headline: <h1> first), so a stale og:title next to a
+    new <h1> is not a change back."""
+    if not parts or not known or not known[0] or shows_known(parts, known[:1]):
+        return None
+    main = page_headline(parts)
+    if not main or "\ufffd" in main:
+        return None
+    for k in known[1:]:
+        if k and len(k) >= MIN_LEN and any(same(v, k) for v in _variants(main)):
+            return k
+    return None
+
+
+def merge_new_headline(article, new_title, now_iso, back=False):
+    """Record a new headline on one stored article (same link). back=True: the page shows an earlier
+    headline again, so the chain becomes A -> B -> A. Returns True if it changed."""
     from versions import merge
     if not new_title or same(new_title, article.get("title")):
         return False
+    if back:
+        article["versions"] = list(article.get("versions", [])) + [
+            {"title": article.get("title"), "link": article.get("link"), "until": now_iso, "back": True}]
+        article["title"] = new_title
+        article["collected"] = max(article.get("collected") or "", now_iso)
+        return True
     return merge(article, {"title": new_title, "link": article.get("link"), "collected": now_iso})

@@ -455,6 +455,7 @@ body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32p
 .k.update { background: #D9E2EC; color: #2B4A6B; }
 .k.live { background: #DCE6D5; color: #3D5A2E; }
 .k.major { background: #F1D9C9; color: #8A3B12; }
+.k.reverted { background: #E6DCEB; color: #5A3870; }
 .k.deleted { background: #2A2B40; color: #F3EFE4; }
 .hc-ex td { padding: 4px 8px 16px; }
 .hc-ex ul { list-style: none; margin: 0; padding: 0; }
@@ -926,6 +927,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
             <th class="hc-kh" data-col="update" data-k="update" title="обновявания">Обнов.</th>
             <th class="hc-kh" data-col="live" data-k="live" title="живо отразяване">Живо</th>
             <th class="hc-kh" data-col="major" data-k="major" title="съществени смени">Съществ.</th>
+            <th class="hc-kh" data-col="reverted" data-k="reverted" title="сменени и върнати">Върнати</th>
             <th class="num" data-col="deleted">Изтрити</th>
           </tr></thead>
           <tbody id="hc-body"></tbody>
@@ -937,10 +939,11 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
             <div><dt><b class="k update">Обновяване</b></dt><dd>Поне половината от заглавието е запазена, но е сменено число („Над 390 сигнала“ → „Над 400 сигнала“) или са добавени или заменени думи („…три полета до София“ → „…три полета до София, единият кацна в Пловдив“). Обикновено новината се развива.</dd></div>
             <div><dt><b class="k live">Живо отразяване</b></dt><dd>Заглавието на една и съща статия е сменяно 3 или повече пъти – медията я ползва като поток от новини (например избирателната активност към 8:00, 10:00, 11:00). Всички смени на такава статия се броят тук, а не като съществени.</dd></div>
             <div><dt><b class="k major">Съществена</b></dt><dd>Запазена е по-малко от половината от заглавието – новото е почти изцяло друго.</dd></div>
+            <div><dt><b class="k reverted">Върната</b></dt><dd>Медията смени заглавието и после върна някое от предишните. След всяка видяна смяна отваряме статията отново при следващото обновяване (около 30 минути по-късно), за да хванем и такива случаи. Заглавие, което се сменя напред-назад няколко пъти, често е тест кое от две заглавия събира повече читатели. Записваме ги от 21 ноември 2026 г.</dd></div>
             <div><dt><b class="k deleted">Изтрита</b></dt><dd>Връзката към статията вече води до „няма такава страница“ (грешка 404 или 410) или пренасочва към началото на сайта – при две поредни проверки, за да не броим временни сривове. Всяка статия се проверява около 3 и 12 часа и 1,5, 3, 7, 14 и 30 дни след публикуването. „—“ значи, че статиите на медията не се проверяват (БТА – разрешението ни е само за емисията; Dnevnik и Capital – страниците им не ни допускат) или още не са проверени. Проверката започна на 5 ноември 2026 г.</dd></div>
           </dl>
           <p class="hc-how">Сходството между две заглавия се мери като дял от буквите, които съвпадат в същия ред. Подредбата по „% сменени“ е по дела на статиите с поне една смяна; „Смени общо“ брои всички смени, а колоните с цветове – смените от всеки вид. Медии с по-малко от <span id="hc-min"></span> статии за периода се показват, но не се класират.</p>
-          <p class="hc-how">Смяната на заглавие не е доказателство за цензура – най-често е обновяване на развиваща се новина. Показателят е сигнал, който си струва да се провери, затова всяка смяна се вижда. Смените виждаме по два начина: когато статията се появи отново в емисията на медията с ново заглавие и, от 21 ноември 2026 г., когато отворим самата статия при проверките по-горе. Ново заглавие от страницата броим само ако го видим при две поредни проверки. Статиите на БТА, Dnevnik и Capital не отваряме, затова при тях виждаме само смените в емисията. Преди 21 ноември виждахме само смените в емисиите, затова медиите с къси емисии и четените по-рядко може да показват по-малко смени за този период. Смени, при които връзката към статията остава същата, записваме от 5 ноември 2026 г.</p>
+          <p class="hc-how">Смяната на заглавие не е доказателство за цензура – най-често е обновяване на развиваща се новина. Показателят е сигнал, който си струва да се провери, затова всяка смяна се вижда. Смените виждаме по два начина: когато статията се появи отново в емисията на медията с ново заглавие и, от 21 ноември 2026 г., когато отворим самата статия при проверките по-горе. Статиите на БТА, Dnevnik и Capital не отваряме, затова при тях виждаме само смените в емисията. Преди 21 ноември виждахме само смените в емисиите, затова медиите с къси емисии и четените по-рядко може да показват по-малко смени за този период. Смени, при които връзката към статията остава същата, записваме от 5 ноември 2026 г.</p>
         </div>
       </div>
     </section>
@@ -2357,11 +2360,11 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     const fmtFull = new Intl.DateTimeFormat("bg-BG", { timeZone: tz, day: "numeric", month: "numeric", year: "numeric" });
     document.getElementById("hc-period").textContent =
       `${fmtDay.format(new Date(hc.from))} – ${fmtFull.format(new Date(hc.to))} · ${nf.format(hc.articles)} статии · ${hc.rows.length} медии`;
-    const KIND = { minor: "дребна", update: "обновяване", live: "живо", major: "съществена", deleted: "изтрита" };
+    const KIND = { minor: "дребна", update: "обновяване", live: "живо", major: "съществена", reverted: "върната", deleted: "изтрита" };
     const body = document.getElementById("hc-body");
     const pct = r => r.articles ? 100 * r.renamed / r.articles : 0;
     let sortBy = "pct", asc = false, examples = null, openRow = null;
-    const COLS = 11;
+    const COLS = 12;
     const loadExamples = () => examples || (examples = fetch(`${base}changes.json?v=${encodeURIComponent(data.generated_at || "")}`, { cache: "no-cache" }).then(r => r.json()).catch(() => ({})));
     const after = (from, to) => {   // how long after publishing we saw the change
       if (!to) return "";
@@ -2434,7 +2437,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
         meter.append(bar);
         const p = el("td", "num hc-pct", `${pct(r).toFixed(1).replace(".", ",")}%`);
         p.append(meter);
-        const kinds = [["minor", "дребни"], ["update", "обновявания"], ["live", "живо отразяване"], ["major", "съществени"]].map(([k, t]) => {
+        const kinds = [["minor", "дребни"], ["update", "обновявания"], ["live", "живо отразяване"], ["major", "съществени"], ["reverted", "сменени и върнати"]].map(([k, t]) => {
           const td = el("td", "hc-kc"), b = el("b", `k ${k}${r[k] ? "" : " zero"}`, String(r[k]));
           b.title = t; td.append(b); return td;
         });

@@ -75,6 +75,21 @@ def merge(keep, newer):
     if newer.get("collected"):
         keep["collected"] = max(keep.get("collected") or "", newer["collected"])
     versions, seen = [], {keep.get("title")}
+    if any(v.get("back") for v in history):
+        # the outlet changed a headline and later went back to an earlier one ("back", headline_watch.py):
+        # keep the whole chain A -> B -> A, only dropping copies of one entry (both sides may carry the
+        # same history) and a headline repeated right after itself
+        keys = set()
+        for v in history:
+            key = (v.get("title"), v.get("until"))
+            if key in keys:
+                continue
+            keys.add(key)
+            if v.get("title") and (not versions or versions[-1]["title"] != v["title"]):
+                versions.append({k: v[k] for k in ("title", "link", "until", "back") if v.get(k)})
+        while versions and versions[-1]["title"] == keep.get("title"):
+            versions.pop()
+        history = []
     for v in history:                     # one entry per earlier headline
         if v.get("title") and v["title"] not in seen:
             seen.add(v["title"])
@@ -157,7 +172,8 @@ def _plain(title):
 
 
 def change_kind(old, new, live=False):
-    """minor / update / live / major - the rules shown in the legend on the site:
+    """minor / update / live / major - the rules shown in the legend on the site
+    (plus "reverted": a headline changed back to an earlier one, see changes_of):
     minor  - after removing tags like (ВИДЕО) and punctuation, the headlines are the same or differ
              by a few letters (90%+ of the text matches) and no number changed;
     update - at least half of the text stayed, but a number changed (390 -> 400 signals) or words
@@ -182,4 +198,6 @@ def changes_of(a):
     chain = [x.get("title") for x in v] + [a.get("title")]
     times = [x.get("until", "") for x in v]
     live = len(v) >= LIVE_CHANGES
-    return [(change_kind(o, n, live), o, n, t) for o, n, t in zip(chain, chain[1:], times)]
+    # "back" on a version: the headline after it was an earlier headline again (changed and changed back)
+    return [("reverted" if x.get("back") else change_kind(o, n, live), o, n, t)
+            for x, o, n, t in zip(v, chain, chain[1:], times)]

@@ -77,10 +77,9 @@ def stage_for(published, now):
 
 
 def is_due(entry, published, now):
-    if entry and entry.get("pending"):
-        # a new headline was seen once: look again CONFIRM_HOURS later to confirm it
-        if now - datetime.fromisoformat(entry["pending_at"]) >= timedelta(hours=headline_watch.CONFIRM_HOURS):
-            return True
+    soon = entry and (entry.get("soon_at") or entry.get("pending_at"))
+    if soon and now - datetime.fromisoformat(soon) >= timedelta(minutes=headline_watch.RECHECK_MINUTES):
+        return True       # the headline just changed: look again on the next run (did it change back?)
     if entry and entry.get("strikes"):
         last = datetime.fromisoformat(entry["last"])
         return now - last >= timedelta(hours=RECHECK_HOURS)
@@ -96,11 +95,11 @@ def _old_stage_to_new(stage):
 
 
 def _priority(a, state):
-    """Order of the checks inside one outlet: confirmations of a new headline first, then articles
+    """Order of the checks inside one outlet: second looks after a headline change first, then articles
     younger than 4 days (headlines change early), oldest first within each group."""
     e = state.get(a["link"]) or {}
     young = (datetime.now(timezone.utc) - datetime.fromisoformat(a["published"])) < timedelta(days=4)
-    return (0 if e.get("pending") else 1 if young else 2, a["published"])
+    return (0 if e.get("soon_at") or e.get("pending_at") else 1 if young else 2, a["published"])
 
 
 HEAD_BYTES = 400_000
@@ -349,24 +348,34 @@ def _known_headlines(months_dir, now):
 
 
 def _headline(state, link, result, parts, known, now):
-    """headline_watch for one visit: returns the new headline once it is confirmed (seen twice), else None."""
+    """headline_watch for one visit: returns (new headline, back) if the page shows a different headline
+    than the one we hold, else None. back=True: it is one of the article's EARLIER headlines again.
+    21 Nov 2026 (David): one sighting is enough (until then a second visit 3 h later had to confirm a
+    change; in the test all 19 first sightings were confirmed, so the wait only delayed and lost changes).
+    After a change the article is looked at again on the next run (soon_at, ~30 min), so a headline that
+    is changed and quickly changed back is caught as well."""
     e = state.get(link)
     if e is None or result != "ok" or not parts or not known:
         return None
-    new = headline_watch.judge(parts, [k for k in known if k])
-    if new is None:
-        if headline_watch.shows_known(parts, [k for k in known if k]):
-            e.pop("pending", None); e.pop("pending_at", None)      # back to a headline we know: no change
+    for k in ("pending", "pending_at", "soon_at"):
+        e.pop(k, None)              # this visit was the second look (and old "pending" marks are retired)
+    known = [k for k in known if k]
+    new = headline_watch.judge(parts, known)
+    # a change back counts only if the headline we hold is one we saw on the page ourselves ("page_title"):
+    # a rename seen in a feed can have its two headlines in the wrong order (test 21 Nov: Vesti.bg), and the
+    # page showing the "older" one then is not a change back
+    back = None
+    if not new and known and headline_watch.same(e.get("page_title"), known[0]):
+        back = headline_watch.went_back(parts, known)
+    if not (new or back):
         return None
-    if e.get("pending") and headline_watch.same(e["pending"], new):
-        e.pop("pending", None); e.pop("pending_at", None)
-        return new                                                  # seen on two visits: a real change
-    e["pending"], e["pending_at"] = new, now.isoformat()
-    return None
+    e["soon_at"] = now.isoformat()
+    e["page_title"] = new or back
+    return (new, False) if new else (back, True)
 
 
 def _record_renames(renames, months_dir, archive, now):
-    """Write confirmed new headlines into the 7-day archive (in memory) and the monthly files."""
+    """Write new headlines ({link: (headline, back)}) into the 7-day archive (in memory) and the monthly files."""
     if not renames:
         return 0
     stamp = now.isoformat()
@@ -377,7 +386,7 @@ def _record_renames(renames, months_dir, archive, now):
     done = set()
     for link, new in renames.items():
         a = by_link.get(link)
-        if a is not None and headline_watch.merge_new_headline(a, new, stamp):
+        if a is not None and headline_watch.merge_new_headline(a, new[0], stamp, new[1]):
             done.add(link)
     oldest = now - timedelta(hours=SCHEDULE_HOURS[-1] + 24)
     for name in sorted(os.listdir(months_dir)) if os.path.isdir(months_dir) else []:
@@ -388,7 +397,7 @@ def _record_renames(renames, months_dir, archive, now):
         for a in items:
             links = [a.get("link")] + [v.get("link") for v in a.get("versions", [])]
             for link in links:
-                if link in renames and headline_watch.merge_new_headline(a, renames[link], stamp):
+                if link in renames and headline_watch.merge_new_headline(a, *renames[link][:1], stamp, renames[link][1]):
                     changed = True
                     done.add(link)
                     break
