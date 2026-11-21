@@ -350,6 +350,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - Outlet info #36 Moreto.net (16 Nov): two companies - Морето ООД (148107340; Стефанов 50% / Петрова 50%) and Морето Нет ЕООД (208626887, registered
   29.12.2025, Петрова 100%; issues the 2026 election tariff and contracts, 10,605.54 EUR). НАП lien on Stefanov's share 02.12.2025 (uic.bg history).
   No disputes found. Not verified (JS check / robots): contacts and terms pages, audience figures, ВАС decision 6315/2026 on the moreto.bg trademark.
+- 21 Nov 2026 check (David asked why Икономедиа has 10,49 млн. лв. revenue but 16 хил. лв. profit): both figures right (2024 individual
+  statement); the text's "непокрита загуба 34,3 млн. лв." was a misread scan - it is 14 335 хил., offset by 14 348 хил. retained profit.
+  Fixed in Dnevnik + Capital, explanation added (staff 7,26 млн. for 157 people, services 3,64 млн., EBITDA 490 хил., group loss 41 хил.,
+  +500 хил. capital Aug 2025) with the 2024 management report as source. Lesson: scanned figures need a second, zoomed reading.
 - 16 Nov: outlet info now filled for all 36 outlets. 17 Nov: the PC-browser checks are done and added (see below).
 - Deeper sweep 17 Nov (David: scandals, lawsuits, convictions were not really investigated). Method that worked: СЕМ's published penalty orders
   (cem.bg/controlsbg/13, 14 pages, 272 PDFs, 2015-2026) downloaded to the scratchpad and parsed (pdftotext; EIK after "срещу", fine after "НАЛАГАМ").
