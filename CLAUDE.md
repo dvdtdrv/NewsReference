@@ -93,6 +93,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   front-page title only (21 Nov 2026, David chose it from 6 Cyrillic serifs): „Една новина." upright + „Всички медии." grey italic in
   Noto Serif Display fixed at width 70 (web/noto-serif-display-narrow-*.woff2, ~31 KB, OFL); since 21 Nov (David) every page's
   big title (.intro h1: Медии., Архив., archive days, legal, search, support) uses the upright serif too, no italic;
+  story headlines (.story h3, search .hit h3) in Noto Serif SemiBold (web/noto-serif-*-600.woff2, 21 Nov, David chose it as a
+  trial and may go back to Oswald 300: the old rule is kept in a comment above .story h3);
   header Медии, Архив | NEWS REFERENCE | search, „Подкрепи" (21 Nov 2026, David: „За проекта" left the header to keep it
   uncluttered; it is now a big „За проекта →" block in the footer, next to „Правна информация", with „Как работи" under it). Installable web app
   (`web/`: manifest, icons, sw.js network-first).
