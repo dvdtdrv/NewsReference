@@ -18,6 +18,7 @@ on:
       - build_search.mjs
       - outlets_info.json
       - no_photos.json
+      - geo_bg.json        # the map on the first screen (21 Nov 2026)
       - web/**
 
 permissions:

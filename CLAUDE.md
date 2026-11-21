@@ -261,6 +261,16 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   its first outlet isn't counted). Not on archive pages. A „Ново" badge was tried and dropped by David. Concept mockup of the
   other ideas (live strip with ticker, „Днес в числа", lead story with „Мълчаха" box, „Кой пръв" timeline, „Как го озаглавиха",
   3-column grid) shown 21 Nov as screenshots only; nothing of it is built yet.
+- First-screen graphics (21 Nov, David chose "the wheel first, switch to the map" from several concepts): build_site.py
+  `hero_data()` (front page only, ~16 KB, key `hero`) from the last 24 h: outlets in wheel order (greedy: busiest first,
+  then the one sharing most stories with the last two), each one's article count and last article time (min of published
+  and collected), the top 260 outlet pairs by shared stories, articles per hour (24 bars), and towns named in stories
+  (`geo_bg.json`: Bulgaria's border from Natural Earth via world-atlas, public domain, projected to 640x415, plus ~60 towns
+  with x/y and regex word forms) with one story whose own headline names the town. site_template.html draws it all as
+  inline SVG (no libraries): tabs „Медиите днес" (wheel; dark name = wrote in the last hour by the reader's clock; hover/
+  focus lights its lines red and names its top partner; click opens the outlet window) / „Къде е новината" (map + top 4
+  towns; click opens the story via showStory). The pulse sits under the stats. body.has-viz switches the intro to
+  title|viz / text|viz; phones stack. rebuild.yml also runs when geo_bg.json changes. Town list can grow in geo_bg.json.
 - `probe_outlets.py` + `.github/workflows/probe-outlets.yml` (21 Nov): by-hand test whether GitHub's servers can read the
   `local` outlets (feed + one article page); no timer, changes nothing. Use it when an outlet says it allowed NewsReferenceBot.
 - Search engines (21 Nov): build_site.py writes site/sitemap.xml (6 main pages + every archive day, lastmod) and

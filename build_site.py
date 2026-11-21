@@ -25,6 +25,9 @@ import copy
 import html
 import json
 import os
+import re
+from collections import Counter
+from itertools import combinations
 import shutil
 from datetime import datetime, timedelta, timezone
 
@@ -293,6 +296,79 @@ def front_page_data():
     return data
 
 
+GEO_FILE = "geo_bg.json"   # Bulgaria's border and the towns we look for in headlines (the map on the first screen)
+
+
+def hero_data(front):
+    """The first screen's graphics (21 Nov 2026), from the last 24 hours:
+    - the media wheel: every outlet's articles, when it last wrote, and how many stories each pair of outlets shared
+    - the pulse: articles per hour
+    - the map: towns named in the stories, with one story that has the town in its own headline
+    Small on purpose (a few KB): the front page carries it, the other pages don't."""
+    now = datetime.fromisoformat(front["generated_at"])
+    since = now - timedelta(hours=24)
+    try:
+        with open(os.path.join("data", "articles.json"), encoding="utf-8") as f:
+            articles = json.load(f)
+    except (OSError, ValueError):
+        return None
+
+    def seen_at(a):   # an outlet whose clock runs ahead counts from when we first read the article
+        t = datetime.fromisoformat(a["published"])
+        c = a.get("collected")
+        return min(t, datetime.fromisoformat(c)) if c else t
+
+    recent = [(a, seen_at(a)) for a in articles]
+    recent = [(a, t) for a, t in recent if since < t <= now + timedelta(minutes=5)]
+    count, last = Counter(), {}
+    hours = [0] * 24
+    for a, t in recent:
+        count[a["outlet"]] += 1
+        last[a["outlet"]] = max(last.get(a["outlet"], t), t)
+        hours[min(23, max(0, 23 - int((now - t).total_seconds() // 3600)))] += 1
+    stories = [st for st in front["stories"] if datetime.fromisoformat(st["last_updated"]) > since]
+    pairs = Counter()
+    for st in stories:
+        for a, b in combinations(sorted({x["outlet"] for x in st["articles"]}), 2):
+            pairs[(a, b)] += 1
+    names = [o["name"] for o in front.get("tracked_outlets", [])] or sorted(count)
+    # around the wheel, outlets that share many stories sit next to each other: start with the busiest, then
+    # always add the outlet that shares most with the last two placed
+    shared = lambda x, y: pairs.get(tuple(sorted((x, y))), 0)
+    order = [max(names, key=lambda o: count[o])]
+    left = [o for o in names if o not in order]
+    while left:
+        nxt = max(left, key=lambda o: sum(shared(o, l) for l in order[-2:]) + count[o] * 0.01)
+        order.append(nxt)
+        left.remove(nxt)
+    idx = {o: i for i, o in enumerate(order)}
+    top_pairs = [[idx[a], idx[b], n] for (a, b), n in pairs.most_common(260) if a in idx and b in idx]
+    places = []
+    try:
+        with open(GEO_FILE, encoding="utf-8") as f:
+            geo = json.load(f)
+    except (OSError, ValueError):
+        geo = None
+    if geo:
+        for town, (x, y, forms) in geo["cities"].items():
+            rx = re.compile(r"(?<![а-я])(?:" + forms + ")")
+            hits = [st for st in stories
+                    if rx.search(" ".join([st["headline"]] + [a["title"] for a in st["articles"]]).lower())]
+            if not hits:
+                continue
+            own = [st for st in hits if rx.search(st["headline"].lower())]
+            ex = max(own, key=lambda st: st["outlet_count"]) if own else None
+            places.append({"n": town, "x": x, "y": y, "c": len(hits),
+                           "h": ex["headline"] if ex else "", "id": ex["id"] if ex else ""})
+        places.sort(key=lambda p: -p["c"])
+    return {
+        "stories": len(stories), "articles": len(recent), "hours": hours,
+        "outlets": [{"n": o, "c": count[o], "last": last[o].isoformat() if o in last else None} for o in order],
+        "pairs": top_pairs, "places": places[:40],
+        "map": {"w": geo["width"], "h": geo["height"], "outline": geo["outline"]} if geo else None,
+    }
+
+
 FEED_HOURS = 1      # „Всички новини“: one file per hour, so a phone loads little at a time (~30 KB zipped)
 
 
@@ -386,7 +462,7 @@ def main():
     # everything except what only „Медии“ shows (the outlet info and the ranking are the biggest part)
     light = {k: v for k, v in front.items() if k not in MEDIA_ONLY}
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(light, template, seo=("", "News Reference – една новина, всички медии",
+        f.write(render({**light, "hero": hero_data(front)}, template, seo=("", "News Reference – една новина, всички медии",
                                             "Новините от 36 български медии, групирани в истории: кои медии отразиха "
                                             "всяка новина, с какво заглавие и кои я премълчаха.")))
 

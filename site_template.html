@@ -137,6 +137,80 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
 .stat { font: 300 15px/1.2 var(--display); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
 .stat strong { display: block; font-weight: 300; font-size: 40px; letter-spacing: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
 
+/* ---------- the first screen's graphics (21 Nov 2026): the media wheel / the map, and the pulse ---------- */
+body.has-viz .intro {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-areas: "title viz" "text viz";
+  align-items: center; gap: 22px 56px; padding-block: 24px 36px;
+}
+body.has-viz .intro h1 { grid-area: title; align-self: end; font-size: clamp(52px, 6.6vw, 104px); }
+body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
+.viz { grid-area: viz; min-width: 0; }
+.viz-tabs { display: flex; align-items: baseline; gap: 22px; border-bottom: 1px solid var(--rule); margin-bottom: 6px; }
+.viz-tabs button { padding: 8px 0 9px; margin-bottom: -1px; border: 0; border-bottom: 2px solid transparent; background: none; cursor: pointer;
+  font: 400 13px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.viz-tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--ink); }
+.viz-tabs button:hover { color: var(--ink); }
+.viz-hint { margin-left: auto; font: 400 11.5px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.viz-pane svg { display: block; width: 100%; height: auto; max-height: calc(100svh - 300px); margin: 0 auto; overflow: visible; }
+.viz-pane[hidden] { display: none; }
+.viz-pane { animation: viz-in .35s ease; }
+@keyframes viz-in { from { opacity: 0; transform: translateY(6px); } }
+.intro .viz-note { max-width: none; min-height: 1.4em; margin: 4px 0 0; font-size: 13px; color: var(--muted); text-align: center; }
+.viz-note b { font-weight: 500; color: var(--ink); }
+/* the wheel */
+.wheel .edges path { fill: none; stroke: var(--ink); transition: stroke-opacity .25s; }
+.wheel .node { cursor: pointer; }
+.wheel .node circle { fill: #A9A294; transition: fill .2s; }
+.wheel .node.live circle { fill: var(--ink); }
+.wheel .node text { font: 400 13px var(--display); letter-spacing: .08em; text-transform: uppercase; fill: #A9A294; transition: fill .2s; }
+.wheel .node.live text { fill: var(--ink); }
+.wheel.focus .edges path { stroke-opacity: .03 !important; }
+.wheel.focus .edges path.on { stroke: var(--live); stroke-opacity: .6 !important; }
+.wheel.focus .node text { fill: #C9C2B2; }
+.wheel.focus .node.on text, .wheel.focus .node.pick text { fill: var(--ink); }
+.wheel.focus .node.pick circle { fill: var(--live); }
+.wheel .mid-n { font: 200 64px var(--display); fill: var(--ink); }
+.wheel .mid-l { font: 400 13px var(--display); letter-spacing: .14em; text-transform: uppercase; fill: var(--muted); }
+.wheel .edges { animation: viz-draw 1.2s ease both; }
+@keyframes viz-draw { from { opacity: 0; } }
+/* the map */
+.bgmap .land { fill: #EFE9DA; stroke: #B9B09C; stroke-width: 1.2; }
+.bgmap .town { cursor: pointer; }
+.bgmap .town circle { fill: var(--live); fill-opacity: .16; stroke: var(--live); stroke-opacity: .55; }
+.bgmap .town circle.core { fill-opacity: 1; stroke: none; }
+.bgmap .town:hover circle:not(.core), .bgmap .town:focus circle:not(.core) { fill-opacity: .32; }
+.bgmap text { font: 400 13px var(--display); letter-spacing: .08em; text-transform: uppercase; fill: var(--ink);
+  paint-order: stroke; stroke: #EFE9DA; stroke-width: 4px; pointer-events: none; }
+.bgmap text tspan { fill: var(--live); }
+.places { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 26px; }
+.places li { border-top: 1px solid var(--rule); padding-top: 7px; }
+.places button { display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; color: inherit; font: inherit; }
+.places b { font: 400 14px var(--display); letter-spacing: .08em; text-transform: uppercase; margin-right: 8px; }
+.places span { font: 400 12px var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--live); }
+.places em { display: block; font-style: normal; font-size: 13px; line-height: 1.35; color: var(--ink-soft);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.places button:hover em { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+/* the pulse */
+.pulse { margin-top: 26px; max-width: 360px; }
+.pulse-cap { font: 400 12px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.pulse svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pulse rect { fill: var(--ink); opacity: .85; transform-box: fill-box; transform-origin: bottom; animation: viz-grow .8s cubic-bezier(.3, 0, .25, 1) both; }
+.pulse rect.now { fill: var(--live); opacity: 1; }
+.pulse text { font: 400 10px var(--display); letter-spacing: .08em; fill: var(--muted); }
+@keyframes viz-grow { from { transform: scaleY(0); } }
+@media (prefers-reduced-motion: reduce) { .viz-pane, .wheel .edges, .pulse rect { animation: none; } }
+@media (max-width: 860px) {
+  body.has-viz .intro { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "viz"; padding-block: 34px 30px; }
+  body.has-viz .intro h1 { font-size: clamp(52px, 15vw, 80px); }
+  .viz-hint { display: none; }
+  .viz-tabs { gap: 18px; } .viz-tabs button { font-size: 12.5px; letter-spacing: .1em; }
+  .viz-pane svg { max-height: none; }
+  .wheel .node text { font-size: 17px; }
+  .places { grid-template-columns: 1fr; }
+  .pulse { max-width: none; }
+}
+@media (max-height: 620px) and (min-width: 861px) { .viz-pane svg { max-height: 520px; } }
+
 /* ---------- story list ---------- */
 .list-head {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 24px;
@@ -643,10 +717,21 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
         <a class="back" id="back" href="../index.html" hidden>← Към последните истории</a>
         <p id="intro-text">В „Новинарски справочник“ събираме заглавията на български медии и ги подреждаме по истории. Така виждате кой какво отразява, как го озаглавява и кой мълчи.</p>
         <div class="stats" id="stats"></div>
+        <div class="pulse" id="pulse" hidden></div>
         <form class="search-form" id="search-form" role="search" action="tarsene.html" hidden>
           <input type="search" id="q" name="q" placeholder="Например „бюджет“" aria-label="Търсене в историите и статиите" autocomplete="off" enterkeyhint="search">
           <button class="cta" type="submit">Търси</button>
         </form>
+      </div>
+      <div class="viz" id="viz" hidden>
+        <div class="viz-tabs" role="tablist" aria-label="Графики за последните 24 часа">
+          <button type="button" role="tab" aria-selected="true" data-p="wheel">Медиите днес</button>
+          <button type="button" role="tab" aria-selected="false" data-p="map">Къде е новината</button>
+          <span class="viz-hint">за последните 24 часа</span>
+        </div>
+        <div class="viz-pane" id="viz-wheel" role="tabpanel"></div>
+        <div class="viz-pane" id="viz-map" role="tabpanel" hidden></div>
+        <p class="viz-note" id="viz-note" aria-live="polite"></p>
       </div>
     </section>
 
@@ -1129,6 +1214,131 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
   [[data.stories.length, "истории"], [tracked.length, "медии"], [archiveDate ? null : (data.articles_total ?? data.articles_in_window), "статии"]]
     .filter(([n]) => n != null)
     .forEach(([n, label]) => { const s = el("div", "stat"); s.append(el("strong", null, n), label); stats.append(s); });
+
+  // ---------- the first screen's graphics (21 Nov 2026), front page only: the media wheel / the map, and the pulse ----------
+  if (data.hero && !archiveDate) (() => {
+    const H = data.hero, NS = "http://www.w3.org/2000/svg";
+    const svg = (tag, attrs = {}, text) => {
+      const n = document.createElementNS(NS, tag);
+      Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+      if (text != null) n.textContent = text;
+      return n;
+    };
+    const num = n => new Intl.NumberFormat("bg-BG").format(n);
+    const note = document.getElementById("viz-note");
+    const say = (...parts) => { note.replaceChildren(...parts.map(p => typeof p === "string" ? document.createTextNode(p) : p)); };
+    document.body.classList.add("has-viz");
+    document.getElementById("viz").hidden = false;
+
+    // the pulse: articles per hour, the last 24 hours (the red bar = the latest hour)
+    const pulse = document.getElementById("pulse");
+    if (H.hours && H.hours.some(Boolean)) {
+      const max = Math.max(...H.hours);
+      const g = svg("svg", { viewBox: "0 0 312 92", role: "img", "aria-label": `${num(H.articles)} статии за последните 24 часа, по часове` });
+      H.hours.forEach((v, i) => {
+        const h = 4 + 64 * v / max;
+        const r = svg("rect", { x: i * 13, y: (72 - h).toFixed(1), width: 9, height: h.toFixed(1), class: i === 23 ? "now" : "" });
+        r.style.animationDelay = `${i * 18}ms`;
+        r.append(svg("title", {}, `${v} статии`));
+        g.append(r);
+      });
+      const hourAt = back => new Intl.DateTimeFormat("bg-BG", { timeZone: tz, hour: "2-digit", minute: "2-digit" })
+        .format(new Date(generated.getTime() - back * 3600000)).replace(/:\d\d$/, ":00");
+      g.append(svg("text", { x: 0, y: 88 }, hourAt(23)), svg("text", { x: 156, y: 88, "text-anchor": "middle" }, hourAt(11)),
+               svg("text", { x: 312, y: 88, "text-anchor": "end" }, "сега"));
+      pulse.append(el("div", "pulse-cap", `Пулсът на медиите · ${num(H.articles)} статии за 24 ч`), g);
+      pulse.hidden = false;
+    }
+
+    // the wheel: outlets around a circle, linked by the stories they shared; dark = wrote in the last hour
+    const W = 640, C = W / 2, R = 232, outlets = H.outlets || [], n = outlets.length;
+    const wheel = svg("svg", { viewBox: `-46 -46 ${W + 92} ${W + 92}`, class: "wheel", role: "img",
+      "aria-label": `${n} медии, свързани с общите им истории за последните 24 часа` });
+    const pos = outlets.map((o, i) => { const a = -Math.PI / 2 + 2 * Math.PI * i / n; return [C + R * Math.cos(a), C + R * Math.sin(a), a]; });
+    const edges = svg("g", { class: "edges" }), nodes = svg("g");
+    const maxPair = Math.max(1, ...(H.pairs || []).map(p => p[2]));
+    const byOutlet = outlets.map(() => []);
+    (H.pairs || []).slice().reverse().forEach(([a, b, k]) => {
+      const [x1, y1] = pos[a], [x2, y2] = pos[b];
+      const cx = C + (x1 + x2 - 2 * C) * 0.18, cy = C + (y1 + y2 - 2 * C) * 0.18;
+      const path = svg("path", { d: `M${x1.toFixed(1)},${y1.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`,
+        "stroke-opacity": (0.05 + 0.5 * (k / maxPair) ** 1.4).toFixed(3), "stroke-width": (0.6 + 2.2 * (k / maxPair) ** 1.5).toFixed(2) });
+      edges.append(path);
+      byOutlet[a].push([path, b, k]); byOutlet[b].push([path, a, k]);
+    });
+    const maxC = Math.max(1, ...outlets.map(o => o.c)), now = Date.now();
+    const plain = () => { wheel.classList.remove("focus"); wheel.querySelectorAll(".on, .pick").forEach(x => x.classList.remove("on", "pick")); say(""); };
+    outlets.forEach((o, i) => {
+      const [x, y, a] = pos[i];
+      const live = o.last && now - new Date(o.last).getTime() < 3600000;
+      const g = svg("g", { class: "node" + (live ? " live" : ""), tabindex: 0, role: "button",
+        "aria-label": `${o.n}: ${o.c} статии за 24 часа${live ? ", писа през последния час" : ""}` });
+      const deg = a * 180 / Math.PI, flip = ((deg % 360) + 360) % 360 > 90 && ((deg % 360) + 360) % 360 < 270;
+      const lx = C + (R + 16) * Math.cos(a), ly = C + (R + 16) * Math.sin(a);
+      g.append(svg("circle", { cx: x.toFixed(1), cy: y.toFixed(1), r: (2.5 + 7 * Math.sqrt(o.c / maxC)).toFixed(1) }),
+               svg("text", { x: lx.toFixed(1), y: ly.toFixed(1), transform: `rotate(${(flip ? deg + 180 : deg).toFixed(1)} ${lx.toFixed(1)} ${ly.toFixed(1)})`,
+                             "text-anchor": flip ? "end" : "start", "dominant-baseline": "middle" }, o.n));
+      const focus = () => {
+        plain();
+        wheel.classList.add("focus"); g.classList.add("pick");
+        const mine = byOutlet[i].slice().sort((p, q) => q[2] - p[2]);
+        mine.forEach(([path, other]) => { path.classList.add("on"); nodes.children[other].classList.add("on"); });
+        const b = el("b", null, o.n);
+        say(b, ` · ${o.c} статии за 24 ч` + (mine.length ? ` · най-много общи истории с ${outlets[mine[0][1]].n} (${mine[0][2]})` : ""));
+      };
+      g.addEventListener("mouseenter", focus); g.addEventListener("focus", focus);
+      g.addEventListener("mouseleave", plain); g.addEventListener("blur", plain);
+      g.addEventListener("click", () => showOutlet(o.n));
+      g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showOutlet(o.n); } });
+      nodes.append(g);
+    });
+    wheel.append(edges, nodes, svg("text", { x: C, y: C - 8, "text-anchor": "middle", class: "mid-n" }, num(H.stories)),
+                 svg("text", { x: C, y: C + 24, "text-anchor": "middle", class: "mid-l" }, "истории за 24 часа"));
+    document.getElementById("viz-wheel").append(wheel);
+
+    // the map: towns named in the stories; a tap opens the town's story
+    const mapPane = document.getElementById("viz-map"), places = H.places || [];
+    if (H.map && places.length) {
+      const m = svg("svg", { viewBox: `-10 -10 ${H.map.w + 20} ${H.map.h + 20}`, class: "bgmap", role: "img", "aria-label": "Места, споменати в историите за последните 24 часа" });
+      m.append(svg("path", { class: "land", d: H.map.outline }));
+      const maxP = Math.max(...places.map(p => p.c));
+      const labelled = new Set(places.slice(0, 7).map(p => p.n));
+      places.slice().reverse().forEach(p => {
+        const g = svg("g", { class: "town", tabindex: 0, role: "button", "aria-label": `${p.n}: ${p.c} истории` });
+        g.append(svg("circle", { cx: p.x, cy: p.y, r: (4 + 26 * (p.c / maxP) ** 0.6).toFixed(1) }), svg("circle", { class: "core", cx: p.x, cy: p.y, r: 2.2 }),
+                 svg("title", {}, `${p.n}: ${p.c} ${p.c === 1 ? "история" : "истории"}`));
+        const open = () => { if (p.id) showStory(p.id); };
+        g.addEventListener("click", open);
+        g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+        m.append(g);
+      });
+      places.filter(p => labelled.has(p.n)).forEach(p => {
+        const t = svg("text", { x: p.x + 9, y: p.y - 9 }, `${p.n} `);
+        t.append(svg("tspan", {}, String(p.c)));
+        m.append(t);
+      });
+      const ul = el("ul", "places");
+      places.filter(p => p.h).slice(0, 4).forEach(p => {
+        const li = el("li"), b = el("button");
+        b.type = "button";
+        b.append(el("b", null, p.n), el("span", null, `${p.c} ${p.c === 1 ? "история" : "истории"}`), el("em", null, p.h));
+        b.addEventListener("click", () => showStory(p.id));
+        li.append(b); ul.append(li);
+      });
+      mapPane.append(m, ul);
+    } else document.querySelector('.viz-tabs [data-p="map"]').hidden = true;
+
+    const legend = () => say("По-плътна линия = повече общи истории · тъмно име = писа през последния час · докосни медия");
+    legend();
+    wheel.addEventListener("mouseleave", legend);
+    document.querySelectorAll(".viz-tabs button").forEach(b => b.addEventListener("click", () => {
+      document.querySelectorAll(".viz-tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+      document.getElementById("viz-wheel").hidden = b.dataset.p !== "wheel";
+      mapPane.hidden = b.dataset.p !== "map";
+      if (b.dataset.p === "map") say("Кръгът е по-голям, колкото повече истории споменават мястото · докосни град");
+      else legend();
+    }));
+  })();
 
   // archive: the list of days
   const days = data.archive_days || [];
