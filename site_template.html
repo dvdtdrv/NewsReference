@@ -151,6 +151,11 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 .viz-tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--ink); }
 .viz-tabs button:hover { color: var(--ink); }
 .viz-hint { margin-left: auto; font: 400 11.5px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.viz-tabs .viz-info { width: 20px; height: 20px; padding: 0; margin: 0 0 0 4px; align-self: center; border: 1px solid var(--muted);
+  border-radius: 50%; font: 400 12px/18px var(--display); letter-spacing: 0; text-transform: none; color: var(--muted); }
+.viz-tabs .viz-info[aria-expanded="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+.viz-tabs .viz-info:hover { color: var(--ink); border-color: var(--ink); }
+.viz-tabs .viz-info[aria-expanded="true"]:hover { color: var(--paper); }
 .viz-pane svg { display: block; width: 100%; height: auto; max-height: calc(100svh - 300px); margin: 0 auto; overflow: visible; }
 .viz-pane[hidden] { display: none; }
 .viz-pane { animation: viz-in .35s ease; }
@@ -203,6 +208,7 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
   body.has-viz .intro { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "viz"; padding-block: 34px 30px; }
   body.has-viz .intro h1 { font-size: clamp(52px, 15vw, 80px); }
   .viz-hint { display: none; }
+  .viz-tabs .viz-info { margin-left: auto; }
   .viz-tabs { gap: 18px; } .viz-tabs button { font-size: 12.5px; letter-spacing: .1em; }
   .viz-pane svg { max-height: none; }
   .wheel .node text { font-size: 17px; }
@@ -728,6 +734,7 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
           <button type="button" role="tab" aria-selected="true" data-p="wheel">Медиите днес</button>
           <button type="button" role="tab" aria-selected="false" data-p="map">Къде е новината</button>
           <span class="viz-hint">за последните 24 часа</span>
+          <button type="button" class="viz-info" id="viz-info" aria-expanded="false" aria-controls="viz-note" title="Как се чете">i</button>
         </div>
         <div class="viz-pane" id="viz-wheel" role="tabpanel"></div>
         <div class="viz-pane" id="viz-map" role="tabpanel" hidden></div>
@@ -1266,8 +1273,9 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       edges.append(path);
       byOutlet[a].push([path, b, k]); byOutlet[b].push([path, a, k]);
     });
-    const maxC = Math.max(1, ...outlets.map(o => o.c)), now = Date.now();
-    const plain = () => { wheel.classList.remove("focus"); wheel.querySelectorAll(".on, .pick").forEach(x => x.classList.remove("on", "pick")); say(""); };
+    // "wrote in the last hour" is measured against the moment the data was made, so an older page doesn't turn all grey
+    const maxC = Math.max(1, ...outlets.map(o => o.c)), now = generated.getTime();
+    const plain = () => { wheel.classList.remove("focus"); wheel.querySelectorAll(".on, .pick").forEach(x => x.classList.remove("on", "pick")); rest(); };
     outlets.forEach((o, i) => {
       const [x, y, a] = pos[i];
       const live = o.last && now - new Date(o.last).getTime() < 3600000;
@@ -1328,15 +1336,22 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       mapPane.append(m, ul);
     } else document.querySelector('.viz-tabs [data-p="map"]').hidden = true;
 
-    const legend = () => say("По-плътна линия = повече общи истории · тъмно име = писа през последния час · докосни медия");
-    legend();
-    wheel.addEventListener("mouseleave", legend);
-    document.querySelectorAll(".viz-tabs button").forEach(b => b.addEventListener("click", () => {
-      document.querySelectorAll(".viz-tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+    // the explanation stays hidden until the reader asks for it with the small "i" (21 Nov 2026, David: less clutter)
+    const info = document.getElementById("viz-info");
+    let onMap = false;
+    function rest() {
+      if (info.getAttribute("aria-expanded") !== "true") return say("");
+      say(onMap ? "По-голям кръг = повече истории, които споменават мястото."
+                : "По-плътна линия = повече общи истории. Тъмно име = писа през последния час.");
+    }
+    rest();
+    info.addEventListener("click", () => { info.setAttribute("aria-expanded", String(info.getAttribute("aria-expanded") !== "true")); rest(); });
+    document.querySelectorAll(".viz-tabs [data-p]").forEach(b => b.addEventListener("click", () => {
+      document.querySelectorAll(".viz-tabs [data-p]").forEach(x => x.setAttribute("aria-selected", String(x === b)));
       document.getElementById("viz-wheel").hidden = b.dataset.p !== "wheel";
       mapPane.hidden = b.dataset.p !== "map";
-      if (b.dataset.p === "map") say("Кръгът е по-голям, колкото повече истории споменават мястото · докосни град");
-      else legend();
+      onMap = b.dataset.p === "map";
+      rest();
     }));
   })();
 

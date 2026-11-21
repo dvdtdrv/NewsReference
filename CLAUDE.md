@@ -269,7 +269,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   with x/y and regex word forms) with one story whose own headline names the town. site_template.html draws it all as
   inline SVG (no libraries): tabs „Медиите днес" (wheel; dark name = wrote in the last hour by the reader's clock; hover/
   focus lights its lines red and names its top partner; click opens the outlet window) / „Къде е новината" (map + top 4
-  towns; click opens the story via showStory). The pulse sits under the stats. body.has-viz switches the intro to
+  towns; click opens the story via showStory). The pulse sits under the stats. 21 Nov (David): the explanation line is
+  hidden until the small round "i" at the end of the tab row is pressed; "dark name" = wrote in the hour before the data
+  was made (generated_at), not the reader's clock, so an old page (hourly updates while the PC is off) doesn't go all grey;
+  `last` is written without microseconds (older Safari can't read 6-digit fractions). body.has-viz switches the intro to
   title|viz / text|viz; phones stack. rebuild.yml also runs when geo_bg.json changes. Town list can grow in geo_bg.json.
 - `probe_outlets.py` + `.github/workflows/probe-outlets.yml` (21 Nov): by-hand test whether GitHub's servers can read the
   `local` outlets (feed + one article page); no timer, changes nothing. Use it when an outlet says it allowed NewsReferenceBot.

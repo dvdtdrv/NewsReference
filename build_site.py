@@ -363,7 +363,7 @@ def hero_data(front):
         places.sort(key=lambda p: -p["c"])
     return {
         "stories": len(stories), "articles": len(recent), "hours": hours,
-        "outlets": [{"n": o, "c": count[o], "last": last[o].isoformat() if o in last else None} for o in order],
+        "outlets": [{"n": o, "c": count[o], "last": last[o].isoformat(timespec="seconds") if o in last else None} for o in order],
         "pairs": top_pairs, "places": places[:40],
         "map": {"w": geo["width"], "h": geo["height"], "outline": geo["outline"]} if geo else None,
     }
