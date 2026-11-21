@@ -273,7 +273,11 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 .flag.rising { color: var(--live); box-shadow: inset 0 0 0 1px currentColor; }
 /* the small menu that orders a story's articles: plain text with a thin arrow, pushed to the right */
 .story-meta .order { margin-left: auto; }
-.story-meta .order .menu-btn { color: var(--ink-soft); padding: 7px 13px 7px 15px; }
+/* quieter than the outlet menu (David: "too eye-catching"): smaller, no fill, a faint border that darkens on hover */
+.story-meta .order .menu-btn { color: var(--muted); font-size: 11.5px; gap: 7px; padding: 5px 10px 5px 12px;
+  background: transparent; border-color: rgba(216,209,191,.7); }
+.story-meta .order .menu-btn svg { width: 8px; height: 5px; opacity: .8; }
+.story-meta .order .menu-btn:hover, .story-meta .order.open .menu-btn { color: var(--ink); border-color: var(--rule); background: rgba(255,255,255,.35); }
 /* 21 Nov 2026 (David): the two menus (story order, „Всички медии“) are our own rounded menus instead of the
    browser's square lists; the real <select> stays hidden underneath and still holds the value (makeMenu) */
 .menu { position: relative; display: inline-block; }
