@@ -90,6 +90,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - **English-language outlets left out** (Novinite, Sofia Globe): grouping works on Bulgarian text only.
 - **Repo stays public** (free Pages + unlimited Actions minutes).
 - **Design**: egg-white `--paper`, darker `--paper-deep` at the top; Oswald display, Golos Text body;
+  front-page title only (21 Nov 2026, David chose it from 6 Cyrillic serifs): „Една новина." upright + „Всички медии." grey italic in
+  Noto Serif Display fixed at width 70 (web/noto-serif-display-narrow-*.woff2, ~31 KB, OFL; other pages keep Oswald titles);
   header Медии, Архив | NEWS REFERENCE | search, „Подкрепи" (21 Nov 2026, David: „За проекта" left the header to keep it
   uncluttered; it is now a big „За проекта →" block in the footer, next to „Правна информация", with „Как работи" under it). Installable web app
   (`web/`: manifest, icons, sw.js network-first).

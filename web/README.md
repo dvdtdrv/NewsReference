@@ -1,1 +1,5 @@
 Web app files: manifest, icons and the offline helper. build_site.py copies them into site/.
+
+noto-serif-display-narrow-400.woff2 and noto-serif-display-narrow-italic-300.woff2 (21 Nov 2026): the front-page title.
+Made from Google's Noto Serif Display variable fonts (OFL, licence in OFL-noto-serif-display.txt): fixed at width 70
+(weight 400 upright, 300 italic) and cut to Bulgarian + basic Latin letters with fontTools, ~14 + 17 KB.
