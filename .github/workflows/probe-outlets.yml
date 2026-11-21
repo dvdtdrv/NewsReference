@@ -1,0 +1,30 @@
+# Started by hand: can GitHub's own servers read the outlets we normally read on David's PC?
+# (probe_outlets.py asks each "local" outlet's feed once, the same polite way collect.py does.)
+# Use it after an outlet says it allows NewsReferenceBot, then move that outlet off the PC in feeds.py.
+
+name: Test PC outlets from GitHub
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ask each PC outlet once
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          pip install -q feedparser requests
+          python probe_outlets.py
