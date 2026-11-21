@@ -17,8 +17,8 @@ feed: the newest headline in "title", the old one in "versions" (versions.merge)
 and then to "two looks on consecutive runs".)
 
 After every change we also look again on the next run: if the page then shows an EARLIER headline again
-(on two looks in a row as well), that is recorded as a change back (kind "reverted" on the site; the
-version gets "back": True). Some outlets test two headlines against each other (A/B tests) or pull a
+(on two looks in a row as well), that is recorded as one more change: the chain becomes A -> B -> A
+(the version gets "back": True so versions.merge keeps the whole chain; the site shows it like any change). Some outlets test two headlines against each other (A/B tests) or pull a
 headline and restore the old one, and both are worth seeing.
 
 Noise we ignore: the site's name after the headline ("... - Mediapool.bg", "... | Новини"), a section

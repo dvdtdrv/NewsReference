@@ -214,8 +214,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   ~30 min, ~1 h for PC outlets; first in its outlet's queue); same headline again = confirmed, our headline again = dropped.
   After a confirmed change `soon_at` is set again, so a change back is caught quickly: if the page's main headline is then an
   EARLIER one (on two looks in a row too), and the headline we hold is one we saw on that page ourselves (`page_title` in data/deleted.json; a feed rename can
-  have its two headlines in the wrong order: test 21 Nov, Vesti.bg), it is recorded as a change back: versions entry gets "back": true, kind "reverted" (column „Върнати", purple,
-  legend: often an A/B headline test). versions.merge keeps the whole A -> B -> A chain once any entry has "back". Noise ignored: site name
+  have its two headlines in the wrong order: test 21 Nov, Vesti.bg), it is recorded as one more change (versions entry gets "back": true so versions.merge keeps the whole A -> B -> A
+  chain; judged by change_kind like any change). A separate „Върнати" column was tried and removed the same day (David: pointless,
+  the struck-through headlines in a row already show it). Noise ignored: site name
   after the headline, Dir.bg's section in <h1>, quotes, Club Z's ";", punctuation, page titles < 20 chars, garbled text.
   link_check.py changes the same day: schedule in hours (3, 12, 36, 72, 168, 336, 720; saved day-stages converted once,
   meta "schedule": 2), all outlets checked side by side (12 at a time starved Nova/Vesti/Darik: 1000+ never checked),

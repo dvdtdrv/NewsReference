@@ -172,8 +172,7 @@ def _plain(title):
 
 
 def change_kind(old, new, live=False):
-    """minor / update / live / major - the rules shown in the legend on the site
-    (plus "reverted": a headline changed back to an earlier one, see changes_of):
+    """minor / update / live / major - the rules shown in the legend on the site:
     minor  - after removing tags like (ВИДЕО) and punctuation, the headlines are the same or differ
              by a few letters (90%+ of the text matches) and no number changed;
     update - at least half of the text stayed, but a number changed (390 -> 400 signals) or words
@@ -198,6 +197,6 @@ def changes_of(a):
     chain = [x.get("title") for x in v] + [a.get("title")]
     times = [x.get("until", "") for x in v]
     live = len(v) >= LIVE_CHANGES
-    # "back" on a version: the headline after it was an earlier headline again (changed and changed back)
-    return [("reverted" if x.get("back") else change_kind(o, n, live), o, n, t)
-            for x, o, n, t in zip(v, chain, chain[1:], times)]
+    # a change back to an earlier headline ("back" on a version, headline_watch.py) is one more change in the
+    # chain A -> B -> A, judged like any other (David, 21 Nov 2026: no separate column)
+    return [(change_kind(o, n, live), o, n, t) for o, n, t in zip(chain, chain[1:], times)]

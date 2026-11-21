@@ -255,8 +255,7 @@ def headline_changes():
         for a in (month["articles"] if isinstance(month, dict) else month):
             o = a.get("outlet")
             r = rows.setdefault(o, {"outlet": o, "articles": 0, "renamed": 0, "changes": 0,
-                                    "minor": 0, "update": 0, "live": 0, "major": 0, "reverted": 0,
-                                    "deleted": 0})
+                                    "minor": 0, "update": 0, "live": 0, "major": 0, "deleted": 0})
             r["articles"] += 1
             total += 1
             p = a.get("published", "")
