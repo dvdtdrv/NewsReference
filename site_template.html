@@ -2239,7 +2239,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     root.style.overflow = "hidden";
     if (bar > 0) root.style.paddingRight = `${bar}px`;        // computers: no sideways jump when the bar disappears
     document.querySelector(".od-scroll").scrollTop = 0;
-    requestAnimationFrame(() => { foldLong(); buildNav(); });
+    foldLong(); buildNav();   // the window is open, so its layout can be measured now (no waiting for a frame)
   }
   // the window's own scroll bar (shown on touch screens): follows the scrolling and can be dragged
   (function odBar() {
