@@ -70,7 +70,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   newest headline kept, older ones in `versions`. Cards show "Заглавието е сменяно N пъти". This also feeds the
   **headline-change ranking** under „Медии" (by % and by count; kinds: minor / update / live / major, legend on
   the site), because silent headline changes can be a sign of pressure or censorship.
-- **Deleted articles** (`link_check.py`): each article is re-opened ~1, 3, 7, 14, 30 days after publishing.
+- **Deleted articles** (`link_check.py`): each article is re-opened ~3 h, 12 h, 1.5, 3, 7, 14, 30 days after publishing
+  (until 21 Nov: 1, 3, 7, 14, 30 days); each visit also reads the page's headline (headline_watch.py).
   Gone = 404/410, redirect to the front or a section page, a "not found" page title, or canonical/og:url
   pointing to the front/section page; two such answers 6 h apart. Rule 1 (6 Nov): if the page still shows our
   headline (title or og:title, incl. earlier versions) it is alive, because 8 of the first 25 "deleted" were
@@ -203,6 +204,17 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   events), cross-encoder reranker (missed most). Next: let Haiku confirm only the proposed joins.
   12 Nov: a joined story's title = the headline closest in meaning to all its articles (best_headline), not its
   largest part's title. Publish jobs in update.yml and rebuild.yml: timeout 15 min, not 5 (slow Pages publishes were cut off).
+- `headline_watch.py` (21 Nov, David: bTV only 38 renamed vs Nova/BNT 230+): renames used to be seen only when an
+  article reappeared in the feed under a new headline, so the ranking measured feed depth and PC uptime (PC read its outlets
+  in 36% of the hours, 14-21 Nov). Now link_check.py also reads each page's own headline (<h1>, og:title, <title>) on every
+  visit; a new headline seen on TWO visits (the second >= 3 h later, state "pending" in data/deleted.json) is merged as a
+  version (versions.merge), in data/articles.json (via collect.py's archive) and the monthly files. Noise ignored: site name
+  after the headline, Dir.bg's section in <h1>, quotes, Club Z's ";", punctuation, page titles < 20 chars, garbled text.
+  link_check.py changes the same day: schedule in hours (3, 12, 36, 72, 168, 336, 720; saved day-stages converted once,
+  meta "schedule": 2), all outlets checked side by side (12 at a time starved Nova/Vesti/Darik: 1000+ never checked),
+  PER_OUTLET 60, young articles (< 4 days) and confirmations first, PC to-do 150 per outlet, PC checks side by side too,
+  pages decoded with their own <meta charset> (Moreto.net is windows-1251). Test 21 Nov on 2000 checks: 19 confirmed real
+  renames (Mediapool, Sega, Evrocom, Boulevard...), 0 false. BTA, Dnevnik, Capital pages are not opened: feed changes only.
 - `limits.py` (9 Nov): hard total time limit for one web request (`within(seconds, fn, ...)`), used by collect.py
   (photo pages 45 s, robots.txt 30 s, feeds 90 s) and link_check.py (40 s). Added after a stuck photo page made
   every update time out from ~06:30 to ~13:30 UTC on 9 Nov. update.yml's collect step has PYTHONUNBUFFERED=1 so

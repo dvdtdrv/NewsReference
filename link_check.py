@@ -31,14 +31,20 @@ from urllib.parse import urlparse
 
 import requests
 
+import headline_watch
 from limits import within
 
 STATE_FILE = os.path.join("data", "deleted.json")
 LOCAL_TODO_FILE = os.path.join("data", "link_check_local.json")
 LOCAL_TODO_URL = "https://raw.githubusercontent.com/dvdtdrv/NewsReference/data/link_check_local.json"
-SCHEDULE_DAYS = (1, 3, 7, 14, 30)   # check each article about this many days after it was published
-PER_OUTLET = 40                      # at most this many checks per outlet per run (runs are every 30 min)
-SECONDS = 4 * 60                     # at most this long per run, all outlets together
+# 21 Nov 2026: hours, not days, and three early visits: each visit also reads the page's headline
+# (headline_watch.py), and headlines change mostly in the first day or two
+SCHEDULE_HOURS = (3, 12, 36, 72, 168, 336, 720)
+SCHEDULE_DAYS = (1, 3, 7, 14, 30)    # the old schedule, only to convert saved stages (see run)
+SCHEDULE_VERSION = 2
+PER_OUTLET = 60                      # at most this many checks per outlet per run (runs are every 30 min)
+SECONDS = 4 * 60                     # at most this long per run; all outlets are checked side by side
+PC_PER_OUTLET = 150                  # links per outlet in the PC's to-do list (the PC runs less often)
 RECHECK_HOURS = 6                    # after a first "no such page", ask again this much later
 TIMEOUT = 15
 PROBE_SECONDS = 40                   # the most one check may take in total
@@ -65,19 +71,39 @@ def checkable(outlet):
 
 
 def stage_for(published, now):
-    """How many of the SCHEDULE_DAYS have passed since the article was published."""
-    age = (now - datetime.fromisoformat(published)).total_seconds() / 86400
-    return sum(1 for d in SCHEDULE_DAYS if age >= d)
+    """How many of the SCHEDULE_HOURS have passed since the article was published."""
+    age = (now - datetime.fromisoformat(published)).total_seconds() / 3600
+    return sum(1 for h in SCHEDULE_HOURS if age >= h)
 
 
 def is_due(entry, published, now):
+    if entry and entry.get("pending"):
+        # a new headline was seen once: look again CONFIRM_HOURS later to confirm it
+        if now - datetime.fromisoformat(entry["pending_at"]) >= timedelta(hours=headline_watch.CONFIRM_HOURS):
+            return True
     if entry and entry.get("strikes"):
         last = datetime.fromisoformat(entry["last"])
         return now - last >= timedelta(hours=RECHECK_HOURS)
     return stage_for(published, now) > (entry or {}).get("stage", 0)
 
 
-HEAD_BYTES = 250_000
+def _old_stage_to_new(stage):
+    """A stage counted on the old day schedule -> the same moment on the hour schedule."""
+    if not stage:
+        return 0
+    hours = SCHEDULE_DAYS[min(stage, len(SCHEDULE_DAYS)) - 1] * 24
+    return sum(1 for h in SCHEDULE_HOURS if h <= hours)
+
+
+def _priority(a, state):
+    """Order of the checks inside one outlet: confirmations of a new headline first, then articles
+    younger than 4 days (headlines change early), oldest first within each group."""
+    e = state.get(a["link"]) or {}
+    young = (datetime.now(timezone.utc) - datetime.fromisoformat(a["published"])) < timedelta(days=4)
+    return (0 if e.get("pending") else 1 if young else 2, a["published"])
+
+
+HEAD_BYTES = 400_000
 NOT_FOUND = re.compile(r"\b404\b|не е намерен|не беше намерен|не съществува|не може да бъде намерен|"
                        r"няма такава страница|страницата не|page not found|not found", re.I)
 TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
@@ -116,11 +142,13 @@ def headlines_of(a):
 
 
 def probe(link, headers, headlines=None):
-    """_probe with a hard limit of PROBE_SECONDS in total (see limits.py): a stuck page counts as "can't tell"."""
+    """_probe with a hard limit of PROBE_SECONDS in total (see limits.py): a stuck page counts as "can't tell".
+    Returns (result, parts): parts = the page's own headline candidates (headline_watch.page_parts) or {}."""
     try:
-        return within(PROBE_SECONDS, _probe, link, headers, headlines)
+        out = within(PROBE_SECONDS, _probe, link, headers, headlines)
     except requests.RequestException:
-        return None
+        return None, {}
+    return out if isinstance(out, tuple) else (out, {})
 
 
 def _probe(link, headers, headlines=None):
@@ -141,10 +169,19 @@ def _probe(link, headers, headlines=None):
                         break
                     # stop once the page's title and its own address have both passed (not at the first
                     # "</head>": Novini.bg has an early fake one)
+                    # and (21 Nov 2026) the page's visible headline <h1>, for headline_watch.py
                     low = raw.lower()
-                    if b"</title>" in low and (b"og:url" in low or b'rel="canonical"' in low) and b"<body" in low:
+                    if (b"</title>" in low and (b"og:url" in low or b'rel="canonical"' in low) and b"<body" in low
+                            and b"</h1>" in low):
                         break
-            enc = r.encoding if r.encoding and r.encoding.lower() not in ("iso-8859-1", "latin-1") else "utf-8"
+            enc = r.encoding if r.encoding and r.encoding.lower() not in ("iso-8859-1", "latin-1") else ""
+            if not enc:       # no charset from the server: the page's own <meta charset> (Moreto.net: windows-1251)
+                m = re.search(rb"""charset\s*=\s*["']?([A-Za-z0-9_-]+)""", raw[:8000])
+                enc = m.group(1).decode("ascii", "ignore") if m else "utf-8"
+            try:
+                "".encode(enc)
+            except LookupError:
+                enc = "utf-8"
     except requests.RequestException:
         return None
     if status in (404, 410):
@@ -154,6 +191,10 @@ def _probe(link, headers, headlines=None):
     if "challenge" in urlparse(final).path:
         return None       # a robot check page (Moreto.net): we can't tell
     head = raw.decode(enc, errors="replace")
+    return _judge(head, link, final, headlines), headline_watch.page_parts(head)
+
+
+def _judge(head, link, final, headlines):
     t = TITLE.search(head)
     title = html.unescape(re.sub(r"\s+", " ", t.group(1))).strip() if t else ""
     og = OG_TITLE.search(head)
@@ -213,12 +254,19 @@ def due_articles(outlets, months_dir, state, now, local):
     return due
 
 
-def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None):
+def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None, archive=None):
     """Check due links on this machine and apply answers the PC sent (local = its local_articles.json).
-    Returns (checked, newly gone)."""
+    New headlines seen on the pages (headline_watch.py) are recorded in `archive` (the last 7 days, saved
+    by collect.py afterwards) and in the monthly files. Returns (checked, newly gone, headlines changed)."""
     state = _load(STATE_FILE, {})
     meta = state.pop("_meta", {})
     gone_before = sum(1 for e in state.values() if e.get("gone"))
+    if meta.get("schedule", 1) < SCHEDULE_VERSION:      # 21 Nov 2026: days -> hours, same moments kept
+        for e in state.values():
+            e["stage"] = _old_stage_to_new(e.get("stage", 0))
+        meta["schedule"] = SCHEDULE_VERSION
+    known = _known_headlines(months_dir, now)
+    renames = {}
 
     # 0. (6 Nov 2026) the rules changed: everything marked "gone" so far is checked again from scratch
     if meta.get("rules", 1) < RULES:
@@ -233,6 +281,9 @@ def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None)
     if local and local.get("link_checks") and local.get("fetched_at") != meta.get("pc_batch"):
         for link, item in local["link_checks"].items():
             apply(state, link, item.get("outlet"), item.get("result"), now, item.get("published"))
+            new = _headline(state, link, item.get("result"), item.get("page") or {}, known.get(link), now)
+            if new:
+                renames[link] = new
         meta["pc_batch"] = local.get("fetched_at")
 
     # 2. our own checks
@@ -254,44 +305,125 @@ def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None)
             time.sleep(crawl_delay(a["link"]))
         return done
 
-    with ThreadPoolExecutor(max_workers=12) as pool:
+    for items in due.values():
+        items.sort(key=lambda a: _priority(a, state))
+    # every outlet side by side (each still one request at a time, with its pause): with 12 at a time the
+    # outlets late in the list (Nova, Vesti.bg, Darik) ran out of time every run and fell 1000+ checks behind
+    with ThreadPoolExecutor(max_workers=max(1, len(due))) as pool:
         checked = sum(pool.map(work, list(due)))
-    for a, result in results:
+    for a, (result, parts) in results:
         apply(state, a["link"], a["outlet"], result, now, a["published"])
+        new = _headline(state, a["link"], result, parts, known.get(a["link"]) or headlines_of(a), now)
+        if new:
+            renames[a["link"]] = new
+    renamed = _record_renames(renames, months_dir, archive, now)
 
     # 3. tell the PC which links of its outlets are due
     local_due = due_articles(outlets, months_dir, state, now, local=True)
+    for items in local_due.values():
+        items.sort(key=lambda a: _priority(a, state))
     _save(LOCAL_TODO_FILE, {"made": now.isoformat(), "links": [
         {"link": a["link"], "outlet": a["outlet"], "published": a["published"], "titles": headlines_of(a)}
-        for items in local_due.values() for a in items[:PER_OUTLET]]})
+        for items in local_due.values() for a in items[:PC_PER_OUTLET]]})
 
     # forget checks of articles older than the schedule, unless they were deleted
-    limit = (now - timedelta(days=SCHEDULE_DAYS[-1] + 2)).isoformat()
+    limit = (now - timedelta(hours=SCHEDULE_HOURS[-1] + 48)).isoformat()
     state = {k: e for k, e in state.items() if e.get("gone") or e.get("restored") or e.get("last", "") >= limit}
     state["_meta"] = meta
     _save(STATE_FILE, state)
     state.pop("_meta")
     gone_now = sum(1 for e in state.values() if e.get("gone"))
-    return checked, gone_now - gone_before
+    return checked, gone_now - gone_before, renamed
 
 
-def check_on_pc(headers_for, outlets, allowed, crawl_delay, seconds=3 * 60):
-    """On David's PC: check the links GitHub said are due for the local outlets.
-    Returns {link: {"outlet", "published", "result"}} to send back."""
+def _known_headlines(months_dir, now):
+    """{link: [headline, earlier headlines...]} for the articles still on the schedule (any of their links)."""
+    oldest = now - timedelta(hours=SCHEDULE_HOURS[-1] + 24)
+    out = {}
+    for name in sorted(os.listdir(months_dir)) if os.path.isdir(months_dir) else []:
+        if name.endswith(".json") and name[:7] >= oldest.strftime("%Y-%m"):
+            for a in _load(os.path.join(months_dir, name), []):
+                if a.get("link"):
+                    out[a["link"]] = headlines_of(a)
+    return out
+
+
+def _headline(state, link, result, parts, known, now):
+    """headline_watch for one visit: returns the new headline once it is confirmed (seen twice), else None."""
+    e = state.get(link)
+    if e is None or result != "ok" or not parts or not known:
+        return None
+    new = headline_watch.judge(parts, [k for k in known if k])
+    if new is None:
+        if headline_watch.shows_known(parts, [k for k in known if k]):
+            e.pop("pending", None); e.pop("pending_at", None)      # back to a headline we know: no change
+        return None
+    if e.get("pending") and headline_watch.same(e["pending"], new):
+        e.pop("pending", None); e.pop("pending_at", None)
+        return new                                                  # seen on two visits: a real change
+    e["pending"], e["pending_at"] = new, now.isoformat()
+    return None
+
+
+def _record_renames(renames, months_dir, archive, now):
+    """Write confirmed new headlines into the 7-day archive (in memory) and the monthly files."""
+    if not renames:
+        return 0
+    stamp = now.isoformat()
+    by_link = {}
+    for a in archive or []:
+        for link in [a.get("link")] + [v.get("link") for v in a.get("versions", [])]:
+            by_link[link] = a
+    done = set()
+    for link, new in renames.items():
+        a = by_link.get(link)
+        if a is not None and headline_watch.merge_new_headline(a, new, stamp):
+            done.add(link)
+    oldest = now - timedelta(hours=SCHEDULE_HOURS[-1] + 24)
+    for name in sorted(os.listdir(months_dir)) if os.path.isdir(months_dir) else []:
+        if not name.endswith(".json") or name[:7] < oldest.strftime("%Y-%m"):
+            continue
+        path = os.path.join(months_dir, name)
+        items, changed = _load(path, []), False
+        for a in items:
+            links = [a.get("link")] + [v.get("link") for v in a.get("versions", [])]
+            for link in links:
+                if link in renames and headline_watch.merge_new_headline(a, renames[link], stamp):
+                    changed = True
+                    done.add(link)
+                    break
+        if changed:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(items, f, ensure_ascii=False, indent=1)
+    return len(done)
+
+
+def check_on_pc(headers_for, outlets, allowed, crawl_delay, seconds=4 * 60):
+    """On David's PC: check the links GitHub said are due for the local outlets, the outlets side by side.
+    Returns {link: {"outlet", "published", "result", "page"}} to send back ("page": the page's headline
+    candidates; GitHub decides whether the headline changed, see headline_watch.py)."""
     try:
         todo = requests.get(LOCAL_TODO_URL, timeout=TIMEOUT).json().get("links", [])
     except (requests.RequestException, ValueError):
         return {}
     by_name = {o["name"]: o for o in outlets}
     deadline = time.monotonic() + seconds
-    out = {}
+    out, groups = {}, {}
     for item in todo:
-        if time.monotonic() > deadline:
-            break
-        o = by_name.get(item["outlet"])
-        if not o or not allowed(item["link"]):
-            continue
-        out[item["link"]] = {**{k: v for k, v in item.items() if k != "titles"},
-                             "result": probe(item["link"], headers_for(o), item.get("titles"))}
-        time.sleep(crawl_delay(item["link"]))
+        groups.setdefault(item.get("outlet"), []).append(item)
+
+    def work(name):
+        o = by_name.get(name)
+        for item in groups[name]:
+            if not o or time.monotonic() > deadline:
+                break
+            if not allowed(item["link"]):
+                continue
+            result, parts = probe(item["link"], headers_for(o), item.get("titles"))
+            out[item["link"]] = {**{k: v for k, v in item.items() if k != "titles"}, "result": result,
+                                 **({"page": parts} if parts else {})}
+            time.sleep(crawl_delay(item["link"]))
+
+    with ThreadPoolExecutor(max_workers=max(1, len(groups))) as pool:
+        list(pool.map(work, list(groups)))
     return out

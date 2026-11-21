@@ -718,11 +718,12 @@ def main():
 
     # are older articles still online? (a few checks per article over 30 days, see link_check.py)
     if extras:
-        checked, gone = link_check.run(
+        checked, gone, renamed = link_check.run(
             OUTLETS, MONTHS_DIR, NOW, allowed, crawl_delay,
             lambda o: BROWSER_HEADERS if o.get("as_browser") else HEADERS,
-            local if ON_GITHUB else None)
-        print(f"Deleted articles: checked {checked} links; {gone} newly found deleted.")
+            local if ON_GITHUB else None, archive)
+        print(f"Deleted articles: checked {checked} links; {gone} newly found deleted; "
+              f"{renamed} headline changes seen on the pages (headline_watch.py).")
 
     archive = [a for a in archive if datetime.fromisoformat(a["published"]) >= oldest_allowed]
     archive.sort(key=lambda a: a["published"], reverse=True)
