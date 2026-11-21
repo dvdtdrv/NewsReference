@@ -272,7 +272,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   towns; click opens the story via showStory). The pulse sits under the stats. 21 Nov (David): the explanation line is
   hidden until the small round "i" at the end of the tab row is pressed; "dark name" = wrote in the hour before the data
   was made (generated_at), not the reader's clock, so an old page (hourly updates while the PC is off) doesn't go all grey;
-  `last` is written without microseconds (older Safari can't read 6-digit fractions). body.has-viz switches the intro to
+  `last` is written without microseconds (older Safari can't read 6-digit fractions). Pulse title is just „Пулсът на
+  медиите" (David); pointing at a bar (mouse) or tapping it (phone, the choice stays) shows „HH:MM–HH:MM · N статии"
+  next to the title and fades the other bars; invisible 13 px hit rects make thin bars tappable. body.has-viz switches the intro to
   title|viz / text|viz; phones stack. rebuild.yml also runs when geo_bg.json changes. Town list can grow in geo_bg.json.
 - `probe_outlets.py` + `.github/workflows/probe-outlets.yml` (21 Nov): by-hand test whether GitHub's servers can read the
   `local` outlets (feed + one article page); no timer, changes nothing. Use it when an outlet says it allowed NewsReferenceBot.

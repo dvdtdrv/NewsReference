@@ -201,6 +201,11 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 .pulse svg { display: block; width: 100%; height: auto; overflow: visible; }
 .pulse rect { fill: var(--ink); opacity: .85; transform-box: fill-box; transform-origin: bottom; animation: viz-grow .8s cubic-bezier(.3, 0, .25, 1) both; }
 .pulse rect.now { fill: var(--live); opacity: 1; }
+/* 21 Nov 2026: a tap (or pointing) on a bar shows that hour's count next to the title */
+.pulse .hit { fill: transparent; opacity: 1; animation: none; cursor: pointer; outline: none; }
+.pulse svg.picked rect:not(.hit):not(.sel) { opacity: .35; }
+.pulse rect.sel { opacity: 1; }
+.pulse-cap .pick { color: var(--ink); }
 .pulse text { font: 400 10px var(--display); letter-spacing: .08em; fill: var(--muted); }
 @keyframes viz-grow { from { transform: scaleY(0); } }
 @media (prefers-reduced-motion: reduce) { .viz-pane, .wheel .edges, .pulse rect { animation: none; } }
@@ -1242,18 +1247,38 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
     if (H.hours && H.hours.some(Boolean)) {
       const max = Math.max(...H.hours);
       const g = svg("svg", { viewBox: "0 0 312 92", role: "img", "aria-label": `${num(H.articles)} статии за последните 24 часа, по часове` });
+      const hhmm = back => new Intl.DateTimeFormat("bg-BG", { timeZone: tz, hour: "2-digit", minute: "2-digit" })
+        .format(new Date(generated.getTime() - back * 3600000));
+      const hourAt = back => hhmm(back).replace(/:\d\d$/, ":00");
+      const cap = el("div", "pulse-cap", "Пулсът на медиите"), pick = el("span", "pick");
+      cap.append(pick);
+      const bars = [];
+      const show = i => {
+        g.classList.toggle("picked", i >= 0);
+        bars.forEach((b, k) => b.classList.toggle("sel", k === i));
+        // bar i covers the hour that ended (23 - i) hours before the update
+        pick.textContent = i < 0 ? "" : ` · ${hhmm(24 - i)}–${i === 23 ? "сега" : hhmm(23 - i)} · ${num(H.hours[i])} ${H.hours[i] === 1 ? "статия" : "статии"}`;
+      };
       H.hours.forEach((v, i) => {
         const h = 4 + 64 * v / max;
         const r = svg("rect", { x: i * 13, y: (72 - h).toFixed(1), width: 9, height: h.toFixed(1), class: i === 23 ? "now" : "" });
         r.style.animationDelay = `${i * 18}ms`;
-        r.append(svg("title", {}, `${v} статии`));
+        bars.push(r);
         g.append(r);
       });
-      const hourAt = back => new Intl.DateTimeFormat("bg-BG", { timeZone: tz, hour: "2-digit", minute: "2-digit" })
-        .format(new Date(generated.getTime() - back * 3600000)).replace(/:\d\d$/, ":00");
+      // wider invisible targets on top, so a finger can hit a thin bar
+      H.hours.forEach((v, i) => {
+        const hit = svg("rect", { x: i * 13 - 2, y: 0, width: 13, height: 74, class: "hit", tabindex: 0, role: "button",
+                                  "aria-label": `${hhmm(24 - i)} до ${i === 23 ? "сега" : hhmm(23 - i)}: ${v} статии` });
+        hit.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") show(i); });
+        hit.addEventListener("focus", () => show(i));
+        hit.addEventListener("click", () => show(i));
+        g.append(hit);
+      });
+      g.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") show(-1); });   // on phones the choice stays
       g.append(svg("text", { x: 0, y: 88 }, hourAt(23)), svg("text", { x: 156, y: 88, "text-anchor": "middle" }, hourAt(11)),
                svg("text", { x: 312, y: 88, "text-anchor": "end" }, "сега"));
-      pulse.append(el("div", "pulse-cap", `Пулсът на медиите · ${num(H.articles)} статии за 24 ч`), g);
+      pulse.append(cap, g);
       pulse.hidden = false;
     }
 
