@@ -90,7 +90,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - **English-language outlets left out** (Novinite, Sofia Globe): grouping works on Bulgarian text only.
 - **Repo stays public** (free Pages + unlimited Actions minutes).
 - **Design**: egg-white `--paper`, darker `--paper-deep` at the top; Oswald display, Golos Text body;
-  header Истории, Медии | NEWS REFERENCE | Как работи, За проекта + „Слепи петна". Installable web app
+  header Медии, Архив | NEWS REFERENCE | search, „Подкрепи" (21 Nov 2026, David: „За проекта" left the header to keep it
+  uncluttered; it is now a big „За проекта →" block in the footer, next to „Правна информация", with „Как работи" under it). Installable web app
   (`web/`: manifest, icons, sw.js network-first).
 
 ## Current state (7 Nov 2026)

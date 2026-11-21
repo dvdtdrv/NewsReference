@@ -483,14 +483,20 @@ body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32p
 .foot { margin-top: 48px; background: var(--ink); color: #C9C6D3; }
 .foot a { color: inherit; text-decoration: none; }
 .foot a:hover, .foot a:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
-.foot-top { display: grid; grid-template-columns: minmax(0, 1.6fr) auto auto; gap: 32px 72px; padding-block: 48px 36px; }
+.foot-top { display: grid; grid-template-columns: minmax(0, 1.4fr) auto minmax(0, .9fr) auto; gap: 32px 60px; padding-block: 48px 36px; }
+/* 21 Nov 2026 (David): „За проекта“ moved out of the header into its own, bigger footer block next to the legal links */
+.foot-project { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; font-size: 14.5px; }
+.foot .foot-big { font: 400 26px/1.05 var(--display); letter-spacing: .02em; text-transform: uppercase; color: #fff; }
+.foot-big span { display: inline-block; transition: transform .2s ease; }
+.foot .foot-big:hover { text-decoration: none; } .foot-big:hover span { transform: translateX(4px); }
+.foot-project p { margin: 0 0 2px; max-width: 30ch; line-height: 1.5; }
 .foot-about strong { display: block; font: 500 24px/1 var(--display); letter-spacing: .02em; text-transform: uppercase; color: #fff; }
 .foot-about p { margin: 14px 0 0; max-width: 46ch; font-size: 15px; line-height: 1.55; }
 .foot nav { display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; }
 .foot nav h2 { margin: 0 0 4px; font: 400 13px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: #fff; }
 .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 28px; padding-block: 20px calc(28px + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(255, 255, 255, .14); font-size: 13px; color: #9D9AAA; }
-@media (max-width: 800px) { .foot-top { grid-template-columns: 1fr 1fr; gap: 28px 24px; } .foot-about { grid-column: 1 / -1; } }
+@media (max-width: 1000px) { .foot-top { grid-template-columns: 1fr 1fr; gap: 32px 24px; } .foot-about, .foot-project { grid-column: 1 / -1; } .foot-about { order: -2; } .foot-project { order: -1; } }
 @media (max-width: 420px) { .foot-top { grid-template-columns: 1fr; } }
 /* „Правна информация“: a two-word title, so smaller letters keep it on one line above the sliding sheet */
 body.page-legal .intro h1 { font-size: clamp(40px, 6vw, 88px); }
@@ -714,7 +720,6 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       <small id="dateline">&nbsp;</small>
     </a>
     <div class="nav-group">
-      <a class="nav-link" href="#about">За проекта</a>
       <a class="nav-link search-link" id="nav-search" href="tarsene.html" aria-label="Търсене" title="Търсене">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
       </a>
@@ -977,12 +982,15 @@ dialog.od.full .od-body { max-width: 1040px; margin: 0 auto; }
       </div>
       <nav aria-label="Сайтът">
         <h2>Сайтът</h2>
-        <a href="{{BASE}}index.html#about">За проекта</a>
-        <a href="{{BASE}}index.html#method">Как работи</a>
         <a href="{{BASE}}medii.html">Медии</a>
         <a href="{{BASE}}arhiv.html">Архив</a>
         <a href="{{BASE}}tarsene.html">Търсене</a>
       </nav>
+      <div class="foot-project">
+        <a class="foot-big" href="{{BASE}}index.html#about">За проекта <span aria-hidden="true">→</span></a>
+        <p>Защо го правим, кой стои зад него и какво предстои.</p>
+        <a href="{{BASE}}index.html#method">Как работи</a>
+      </div>
       <nav aria-label="Правна информация">
         <h2>Правна информация</h2>
         <a href="{{BASE}}pravila.html#za-nas">За нас и контакти</a>
