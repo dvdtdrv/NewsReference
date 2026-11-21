@@ -95,7 +95,7 @@ def _old_stage_to_new(stage):
 
 
 def _priority(a, state):
-    """Order of the checks inside one outlet: second looks after a headline change first, then articles
+    """Order of the checks inside one outlet: second looks after a headline change (to confirm it) first, then articles
     younger than 4 days (headlines change early), oldest first within each group."""
     e = state.get(a["link"]) or {}
     young = (datetime.now(timezone.utc) - datetime.fromisoformat(a["published"])) < timedelta(days=4)
@@ -348,17 +348,18 @@ def _known_headlines(months_dir, now):
 
 
 def _headline(state, link, result, parts, known, now):
-    """headline_watch for one visit: returns (new headline, back) if the page shows a different headline
-    than the one we hold, else None. back=True: it is one of the article's EARLIER headlines again.
-    21 Nov 2026 (David): one sighting is enough (until then a second visit 3 h later had to confirm a
-    change; in the test all 19 first sightings were confirmed, so the wait only delayed and lost changes).
-    After a change the article is looked at again on the next run (soon_at, ~30 min), so a headline that
-    is changed and quickly changed back is caught as well."""
+    """headline_watch for one visit: returns (headline, back) once a different headline is CONFIRMED, else None.
+    back=True: it is one of the article's EARLIER headlines again (a change back).
+
+    21 Nov 2026 (David: precise beats fast - better not to count a mistake and correct it later): a different
+    headline counts only if the page still shows it on the next look. The next look comes on the next run
+    (soon_at, RECHECK_MINUTES: ~30 min, ~1 h for the PC outlets), not 3 h later as in the first version.
+    Seen once and then gone again = not counted (a cache, a page variant, an error). After a confirmed change the
+    article is looked at again on the next run too, so a quick change back is caught (and also needs two looks)."""
     e = state.get(link)
     if e is None or result != "ok" or not parts or not known:
         return None
-    for k in ("pending", "pending_at", "soon_at"):
-        e.pop(k, None)              # this visit was the second look (and old "pending" marks are retired)
+    e.pop("soon_at", None)
     known = [k for k in known if k]
     new = headline_watch.judge(parts, known)
     # a change back counts only if the headline we hold is one we saw on the page ourselves ("page_title"):
@@ -367,11 +368,20 @@ def _headline(state, link, result, parts, known, now):
     back = None
     if not new and known and headline_watch.same(e.get("page_title"), known[0]):
         back = headline_watch.went_back(parts, known)
-    if not (new or back):
+    seen = new or back
+    waiting = e.get("pending")
+    if not seen:
+        for k in ("pending", "pending_back", "pending_at"):
+            e.pop(k, None)          # the page shows the headline we hold: an unconfirmed sighting is dropped
         return None
-    e["soon_at"] = now.isoformat()
-    e["page_title"] = new or back
-    return (new, False) if new else (back, True)
+    e["soon_at"] = now.isoformat()  # look again on the next run in either case
+    if waiting and headline_watch.same(waiting, seen) and bool(e.get("pending_back")) == bool(back):
+        for k in ("pending", "pending_back", "pending_at"):
+            e.pop(k, None)
+        e["page_title"] = seen
+        return seen, bool(back)     # seen on two looks in a row: confirmed
+    e["pending"], e["pending_back"], e["pending_at"] = seen, bool(back), now.isoformat()
+    return None                     # first sighting: wait for the next look
 
 
 def _record_renames(renames, months_dir, archive, now):

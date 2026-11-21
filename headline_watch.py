@@ -10,14 +10,16 @@ aged 1-4 days found real renames the feeds never showed (Nova, Vesti.bg, Mediapo
 How: link_check.py already re-opens every article on a schedule (now 3 h, 12 h, 36 h, 3, 7, 14, 30 days).
 At each visit we also read the page's own headline: the visible <h1> and og:title (and <title> as a
 last resort). If none of them is the headline we know (or one of its earlier versions), the page shows
-a new headline, and it is recorded at once, exactly like a rename seen in a feed: the newest headline
-in "title", the old one in "versions" (versions.merge). (21 Nov 2026, David: one sighting counts; for a
-few hours that day a second visit had to confirm it, but every first sighting in the test was confirmed.)
+a new headline. It is recorded only if the page still shows it on the NEXT look, which comes on the
+next run (RECHECK_MINUTES, ~30 min; ~1 h for the PC outlets), and then exactly like a rename seen in a
+feed: the newest headline in "title", the old one in "versions" (versions.merge).
+(21 Nov 2026, David: precise beats fast. That day the rule went from "two looks 3 h apart" to "one look"
+and then to "two looks on consecutive runs".)
 
-After every change we look again on the next run (RECHECK_MINUTES, ~30 min later instead of the next stage
-hours later): if the page then shows an EARLIER headline again, that is recorded too, as a change back
-(kind "reverted" on the site; the version gets "back": True). Some outlets test two headlines against
-each other (A/B tests) or pull a headline and restore the old one, and both are worth seeing.
+After every change we also look again on the next run: if the page then shows an EARLIER headline again
+(on two looks in a row as well), that is recorded as a change back (kind "reverted" on the site; the
+version gets "back": True). Some outlets test two headlines against each other (A/B tests) or pull a
+headline and restore the old one, and both are worth seeing.
 
 Noise we ignore: the site's name after the headline ("... - Mediapool.bg", "... | Новини"), a section
 name in <h1> (Dir.bg), quote marks, broken quotes shown as ";" (Club Z), spacing and punctuation, and
@@ -34,7 +36,7 @@ META = re.compile(r"<meta\b[^>]*>", re.I)
 ATTR = re.compile(r"""(property|name|content)\s*=\s*(["'])(.*?)\2""", re.I | re.S)
 SEP = re.compile(r"^(.*\S)\s+[-|—–:/•]\s+([^-|—–]{1,60})$")
 MIN_LEN = 20            # shorter page headlines are generic ("Спорт - Новини СЕГА"), never a rename
-RECHECK_MINUTES = 20    # after a change, look again on the next run (updates come every ~30 min)
+RECHECK_MINUTES = 20    # a new headline is looked at again on the next run (updates come every ~30 min)
 
 
 def _text(s):

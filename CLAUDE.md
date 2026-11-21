@@ -207,11 +207,13 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
 - `headline_watch.py` (21 Nov, David: bTV only 38 renamed vs Nova/BNT 230+): renames used to be seen only when an
   article reappeared in the feed under a new headline, so the ranking measured feed depth and PC uptime (PC read its outlets
   in 36% of the hours, 14-21 Nov). Now link_check.py also reads each page's own headline (<h1>, og:title, <title>) on every
-  visit; a new headline is merged at once as a version (versions.merge; 21 Nov 16:40 David: one sighting counts - the
-  first version waited for a 2nd visit 3 h later, "pending" in data/deleted.json, but all 19 test sightings were confirmed), in data/articles.json (via collect.py's archive) and the monthly files.
-  21 Nov evening (David: "can't it be sooner than 3 hours"): after every change the article gets `soon_at` in data/deleted.json and is
-  opened again on the next run (RECHECK_MINUTES 20, so ~30 min, first in its outlet's queue); if the page's main headline is then an
-  EARLIER one, and the headline we hold is one we saw on that page ourselves (`page_title` in data/deleted.json; a feed rename can
+  visit; a new headline is merged as a version (versions.merge) in data/articles.json (via collect.py's archive) and the monthly
+  files ONLY when the next look shows it too (David, 21 Nov 17:00: precise beats fast - "better than mistaking something and later
+  correcting it"; that day the rule went 2 looks 3 h apart -> 1 look -> 2 looks on consecutive runs). First sighting: "pending",
+  "pending_back", "pending_at" + `soon_at` in data/deleted.json; the article is opened again on the next run (RECHECK_MINUTES 20, so
+  ~30 min, ~1 h for PC outlets; first in its outlet's queue); same headline again = confirmed, our headline again = dropped.
+  After a confirmed change `soon_at` is set again, so a change back is caught quickly: if the page's main headline is then an
+  EARLIER one (on two looks in a row too), and the headline we hold is one we saw on that page ourselves (`page_title` in data/deleted.json; a feed rename can
   have its two headlines in the wrong order: test 21 Nov, Vesti.bg), it is recorded as a change back: versions entry gets "back": true, kind "reverted" (column „Върнати", purple,
   legend: often an A/B headline test). versions.merge keeps the whole A -> B -> A chain once any entry has "back". Noise ignored: site name
   after the headline, Dir.bg's section in <h1>, quotes, Club Z's ";", punctuation, page titles < 20 chars, garbled text.
