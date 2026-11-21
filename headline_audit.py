@@ -7,7 +7,8 @@ archive changes: the file is handed back as a download and compared by hand / by
 
 Why (21 Nov 2026, David): bTV showed almost no headline changes since 5 Nov. bTV's pages refuse
 GitHub's servers, so this runs on David's PC like fetch_local.py, one page at a time with the site's
-robots.txt pause (crawl-delay, at least 1 s), exactly as polite as the normal checks.
+robots.txt pause (crawl-delay), at least link_check.PC_PAUSE (5 s) since 21 Nov: BG On Air blocked the home
+connection after fast checks that day. ~1,400 pages then take ~2 h; MAX_MINUTES stops it earlier.
 
 Run by hand with:   python headline_audit.py "bTV Novinite"
 """
@@ -25,7 +26,7 @@ from feeds import OUTLETS
 RAW = "https://raw.githubusercontent.com/dvdtdrv/NewsReference/data/articles/{}.json"
 MONTHS = ("2026-10", "2026-11")
 OUT_FILE = "headline_audit.json"
-MAX_MINUTES = 80
+MAX_MINUTES = 85
 
 
 def main(name):
@@ -41,6 +42,7 @@ def main(name):
     print(f"{name}: {len(articles)} articles to open")
     out = {"outlet": name, "started": collect.NOW.isoformat(), "pages": []}
     deadline = time.monotonic() + MAX_MINUTES * 60
+    refused = 0
     for i, a in enumerate(articles):
         if time.monotonic() > deadline:
             print("time is up, stopping at", i)
@@ -49,13 +51,17 @@ def main(name):
         if not link or not collect.allowed(link):
             continue
         result, parts = link_check.probe(link, headers, link_check.headlines_of(a))
+        refused = refused + 1 if result is None else 0
+        if refused >= link_check.GIVE_UP:
+            print("the site stopped answering - stopping so we don't keep knocking")
+            break
         out["pages"].append({"link": link, "published": a.get("published"), "titles": link_check.headlines_of(a),
                              "result": result, "page": parts})
         if i % 50 == 0:
             print(i, result, (parts or {}).get("h1", "")[:80])
             with open(OUT_FILE, "w", encoding="utf-8") as f:     # saved as we go, in case the run is cut off
                 json.dump(out, f, ensure_ascii=False)
-        time.sleep(collect.crawl_delay(link))
+        time.sleep(max(link_check.PC_PAUSE, collect.crawl_delay(link)))
     out["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False)

@@ -60,6 +60,13 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   Euronews BG: link_check.due_articles treats photos_on_pc as PC). bTV answered GitHub 2 of 4 times: not moved.
   To re-test: run "Test PC outlets from GitHub" (probe-outlets.yml + probe_outlets.py, by hand only; reads each local
   feed + one article page). Nova works from GitHub (its feed was empty for a few hours on the night of 20-21 Nov).
+- **Be gentle with the home connection** (21 Nov 2026): BG On Air's firewall blocked David's home connection for the whole
+  site ("403 Forbidden - Request forbidden by administrative rules", in his browser too; from Claude's workspace the same page
+  opened fine) after the PC opened ~230 of its pages in two rounds, one every ~1.6 s (PC link checks 150/outlet/run, side by
+  side). bTV/Dnes.bg/Bloomberg TV still opened. The site's photos then failed only on David's machine (a card looked
+  "deleted"). Now: link_check PC_PER_OUTLET 40, PC_PAUSE 5 s, GITHUB_PAUSE 2 s, GIVE_UP 3 (stop an outlet for the run after 3
+  "can't tell" in a row; also in headline_audit.py, and fetch_photo_todo pauses 5 s). If BG On Air stays blocked, David asks it
+  (the universal email). Never work around a block (no other IP, no proxies).
 - **Novini.bg** via its news sitemap (robots disallows /api/*). **DW** via its news sitemap.
 - **Blindspot rule**: an outlet is "didn't cover" only if we read it in the last 3 h AND our archive of it reaches
   back before the story started, so an outlet we couldn't read is never falsely called silent.

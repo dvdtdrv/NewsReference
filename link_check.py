@@ -48,7 +48,13 @@ SCHEDULE_DAYS = (1, 3, 7, 14, 30)    # the old schedule, only to convert saved s
 SCHEDULE_VERSION = 2
 PER_OUTLET = 60                      # at most this many checks per outlet per run (runs are every 30 min)
 SECONDS = 4 * 60                     # at most this long per run; all outlets are checked side by side
-PC_PER_OUTLET = 150                  # links per outlet in the PC's to-do list (the PC runs less often)
+PC_PER_OUTLET = 40                   # links per outlet in the PC's to-do list (150 until 21 Nov 2026, see PC_PAUSE)
+# Pauses between two pages of ONE outlet (at least; robots.txt crawl-delay wins if longer). 21 Nov 2026: BG On Air's
+# firewall blocked David's home connection ("403 Request forbidden by administrative rules", the whole site, also in his
+# browser) after the PC opened ~230 of its pages in two rounds, one every ~1.6 s. The PC is a home connection: be gentle.
+PC_PAUSE = 5
+GITHUB_PAUSE = 2
+GIVE_UP = 3                          # stop an outlet for this run after this many "can't tell" answers in a row
 RECHECK_HOURS = 6                    # after a first "no such page", ask again this much later
 TIMEOUT = 15
 PROBE_SECONDS = 40                   # the most one check may take in total
@@ -312,15 +318,17 @@ def run(outlets, months_dir, now, allowed, crawl_delay, headers_for, local=None,
 
     def work(name):
         headers = headers_for(by_name[name])
-        done = 0
+        done = refused = 0
         for a in due[name]:
-            if done >= PER_OUTLET or time.monotonic() > deadline:
-                break
+            if done >= PER_OUTLET or time.monotonic() > deadline or refused >= GIVE_UP:
+                break             # (refused: the site stopped answering us - don't keep knocking)
             if not allowed(a["link"]):
                 continue
-            results.append((a, probe(a["link"], headers, headlines_of(a))))
+            answer = probe(a["link"], headers, headlines_of(a))
+            results.append((a, answer))
+            refused = refused + 1 if answer[0] is None else 0
             done += 1
-            time.sleep(crawl_delay(a["link"]))
+            time.sleep(max(GITHUB_PAUSE, crawl_delay(a["link"])))
         return done
 
     for items in due.values():
@@ -452,15 +460,17 @@ def check_on_pc(headers_for, outlets, allowed, crawl_delay, seconds=4 * 60):
 
     def work(name):
         o = by_name.get(name)
+        refused = 0
         for item in groups[name]:
-            if not o or time.monotonic() > deadline:
-                break
+            if not o or time.monotonic() > deadline or refused >= GIVE_UP:
+                break             # (refused: the site stopped answering this PC - don't keep knocking)
             if not allowed(item["link"]):
                 continue
             result, parts = probe(item["link"], headers_for(o), item.get("titles"))
             out[item["link"]] = {**{k: v for k, v in item.items() if k != "titles"}, "result": result,
                                  **({"page": parts} if parts else {})}
-            time.sleep(crawl_delay(item["link"]))
+            refused = refused + 1 if result is None else 0
+            time.sleep(max(PC_PAUSE, crawl_delay(item["link"])))
 
     with ThreadPoolExecutor(max_workers=max(1, len(groups))) as pool:
         list(pool.map(work, list(groups)))

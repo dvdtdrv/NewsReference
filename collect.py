@@ -378,7 +378,7 @@ def fetch_photo_todo(cache, seconds=120):
             img = page_image(link, BROWSER_HEADERS if o.get("as_browser") else HEADERS)
         except requests.RequestException:
             img = None
-        time.sleep(crawl_delay(link))
+        time.sleep(max(5, crawl_delay(link)))      # a home connection: be gentle (see link_check.PC_PAUSE)
         if img is None:
             failed[o["name"]] = failed.get(o["name"], 0) + 1
             continue
