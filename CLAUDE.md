@@ -117,6 +117,12 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   (`makeMenu(select, {cls, right, search, counts})` in site_template.html: the real <select> stays hidden and keeps the value;
   picking sets it and fires "change"; keyboard: arrows, Enter, Esc). The outlet menu has a search box and each outlet's article
   count for the last 7 days (build_site.py front["feed_counts"]). Tabs, periods and the checkbox were left as they were (David).
+  22 Nov 2026 (David's iPhone app showed the front page shifted sideways): Safari gave the hidden <select> of every story's
+  order menu its own ~134 px width past the right edge (it also matched `.story-meta .order { margin-left:auto }`), so the
+  page was 527 px wide on a 393 px phone. Fixed: `.menu > select` pinned inside the menu at 1 px, appearance none; the
+  margin rule now targets `.menu.order`; `.sheet { overflow-x: clip }` as a safety net; menu search 16 px (iPhones zoom
+  into smaller inputs); on touch screens opening a menu no longer jumps into the search box. Test with Playwright's
+  WebKit too (installed in the workspace 22 Nov), not only Chromium: Chromium did not show this bug.
 
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).
