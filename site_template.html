@@ -812,8 +812,19 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
 /* 22 Nov 2026 (David: the app was hard to read): on phones a story's articles are a list, one per row (small square
    photo left, outlet + time + headline right), the first 3 shown; small labels in the body font, normal case, 13-14 px;
    a darker grey. Computers are unchanged. --cols: 3 also tells the script when "Всички N статии" is needed. */
+.lede-btn { display: none; }
 @media (max-width: 480px) {
   :root { --muted: #5C5965; }
+  /* 22 Nov 2026 (David): on phones the front page's title is smaller and its explanation hides behind „Какво е това?" */
+  body.has-viz .intro { gap: 14px 0; padding-block: 18px 28px; }
+  body.has-viz .intro h1 { font-size: 44px; }
+  body.has-viz #intro-text { display: none; }
+  body.has-viz.lede-open #intro-text { display: block; font-size: 15.5px; line-height: 1.5; margin: 0 0 18px; }
+  body.has-viz .lede-btn { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 20px; padding: 4px 0; background: none; border: 0;
+    border-bottom: 1px solid var(--muted); cursor: pointer; font: 500 14px/1 var(--body); color: var(--muted); }
+  body.has-viz .lede-btn::after { content: "+"; font-weight: 400; }
+  body.has-viz.lede-open .lede-btn::after { content: "−"; }
+  body.has-viz .stat strong { font-size: 34px; }
   .story { padding-block: 30px 30px; }
   .story-meta { font: 500 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; gap: 6px 12px; }
   .story-meta .order .menu-btn { font: 500 13px/1 var(--body); letter-spacing: 0; text-transform: none; }
@@ -859,6 +870,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       <h1 id="intro-title">Една новина.<br><em>Всички медии.</em></h1>
       <div>
         <a class="back" id="back" href="../index.html" hidden>← Към последните истории</a>
+        <button class="lede-btn" id="lede-btn" type="button" aria-expanded="false" aria-controls="intro-text">Какво е това?</button>
         <p id="intro-text">В „Новинарски справочник“ събираме заглавията на български медии и ги подреждаме по истории. Така виждате кой какво отразява, как го озаглавява и кой мълчи.</p>
         <div class="stats" id="stats"></div>
         <div class="pulse" id="pulse" hidden></div>
@@ -1461,6 +1473,11 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     const note = document.getElementById("viz-note");
     const say = (...parts) => { note.replaceChildren(...parts.map(p => typeof p === "string" ? document.createTextNode(p) : p)); };
     document.body.classList.add("has-viz");
+    const lede = document.getElementById("lede-btn");
+    lede.addEventListener("click", () => {
+      const open = document.body.classList.toggle("lede-open");
+      lede.setAttribute("aria-expanded", String(open));
+    });
     document.getElementById("viz").hidden = false;
 
     // the pulse: articles per hour, the last 24 hours (the red bar = the latest hour)
