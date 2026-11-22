@@ -130,7 +130,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   phones (shorter opening, wheel/map in a compact box; wheel names ~8 px on phones: 4a ranked list or 4b bigger wheel with
   top 12 named), smaller back-to-top button, tappable „Заглавието е сменяно" note.
   22 Nov 2026 (David): on phones the front page's title is 44 px (was ~56) and the explanation paragraph is hidden behind a
-  small „Какво е това? +" button (#lede-btn, toggles body.lede-open); stats numbers 34 px. Only on the front page (body.has-viz).
+  small „Какво е това? +" button (#lede-btn, toggles body.lede-open). Same evening (David: "on one line, denser"): the title
+  is ONE line on phones (br hidden, clamp 26-34 px, nowrap), stats one row „670 истории  36 медии  73028 статии" (24 px
+  numbers, 13 px labels; 21/12 px under 360 px), „Пулсът на медиите" in normal case. Only on the front page (body.has-viz).
 
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).

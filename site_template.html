@@ -816,15 +816,27 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
 @media (max-width: 480px) {
   :root { --muted: #5C5965; }
   /* 22 Nov 2026 (David): on phones the front page's title is smaller and its explanation hides behind „Какво е това?" */
-  body.has-viz .intro { gap: 14px 0; padding-block: 18px 28px; }
-  body.has-viz .intro h1 { font-size: 44px; }
+  body.has-viz .intro { gap: 10px 0; padding-block: 14px 24px; }
+  /* 22 Nov 2026 (David): one line, smaller, denser */
+  body.has-viz .intro h1 { font-size: clamp(26px, 8.2vw, 34px); line-height: 1.1; white-space: nowrap; }
+  body.has-viz .intro h1 br { display: none; }
+  body.has-viz .intro h1 em { margin-left: .22em; }
   body.has-viz #intro-text { display: none; }
   body.has-viz.lede-open #intro-text { display: block; font-size: 15.5px; line-height: 1.5; margin: 0 0 18px; }
-  body.has-viz .lede-btn { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 20px; padding: 4px 0; background: none; border: 0;
-    border-bottom: 1px solid var(--muted); cursor: pointer; font: 500 14px/1 var(--body); color: var(--muted); }
+  body.has-viz .lede-btn { display: inline-flex; align-items: center; gap: 5px; margin: 0 0 14px; padding: 3px 0; background: none; border: 0;
+    border-bottom: 1px solid var(--muted); cursor: pointer; font: 500 13px/1 var(--body); color: var(--muted); }
   body.has-viz .lede-btn::after { content: "+"; font-weight: 400; }
   body.has-viz.lede-open .lede-btn::after { content: "−"; }
-  body.has-viz .stat strong { font-size: 34px; }
+  body.has-viz .stats { gap: 6px 18px; }
+  body.has-viz .stat { display: inline-flex; align-items: baseline; gap: 5px; font: 400 13px/1 var(--body); letter-spacing: 0; text-transform: none; }
+  body.has-viz .stat strong { display: inline; font: 400 24px/1 var(--display); color: var(--ink); }
+  body.has-viz .pulse { margin-top: 18px; }
+  body.has-viz .pulse-cap { font: 500 13px/1.2 var(--body); letter-spacing: 0; text-transform: none; }
+}
+@media (max-width: 360px) {
+  body.has-viz .stats { gap: 6px 12px; }
+  body.has-viz .stat { font-size: 12px; gap: 4px; }
+  body.has-viz .stat strong { font-size: 21px; }
   .story { padding-block: 30px 30px; }
   .story-meta { font: 500 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; gap: 6px 12px; }
   .story-meta .order .menu-btn { font: 500 13px/1 var(--body); letter-spacing: 0; text-transform: none; }
