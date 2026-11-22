@@ -137,6 +137,11 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   outlets open under it on a tap, story.miss-open); on computers the button is hidden and the list shows as before.
   Lesson: a phone-only rule block was once closed by mistake (a 360 px block inserted mid-block) - after editing the phone
   CSS, check the story cards too, not only the part changed.
+  Same evening (David chose mock-up A of two): phones show two separate light rounded boxes on the front page:
+  „В числа" (#stats as 3 columns: медии „следим ги" / истории „за последните 48 ч" / статии „в архива от 31 окт.";
+  .stats-h and .stat-note exist in the markup but are hidden on computers and other pages) and „Пулсът на медиите" with
+  .pulse-sub „Статии по часове, последните 24 часа · N общо". Phone rules are scoped to #stats so the outlet window's
+  .od-stats is untouched. Everywhere: numbers formatted with spaces (73 028) and the order is медии, истории, статии.
 
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).
