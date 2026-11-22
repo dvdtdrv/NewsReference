@@ -123,6 +123,12 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   margin rule now targets `.menu.order`; `.sheet { overflow-x: clip }` as a safety net; menu search 16 px (iPhones zoom
   into smaller inputs); on touch screens opening a menu no longer jumps into the search box. Test with Playwright's
   WebKit too (installed in the workspace 22 Nov), not only Chromium: Chromium did not show this bug.
+  22 Nov 2026 (David: the app is hard to read; he approved proposals 1-3 from before/after screenshots): phones (<= 480 px)
+  show a story's articles as a list (84 px square photo left; outlet + time, headline 16.5 px right; first 3, then
+  „Всички N статии"), small labels in Golos normal case 13-14 px instead of tiny Oswald capitals, darker grey --muted #5C5965,
+  „Не отразиха" on its own line, story titles 24 px. Computers unchanged. Still proposed, not built: stories higher up on
+  phones (shorter opening, wheel/map in a compact box; wheel names ~8 px on phones: 4a ranked list or 4b bigger wheel with
+  top 12 named), smaller back-to-top button, tappable „Заглавието е сменяно" note.
 
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).

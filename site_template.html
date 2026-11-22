@@ -809,6 +809,30 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
   .articles { --cols: 2; gap: 22px 14px; }
   .hl { font-size: 14px; }
 }
+/* 22 Nov 2026 (David: the app was hard to read): on phones a story's articles are a list, one per row (small square
+   photo left, outlet + time + headline right), the first 3 shown; small labels in the body font, normal case, 13-14 px;
+   a darker grey. Computers are unchanged. --cols: 3 also tells the script when "Всички N статии" is needed. */
+@media (max-width: 480px) {
+  :root { --muted: #5C5965; }
+  .story { padding-block: 30px 30px; }
+  .story-meta { font: 500 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; gap: 6px 12px; }
+  .story-meta .order .menu-btn { font: 500 13px/1 var(--body); letter-spacing: 0; text-transform: none; }
+  .story h3 { font-size: 24px; line-height: 1.2; }
+  .title-row { margin-bottom: 8px; }
+  .articles { --cols: 3; display: block; }
+  .articles.collapsed > .card:nth-child(n + 4) { display: none; }
+  .card { display: grid; grid-template-columns: 84px minmax(0, 1fr); grid-template-areas: "ph src" "ph hl" "ph was";
+    grid-template-rows: auto auto 1fr; gap: 5px 14px; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .card .ph { grid-area: ph; width: 84px; aspect-ratio: 1 / 1; border-radius: 10px; }
+  .card .ph .fallback { font-size: 15px; padding: 8px; }
+  .card .src { grid-area: src; justify-content: flex-start; gap: 10px; font: 600 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; }
+  .card .src time { font-weight: 400; color: var(--muted); }
+  .card .hl { grid-area: hl; font-size: 16.5px; line-height: 1.36; }
+  .card .was { grid-area: was; margin-top: 2px; font: 400 13px/1.3 var(--body); letter-spacing: 0; text-transform: none; }
+  .expand { margin-top: 10px; font: 600 15px/1 var(--body); letter-spacing: 0; text-transform: none; }
+  .missing { margin-top: 18px; font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); }
+  .missing b { display: block; margin-bottom: 4px; font: 600 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; color: var(--ink); }
+}
 @media (prefers-reduced-motion: reduce) { .ph img, body { transition: none; } }
 </style>
 <!--body-->
