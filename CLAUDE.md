@@ -296,10 +296,11 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   the first click. Closing (×, Esc, click outside, or the browser's Back) leaves the reader where they were.
   From „Всички новини" a story opens with „← Обратно към „Всички новини"" above it; Back returns to the same row.
 
-- Refreshing without closing the app (12 Nov): „обновено в HH:MM ↻" next to „Истории" reloads the page; a dark
-  pill „Има по-нови новини · Обнови" (top centre, bottom on phones) appears when site/version.json (written by
-  build_site.py, the time of the last update) is newer than the open page. Checked every 5 min and when the app
-  comes back to the front. Not on archive day pages.
+- Refreshing without closing the app (12 Nov): „обновено в HH:MM ↻" next to „Истории" reloads the page. The dark pill
+  „Има по-нови новини · Обнови" (site/version.json polling) was REMOVED 22 Nov 2026 (David: came up too often, annoying);
+  build_site.py still writes version.json (unused). Instead, in the installed app only (display-mode standalone /
+  navigator.standalone, touch): pull down at the very top -> a round arrow (.ptr) follows the finger, turns dark past 80 px,
+  letting go reloads (pullToRefresh() in site_template.html). Browsers already have their own pull-to-refresh; computers none.
 
 - Legal page and footer (12 Nov): site/pravila.html (page mode "legal" in site_template.html; the text is in the
   template, section #legal): За нас и контакти (Давид Тодоров, newsreference.contact@gmail.com), Условия, Поверителност,
