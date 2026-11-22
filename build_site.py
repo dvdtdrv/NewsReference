@@ -313,6 +313,8 @@ def front_page_data():
     # every article we ever collected from each outlet (the whole archive, not just these 48 hours)
     data["outlet_totals"] = {r["outlet"]: r["articles"] for r in (data["headline_changes"] or {}).get("rows", [])}
     data["story_totals"] = outlet_story_totals()
+    # 22 Nov 2026 (David): the front page's „истории" counts the whole archive, like „статии" (story_totals is medii-only)
+    data["stories_total"] = data["story_totals"]["stories"]
     data["base"] = ""
     return data
 

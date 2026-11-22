@@ -1490,9 +1490,14 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
   const stats = document.getElementById("stats");
   // 22 Nov 2026 (David chose mock-up A): on phones the front page shows these in a box „В числа", each with a note on
   // what it counts (the notes and the heading are hidden on computers and on the other pages)
-  stats.append(el("p", "stats-h", "В числа"));
-  [[tracked.length, "медии", "следим ги"], [data.stories.length, "истории", "за последните 48 ч"],
-   [archiveDate ? null : (data.articles_total ?? data.articles_in_window), "статии", "в архива от 31 окт."]]
+  // stories and articles: the whole archive (David, 22 Nov 2026), which starts on the oldest archive day
+  const firstDay = (data.archive_days || []).map(d => d.date).sort()[0];
+  stats.append(el("p", "stats-h", firstDay
+    ? `В числа · от ${new Intl.DateTimeFormat("bg-BG", { day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(firstDay + "T12:00:00Z"))}`
+    : "В числа"));
+  [[tracked.length, "медии", "следим ги"],
+   [archiveDate ? data.stories.length : (data.stories_total ?? data.stories.length), "истории", "в архива"],
+   [archiveDate ? null : (data.articles_total ?? data.articles_in_window), "статии", "в архива"]]
     .filter(([n]) => n != null)
     .forEach(([n, label, note]) => {
       const s = el("div", "stat");
