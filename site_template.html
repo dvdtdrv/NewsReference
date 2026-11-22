@@ -372,7 +372,38 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 .was { margin-top: 6px; font: 400 10.5px/1.3 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .card:hover .hl, .card:focus-visible .hl { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .missing { margin: 24px 0 0; font-size: 13px; color: var(--muted); }
-.story-foot .miss-btn { display: none; }
+.story-foot .miss-btn, .row-nav { display: none; }
+/* 22 Nov 2026 (David chose layout C of the story mock-ups): on computers and tablets the labels are in the body font,
+   normal case, the time right next to the outlet; photos are rounded; a folded story is ONE sliding row of all its
+   articles (‹ › or the trackpad), and „Всички N статии" opens them all as the usual grid. Phones keep their list. */
+@media (min-width: 481px) {
+  .story-meta { font: 500 14px/1.2 var(--body); letter-spacing: 0; text-transform: none; }
+  .story-meta .order .menu-btn { font: 500 13px/1 var(--body); letter-spacing: 0; text-transform: none; }
+  .src { font: 600 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; justify-content: flex-start; gap: 10px; }
+  .src time { font-weight: 400; }
+  .was { font: 400 12.5px/1.3 var(--body); letter-spacing: 0; text-transform: none; }
+  .ph { border-radius: 10px; }
+  .articles.collapsed { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px;
+    scrollbar-width: thin; overscroll-behavior-x: contain; align-items: flex-start; }
+  .articles.collapsed > .card.card.card { display: flex; flex: 0 0 calc((100% - 4 * 18px) / 5.35); scroll-snap-align: start; }
+  .articles.collapsed .hl { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .story-foot { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .story-foot .expand { margin-top: 0; font: 600 14.5px/1 var(--body); letter-spacing: 0; text-transform: none; }
+  .row-nav { display: inline-flex; gap: 8px; margin-left: auto; }
+  .row-nav[hidden] { display: none; }
+  .row-nav button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--rule); background: rgba(255,255,255,.5);
+    color: var(--ink); font: 400 20px/1 var(--body); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0 0 2px; }
+  .row-nav button:hover:not(:disabled) { border-color: var(--ink-soft); background: #fff; }
+  .row-nav button:disabled { opacity: .35; cursor: default; }
+  .story .missing { font-size: 14px; }
+  .story .missing b { font: 600 14px/1 var(--body); letter-spacing: 0; text-transform: none; color: var(--ink); }
+}
+@media (min-width: 481px) and (max-width: 1100px) {
+  .articles.collapsed > .card.card.card { flex-basis: calc((100% - 3 * 18px) / 4.35); }
+}
+@media (min-width: 481px) and (max-width: 700px) {
+  .articles.collapsed > .card.card.card { flex-basis: calc((100% - 18px) / 2.3); }
+}
 .missing b { font: 400 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-right: 6px; }
 /* „Всички новини“: every article in the order it was published, one row each */
 .feed-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px 22px; padding: 6px 0;
@@ -1848,6 +1879,25 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
         const cols = parseInt(getComputedStyle(grid).getPropertyValue("--cols"), 10) || 5;
         if (s.articles.length <= cols) btn.hidden = true;
       });
+      // 22 Nov 2026 (David chose layout C): on computers the folded story is one sliding row of all its articles;
+      // ‹ › move it, „Всички N статии" opens them all as a grid. The arrows hide when there's nothing to slide (and on phones).
+      const nav = el("span", "row-nav"), prev = el("button", "row-prev", "‹"), next = el("button", "row-next", "›");
+      prev.type = next.type = "button";
+      prev.setAttribute("aria-label", "Предишни статии"); next.setAttribute("aria-label", "Следващи статии");
+      const step = dir => grid.scrollBy({ left: dir * grid.clientWidth * 0.8, behavior: "smooth" });
+      prev.addEventListener("click", () => step(-1)); next.addEventListener("click", () => step(1));
+      nav.append(prev, next);
+      const upd = () => {
+        const slides = grid.classList.contains("collapsed") && grid.scrollWidth > grid.clientWidth + 4;
+        nav.hidden = !slides;
+        prev.disabled = grid.scrollLeft < 4;
+        next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
+      };
+      grid.addEventListener("scroll", upd, { passive: true });
+      window.addEventListener("resize", upd);
+      btn.addEventListener("click", () => requestAnimationFrame(upd));
+      requestAnimationFrame(upd);
+      foot.append(nav);
     }
     let m = null;
     if (s.not_covered && s.not_covered.length) {
