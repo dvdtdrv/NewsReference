@@ -110,6 +110,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   links sit close around the centred logo, 36/30 px apart, logo 32 px, „Подкрепи" a rounded pill; phones unchanged) (21 Nov 2026, David: „За проекта" left the header to keep it
   uncluttered; it is now a big „За проекта →" block in the footer, next to „Правна информация", with „Как работи" under it). Installable web app
   (`web/`: manifest, icons, sw.js network-first).
+  22 Nov 2026 (David: Chrome cut the pulse off under the sheet's edge, Opera didn't - different zoom/window height): on
+  computers the first screen's sizes also follow the window HEIGHT (title clamp(44px, min(6.6vw, 12.5vh), 104px), text,
+  stats, pulse width in vh), and a script adds body.hero-tall (stage no longer sticky, page simply scrolls, no slide) when
+  the title, stats, pulse or wheel would still reach below the sheet's edge. Tested 1280x720 to 2114x975.
   21 Nov 2026 (David: while scrolling the wheel showed through the stories): body.stage-covered hides .stage-inner once the
   sheet's top is above the screen (scroll check in site_template.html); fast scrolling showed the first screen through
   not-yet-drawn parts of the long sheet.

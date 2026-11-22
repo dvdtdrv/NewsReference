@@ -78,7 +78,7 @@ a { color: inherit; }
 @keyframes stage-out { to { transform: translate3d(0, -9vh, 0); opacity: .2; } }
 @supports (animation-timeline: scroll()) {
   @media (min-width: 861px) and (min-height: 621px) and (prefers-reduced-motion: no-preference) {
-    body:not(.compact) .stage-inner {
+    body:not(.compact):not(.hero-tall) .stage-inner {
       animation: stage-out linear both; animation-timeline: scroll(root block); animation-range: 0 90vh;
       animation-timing-function: cubic-bezier(.3, 0, .25, 1);
     }
@@ -97,6 +97,17 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
   box-shadow: 0 -18px 50px rgba(21, 22, 43, .14);
   overflow-x: clip;   /* 22 Nov 2026: nothing inside may push the page sideways on a phone */
 }
+/* 22 Nov 2026 (David: in Chrome the pulse was cut off by the sheet, in Opera not - the same screen, different zoom /
+   window height): the first screen's sizes now also follow the window's HEIGHT, so it fits on laptop screens; if it
+   still doesn't fit (very short windows, big zoom), the script adds body.hero-tall and the page simply scrolls. */
+@media (min-width: 861px) and (min-height: 621px) {
+  body.has-viz .intro { padding-block: min(24px, 2.5vh) min(36px, 3.5vh); row-gap: min(22px, 2.4vh); }
+  body.has-viz .intro h1 { font-size: clamp(44px, min(6.6vw, 12.5vh), 104px); }
+  body.has-viz .intro p { font-size: clamp(15px, 2.1vh, 17px); margin-bottom: min(16px, 1.8vh); }
+  body.has-viz .stat strong { font-size: clamp(30px, 4.7vh, 40px); }
+  body.has-viz .pulse { margin-top: min(26px, 2.6vh); max-width: min(360px, 44vh); }
+}
+body.hero-tall .stage { position: relative; height: auto; overflow: visible; }
 /* small or short screens: no sliding, the page simply scrolls */
 @media (max-width: 860px), (max-height: 620px) {
   .stage, body.page-own .stage { position: relative; height: auto; overflow: visible; }
@@ -1735,6 +1746,25 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     document.getElementById("day-pick").hidden = false;
   }
   document.getElementById("updated").textContent = `Данни към ${fmtLong.format(generated)}, ${fmtTime.format(generated)}`;
+
+  // the first screen must fit above the sheet's edge; if it doesn't (short window, browser zoom), let the page scroll
+  (() => {
+    const stage = document.getElementById("top"), inner = stage && stage.querySelector(".stage-inner");
+    if (!inner) return;
+    let t = 0;
+    const fit = () => {
+      document.body.classList.remove("hero-tall");
+      if (getComputedStyle(stage).position !== "sticky") return;      // phones / short screens already scroll
+      // measured inside the first screen (it may already be moved by the slide), only what must stay visible
+      const top = inner.getBoundingClientRect().top;
+      const low = Math.max(...["#pulse", ".viz-pane:not([hidden]) svg", ".intro h1", "#stats"].map(q => {
+        const e = document.querySelector(q); return e && !e.hidden ? e.getBoundingClientRect().bottom - top : 0; }));
+      if (low > inner.clientHeight - 8) document.body.classList.add("hero-tall");
+    };
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(fit, 150); });
+  })();
 
   // hide the first screen once the stories sheet covers it completely (see .stage-covered in the CSS)
   (() => {
