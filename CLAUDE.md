@@ -302,6 +302,9 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   in 72 h (photos or the whole outlet switched off without arguing), corrections in 7 days, replies published next to
   the claim, emails kept at most 3 years. Dark footer on every page links to it. Update „Последна промяна" when the
   text changes. No cookie banner: the site sets no cookies and loads nothing from third parties except outlet photos.
+- Footer bottom line (22 Nov 2026, David chose it from mock-ups): left „© 2026 News Reference · Заглавията и снимките са на
+  медиите." (the copyright note moved there, shortened), middle .foot-motto „Jesus Christ is the greatest of all time." in Kalam
+  (printed-handwriting font, web/kalam-latin-400.woff2, ~22 KB, OFL in web/OFL-kalam.txt), 15 px, #D9D5CC; right the data time.
 - Fonts are our own files (12 Nov): web/oswald-*.woff2, web/golos-text-*.woff2 (from @fontsource, OFL), @font-face in
   the template with {{BASE}}. Never load fonts or scripts from Google or other third parties (GDPR: LG München 2022).
 - `no_photos.json` (12 Nov): list of outlet names (as in feeds.py) whose photos must not be shown; read by
