@@ -133,6 +133,10 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   small „Какво е това? +" button (#lede-btn, toggles body.lede-open). Same evening (David: "on one line, denser"): the title
   is ONE line on phones (br hidden, clamp 26-34 px, nowrap), stats one row „670 истории  36 медии  73028 статии" (24 px
   numbers, 13 px labels; 21/12 px under 360 px), „Пулсът на медиите" in normal case. Only on the front page (body.has-viz).
+  Same evening (David): under each story a .story-foot row: „Всички N статии" left, „Не отразиха +" right (phones only; the
+  outlets open under it on a tap, story.miss-open); on computers the button is hidden and the list shows as before.
+  Lesson: a phone-only rule block was once closed by mistake (a 360 px block inserted mid-block) - after editing the phone
+  CSS, check the story cards too, not only the part changed.
 
 ## Current state (7 Nov 2026)
 - Live and updating every ~30 min while David's PC is on (hourly, without the 7 PC outlets, while it is off).
