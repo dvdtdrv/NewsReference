@@ -383,8 +383,9 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
   .src time { font-weight: 400; }
   .was { font: 400 12.5px/1.3 var(--body); letter-spacing: 0; text-transform: none; }
   .ph { border-radius: 10px; }
-  .articles.collapsed { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px;
-    scrollbar-width: thin; overscroll-behavior-x: contain; align-items: flex-start; }
+  .articles.collapsed { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 2px;
+    scrollbar-width: none; overscroll-behavior-x: contain; align-items: flex-start; }
+  .articles.collapsed::-webkit-scrollbar { display: none; }   /* no scrollbar under the row (David): the ‹ › buttons and the trackpad move it */
   .articles.collapsed > .card.card.card { display: flex; flex: 0 0 calc((100% - 4 * 18px) / 5.35); scroll-snap-align: start; }
   .articles.collapsed .hl { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .story-foot { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
