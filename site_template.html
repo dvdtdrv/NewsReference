@@ -132,6 +132,16 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
 .cta:disabled { opacity: .4; cursor: not-allowed; }
 .cta:hover, .cta:focus-visible { background: var(--ink-soft); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+/* 22 Nov 2026 (David chose mock-up C): on computers the links sit close around the logo instead of spread over the
+   whole width, a little more air above, and „Подкрепи" is a rounded pill like the menus. Phones keep their header. */
+@media (min-width: 861px) {
+  .masthead { padding-block: 26px 20px; }
+  .masthead .nav-group:first-child { justify-content: flex-end; gap: 36px; padding-right: 44px; }
+  .masthead .nav-group:last-child { justify-content: flex-start; gap: 30px; padding-left: 44px; }
+  .masthead .logo { padding: 0 8px; }
+  .masthead .logo b { font-size: 32px; }
+  .masthead .cta { border-radius: 999px; padding: 10px 20px; }
+}
 
 /* ---------- intro ---------- */
 .intro {

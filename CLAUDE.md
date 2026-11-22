@@ -106,7 +106,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   big title (.intro h1: Медии., Архив., archive days, legal, search, support) uses the upright serif too, no italic;
   story headlines (.story h3, search .hit h3) in Noto Serif SemiBold (web/noto-serif-*-600.woff2, 21 Nov, David chose it as a
   trial and may go back to Oswald 300: the old rule is kept in a comment above .story h3);
-  header Медии, Архив | NEWS REFERENCE | search, „Подкрепи" (21 Nov 2026, David: „За проекта" left the header to keep it
+  header Медии, Архив | NEWS REFERENCE | search, „Подкрепи" (22 Nov 2026, David chose mock-up C of A/B/C: on computers > 860 px the
+  links sit close around the centred logo, 36/30 px apart, logo 32 px, „Подкрепи" a rounded pill; phones unchanged) (21 Nov 2026, David: „За проекта" left the header to keep it
   uncluttered; it is now a big „За проекта →" block in the footer, next to „Правна информация", with „Как работи" under it). Installable web app
   (`web/`: manifest, icons, sw.js network-first).
   21 Nov 2026 (David: while scrolling the wheel showed through the stories): body.stage-covered hides .stage-inner once the
