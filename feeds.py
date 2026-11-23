@@ -54,8 +54,10 @@ OUTLETS = [
      "sitemap": "https://trud.bg/sitemaps/sitemap_latest.xml"},
     {"name": "Sega", "domain": "segabg.com", "type": "daily",
      "feed": "https://www.segabg.com/rss"},
+    # Club Z's feed turns every quotation mark into ";" (";Нова надежда;" where its page says "Нова надежда"):
+    # collect.py puts the quotes back (fix_semicolon_quotes), 23 Nov 2026
     {"name": "Club Z", "domain": "clubz.bg", "type": "online",
-     "feed": "https://www.clubz.bg/rss"},
+     "feed": "https://www.clubz.bg/rss", "semicolon_quotes": True},
     # Dnes.bg and BG On Air refused GitHub until ~Nov 2026; on 21 Nov 2026 both answered GitHub every time
     # (probe-outlets.yml), so GitHub reads them again, day and night. rss.php?today now redirects to /rss/latest.
     {"name": "Dnes.bg", "domain": "dnes.bg", "type": "online portal",

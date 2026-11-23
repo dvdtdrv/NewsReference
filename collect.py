@@ -135,6 +135,66 @@ def clean_text(raw, limit=300):
     return text if len(text) <= limit else text[:limit].rsplit(" ", 1)[0] + "…"
 
 
+# 23 Nov 2026: Club Z's feed turns every quotation mark into ";" (";Нова надежда;" where its own page says
+# "Нова надежда"). A ";" that opens a word and the next ";" that closes one become quotes again; a real
+# semicolon ("думи; други думи") has a space after it and stays.
+SEMICOLON_QUOTES = re.compile(r'(^|[\s(\[–—/-]);([^;\s](?:[^;]*?[^;\s])?);(?=$|[\s,.:!?)\]–—/…-])')
+SEMICOLON_OUTLETS = {o["name"] for o in OUTLETS if o.get("semicolon_quotes")}
+QUOTES_REPAIR = "semicolon-quotes-2026-11-23"   # marker in state.json: the saved headlines were repaired
+
+
+def fix_semicolon_quotes(title):
+    return SEMICOLON_QUOTES.sub(r'\1"\2"', title) if title else title
+
+
+def repair_semicolon_quotes():
+    """Once: put the quotes back into the headlines we already saved from those outlets (the 7-day file, the
+    monthly archive, the saved story days). Must run before the feeds are compared with what we have, or every
+    repaired headline would look like a renamed article. Running it again changes nothing."""
+    def fix_article(a):
+        if a.get("outlet") not in SEMICOLON_OUTLETS:
+            return 0
+        n = 0
+        for x in [a] + a.get("versions", []):
+            new = fix_semicolon_quotes(x.get("title"))
+            if new != x.get("title"):
+                x["title"] = new
+                n += 1
+        return n
+
+    changed = 0
+    files = [ARTICLES_FILE] + [os.path.join(MONTHS_DIR, f) for f in sorted(os.listdir(MONTHS_DIR))
+                               if f.endswith(".json")] if os.path.isdir(MONTHS_DIR) else [ARTICLES_FILE]
+    for path in files:
+        data = load_json(path, None)
+        if data is None:
+            continue
+        arts = data["articles"] if isinstance(data, dict) else data
+        n = sum(fix_article(a) for a in arts)
+        if n:
+            save_json(path, data)
+            changed += n
+    days_dir = os.path.join(DATA, "stories")
+    for path in [os.path.join(DATA, "stories.json")] + ([os.path.join(days_dir, f) for f in sorted(os.listdir(days_dir))
+                                                          if f.endswith(".json")] if os.path.isdir(days_dir) else []):
+        data = load_json(path, None)
+        if not data or "stories" not in data:
+            continue
+        n = 0
+        for s in data["stories"]:
+            broken = {a.get("title") for a in s.get("articles", []) if a.get("outlet") in SEMICOLON_OUTLETS}
+            n += sum(fix_article(a) for a in s.get("articles", []))
+            if s.get("headline") in broken:          # the story's headline is one of those outlets' headlines
+                new = fix_semicolon_quotes(s["headline"])
+                if new != s["headline"]:
+                    s["headline"] = new
+                    n += 1
+        if n:
+            save_json(path, data)
+            changed += n
+    print(f"Repaired {changed} saved headlines with ';' instead of quotes ({', '.join(sorted(SEMICOLON_OUTLETS))}).")
+
+
 def parse_date(value):
     """Turn the many date formats feeds use into a UTC datetime (or None)."""
     if not value:
@@ -452,7 +512,7 @@ def read_feed(content, outlet):
             when = datetime(*t[:6], tzinfo=timezone.utc)
         out.append({
             "outlet": outlet["name"],
-            "title": clean_text(e.get("title")),
+            "title": (fix_semicolon_quotes if outlet.get("semicolon_quotes") else str)(clean_text(e.get("title"))),
             "link": e.get("link") or e.get("id") or "",
             "summary": clean_text(e.get("summary")),
             "published": when.isoformat() if when else None,
@@ -611,8 +671,11 @@ def save_monthly(articles):
 
 def main():
     os.makedirs(DATA, exist_ok=True)
-    archive = load_json(ARTICLES_FILE, [])
     state = load_json(STATE_FILE, {})
+    if QUOTES_REPAIR not in state.get("repairs_done", []):
+        repair_semicolon_quotes()
+        state.setdefault("repairs_done", []).append(QUOTES_REPAIR)
+    archive = load_json(ARTICLES_FILE, [])
     old_status = {s["outlet"]: s for s in load_json(STATUS_FILE, [])}
 
     # one article per story an outlet wrote, even if it renamed it (see versions.py)
