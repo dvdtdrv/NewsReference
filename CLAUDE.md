@@ -95,7 +95,10 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
   login via start_runner.bat). `fetch_local.py` reads the `local` outlets (bTV, Trud, Blitz, Marica: Cloudflare challenge;
   Bloomberg TV: own 403 - they refuse GitHub's servers), their due link checks and the photos/link checks of
   `photos_on_pc` outlets (BG On Air, Euronews BG), uploads an artifact, dispatches update.yml. Used if < 75 min old.
-  When the PC is off, those outlets' overnight articles are mostly lost (feeds are short).
+  When the PC is off, the feeds are too short to cover the gap: `catchup.py` (23 Nov) reads back the last 24 h each
+  round: Marica + Blitz from their Google News sitemaps (headlines included, 1 request); bTV + Bloomberg TV from sitemaps
+  without headlines, opening <= 10 missed article pages per outlet per round, 5 s apart, only links not in GitHub's
+  data/known_local.json. Read-back articles are only added, never counted as renames. Trud's sitemap already reaches ~4 days.
 - `rebuild.yml`: pages + search only from saved data (~1-2 min); runs on push to site_template.html, build_site.py,
   build_search.mjs, outlets_info.json, web/**, geo_bg.json, no_photos.json. If it fails with "deployment_queued":
   `gh workflow run rebuild.yml --ref main`.
@@ -134,7 +137,8 @@ over http(s), not file://.
 - Support page: 0,99 EUR/month promised, no payments built yet (ask BTA/bTV first, see Hard rules).
 
 ## Open problems
-- PC off/asleep = lost articles from the PC outlets. Fixes: PC never sleeps; catch-up reading; outlets allowing
+- PC off/asleep = lost articles from the PC outlets (71% of the time 3-23 Nov). Catch-up reading (23 Nov) recovers the last
+  24 h after the PC wakes; longer gaps still lose the oldest part. Other fixes: PC never sleeps; outlets allowing
   `NewsReferenceBot` (David emailed them; bTV allows reading but can't change Cloudflare - its click-the-check suggestion
   was declined). Paid server dropped (cost; data centres get the same challenge).
 - Grouping misses paraphrased single articles; few business outlets.
@@ -150,7 +154,7 @@ over http(s), not file://.
 - BG On Air email if it keeps blocking his home connection.
 
 ## Next steps
-1. Catch-up reading for the PC outlets after a gap.
+1. Watch catch-up reading (23 Nov) for a few days: outlet_status notes say "catch-up: N ...".
 2. More outlets (check feed + robots first): BGNES, Telegraph, Monitor, 168 Chasa; business: Pari, Economic.bg,
    Investor.bg, Profit.bg, Forbes Bulgaria; Trafficnews (Plovdiv); Bivol, Toest.
 3. Better grouping (embeddings for single articles; Haiku to confirm proposed joins), then a „Бизнес" filter.

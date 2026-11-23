@@ -415,6 +415,19 @@ def save_photo_todo(articles, cache):
     save_json(PHOTO_TODO_FILE, {"made": NOW.isoformat(), "links": [x for items in todo.values() for x in items]})
 
 
+KNOWN_LOCAL_FILE = os.path.join(DATA, "known_local.json")
+
+
+def save_known_local(articles):
+    """GitHub side (23 Nov 2026): the links we already have of the outlets the PC catches up on (catchup.py),
+    from the last KEEP_DAYS days, so the PC opens only the pages of articles we really missed."""
+    names = {o["name"] for o in OUTLETS if o.get("catchup")}
+    since = (NOW - timedelta(days=KEEP_DAYS)).isoformat()
+    links = sorted({link for a in articles if a.get("outlet") in names and (a.get("published") or "") >= since
+                    for link in [a.get("link")] + [v.get("link") for v in a.get("versions", [])] if link})
+    save_json(KNOWN_LOCAL_FILE, {"made": NOW.isoformat(), "links": links})
+
+
 def fetch_photo_todo(cache, seconds=120):
     """PC side: fetch the photos GitHub listed. Returns {link: photo or ""}; "" = the page has no photo
     (so GitHub stops listing it). Pages that refuse us are left out and asked again next run."""
@@ -717,6 +730,8 @@ def main():
                 skipped["too old/future"] += 1
                 example_date = example_date or f"e.g. date '{a.get('raw_date', '')}' read as {a['published'][:16]}"
                 continue
+            if a.get("catchup") and (a["link"] in seen_links or key in seen_titles):
+                continue      # read back after a gap (catchup.py): only ever added, never counted as a rename
             if a["link"] in seen_links or key in seen_titles:
                 old = by_link.get(a["link"])
                 if old is not None and a.get("image") and old.get("image") != a["image"]:
@@ -734,6 +749,9 @@ def main():
             a["collected"] = NOW.isoformat()
             a.pop("raw_date", None)
             earlier = index.find(a)
+            if earlier is not None and a.pop("catchup", None):
+                continue      # a read-back article that looks like one we have under another link: leave it
+            a.pop("catchup", None)
             if earlier is not None:
                 # the outlet renamed an article we already have: update it instead of adding a copy
                 merge(earlier, a)
@@ -796,6 +814,7 @@ def main():
     save_page_images(photos)
     if ON_GITHUB:
         save_photo_todo(archive, photos)
+        save_known_local(archive)
 
     ok = sum(1 for s in status if s["status"] == "ok")
     new = sum(s["added_this_run"] for s in status)

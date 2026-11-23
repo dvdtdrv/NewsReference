@@ -14,6 +14,9 @@ Each outlet has:
   page_images - False for outlets whose article pages refuse us (403): keep the feed's photo
   as_browser - introduce ourselves as a web browser. ONLY with the outlet's written permission
                (kept in the permissions folder).
+  catchup  - (local outlets) where the PC reads back what it missed while it was off (catchup.py, 23 Nov 2026):
+             {"sitemap": address, "headlines": True if the sitemap itself has the headlines}
+  semicolon_quotes - the feed turns quotation marks into ";" (Club Z): collect.py puts them back
 
 Found with check_feeds.py and probe_missing.py on 31 Oct 2026.
 """
@@ -35,7 +38,8 @@ OUTLETS = [
     # bTV gave written permission on 1 Nov 2026 to read its coverage through a browser for this
     # project (the email is kept by David, outside the repository), so the program introduces itself as a browser for bTV only.
     {"name": "bTV Novinite", "local": True, "domain": "btvnovinite.bg", "type": "commercial TV",
-     "feed": "https://btvnovinite.bg/lbin/v3/rss.php", "as_browser": True},
+     "feed": "https://btvnovinite.bg/lbin/v3/rss.php", "as_browser": True,
+     "catchup": {"sitemap": "https://btvnovinite.bg/lbin/v3/sitemap.php", "headlines": False}},
     {"name": "Nova", "domain": "nova.bg", "type": "commercial TV",
      "feed": "https://nova.bg/rss/latest"},
 
@@ -69,7 +73,8 @@ OUTLETS = [
     {"name": "Offnews", "domain": "offnews.bg", "type": "online portal",
      "sitemap": "https://offnews.bg/xml/sitemap.php?type=news"},
     {"name": "Blitz", "local": True, "domain": "blitz.bg", "type": "online portal",
-     "feed": "https://blitz.bg/rss"},
+     "feed": "https://blitz.bg/rss",
+     "catchup": {"sitemap": "https://blitz.bg/sitemap/google-news.xml", "headlines": True}},
     # Novini.bg's feed is under /api/, which its robots.txt forbids, so we read its news sitemap instead
     {"name": "Novini.bg", "domain": "novini.bg", "type": "online portal",
      "sitemap": "https://novini.bg/sitemap/news/1.xml"},
@@ -97,7 +102,8 @@ OUTLETS = [
     {"name": "BG On Air", "domain": "bgonair.bg", "type": "commercial TV",
      "feed": "https://www.bgonair.bg/rss/news", "photos_on_pc": True},
     {"name": "Bloomberg TV", "local": True, "domain": "bloombergtv.bg", "type": "business TV",
-     "feed": "https://www.bloombergtv.bg/rss/news"},
+     "feed": "https://www.bloombergtv.bg/rss/news",
+     "catchup": {"sitemap": "https://www.bloombergtv.bg/sitemap/sitemap-1.xml", "headlines": False}},
     {"name": "Evrocom", "domain": "eurocom.bg", "type": "commercial TV",
      "feed": "https://eurocom.bg/feed/"},
     {"name": "Euronews BG", "domain": "euronews.bg", "type": "international",
@@ -110,7 +116,8 @@ OUTLETS = [
     {"name": "Svobodna Tochka", "domain": "svobodnatochka.bg", "type": "online",
      "feed": "https://svobodnatochka.bg/feed/"},
     {"name": "Marica", "local": True, "domain": "marica.bg", "type": "regional",
-     "feed": "https://www.marica.bg/rss"},
+     "feed": "https://www.marica.bg/rss",
+     "catchup": {"sitemap": "https://www.marica.bg/storage/google-news-sitemap.xml", "headlines": True}},
     {"name": "Moreto.net", "domain": "moreto.net", "type": "regional",
      "feed": "https://www.moreto.net/rss/lastnews.xml"},
 ]
