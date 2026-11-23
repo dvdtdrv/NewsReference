@@ -2193,7 +2193,9 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     more.textContent = v === "all" ? "Покажи още новини" : "Покажи още истории";
     if (!archiveDate) document.getElementById("list-title").textContent = v === "all" ? "Новини" : "Истории";
     if (v === "all") {                               // every article, newest first, without grouping
-      feedLeft = (data.feed_files || []).slice(); feedWait = []; feedDay = ""; feedSeen = new Set();
+      // one outlet: its own file (feed/o-NAME.json, 23 Nov 2026), so it loads at once; all outlets: hour by hour
+      const own = feedOutlet.value && (data.feed_outlet_files || {})[feedOutlet.value];
+      feedLeft = own ? [own] : (data.feed_files || []).slice(); feedWait = []; feedDay = ""; feedSeen = new Set();
       setNote(""); more.hidden = true;
       return feedMore();
     }

@@ -75,7 +75,8 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
    `corrections.json` = hand fixes of saved stories (applied once each).
 4. `build_site.py` + `site_template.html` (all CSS + JS of every page) -> `site/`: front page (index), medii.html,
    arhiv.html + archive days, tarsene.html (Pagefind search, `build_search.mjs`), pravila.html (legal), support page,
-   outlets.json, feed/*.json („Всички новини"), periods/*.json, sitemap.xml, robots.txt. `no_photos.json` = outlets
+   outlets.json, feed/*.json („Всички новини": one file per hour + feed/o-NAME.json per outlet, 23 Nov: picking DW
+   took 38 s, now 0.2 s), periods/*.json, sitemap.xml, robots.txt. `no_photos.json` = outlets
    whose photos must not be shown. `geo_bg.json` = map + towns for the first-screen graphics. Heavy data
    (outlet info, totals, headline changes) goes only to medii.html/outlets.json (`MEDIA_ONLY`), keeping the front page
    light. The front page holds only the 40 stories of its first view (most covered, 24 h); the other 48 h stories are in

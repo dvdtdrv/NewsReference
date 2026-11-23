@@ -500,6 +500,20 @@ def main():
         with open(os.path.join(OUT_DIR, "feed", f"{key}.json"), "w", encoding="utf-8") as f:
             json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
     front["feed_files"] = sorted(feed, reverse=True)
+    # 23 Nov 2026 (David: picking an outlet was slow): the same rows again, one file per outlet, so picking one
+    # outlet loads one file instead of going through up to 170 hourly files one after another
+    per_outlet, names = {}, {}
+    for rows in feed.values():
+        for r in rows:
+            per_outlet.setdefault(r[1], {})[r[3]] = r          # by link: an article once
+    for outlet, rows in per_outlet.items():
+        slug = re.sub(r"[^a-z0-9]+", "-", outlet.lower()).strip("-") or "x"
+        while f"o-{slug}" in names.values():                 # two names that read the same in Latin letters
+            slug += "-2"
+        names[outlet] = f"o-{slug}"
+        with open(os.path.join(OUT_DIR, "feed", f"{names[outlet]}.json"), "w", encoding="utf-8") as f:
+            json.dump(sorted(rows.values(), key=lambda r: r[0], reverse=True), f, ensure_ascii=False, separators=(",", ":"))
+    front["feed_outlet_files"] = names
     front["feed_outlets"] = sorted({r[1] for rows in feed.values() for r in rows}, key=str.lower)
     # how many articles each outlet has in „Всички новини“ (the last 7 days), shown in the outlet menu
     front["feed_counts"] = dict(Counter(r[1] for rows in feed.values() for r in rows))
