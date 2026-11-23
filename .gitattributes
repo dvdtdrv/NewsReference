@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Windows .bat/.cmd files need Windows line endings (CRLF), or cmd can misread them (23 Nov 2026)
+*.bat text eol=crlf
+*.cmd text eol=crlf

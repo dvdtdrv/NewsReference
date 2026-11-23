@@ -18,7 +18,8 @@ Pages + Actions) · Architecture doc: https://claude.ai/artifact/WMiJigfLkQ3aMtR
   force-push main. Push only what David agreed to.
 - After a change: add a short dated line to the right section here (or to docs/HISTORY.md if it is detail).
 - `sync_from_github.bat` does `git reset --hard origin/main`: it wipes uncommitted edits in this folder. Commit
-  and push before David runs it.
+  and push before David runs it. It replaces itself while running, so its last steps sit in one ( ) block, and
+  .gitattributes gives all .bat files Windows line endings (an LF .bat printed "'igin' is not recognized", 23 Nov).
 
 ## Where Claude Code runs (since 23 Nov 2026)
 Either way the repo on GitHub is the source of truth: work on main's latest code, commit, push; Actions deploy.
