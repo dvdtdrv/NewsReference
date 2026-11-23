@@ -31,6 +31,7 @@ CATCHUP_HOURS = 24          # look back this far (an outlet's "catchup" can say 
 PAGES_PER_ROUND = 10        # article pages opened per outlet per PC round (every ~30 min)
 PAUSE = 5                   # seconds between those pages (link_check.PC_PAUSE)
 GIVE_UP = 3                 # this many refused pages in a row: stop for this round
+USELESS = 5                 # the first this many pages gave no article (no headline or date found): stop the outlet
 SITEMAP_BYTES = 600_000     # read at most this much of a sitemap (newest first; Bloomberg TV's is 10 MB)
 PAGE_BYTES = 600_000        # and of an article page
 PAGE_SECONDS = 25           # never longer than this for one page
@@ -172,12 +173,13 @@ def catch_up(outlet, fetched, headers, known, sent, photos):
 
     if cfg.get("headlines"):             # Marica, Blitz: the sitemap itself has the headlines
         found = [a for a in collect.read_news_sitemap(text, outlet)
-                 if a["link"] not in have and a.get("published") and datetime.fromisoformat(a["published"]) >= since]
+                 if a["link"] not in have and (known is None or a["link"] not in known)
+                 and a.get("published") and datetime.fromisoformat(a["published"]) >= since]
         for a in found:
             a["catchup"] = True
             if a["link"] in photos:
                 a["image"] = photos[a["link"]] or a.get("image", "")
-        return found, f"catch-up: {len(found)} from the sitemap" if found else ""
+        return found, f"catch-up: {len(found)} new from the sitemap" if found else ""
 
     if known is None:                     # bTV, Bloomberg TV: we must know what GitHub has before opening pages
         return [], "catch-up skipped (GitHub's list unreachable)"
@@ -190,7 +192,7 @@ def catch_up(outlet, fetched, headers, known, sent, photos):
                  if link not in have and link not in known and link not in listed]
     found, opened, refused = [], 0, 0
     for link, t in todo[:DEEP_ARTICLES if DEEP else PAGES_PER_ROUND]:
-        if refused >= GIVE_UP or not collect.allowed(link):
+        if refused >= GIVE_UP or (opened >= USELESS and not found) or not collect.allowed(link):
             continue
         if opened:
             time.sleep(max(PAUSE, collect.crawl_delay(link)))
@@ -206,4 +208,6 @@ def catch_up(outlet, fetched, headers, known, sent, photos):
             found.append(a)
     left = max(0, len(todo) - opened)
     note = f"catch-up: {len(found)} from {opened} pages" + (f", {left} left for later rounds" if left else "")
+    if opened >= USELESS and not found:
+        note += " (stopped: the pages gave no headline/date)"
     return found, note if todo else ""
