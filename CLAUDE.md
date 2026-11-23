@@ -3,7 +3,7 @@
 Free public site that groups articles from 36 Bulgarian outlets into stories and shows, per story, who covered it,
 how they headlined it, and who stayed silent ("blindspots"); plus who each outlet is (ownership, money, disputes).
 Live: https://newsreference.bg (Cloudflare -> GitHub Pages) · Repo: dvdtdrv/NewsReference (public, stays public: free
-Pages + Actions) · Full history of every decision and lesson: `docs/HISTORY.md` (search it before re-deciding something).
+Pages + Actions) · Architecture doc: https://claude.ai/artifact/WMiJigfLkQ3aMtR8eK3eMn · Full history of every decision and lesson: `docs/HISTORY.md` (search it before re-deciding something).
 
 ## Working with David (always)
 - David is a beginner (Windows, Anaconda Python, runs .bat files by double-clicking). Explain plainly.
@@ -19,6 +19,16 @@ Pages + Actions) · Full history of every decision and lesson: `docs/HISTORY.md`
 - After a change: add a short dated line to the right section here (or to docs/HISTORY.md if it is detail).
 - `sync_from_github.bat` does `git reset --hard origin/main`: it wipes uncommitted edits in this folder. Commit
   and push before David runs it.
+
+## Working on David's PC (Claude Code, since 23 Nov 2026)
+- Python: `%USERPROFILE%\anaconda3\python.exe` (else `python`), with `PYTHONIOENCODING=utf-8`. Node is needed for
+  Pagefind/Playwright; Playwright browsers may need `npx playwright install chromium webkit` the first time.
+- Every web request made here comes from David's HOME connection, the same one outlets can block (BG On Air did).
+  Fetch outlet pages slowly and only when needed; never loop over many article pages from here.
+- The self-hosted runner (C:\Users\david\actions-runner) runs on this same PC: don't stop it or edit its folder.
+- The AI model for matching.py did not install on this PC, so a local group_stories.py run joins nothing and its
+  stories differ from the live site. Real data comes from the `data` branch, not from local runs; don't push data.
+- `run_all.bat` (collect + group + build locally) is old and writes local data only; GitHub is the real pipeline.
 
 ## Hard rules
 - Headline, short summary, link and the outlet's photo only; never full article text (copyright).
@@ -58,7 +68,13 @@ Pages + Actions) · Full history of every decision and lesson: `docs/HISTORY.md`
 4. `build_site.py` + `site_template.html` (all CSS + JS of every page) -> `site/`: front page (index), medii.html,
    arhiv.html + archive days, tarsene.html (Pagefind search, `build_search.mjs`), pravila.html (legal), support page,
    outlets.json, feed/*.json („Всички новини"), periods/*.json, sitemap.xml, robots.txt. `no_photos.json` = outlets
-   whose photos must not be shown. `geo_bg.json` = map + towns for the first-screen graphics.
+   whose photos must not be shown. `geo_bg.json` = map + towns for the first-screen graphics. Heavy data
+   (outlet info, totals, headline changes) goes only to medii.html/outlets.json (`MEDIA_ONLY`), keeping the front page
+   light. `SITE_URL` gives each page its canonical address. `seed/` = starting data for a first run on an empty branch.
+6. Blindspot rule: an outlet is listed under „Не отразиха" only if we read it in the last 3 h AND our archive of it
+   reaches back before the story began, so an outlet we couldn't read is never falsely called silent.
+7. Headline-change kinds (minor / update / live / major, `versions.change_kind`) feed the ranking under „Медии" with a
+   legend on the site; silent changes can signal pressure, so precision beats speed (two looks before recording).
 5. Data lives on the `data` branch (force-replaced each run):
    `git fetch https://github.com/dvdtdrv/NewsReference.git +data:refs/remotes/d/data`.
 
@@ -97,6 +113,14 @@ over http(s), not file://.
   „Не отразиха +" opens on tap. Installed app: pull down to reload. Own rounded menus (`makeMenu`) replace <select>.
 - The outlet window (click any outlet name) shows totals, „Накратко" facts, outlet info with folded sources.
 
+## Domain, hosting, accounts
+- newsreference.bg: bought at Jump.bg (David owns it), renews 17.11.2027 (29.60 EUR/yr). DNS at Cloudflare (David's
+  free account; nameservers chip/vida.ns.cloudflare.com): A/AAAA to GitHub Pages, www CNAME, all proxied, SSL Full +
+  Always HTTPS. Custom domain set in the repo's Pages settings; the old github.io address forwards. Never remove the
+  custom domain while Cloudflare is not Active (it once redirected the whole site to a dead address).
+- Google Search Console (Domain property) and Bing are David's.
+- Support page: 0,99 EUR/month promised, no payments built yet (ask BTA/bTV first, see Hard rules).
+
 ## Open problems
 - PC off/asleep = lost articles from the PC outlets. Fixes: PC never sleeps; catch-up reading; outlets allowing
   `NewsReferenceBot` (David emailed them; bTV allows reading but can't change Cloudflare - its click-the-check suggestion
@@ -109,7 +133,8 @@ over http(s), not file://.
 ## Waiting for David's decision
 - Phone wheel: 4a ranked list or 4b bigger wheel with top 12 named; smaller back-to-top button; tappable headline note.
 - A 1200x630 share image (social previews use the app icon now). Submit sitemap.xml in Google Search Console.
-- Ad videos (Desktop\NR - advertisement\NR_advertisement): music still open (David may pick a track).
+- Ad videos (Desktop\NR - advertisement\NR_advertisement; 10 vertical videos, code in 2_video_code, make_videos.bat):
+  music still open (David may pick a track). Ads never use outlets' photos or footage.
 - BG On Air email if it keeps blocking his home connection.
 
 ## Next steps
