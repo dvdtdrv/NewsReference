@@ -39,7 +39,10 @@ OUTLETS = [
     # project (the email is kept by David, outside the repository), so the program introduces itself as a browser for bTV only.
     {"name": "bTV Novinite", "local": True, "domain": "btvnovinite.bg", "type": "commercial TV",
      "feed": "https://btvnovinite.bg/lbin/v3/rss.php", "as_browser": True,
-     "catchup": {"sitemap": "https://btvnovinite.bg/lbin/v3/sitemap.php", "headlines": False}},
+     "catchup": {"sitemap": "https://btvnovinite.bg/lbin/v3/sitemap.php", "headlines": False,
+                 # its sitemap lists only ~30 links: after a gap also these section pages (probe_btv_pages.py, 23 Nov)
+                 "sections": ["https://btvnovinite.bg/bulgaria/", "https://btvnovinite.bg/svetut/",
+                              "https://btvnovinite.bg/predavania/"]}},
     {"name": "Nova", "domain": "nova.bg", "type": "commercial TV",
      "feed": "https://nova.bg/rss/latest"},
 

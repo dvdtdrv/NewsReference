@@ -423,9 +423,10 @@ def save_known_local(articles):
     from the last KEEP_DAYS days, so the PC opens only the pages of articles we really missed."""
     names = {o["name"] for o in OUTLETS if o.get("catchup")}
     since = (NOW - timedelta(days=KEEP_DAYS)).isoformat()
-    links = sorted({link for a in articles if a.get("outlet") in names and (a.get("published") or "") >= since
-                    for link in [a.get("link")] + [v.get("link") for v in a.get("versions", [])] if link})
-    save_json(KNOWN_LOCAL_FILE, {"made": NOW.isoformat(), "links": links})
+    dates = {link: a["published"] for a in articles if a.get("outlet") in names and (a.get("published") or "") >= since
+             for link in [a.get("link")] + [v.get("link") for v in a.get("versions", [])] if link}
+    # "published": each link's date, so the PC knows where to stop reading bTV's section pages (catchup.py)
+    save_json(KNOWN_LOCAL_FILE, {"made": NOW.isoformat(), "links": sorted(dates), "published": dates})
 
 
 def fetch_photo_todo(cache, seconds=120):

@@ -99,6 +99,10 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
   round (Marica 72 h, its sitemap reaches ~3 days): Marica + Blitz from their Google News sitemaps (headlines included, 1 request); bTV + Bloomberg TV from sitemaps
   without headlines, opening <= 10 missed article pages per outlet per round, 5 s apart, only links not in GitHub's
   data/known_local.json. Read-back articles are only added, never counted as renames. Trud's sitemap already reaches ~4 days.
+  bTV's sitemap lists only ~30 links: after a PC gap > 2 h it also reads pages 1-3 of its sections (България, Светът,
+  Предавания; probe_btv_pages.py showed they page back ~1 day per 1-2 pages). Deep catch-up once by hand: run
+  local-fetch.yml with deep = 1 (7 days, section pages stop by date, <= 100 article pages per outlet). Articles older
+  than ~36-48 h reach the archive, „Всички новини" and search, but not their (frozen) stories.
 - `rebuild.yml`: pages + search only from saved data (~1-2 min); runs on push to site_template.html, build_site.py,
   build_search.mjs, outlets_info.json, web/**, geo_bg.json, no_photos.json. If it fails with "deployment_queued":
   `gh workflow run rebuild.yml --ref main`.

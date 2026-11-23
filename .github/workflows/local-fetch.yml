@@ -20,6 +20,10 @@ on:
         description: "Minutes to wait before reading (set by the main run)"
         required: false
         default: "0"
+      deep:
+        description: "1 = deep catch-up once (catchup.py): the last 7 days of the PC outlets, at most 100 pages each"
+        required: false
+        default: "0"
 
 permissions:
   actions: write     # to start the main run when done
@@ -63,6 +67,7 @@ jobs:
           if (-not (Test-Path $py)) { $py = "python" }
           & $py -m pip install -q -r requirements.txt
           $env:NR_CACHE_DIR = "$env:USERPROFILE\actions-runner\cache"   # remembered photos; GitHub cleans the project folder
+          $env:CATCHUP_DEEP = "${{ github.event.inputs.deep }}"            # "1" only when started by hand for a deep catch-up
           & $py fetch_local.py
 
       - name: Hand the articles to the main run

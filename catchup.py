@@ -19,6 +19,7 @@ import os
 import re
 import time
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urljoin
 
 import requests
 
@@ -34,6 +35,15 @@ SITEMAP_BYTES = 600_000     # read at most this much of a sitemap (newest first;
 PAGE_BYTES = 600_000        # and of an article page
 PAGE_SECONDS = 25           # never longer than this for one page
 SENT_HOURS = 3              # a link the PC sent but GitHub still doesn't list after this long: try it again
+GAP_HOURS = 2               # the PC was off longer than this: also read the outlet's section pages ("sections")
+GAP_PAGES = 3               # ... pages 1-3 of each section
+# deep recovery, once by hand (local-fetch.yml started with deep = 1): the last 7 days, section pages as far back
+# as needed (they stop by date), at most DEEP_ARTICLES article pages per outlet
+DEEP = os.environ.get("CATCHUP_DEEP") == "1"
+DEEP_HOURS = 7 * 24
+DEEP_PAGES = 20
+DEEP_ARTICLES = 100
+GAP = False                 # set by load_known(): was the PC off for a while before this round?
 KNOWN_URL = "https://raw.githubusercontent.com/dvdtdrv/NewsReference/data/known_local.json"
 MEMORY_FILE = os.path.join(os.environ.get("NR_CACHE_DIR") or collect.DATA, "catchup_sent.json")
 
@@ -61,20 +71,54 @@ def _get(url, headers, limit):
 
 
 def load_known():
-    """Links GitHub already has for these outlets (refreshed by every GitHub run), plus what this PC sent lately."""
+    """Links GitHub already has for these outlets ({link: published}, refreshed by every GitHub run), plus what this
+    PC sent lately. Also notes whether the PC was off for a while (GAP)."""
+    global GAP
     try:
-        known = set(requests.get(KNOWN_URL, timeout=collect.TIMEOUT).json().get("links", []))
+        data = requests.get(KNOWN_URL, timeout=collect.TIMEOUT).json()
+        known = data.get("published") or {link: "" for link in data.get("links", [])}
     except (requests.RequestException, ValueError):
         known = None                     # can't tell what GitHub has: open no pages this round
     sent = collect.load_json(MEMORY_FILE, {})
-    cutoff = (datetime.now(timezone.utc) - timedelta(hours=SENT_HOURS)).isoformat()
+    now = datetime.now(timezone.utc)
+    last = sent.pop("__last_run__", None)
+    GAP = not last or datetime.fromisoformat(last) < now - timedelta(hours=GAP_HOURS)
+    cutoff = (now - timedelta(hours=SENT_HOURS)).isoformat()
     sent = {k: v for k, v in sent.items() if v >= cutoff}
     return known, sent
 
 
 def save_sent(sent):
     os.makedirs(os.path.dirname(MEMORY_FILE) or ".", exist_ok=True)
-    collect.save_json(MEMORY_FILE, sent)
+    collect.save_json(MEMORY_FILE, {**sent, "__last_run__": datetime.now(timezone.utc).isoformat()})
+
+
+def section_links(cfg, headers, known, since, max_pages):
+    """Article links from the outlet's section pages (bTV: България, Светът, Предавания; page 2 = ?page=2), newest
+    first. A section stops when its page holds only articles we know to be older than `since`, or no articles."""
+    out = []
+    for base in cfg.get("sections", []):
+        for n in range(1, max_pages + 1):
+            url = base if n == 1 else f"{base}?page={n}"
+            if not collect.allowed(url):
+                break
+            time.sleep(PAUSE)
+            page = _get(url, headers, PAGE_BYTES)
+            if page is None:
+                break
+            links = []
+            for href in re.findall(r'href="([^"#?]+\.html)"', page):
+                full = urljoin(base, href)
+                if full.startswith(base) and full not in links:
+                    links.append(full)
+            dated = [datetime.fromisoformat(known[link]) for link in links if known.get(link)]
+            if not links or (dated and max(dated) < since):
+                break                    # this page is already older than we look back: nothing from it
+            if dated and min(dated) < since:   # the page reaches past `since`: only the links above the oldest
+                cut = max(i for i, link in enumerate(links) if known.get(link) and datetime.fromisoformat(known[link]) >= since)
+                links = links[:cut + 1]
+            out += [link for link in links if link not in out]
+    return out
 
 
 def sitemap_links(text):
@@ -124,7 +168,7 @@ def catch_up(outlet, fetched, headers, known, sent, photos):
     if text is None:
         return [], "catch-up sitemap refused"
     have = {a.get("link") for a in fetched} | set(sent)
-    since = datetime.now(timezone.utc) - timedelta(hours=cfg.get("hours", CATCHUP_HOURS))
+    since = datetime.now(timezone.utc) - timedelta(hours=DEEP_HOURS if DEEP else cfg.get("hours", CATCHUP_HOURS))
 
     if cfg.get("headlines"):             # Marica, Blitz: the sitemap itself has the headlines
         found = [a for a in collect.read_news_sitemap(text, outlet)
@@ -140,8 +184,12 @@ def catch_up(outlet, fetched, headers, known, sent, photos):
     todo = [(link, t) for link, t in sitemap_links(text)
             if link not in have and link not in known and (t is None or t >= since)]
     todo.sort(key=lambda x: x[1] or since, reverse=True)
+    if cfg.get("sections") and (GAP or DEEP):   # after a gap (or by hand): the section pages list much more
+        listed = {link for link, _ in todo}
+        todo += [(link, None) for link in section_links(cfg, headers, known, since, DEEP_PAGES if DEEP else GAP_PAGES)
+                 if link not in have and link not in known and link not in listed]
     found, opened, refused = [], 0, 0
-    for link, t in todo[:PAGES_PER_ROUND]:
+    for link, t in todo[:DEEP_ARTICLES if DEEP else PAGES_PER_ROUND]:
         if refused >= GIVE_UP or not collect.allowed(link):
             continue
         if opened:
