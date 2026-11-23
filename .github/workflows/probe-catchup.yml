@@ -2,11 +2,19 @@
 # On David's PC, probe_catchup.py looks once at each `local` outlet's robots.txt, feed, sitemaps and page 2 of
 # its feed (at most 8 requests per outlet, 5 s apart) and hands back how far back each reaches
 # (probe_catchup.txt / .json, a download on the run's page). Changes nothing. Takes ~5 minutes.
+# check = btv-pages (23 Nov): probe_btv_pages.py instead, bTV's section pages (<= 13 requests, 5 s apart).
 
 name: Check catch-up sources of the PC outlets
 
 on:
   workflow_dispatch:
+    inputs:
+      check:
+        description: "catchup = every PC outlet's sitemaps/feeds; btv-pages = how far back bTV's section pages reach"
+        required: true
+        default: "catchup"
+        type: choice
+        options: [catchup, btv-pages]
 
 permissions:
   contents: read
@@ -28,7 +36,7 @@ jobs:
           $py = "$env:USERPROFILE\anaconda3\python.exe"
           if (-not (Test-Path $py)) { $py = "python" }
           & $py -m pip install -q -r requirements.txt
-          & $py probe_catchup.py
+          if ("${{ github.event.inputs.check }}" -eq "btv-pages") { & $py probe_btv_pages.py } else { & $py probe_catchup.py }
 
       - name: Hand back the result
         if: always()
@@ -38,4 +46,6 @@ jobs:
           path: |
             probe_catchup.txt
             probe_catchup.json
+            probe_btv_pages.json
+          if-no-files-found: ignore
           retention-days: 14
