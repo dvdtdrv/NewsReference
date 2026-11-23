@@ -1972,6 +1972,35 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     empty: "Няма истории за този период."
   };
 
+  // the stories of a period that this page holds (12, 24 or 48 hours)
+  function periodItems(v, p) {
+    const cut = cutoff(p);
+    if (v === "top" && p !== "48h") {
+      // most covered IN this period: count only the outlets that wrote about it within the last 12/24 hours,
+      // so 12 and 24 hours differ (a big story from yesterday morning doesn't top the last 12 hours)
+      // (build_site.py split_front_stories counts the same way: keep the two alike)
+      const inWindow = s => new Set(s.articles.filter(a => new Date(a.published) >= cut).map(a => a.outlet)).size;
+      return data.stories.map(s => [s, inWindow(s)]).filter(([, n]) => n >= 2)
+        .sort((a, b) => (b[1] - a[1]) || b[0].last_updated.localeCompare(a[0].last_updated)).map(([s]) => s);
+    }
+    return data.stories.filter(s => p === "48h" || new Date(s.last_updated) >= cut).sort(v === "top" ? byTop : byNew);
+  }
+
+  // 23 Nov 2026: the front page holds only the stories its first view shows (most covered, 24 hours);
+  // the rest of the 48 hours are in stories-48h.json, loaded in the background once the page is showing
+  const isFirstView = (v, p) => v === "top" && p === "24h";
+  let restLoad = null;
+  const loadRest = () => restLoad || (restLoad = (data.stories_rest
+    ? fetch(`${base}${data.stories_rest}?v=${encodeURIComponent(data.generated_at || "")}`)
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(rest => {
+          data.stories = data.stories.concat(rest);
+          data.stories_rest = null;
+          rest.forEach(s => onPage.add(s.id));
+          restArrived();
+        })
+    : Promise.resolve()).catch(e => { restLoad = null; throw e; }));   // failed: a later click tries again
+
   let current = "top", period = "24h", shown = 0, items = [], token = 0, nextDays = null, loading = false, failed = false;
   const list = document.getElementById("list");
   const more = document.getElementById("more");
@@ -2010,6 +2039,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     return k === today ? `Днес, ${long.split(", ")[1] || long}` : k === yest ? `Вчера, ${long.split(", ")[1] || long}` : long;
   };
   function showStory(id) {                                         // a story of this page: open „Най-отразявани“, 48 hours, at it
+    if (data.stories_rest) { loadRest().then(() => showStory(id), () => {}); return; }   // the rest first
     setView("top", "48h");
     const at = items.findIndex(s => s.id === id);
     if (at < 0) return;
@@ -2102,11 +2132,30 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     items.slice(shown, shown + PAGE).forEach(s => frag.append(storyNode(s)));
     list.append(frag);
     shown = Math.min(shown + PAGE, items.length);
-    more.hidden = shown >= items.length && !(nextDays && nextDays.length);
+    more.hidden = shown >= items.length && !(nextDays && nextDays.length)
+      && !(data.stories_rest && isFirstView(current, period));      // more of this list is still on its way
+  }
+  // the rest of the stories arrived: the first view's list gets its full length; what is already on the
+  // screen stays (build_site.py put exactly these stories first), unless the order came out different
+  function restArrived() {
+    if (archiveDate || !isFirstView(current, period) || noList) return;
+    const fresh = periodItems(current, period);
+    const same = items.slice(0, shown).every((s, i) => fresh[i] && fresh[i].id === s.id);
+    items = fresh;
+    if (!same) { const n = shown; shown = 0; list.replaceChildren(); while (shown < n && shown < items.length) paintMore(); }
+    more.hidden = shown >= items.length;
+    setNote(items.length ? "" : NOTES.empty);
   }
   // the newest stories of a long period: load archive days until there is a page full (or no days left)
   async function renderMore() {
     if (current === "all") return feedMore();
+    if (!nextDays && shown >= items.length && data.stories_rest) {   // the first view's next page isn't here yet
+      const my = token;
+      more.disabled = true;
+      try { await loadRest(); } catch (e) { if (my === token) { more.hidden = true; setNote(NOTES.offline); } }
+      if (my === token) more.disabled = false;
+      if (my !== token || shown >= items.length) return;
+    }
     if (!nextDays) return paintMore();
     if (loading) return;
     // „Най-нови“ has no period (10 Nov 2026): it goes back through the whole archive, taking from each
@@ -2154,17 +2203,15 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       setNote(items.length ? "" : NOTES.empty);
       return paintMore();
     }
+    // the front page carries only the first view's stories; any other list waits for the rest (stories-48h.json)
+    if (data.stories_rest && (v === "all" || v === "new" || (PERIOD_HOURS[p] && !isFirstView(v, p)))) {
+      setNote("Зареждане…");
+      more.hidden = true;
+      loadRest().then(() => { if (my === token) setView(v, p); }, () => { if (my === token) setNote(NOTES.offline); });
+      return;
+    }
     if (PERIOD_HOURS[p]) {                           // from this page
-      const cut = cutoff(p);
-      if (v === "top" && p !== "48h") {
-        // most covered IN this period: count only the outlets that wrote about it within the last 12/24 hours,
-        // so 12 and 24 hours differ (a big story from yesterday morning doesn't top the last 12 hours)
-        const inWindow = s => new Set(s.articles.filter(a => new Date(a.published) >= cut).map(a => a.outlet)).size;
-        items = data.stories.map(s => [s, inWindow(s)]).filter(([, n]) => n >= 2)
-          .sort((a, b) => (b[1] - a[1]) || b[0].last_updated.localeCompare(a[0].last_updated)).map(([s]) => s);
-      } else {
-        items = data.stories.filter(s => p === "48h" || new Date(s.last_updated) >= cut).sort(v === "top" ? byTop : byNew);
-      }
+      items = periodItems(v, p);
       setNote(items.length ? "" : NOTES.empty);
       return paintMore();
     }
@@ -2190,7 +2237,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
 
   // a link to one story (from search: archive/DAY.html#s-ID): show it even if it's further down the list
   const target = /^#s-[\w-]+$/.test(location.hash) ? location.hash.slice(1) : null;
-  if (target && !isSearch && !isSupport) {
+  const goTarget = () => {
     const at = items.findIndex(s => `s-${s.id}` === target);
     if (at >= 0) {
       while (shown <= at) renderMore();
@@ -2198,6 +2245,14 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       const go = () => { node.scrollIntoView({ block: "start" }); node.classList.add("flash"); };
       (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
     }
+    return at >= 0;
+  };
+  if (target && !isSearch && !isSupport && !goTarget() && data.stories_rest)
+    loadRest().then(() => { if (isFirstView(current, period)) goTarget(); }, () => {});
+  // the rest of the front page's stories: fetched once the page has finished showing (not competing with it)
+  if (data.stories_rest) {
+    const later = () => setTimeout(() => loadRest().catch(() => {}), 200);
+    if (document.readyState === "complete") later(); else window.addEventListener("load", later, { once: true });
   }
 
   // ---------- search (only on tarsene.html) ----------

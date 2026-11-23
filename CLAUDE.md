@@ -78,7 +78,9 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
    outlets.json, feed/*.json („Всички новини"), periods/*.json, sitemap.xml, robots.txt. `no_photos.json` = outlets
    whose photos must not be shown. `geo_bg.json` = map + towns for the first-screen graphics. Heavy data
    (outlet info, totals, headline changes) goes only to medii.html/outlets.json (`MEDIA_ONLY`), keeping the front page
-   light. `SITE_URL` gives each page its canonical address. `seed/` = starting data for a first run on an empty branch.
+   light. The front page holds only the 40 stories of its first view (most covered, 24 h); the other 48 h stories are in
+   stories-48h.json, loaded in the background (23 Nov: 2.7 MB -> 0.65 MB; `split_front_stories` must count like
+   `periodItems` in the template). `SITE_URL` gives each page its canonical address. `seed/` = starting data for a first run on an empty branch.
 5. Data lives on the `data` branch (force-replaced each run):
    `git fetch https://github.com/dvdtdrv/NewsReference.git +data:refs/remotes/d/data`.
 6. Blindspot rule: an outlet is listed under „Не отразиха" only if we read it in the last 3 h AND our archive of it

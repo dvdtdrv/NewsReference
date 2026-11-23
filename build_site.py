@@ -2,7 +2,8 @@
 Step 3: build the website pages from the latest stories and the archive.
 
 Takes site_template.html and writes:
-  site/index.html               the front page: stories from the last 48 hours
+  site/index.html               the front page: the 40 stories its first view shows (most covered, 24 hours)
+  site/stories-48h.json         the front page's other stories of the last 48 hours, loaded in the background
   site/abonament.html           the subscription page
   site/tarsene.html             the search page (the index itself is made by build_search.mjs)
   site/archive/YYYY-MM-DD.html  one page per day in the archive (data/stories/YYYY-MM-DD.json)
@@ -16,7 +17,8 @@ Takes site_template.html and writes:
   site/sitemap.xml, robots.txt  for search engines (21 Nov 2026): the list of all pages, and where that list is
 
 The stories are put inside each page itself, so the pages work straight from your folder:
-double-click site/index.html to open the site.
+double-click site/index.html to open the site. (Since 23 Nov 2026 the front page opened that way shows only its
+first 40 stories; the other lists need the site served over http, like the week and month lists always did.)
 
 Run with:   python build_site.py
 """
@@ -435,6 +437,28 @@ def feed_files(front):
     return files
 
 
+FIRST_STORIES = 40                # stories inside index.html itself: the first two pages of „Покажи още истории“
+REST_FILE = "stories-48h.json"    # the front page's other stories, loaded in the background
+
+
+def split_front_stories(front):
+    """Split the front page's stories (23 Nov 2026): the ones the first view shows (most covered in the last
+    24 hours, FIRST_STORIES of them, in the page's own order) and the rest (in a file, loaded after the page shows).
+    Must count like setView in site_template.html: outlets that wrote within the last 24 hours, at least 2,
+    most first, then the newest update. JavaScript keeps times to the millisecond, so we do too."""
+    def ms(iso):
+        t = datetime.fromisoformat(iso)
+        return t.replace(microsecond=t.microsecond // 1000 * 1000)
+    cut = ms(front["generated_at"]) - timedelta(hours=24)
+    stories = front["stories"]
+    counted = [(s, len({a["outlet"] for a in s["articles"] if ms(a["published"]) >= cut})) for s in stories]
+    counted = [x for x in counted if x[1] >= 2]
+    counted.sort(key=lambda x: x[0]["last_updated"], reverse=True)   # stable sorts: newest update, then outlets
+    counted.sort(key=lambda x: x[1], reverse=True)
+    keep = {s["id"] for s, _ in counted[:FIRST_STORIES]}
+    return [s for s in stories if s["id"] in keep], [s for s in stories if s["id"] not in keep]
+
+
 def build(fragment_only=False):
     """The front page as one HTML string (used for the preview)."""
     with open(TEMPLATE, encoding="utf-8") as f:
@@ -486,8 +510,14 @@ def main():
 
     # everything except what only „Медии“ shows (the outlet info and the ranking are the biggest part)
     light = {k: v for k, v in front.items() if k not in MEDIA_ONLY}
+    # 23 Nov 2026 (David): the front page carries only the stories its first view shows; the rest of the
+    # 48 hours go to a file of their own, which the page loads in the background (2.7 MB -> under 1 MB)
+    first, rest = split_front_stories(front)
+    with open(os.path.join(OUT_DIR, REST_FILE), "w", encoding="utf-8") as f:
+        json.dump(rest, f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render({**light, "hero": hero_data(front)}, template, seo=("", "News Reference – една новина, всички медии",
+        f.write(render({**light, "stories": first, "stories_rest": REST_FILE if rest else None,
+                        "hero": hero_data(front)}, template, seo=("", "News Reference – една новина, всички медии",
                                             "Новините от 36 български медии, групирани в истории: кои медии отразиха "
                                             "всяка новина, с какво заглавие и кои я премълчаха.")))
 
