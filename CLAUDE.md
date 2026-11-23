@@ -20,15 +20,20 @@ Pages + Actions) · Architecture doc: https://claude.ai/artifact/WMiJigfLkQ3aMtR
 - `sync_from_github.bat` does `git reset --hard origin/main`: it wipes uncommitted edits in this folder. Commit
   and push before David runs it.
 
-## Working on David's PC (Claude Code, since 23 Nov 2026)
-- Python: `%USERPROFILE%\anaconda3\python.exe` (else `python`), with `PYTHONIOENCODING=utf-8`. Node is needed for
-  Pagefind/Playwright; Playwright browsers may need `npx playwright install chromium webkit` the first time.
-- Every web request made here comes from David's HOME connection, the same one outlets can block (BG On Air did).
-  Fetch outlet pages slowly and only when needed; never loop over many article pages from here.
-- The self-hosted runner (C:\Users\david\actions-runner) runs on this same PC: don't stop it or edit its folder.
-- The AI model for matching.py did not install on this PC, so a local group_stories.py run joins nothing and its
-  stories differ from the live site. Real data comes from the `data` branch, not from local runs; don't push data.
-- `run_all.bat` (collect + group + build locally) is old and writes local data only; GitHub is the real pipeline.
+## Where Claude Code runs (since 23 Nov 2026)
+Either way the repo on GitHub is the source of truth: work on main's latest code, commit, push; Actions deploy.
+- In the cloud (claude.ai/code): fresh clone; web requests come from a cloud server and only reach the sites allowed in
+  that environment's network settings (outlet sites must be allowed there). The 5 `local` outlets refuse cloud servers.
+  The PC, its runner and its files are not reachable from there unless the session is linked to the PC.
+- On David's PC (folder Desktop\NewsReference, a clone of the repo; pushing needs his GitHub login, e.g. GitHub Desktop):
+  - Python: `%USERPROFILE%\anaconda3\python.exe` (else `python`), with `PYTHONIOENCODING=utf-8`. Node is needed for
+    Pagefind/Playwright; Playwright browsers may need `npx playwright install chromium webkit` the first time.
+  - Every web request made here comes from David's HOME connection, the same one outlets can block (BG On Air did).
+    Fetch outlet pages slowly and only when needed; never loop over many article pages from here.
+  - The self-hosted runner (C:\Users\david\actions-runner) runs on this same PC: don't stop it or edit its folder.
+  - The AI model for matching.py did not install on this PC, so a local group_stories.py run joins nothing and its
+    stories differ from the live site. Real data comes from the `data` branch, not from local runs; don't push data.
+  - `run_all.bat` (collect + group + build locally) is old and writes local data only; GitHub is the real pipeline.
 
 ## Hard rules
 - Headline, short summary, link and the outlet's photo only; never full article text (copyright).
