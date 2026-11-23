@@ -117,7 +117,8 @@ OUTLETS = [
      "feed": "https://svobodnatochka.bg/feed/"},
     {"name": "Marica", "local": True, "domain": "marica.bg", "type": "regional",
      "feed": "https://www.marica.bg/rss",
-     "catchup": {"sitemap": "https://www.marica.bg/storage/google-news-sitemap.xml", "headlines": True}},
+     "catchup": {"sitemap": "https://www.marica.bg/storage/google-news-sitemap.xml", "headlines": True,
+                 "hours": 72}},   # its sitemap reaches ~3 days (David, 23 Nov 2026)
     {"name": "Moreto.net", "domain": "moreto.net", "type": "regional",
      "feed": "https://www.moreto.net/rss/lastnews.xml"},
 ]

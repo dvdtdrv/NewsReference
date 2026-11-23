@@ -26,7 +26,7 @@ import collect
 import headline_watch
 from limits import within
 
-CATCHUP_HOURS = 24          # look back this far
+CATCHUP_HOURS = 24          # look back this far (an outlet's "catchup" can say "hours": Marica 72)
 PAGES_PER_ROUND = 10        # article pages opened per outlet per PC round (every ~30 min)
 PAUSE = 5                   # seconds between those pages (link_check.PC_PAUSE)
 GIVE_UP = 3                 # this many refused pages in a row: stop for this round
@@ -124,7 +124,7 @@ def catch_up(outlet, fetched, headers, known, sent, photos):
     if text is None:
         return [], "catch-up sitemap refused"
     have = {a.get("link") for a in fetched} | set(sent)
-    since = datetime.now(timezone.utc) - timedelta(hours=CATCHUP_HOURS)
+    since = datetime.now(timezone.utc) - timedelta(hours=cfg.get("hours", CATCHUP_HOURS))
 
     if cfg.get("headlines"):             # Marica, Blitz: the sitemap itself has the headlines
         found = [a for a in collect.read_news_sitemap(text, outlet)

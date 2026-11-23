@@ -96,7 +96,7 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
   Bloomberg TV: own 403 - they refuse GitHub's servers), their due link checks and the photos/link checks of
   `photos_on_pc` outlets (BG On Air, Euronews BG), uploads an artifact, dispatches update.yml. Used if < 75 min old.
   When the PC is off, the feeds are too short to cover the gap: `catchup.py` (23 Nov) reads back the last 24 h each
-  round: Marica + Blitz from their Google News sitemaps (headlines included, 1 request); bTV + Bloomberg TV from sitemaps
+  round (Marica 72 h, its sitemap reaches ~3 days): Marica + Blitz from their Google News sitemaps (headlines included, 1 request); bTV + Bloomberg TV from sitemaps
   without headlines, opening <= 10 missed article pages per outlet per round, 5 s apart, only links not in GitHub's
   data/known_local.json. Read-back articles are only added, never counted as renames. Trud's sitemap already reaches ~4 days.
 - `rebuild.yml`: pages + search only from saved data (~1-2 min); runs on push to site_template.html, build_site.py,
