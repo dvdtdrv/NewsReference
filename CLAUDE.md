@@ -79,12 +79,12 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
    whose photos must not be shown. `geo_bg.json` = map + towns for the first-screen graphics. Heavy data
    (outlet info, totals, headline changes) goes only to medii.html/outlets.json (`MEDIA_ONLY`), keeping the front page
    light. `SITE_URL` gives each page its canonical address. `seed/` = starting data for a first run on an empty branch.
+5. Data lives on the `data` branch (force-replaced each run):
+   `git fetch https://github.com/dvdtdrv/NewsReference.git +data:refs/remotes/d/data`.
 6. Blindspot rule: an outlet is listed under „Не отразиха" only if we read it in the last 3 h AND our archive of it
    reaches back before the story began, so an outlet we couldn't read is never falsely called silent.
 7. Headline-change kinds (minor / update / live / major, `versions.change_kind`) feed the ranking under „Медии" with a
    legend on the site; silent changes can signal pressure, so precision beats speed (two looks before recording).
-5. Data lives on the `data` branch (force-replaced each run):
-   `git fetch https://github.com/dvdtdrv/NewsReference.git +data:refs/remotes/d/data`.
 
 ### Workflows (.github/workflows)
 - `update.yml`: collect + group + build + deploy (~every 30 min: started by the PC relay; hourly cron at :37 as backup).
