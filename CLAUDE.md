@@ -27,6 +27,8 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
   that environment's network settings (outlet sites must be allowed there). The 5 `local` outlets refuse cloud servers.
   The PC, its runner and its files are not reachable from there unless the session is linked to the PC.
 - On David's PC (folder Desktop\NewsReference, a clone of the repo; pushing needs his GitHub login, e.g. GitHub Desktop):
+  - At the start of each session run `git pull` yourself (it keeps local edits; the sync .bat wipes them). David
+    doesn't need to run sync_from_github.bat routinely; the runner uses its own copy of the code.
   - Python: `%USERPROFILE%\anaconda3\python.exe` (else `python`), with `PYTHONIOENCODING=utf-8`. Node is needed for
     Pagefind/Playwright; Playwright browsers may need `npx playwright install chromium webkit` the first time.
   - Every web request made here comes from David's HOME connection, the same one outlets can block (BG On Air did).
