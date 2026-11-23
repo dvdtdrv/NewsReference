@@ -149,6 +149,8 @@ who each outlet is (ownership, money, disputes) and, later, where it sits on a s
   .stats-h and .stat-note exist in the markup but are hidden on computers and other pages) and „Пулсът на медиите" with
   .pulse-sub „Статии по часове, последните 24 часа · N общо". Phone rules are scoped to #stats so the outlet window's
   .od-stats is untouched. Everywhere: numbers formatted with spaces (73 028) and the order is медии, истории, статии.
+  23 Nov 2026 (David: side margins too large on wide screens): content width --max 1240 -> 1440 px (.wrap max-width = --max + 64),
+  so a 1920 px screen keeps ~210 px per side instead of ~310; screens up to ~1500 px and phones are unchanged.
   22 Nov 2026 late (David chose layout C of the computer story mock-ups A-E): on screens > 480 px the labels are Golos normal
   case (outlet + time side by side), photos rounded (10 px), a folded story is ONE sliding row of ALL its articles
   (.articles.collapsed = flex + overflow-x, ~5.35 cards visible, 4.35 under 1100 px, 2.3 under 700 px; headlines clamped to 4
