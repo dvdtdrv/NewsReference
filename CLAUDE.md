@@ -99,7 +99,8 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
 - `rebuild.yml`: pages + search only from saved data (~1-2 min); runs on push to site_template.html, build_site.py,
   build_search.mjs, outlets_info.json, web/**, geo_bg.json, no_photos.json. If it fails with "deployment_queued":
   `gh workflow run rebuild.yml --ref main`.
-- By hand only: `probe-outlets.yml` (can GitHub read the local outlets now?), `headline-audit.yml` (PC: opens every
+- By hand only: `probe-outlets.yml` (can GitHub read the local outlets now?), `probe-catchup.yml` (PC, 23 Nov: how far
+  back can each local outlet's robots-named sitemaps / feed page 2 reach? `probe_catchup.py`, <= 8 requests per outlet), `headline-audit.yml` (PC: opens every
   archived page of ONE outlet once, uploads a report, changes nothing; `recheck.json` makes chosen links due once),
   `probe-images.yml`.
 

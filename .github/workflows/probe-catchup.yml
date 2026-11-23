@@ -1,0 +1,41 @@
+# Started by hand only (23 Nov 2026): can we read back what the PC outlets published while the PC was off?
+# On David's PC, probe_catchup.py looks once at each `local` outlet's robots.txt, feed, sitemaps and page 2 of
+# its feed (at most 8 requests per outlet, 5 s apart) and hands back how far back each reaches
+# (probe_catchup.txt / .json, a download on the run's page). Changes nothing. Takes ~5 minutes.
+
+name: Check catch-up sources of the PC outlets
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: [self-hosted, Windows]
+    timeout-minutes: 20
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Look at each outlet once
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: "utf-8"
+        run: |
+          $py = "$env:USERPROFILE\anaconda3\python.exe"
+          if (-not (Test-Path $py)) { $py = "python" }
+          & $py -m pip install -q -r requirements.txt
+          & $py probe_catchup.py
+
+      - name: Hand back the result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-catchup
+          path: |
+            probe_catchup.txt
+            probe_catchup.json
+          retention-days: 14
