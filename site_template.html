@@ -171,7 +171,8 @@ body.hero-tall .stage { position: relative; height: auto; overflow: visible; }
 .intro p { margin: 0 0 16px; max-width: 44ch; font-size: 17px; color: var(--ink-soft); }
 .stats { display: flex; flex-wrap: wrap; gap: 8px 28px; }
 .stat { font: 300 15px/1.2 var(--display); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
-.stat strong { display: block; font-weight: 300; font-size: 40px; letter-spacing: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+/* 24 Nov 2026 (David): digits close together; the equal-width digits of Sofia Sans Extra Condensed sat far apart */
+.stat strong { display: block; font-weight: 300; font-size: 40px; letter-spacing: 0; color: var(--ink); font-variant-numeric: proportional-nums; }
 
 /* ---------- the first screen's graphics (21 Nov 2026): the media wheel / the map, and the pulse ---------- */
 body.has-viz .intro {
@@ -215,7 +216,7 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 .wheel.focus .node text { fill: #C9C2B2; }
 .wheel.focus .node.on text, .wheel.focus .node.pick text { fill: var(--ink); }
 .wheel.focus .node.pick circle { fill: var(--live); }
-.wheel .mid-n { font: 200 64px var(--display); fill: var(--ink); }
+.wheel .mid-n { font: 200 64px var(--display); fill: var(--ink); font-variant-numeric: proportional-nums; }
 .wheel .mid-l { font: 400 13px var(--display); letter-spacing: .14em; text-transform: uppercase; fill: var(--muted); }
 .wheel .edges { animation: viz-draw 1.2s ease both; }
 @keyframes viz-draw { from { opacity: 0; } }
