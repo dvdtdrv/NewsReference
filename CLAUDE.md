@@ -102,7 +102,8 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
   bTV's sitemap lists only ~30 links: after a PC gap > 2 h it also reads pages 1-3 of its sections (България, Светът,
   Предавания; probe_btv_pages.py showed they page back ~1 day per 1-2 pages). Deep catch-up once by hand: run
   local-fetch.yml with deep = 1 (7 days, section pages stop by date, <= 100 article pages per outlet); an outlet stops after 5 pages without a usable headline/date. While a round runs, `fetch_local.py` asks Windows not to sleep (24 Nov: the deep run was
-  cut off twice, "runner lost communication"); it can't wake a sleeping PC. Articles older
+  cut off twice, "runner lost communication"); it can't wake a sleeping PC.
+  A deep run has its own concurrency group, so regular rounds wait for it instead of cancelling it (24 Nov). Articles older
   than ~36-48 h reach the archive, „Всички новини" and search, but not their (frozen) stories.
 - `rebuild.yml`: pages + search only from saved data (~1-2 min); runs on push to site_template.html, build_site.py,
   build_search.mjs, outlets_info.json, web/**, geo_bg.json, no_photos.json. If it fails with "deployment_queued":

@@ -29,8 +29,10 @@ permissions:
   actions: write     # to start the main run when done
   contents: read
 
+# A deep catch-up has its own group (24 Nov 2026): the next regular round used to cancel it after a few minutes.
+# The PC runs one job at a time, so that round now simply waits until the deep catch-up ends.
 concurrency:
-  group: local-fetch
+  group: ${{ github.event.inputs.deep == '1' && 'local-fetch-deep' || 'local-fetch' }}
   cancel-in-progress: true
 
 jobs:
