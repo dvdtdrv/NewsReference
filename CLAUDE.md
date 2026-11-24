@@ -164,6 +164,8 @@ over http(s), not file://.
 - A 1200x630 share image (social previews use the app icon now). Submit sitemap.xml in Google Search Console.
 - Ad videos (Desktop\NR - advertisement\NR_advertisement; 10 vertical videos, code in 2_video_code, make_videos.bat):
   music still open (David may pick a track). Ads never use outlets' photos or footage.
+  24 Nov: new promo video planned (David sends materials). `.claude/settings.json` enables the Lemo-Opuscar plugin
+  (lemomo-ai/lemo-opuscar: films made in code; films we make are ours, commercial use OK; needs ffmpeg 7+).
 - BG On Air email if it keeps blocking his home connection.
 
 ## Next steps
