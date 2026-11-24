@@ -10,7 +10,9 @@ Nothing here touches the archive: it only fetches and hands over.
 Run by hand with:   python fetch_local.py
 """
 
+import ctypes
 import json
+import sys
 import time
 
 import catchup
@@ -18,6 +20,18 @@ import collect
 from feeds import OUTLETS
 
 OUT_FILE = "local_articles.json"
+
+
+def stay_awake(on):
+    """While a round runs, ask Windows not to put the PC to sleep (24 Nov 2026: the deep catch-up was cut off twice
+    after ~10 min, "runner lost communication"). Normal sleep returns when the round ends. Does nothing elsewhere."""
+    if sys.platform != "win32":
+        return
+    ES_CONTINUOUS, ES_SYSTEM_REQUIRED = 0x80000000, 0x00000001
+    try:
+        ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | (ES_SYSTEM_REQUIRED if on else 0))
+    except Exception:
+        pass
 
 
 def main():
@@ -64,4 +78,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    stay_awake(True)
+    try:
+        main()
+    finally:
+        stay_awake(False)
