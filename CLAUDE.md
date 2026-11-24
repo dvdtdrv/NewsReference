@@ -120,9 +120,12 @@ over http(s), not file://.
 ## Design (current)
 - Colours: egg-white `--paper`, darker `--paper-deep` on top, `--muted #5C5965`, `--live #B42318`. Content width
   `--max: 1340px` (23 Nov; 1240 had too much margin on 1920 px screens, 1440 too little).
-- Fonts (own files, OFL): Oswald (labels/display), Golos Text (body), Noto Serif Display narrow (big page titles; front
-  page „Една новина." + grey italic „Всички медии."), Noto Serif SemiBold (story headlines; trial, the old Oswald 300 rule
-  is in a comment above .story h3), Kalam (footer motto „Jesus Christ is the greatest of all time.").
+- Fonts (own files, OFL, web/README.md), with BULGARIAN letter shapes since 24 Nov (philologists: the old ones were
+  Russian-only; David chose option A): Sofia Sans Extra Condensed (labels/numbers, was Oswald), Sofia Sans (body, was
+  Golos Text), Roboto Serif narrow (big page titles „Една новина." + grey italic „Всички медии.", was Noto Serif Display),
+  Source Serif 4 SemiBold (story headlines, was Noto Serif), Kalam (footer motto „Jesus Christ is the greatest of all
+  time."). Weights matched to the old stroke thickness, size-adjust to the old letter heights. Any new font must have
+  Bulgarian forms (GSUB locl cyrl:BGR, or Bulgarian by default like Sofia Sans).
 - Header on computers (> 860 px): Медии, Архив | NEWS REFERENCE | search, „Подкрепи" pill. „За проекта" lives in the footer.
 - Front page first screen: title, stats (медии / истории in the whole archive / статии, numbers like 73 028), the pulse
   (articles per hour, 24 h), tabs „Медиите днес" (outlet wheel) / „Къде е новината" (map). Sizes follow window height;

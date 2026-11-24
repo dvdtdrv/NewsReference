@@ -11,32 +11,37 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="News Ref">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<!-- fonts (Oswald, Golos Text; SIL Open Font License) are served from this site, not from Google (12 Nov 2026):
+<!-- fonts (SIL Open Font License) are served from this site, not from Google (12 Nov 2026):
      loading them from Google would send every visitor's IP address there without consent -->
 <style>
-/* Noto Serif Display (OFL), fixed at a narrow width (wdth 70) and cut to Bulgarian + basic Latin letters; only the
-   front-page title uses it, so other pages never download it (21 Nov 2026) */
-/* Noto Serif SemiBold (OFL, from @fontsource): the story headlines, 21 Nov 2026 - the reading cut of the page titles' family */
-@font-face { font-family: "Noto Serif"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}noto-serif-cyrillic-600.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Noto Serif"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}noto-serif-latin-600.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Noto Serif Display Narrow"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}noto-serif-display-narrow-400.woff2) format("woff2"); }
+/* 24 Nov 2026 (David chose option A): fonts with BULGARIAN letter shapes (д like g, л, т like m, в, ж, к ...).
+   The old ones (Oswald, Golos Text, Noto Serif, Noto Serif Display) had only the Russian shapes. Files: web/README.md.
+   Weights are matched to the old fonts' stroke thickness, and size-adjust gives the letters the old fonts' height,
+   so sizes in the CSS below stay as they were. */
+/* body text: Sofia Sans (Lettersoup, Bulgarian forms by default) */
+@font-face { font-family: "Sofia Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}sofia-sans-cyrillic-400.woff2) format("woff2"); size-adjust: 108.6%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}sofia-sans-latin-400.woff2) format("woff2"); size-adjust: 108.6%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Sofia Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}sofia-sans-cyrillic-500.woff2) format("woff2"); size-adjust: 108.6%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}sofia-sans-latin-500.woff2) format("woff2"); size-adjust: 108.6%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Sofia Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}sofia-sans-cyrillic-600.woff2) format("woff2"); size-adjust: 108.6%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}sofia-sans-latin-600.woff2) format("woff2"); size-adjust: 108.6%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+/* labels and numbers (was Oswald): Sofia Sans Extra Condensed */
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 200; font-display: swap; src: url({{BASE}}sofia-sans-xcond-cyrillic-200.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 200; font-display: swap; src: url({{BASE}}sofia-sans-xcond-latin-200.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}sofia-sans-xcond-cyrillic-300.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}sofia-sans-xcond-latin-300.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}sofia-sans-xcond-cyrillic-400.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}sofia-sans-xcond-latin-400.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}sofia-sans-xcond-cyrillic-500.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Sofia Sans Extra Condensed"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}sofia-sans-xcond-latin-500.woff2) format("woff2"); size-adjust: 123.7%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+/* story headlines (was Noto Serif SemiBold): Source Serif 4 SemiBold */
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}source-serif-cyrillic-600.woff2) format("woff2"); size-adjust: 111.9%; unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}source-serif-latin-600.woff2) format("woff2"); size-adjust: 111.9%; unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+/* big page titles (was Noto Serif Display, narrow): Roboto Serif at width 62; only those titles download it */
+@font-face { font-family: "Roboto Serif Narrow"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}roboto-serif-narrow-400.woff2) format("woff2"); size-adjust: 103.5%; }
+@font-face { font-family: "Roboto Serif Narrow"; font-style: italic; font-weight: 300; font-display: swap; src: url({{BASE}}roboto-serif-narrow-italic-300.woff2) format("woff2"); size-adjust: 103.5%; }
 /* 22 Nov 2026 (David): the footer's line in Kalam, a printed-handwriting font (OFL, web/OFL-kalam.txt) */
 @font-face { font-family: "Kalam"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}kalam-latin-400.woff2) format("woff2"); }
-@font-face { font-family: "Noto Serif Display Narrow"; font-style: italic; font-weight: 300; font-display: swap; src: url({{BASE}}noto-serif-display-narrow-italic-300.woff2) format("woff2"); }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 200; font-display: swap; src: url({{BASE}}oswald-cyrillic-200.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 200; font-display: swap; src: url({{BASE}}oswald-latin-200.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}oswald-cyrillic-300.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}oswald-latin-300.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}oswald-cyrillic-400.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}oswald-latin-400.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}oswald-cyrillic-500.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}oswald-latin-500.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}golos-text-cyrillic-400.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}golos-text-latin-400.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}golos-text-cyrillic-500.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 500; font-display: swap; src: url({{BASE}}golos-text-latin-500.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}golos-text-cyrillic-600.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 600; font-display: swap; src: url({{BASE}}golos-text-latin-600.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 </style>
 <style>
 /* Layout: newspaper column on egg-white paper. Clean spread header, a big condensed
@@ -50,8 +55,8 @@
   --muted: #74717A;
   --rule: #D8D1BF;
   --live: #B42318;         /* news red: only for what is happening now (spreading stories) */
-  --display: "Oswald", "Arial Narrow", "Roboto Condensed", sans-serif;
-  --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --display: "Sofia Sans Extra Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Sofia Sans", "Segoe UI", system-ui, sans-serif;
   --max: 1340px;
   color-scheme: only light;   /* "only": asks phones in dark mode not to recolour the page themselves (it came out brown) */
 }
@@ -175,7 +180,7 @@ body.has-viz .intro {
 }
 body.has-viz .intro h1 { grid-area: title; align-self: end; font-size: clamp(52px, 6.6vw, 104px); }
 /* 21 Nov 2026 (David): every page title in the same narrow serif, upright; only the front page adds the grey italic line */
-.intro h1 { font-family: "Noto Serif Display Narrow", Georgia, serif; font-weight: 400; letter-spacing: -.01em; line-height: .95; }
+.intro h1 { font-family: "Roboto Serif Narrow", Georgia, serif; font-weight: 400; letter-spacing: -.01em; line-height: .95; }
 body.has-viz .intro h1 em { font-style: italic; font-weight: 300; color: #5E6170; }
 body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 .viz { grid-area: viz; min-width: 0; }
@@ -339,7 +344,7 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
    thin condensed Oswald; wider lines so most headlines fit in two or three. Old rule, to go back:
    max-width: 26ch; font: 300 clamp(30px, 3.8vw, 50px)/1.02 var(--display); */
 .story h3 {
-  margin: 0; max-width: 46ch; font: 600 clamp(22px, 2.6vw, 36px)/1.16 "Noto Serif", Georgia, serif;
+  margin: 0; max-width: 46ch; font: 600 clamp(22px, 2.6vw, 36px)/1.16 "Source Serif 4", Georgia, serif;
   letter-spacing: -.01em; text-wrap: balance;
 }
 /* title + a small (i) that opens a line on how the title was made */
@@ -657,7 +662,7 @@ body.compact .intro { padding-block: 40px 44px; align-items: center; }
 .search-form input::placeholder { color: var(--muted); }
 .tab .n { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 4px; }
 .hit { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 8px 28px; padding-block: 26px; border-bottom: 1px solid var(--rule); }
-.hit h3 { margin: 0 0 10px; font: 600 clamp(21px, 2.1vw, 28px)/1.18 "Noto Serif", Georgia, serif; letter-spacing: -.01em; text-wrap: balance; }
+.hit h3 { margin: 0 0 10px; font: 600 clamp(21px, 2.1vw, 28px)/1.18 "Source Serif 4", Georgia, serif; letter-spacing: -.01em; text-wrap: balance; }
 .hit h3 a { text-decoration: none; }
 .hit h3 a:hover, .hit h3 a:focus-visible { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .hit .story-meta { margin-bottom: 10px; }
@@ -707,7 +712,7 @@ dialog.od.full::backdrop { background: var(--paper-deep); }
 dialog.od.full .od-body { max-width: 1120px; margin: 0 auto; }
 .od-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .od-eyebrow { margin: 0 0 6px; font: 400 12px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.od h2 { margin: 0; font: 400 clamp(44px, 6vw, 72px)/.95 "Noto Serif Display Narrow", Georgia, serif; letter-spacing: -.01em; text-wrap: balance; }
+.od h2 { margin: 0; font: 400 clamp(44px, 6vw, 72px)/.95 "Roboto Serif Narrow", Georgia, serif; letter-spacing: -.01em; text-wrap: balance; }
 .od-meta { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font: 400 14px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 .od-meta a { color: var(--ink); text-underline-offset: 3px; }
 .od-close {
@@ -716,7 +721,7 @@ dialog.od.full .od-body { max-width: 1120px; margin: 0 auto; }
 }
 .od-close:hover, .od-close:focus-visible { background: var(--ink); color: var(--paper-deep); }
 .od-stats { display: flex; flex-wrap: wrap; gap: 10px 36px; padding-block: 18px; border-block: 1px solid var(--rule); }
-.od-section h3 { margin: 0 0 10px; font: 600 21px/1.25 "Noto Serif", Georgia, serif; letter-spacing: -.005em; color: var(--ink); }
+.od-section h3 { margin: 0 0 10px; font: 600 21px/1.25 "Source Serif 4", Georgia, serif; letter-spacing: -.005em; color: var(--ink); }
 /* 21 Nov 2026 redesign (David): key facts on top, a contents list beside the text, long sections and sources folded,
    numbers in bold so amounts stand out */
 .od-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: -10px 0 0; border: 1px solid var(--rule); background: var(--paper); }
@@ -726,7 +731,7 @@ dialog.od.full .od-body { max-width: 1120px; margin: 0 auto; }
 .od-facts div:last-child:nth-child(3n+2) { grid-column: span 2; border-right: 0; }
 .od-facts div:nth-last-child(-n+3):nth-child(3n+1), .od-facts div:nth-last-child(-n+2):nth-child(3n+2), .od-facts div:last-child { border-bottom: 0; }
 .od-facts dt { margin: 0 0 5px; font: 400 11.5px/1.2 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.od-facts dd { margin: 0; font: 600 17px/1.3 "Noto Serif", Georgia, serif; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.od-facts dd { margin: 0; font: 600 17px/1.3 "Source Serif 4", Georgia, serif; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .od-facts dd small { display: block; margin-top: 3px; font: 400 12.5px/1.35 var(--body); color: var(--muted); }
 .od-cols { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 0 40px; align-items: start; }
 .od-nav { position: sticky; top: -30px; padding-top: 30px; margin-top: -30px; display: flex; flex-direction: column; gap: 1px; }
@@ -769,7 +774,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
 .od-cases > li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 18px; padding-block: 16px; border-top: 1px solid var(--rule); }
 .od-cases > li:last-child { border-bottom: 1px solid var(--rule); }
 .od-case-date { font: 400 13px/1.4 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.od-cases h4 { margin: 0 0 6px; font: 600 17px/1.3 "Noto Serif", Georgia, serif; }
+.od-cases h4 { margin: 0 0 6px; font: 600 17px/1.3 "Source Serif 4", Georgia, serif; }
 .od-cases p { margin: 0 0 8px; max-width: 66ch; color: var(--ink-soft); }
 .od-case-src { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
 .od-case-src a { color: var(--muted); text-underline-offset: 3px; overflow-wrap: anywhere; }
@@ -903,8 +908,9 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
   body.has-viz .pulse-sub { display: block; margin: 3px 0 10px; font: 400 13px/1.3 var(--body); color: var(--muted); }
 
   .story { padding-block: 30px 30px; }
-  .story-meta { font: 500 13.5px/1.2 var(--body); letter-spacing: 0; text-transform: none; gap: 6px 12px; }
-  .story-meta .order .menu-btn { font: 500 13px/1 var(--body); letter-spacing: 0; text-transform: none; }
+  /* 24 Nov 2026: 13 / 12.5 px (was 13.5 / 13) so the sort menu still fits beside the count in Sofia Sans */
+  .story-meta { font: 500 13px/1.2 var(--body); letter-spacing: 0; text-transform: none; gap: 6px 10px; }
+  .story-meta .order .menu-btn { font: 500 12.5px/1 var(--body); letter-spacing: 0; text-transform: none; padding: 5px 8px 5px 10px; }
   .story h3 { font-size: 24px; line-height: 1.2; }
   .title-row { margin-bottom: 8px; }
   .articles { --cols: 3; display: block; }
