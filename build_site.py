@@ -105,14 +105,42 @@ def spare_photo(a):
     return ""
 
 
+# Smaller copies of the same photo on the outlet's OWN image server (24 Nov 2026, David chose "option 1"): the cards
+# show photos ~220 px wide, but outlets' share photos are often 1000-2000 px (one scroll of the front page = ~35 MB).
+# Each rule was checked on 3 photos per outlet (photo_probe, 24 Nov): the smaller copy exists, same picture, ~400-770 px.
+# If a smaller copy fails to load, the page falls back to the full-size one (image2). Outlets without a smaller copy
+# on their server (News.bg, Nova, Dir.bg, Dnes.bg, BG On Air, Actualno, 24 Chasa) keep the full-size photo.
+SMALLER_PHOTOS = [
+    (re.compile(r"(netinfo\.bg/media/images/\d+/\d+/)1920-1080-"), r"\g<1>640-360-"),        # Vesti.bg: 230 -> 40 KB
+    (re.compile(r"(bnrnews\.bg/api/media/[^?]+\?(?:.*&)?Size=)large"), r"\g<1>medium"),      # BNR: 190 -> 55 KB
+    (re.compile(r"(bntnews\.bg/f/news/)b/"), r"\g<1>m/"),                                     # BNT: 130 -> 30 KB (400 px)
+    (re.compile(r"(i\.pik\.bg/s/news/)o/"), r"\g<1>b/"),                                      # PIK: 300 -> 85 KB
+    (re.compile(r"(sportal365images\.com/.*(?:fit|autocrop)\()1280:720\)"), r"\g<1>640:360)"),  # Novini.bg: about half
+    (re.compile(r"(euronews\.bg/wp-content/uploads/.+)-1024x576\."), r"\g<1>-768x432."),       # Euronews BG: 45 -> 30 KB
+]
+
+
+def smaller_photo(url):
+    for pattern, small in SMALLER_PHOTOS:
+        if pattern.search(url or ""):
+            return pattern.sub(small, url, count=1)
+    return url
+
+
 def slim(stories):
     """Keep only what the page uses, so it loads fast."""
     for s in stories:
         # one card per article even if the outlet renamed it (older saved stories may hold both)
         arts = collapse(s["articles"])
-        s["articles"] = [{**{k: a.get(k, "") for k in KEEP}, "image": photo_for(a), "image2": spare_photo(a),
-                          **({"was": [v["title"] for v in a["versions"]]} if a.get("versions") else {})}
-                         for a in arts]
+        out = []
+        for a in arts:
+            full = photo_for(a)
+            small = smaller_photo(full)
+            out.append({**{k: a.get(k, "") for k in KEEP}, "image": small,
+                        # the spare photo: the full-size one if we asked for a smaller copy, else the feed's photo
+                        "image2": full if small != full else spare_photo(a),
+                        **({"was": [v["title"] for v in a["versions"]]} if a.get("versions") else {})})
+        s["articles"] = out
     return stories
 
 

@@ -77,7 +77,8 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
    arhiv.html + archive days, tarsene.html (Pagefind search, `build_search.mjs`), pravila.html (legal), support page,
    outlets.json, feed/*.json („Всички новини": one file per hour + feed/o-NAME.json per outlet, 23 Nov: picking DW
    took 38 s, now 0.2 s), periods/*.json, sitemap.xml, robots.txt. `no_photos.json` = outlets
-   whose photos must not be shown. `geo_bg.json` = map + towns for the first-screen graphics. Heavy data
+   whose photos must not be shown. `SMALLER_PHOTOS` (24 Nov) asks 6 outlets' own image servers for a smaller copy
+   of the same photo (Vesti.bg, BNR, BNT, PIK, Novini.bg, Euronews BG); the full one stays as image2 (fallback). `geo_bg.json` = map + towns for the first-screen graphics. Heavy data
    (outlet info, totals, headline changes) goes only to medii.html/outlets.json (`MEDIA_ONLY`), keeping the front page
    light. The front page holds only the 40 stories of its first view (most covered, 24 h); the other 48 h stories are in
    stories-48h.json, loaded in the background (23 Nov: 2.7 MB -> 0.65 MB; `split_front_stories` must count like
