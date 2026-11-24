@@ -133,6 +133,7 @@ over http(s), not file://.
   (articles per hour, 24 h), tabs „Медиите днес" (outlet wheel) / „Къде е новината" (map). Sizes follow window height;
   `body.hero-tall` turns off the sliding stage when it doesn't fit.
 - Stories on computers: one sliding row of all articles with ‹ › buttons, rounded photos, „Всички N статии" opens the grid,
+  the order menu („От първата / последната статия") jumps the row back to its start (24 Nov),
   „Не отразиха" list, „↑ +N медии за последния час" when 2+ outlets joined in the last hour.
 - Phones (<= 480 px): article list (84 px photo left), one-line title, „Какво е това? +" button, „В числа" and pulse boxes,
   „Не отразиха +" opens on tap. Installed app: pull down to reload. Own rounded menus (`makeMenu`) replace <select>.

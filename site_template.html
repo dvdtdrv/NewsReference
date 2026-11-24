@@ -1897,6 +1897,10 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       pick.append(new Option("От първата статия", "first"), new Option("От последната статия", "last"));
       pick.addEventListener("change", () => {
         grid.append(...(pick.value === "last" ? cards.slice().reverse() : cards));
+        // 24 Nov 2026 (David): back to the start of the row, so the new first article shows (the browser kept the
+        // old scroll place, so the row seemed unchanged)
+        grid.scrollLeft = 0;
+        grid.dispatchEvent(new Event("scroll"));
       });
       meta.append(pick);
       makeMenu(pick, { cls: "order", right: true });
