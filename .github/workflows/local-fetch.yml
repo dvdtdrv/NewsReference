@@ -59,6 +59,25 @@ jobs:
           Write-Host "Waiting $m minutes so updates stay about 30 minutes apart..."
           Start-Sleep -Seconds ($m * 60)
 
+      # 24 Nov 2026: keep Windows awake while the job works (reading, upload, starting the main run; not
+      # during the wait, so the PC still sleeps between rounds as before). fetch_local.py alone
+      # wasn't enough: when it ended, Windows slept at once and the upload was lost ("runner lost communication").
+      # A small hidden helper asks Windows not to sleep; it ends with the job (last step, or the runner's clean-up),
+      # and after 70 minutes at the latest. If it can't start, the job carries on as before.
+      - name: Keep the PC awake during this job
+        shell: powershell
+        continue-on-error: true
+        run: |
+          $code = @'
+          Add-Type -Name Power -Namespace NR -MemberDefinition '[DllImport("kernel32.dll")] public static extern uint SetThreadExecutionState(uint flags);'
+          [NR.Power]::SetThreadExecutionState([uint32]2147483649) | Out-Null   # ES_CONTINUOUS + ES_SYSTEM_REQUIRED
+          Start-Sleep -Seconds 4200
+          '@
+          $enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($code))
+          $p = Start-Process powershell -WindowStyle Hidden -PassThru -ArgumentList "-NoProfile -EncodedCommand $enc"
+          "$($p.Id)" | Set-Content "$env:RUNNER_TEMP\nr-awake.pid"
+          Write-Host "Keeping the PC awake (helper process $($p.Id))."
+
       - name: Get the code
         uses: actions/checkout@v4
 
@@ -89,3 +108,11 @@ jobs:
             -Uri "https://api.github.com/repos/${{ github.repository }}/actions/workflows/update.yml/dispatches" `
             -Body '{"ref":"main"}'
           Write-Host "Started 'Update News Reference'."
+
+      - name: Let the PC sleep again
+        if: always()
+        shell: powershell
+        continue-on-error: true
+        run: |
+          $f = "$env:RUNNER_TEMP\nr-awake.pid"
+          if (Test-Path $f) { Stop-Process -Id ([int](Get-Content $f)) -ErrorAction SilentlyContinue; Remove-Item $f }
