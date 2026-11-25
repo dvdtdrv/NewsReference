@@ -166,6 +166,11 @@ over http(s), not file://.
   music still open (David may pick a track). Ads never use outlets' photos or footage.
   24 Nov: new promo video planned (David sends materials). `.claude/settings.json` enables the Lemo-Opuscar plugin
   (lemomo-ai/lemo-opuscar: films made in code; films we make are ours, commercial use OK; needs ffmpeg 7+).
+  25 Nov: promo „Искал ли си да бъдеш тук…" (David's own nature clips in private repo dvdtdrv/nr-promo + city ->
+  flood of real headline cards WITH outlet photos (David decided 25 Nov: allowed as snapshots of the site; was "never")
+  -> the site animated on a phone -> logo). 58.3 s, 1080x1920, text + no-text versions; David records the Bulgarian
+  voice. Music: Vivaldi Summer i (0-21.6 s) + Summer iii Presto + Spring i, John Harrison with Wichita State Univ.
+  Chamber Players (archive.org, CC BY-SA 3.0: credit in the post; Spotify can't be used). Lemo-Opuscar styles rejected.
 - BG On Air email if it keeps blocking his home connection.
 
 ## Next steps
