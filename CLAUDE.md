@@ -171,6 +171,10 @@ over http(s), not file://.
   -> the site animated on a phone -> logo). 58.3 s, 1080x1920, text + no-text versions; David records the Bulgarian
   voice. Music: Vivaldi Summer i (0-21.6 s) + Summer iii Presto + Spring i, John Harrison with Wichita State Univ.
   Chamber Players (archive.org, CC BY-SA 3.0: credit in the post; Spotify can't be used). Lemo-Opuscar styles rejected.
+  25 Nov v4 (59.8 s): Rila/sea/lake -> train fields („тук." on the first card) -> storm on Summer i's climax -> Spring:
+  live pulse wave, turning wheel, map taps, Коцев story scroll, Медии (BNT window + headline-change ranking), search.
+  Everything (code, captures, music, David's clips, all MP4s v1-v4) is in dvdtdrv/nr-promo; README has voice timings,
+  build.sh rebuilds it. David still records the voice.
 - BG On Air email if it keeps blocking his home connection.
 
 ## Next steps
