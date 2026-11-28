@@ -126,8 +126,9 @@ over http(s), not file://.
 - Fonts (own files, OFL, web/README.md), with BULGARIAN letter shapes since 24 Nov (philologists: the old ones were
   Russian-only; David chose option A): Sofia Sans Extra Condensed (labels/numbers, was Oswald), Sofia Sans (body, was
   Golos Text), Roboto Serif narrow (big page titles „Една новина." + grey italic „Всички медии.", was Noto Serif Display),
-  Source Serif 4 SemiBold (story headlines, was Noto Serif), Kalam (footer motto „Jesus Christ is the greatest of all
-  time."). Weights matched to the old stroke thickness, size-adjust to the old letter heights.
+  Source Serif 4 SemiBold (story headlines, was Noto Serif), Kalam Light (footer motto „Jesus Christ is the greatest of
+  all time."; Light since 28 Nov). Footer bottom line: just „© 2026 News Reference" (28 Nov, David; the
+  „headlines and photos belong to the outlets" note stays on „За проекта" and pravila.html). Weights matched to the old stroke thickness, size-adjust to the old letter heights.
   Big numbers use proportional digits (David, 24 Nov: the equal-width ones sat too far apart). Any new font must have
   Bulgarian forms (GSUB locl cyrl:BGR, or Bulgarian by default like Sofia Sans).
 - Header on computers (> 860 px): Медии, Архив | NEWS REFERENCE | search, „Подкрепи" pill. „За проекта" lives in the footer.

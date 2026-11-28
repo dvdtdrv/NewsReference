@@ -40,8 +40,8 @@
 /* big page titles (was Noto Serif Display, narrow): Roboto Serif at width 62; only those titles download it */
 @font-face { font-family: "Roboto Serif Narrow"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}roboto-serif-narrow-400.woff2) format("woff2"); size-adjust: 103.5%; }
 @font-face { font-family: "Roboto Serif Narrow"; font-style: italic; font-weight: 300; font-display: swap; src: url({{BASE}}roboto-serif-narrow-italic-300.woff2) format("woff2"); size-adjust: 103.5%; }
-/* 22 Nov 2026 (David): the footer's line in Kalam, a printed-handwriting font (OFL, web/OFL-kalam.txt) */
-@font-face { font-family: "Kalam"; font-style: normal; font-weight: 400; font-display: swap; src: url({{BASE}}kalam-latin-400.woff2) format("woff2"); }
+/* 22 Nov 2026 (David): the footer's line in Kalam, a printed-handwriting font (OFL, web/OFL-kalam.txt); Light since 28 Nov */
+@font-face { font-family: "Kalam"; font-style: normal; font-weight: 300; font-display: swap; src: url({{BASE}}kalam-latin-300.woff2) format("woff2"); }
 </style>
 <style>
 /* Layout: newspaper column on egg-white paper. Clean spread header, a big condensed
@@ -613,7 +613,7 @@ body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32p
 .foot nav h2 { margin: 0 0 4px; font: 400 13px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: #fff; }
 .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 28px; padding-block: 20px calc(28px + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(255, 255, 255, .14); font-size: 13px; color: #9D9AAA; }
-.foot-motto { font: 400 15px/1.3 "Kalam", cursive; color: #D9D5CC; }
+.foot-motto { font: 300 15px/1.3 "Kalam", cursive; color: #D9D5CC; }
 @media (max-width: 1000px) { .foot-top { grid-template-columns: 1fr 1fr; gap: 32px 24px; } .foot-about, .foot-project { grid-column: 1 / -1; } .foot-about { order: -2; } .foot-project { order: -1; } }
 @media (max-width: 420px) { .foot-top { grid-template-columns: 1fr; } }
 /* „Правна информация“: a two-word title, so smaller letters keep it on one line above the sliding sheet */
@@ -1248,7 +1248,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       </nav>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 News Reference · Заглавията и снимките са на медиите.</span>
+      <span>© 2026 News Reference</span>
       <span class="foot-motto" lang="en">Jesus Christ is the greatest of all time.</span>
       <span id="updated"></span>
     </div>

@@ -14,5 +14,6 @@ are matched to the old fonts' stroke thickness; size-adjust in site_template.htm
 - roboto-serif-narrow-400.woff2 / roboto-serif-narrow-italic-300.woff2: the big page titles. Roboto Serif at width 62,
   optical size 144, weights 410 / italic 250, Bulgarian + basic Latin only. Licence OFL-roboto-serif.txt.
 
-kalam-latin-400.woff2 (22 Nov 2026): the footer's line „Jesus Christ is the greatest of all time." (David). Kalam Regular,
-Latin only, from @fontsource/kalam (OFL, licence in OFL-kalam.txt), ~22 KB.
+kalam-latin-300.woff2 (22 Nov 2026; Light since 28 Nov, David: Regular looked too thick): the footer's line
+„Jesus Christ is the greatest of all time." (David). Kalam Light from github.com/google/fonts, Latin only (fontTools),
+~21 KB, licence in OFL-kalam.txt.
