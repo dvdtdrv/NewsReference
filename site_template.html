@@ -474,7 +474,7 @@ body.has-viz .intro > div:not(.viz) { grid-area: text; align-self: start; }
 
 /* ---------- outlets, method, footer ---------- */
 .section { padding-block: 56px; border-top: 1px solid var(--ink); }
-body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32px; }   /* „Медии“ / „Архив“ pages */
+body.page-own #outlets, body.page-own #archive, body.page-own #about { border-top: 0; padding-top: 32px; }   /* „Медии“ / „Архив“ / „За проекта“ pages */
 .day-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 28px; }
 .day-pick label { font: 400 13px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .day-pick input { font: 300 22px/1.1 var(--display); color: var(--ink); background: transparent; border: 0;
@@ -1118,7 +1118,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
       </div>
     </section>
 
-    <section class="section" id="about">
+    <section class="section" id="about" hidden>
       <h2>За проекта</h2>
       <div class="cols">
         <p>News Reference – Новинарски справочник показва как различните български медии отразяват едни и същи събития: кой пише за тях, как ги озаглавява и кой не ги отразява.</p>
@@ -1233,9 +1233,9 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
         <a href="{{BASE}}tarsene.html">Търсене</a>
       </nav>
       <div class="foot-project">
-        <a class="foot-big" href="{{BASE}}index.html#about">За проекта <span aria-hidden="true">→</span></a>
+        <a class="foot-big" href="{{BASE}}za-proekta.html">За проекта <span aria-hidden="true">→</span></a>
         <p>Защо го правим, кой стои зад него и какво предстои.</p>
-        <a href="{{BASE}}index.html#method">Как работи</a>
+        <a href="{{BASE}}za-proekta.html#method">Как работи</a>
       </div>
       <nav aria-label="Правна информация">
         <h2>Правна информация</h2>
@@ -1493,6 +1493,24 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     });
     document.getElementById("legal").hidden = false;
     document.body.classList.add("page-own", "page-legal");
+    document.querySelector(".logo").href = `${base}index.html`;
+  }
+  // „За проекта“ (za-proekta.html, 28 Nov 2026, David): its own page; the section is hidden everywhere else
+  const isAbout = data.page === "about";
+  if (!data.page && !archiveDate && (location.hash === "#about" || location.hash === "#method")) {
+    location.replace(`${base}za-proekta.html${location.hash === "#method" ? "#method" : ""}`);   // old links still work
+  }
+  if (isAbout) {
+    document.title = "За проекта · News Reference";
+    document.getElementById("intro-title").textContent = "За проекта.";
+    document.getElementById("intro-text").textContent =
+      "Какво показва News Reference, откъде взима заглавията и как ги подрежда.";
+    ["stories", "view-note", "list", "more-wrap", "archive", "stats"].forEach(id => {
+      document.getElementById(id).hidden = true;
+    });
+    document.getElementById("about").hidden = false;
+    document.querySelector("#about > h2").hidden = true;            // the intro already says „За проекта.“
+    document.body.classList.add("page-own");
     document.querySelector(".logo").href = `${base}index.html`;
   }
   // the subscription page: same header and design, its own intro, no story list
@@ -2025,7 +2043,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
   const more = document.getElementById("more");
   const periods = document.getElementById("periods");
   if (archiveDate) periods.hidden = true;            // an archive page is one day: no periods
-  const noList = isSupport || isSearch || isMedia || isArchive || isLegal;   // pages without the story list
+  const noList = isSupport || isSearch || isMedia || isArchive || isLegal || isAbout;   // pages without the story list
   const setNote = t => { if (noList) return; const n = document.getElementById("view-note"); n.textContent = t || ""; n.hidden = !t; };
 
   // an outlet's name that opens the outlet window (the one from „Медии“) over the page; closing it leaves you where you were
@@ -2268,7 +2286,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     }
     return at >= 0;
   };
-  if (target && !isSearch && !isSupport && !goTarget() && data.stories_rest)
+  if (target && !isSearch && !isSupport && !isAbout && !goTarget() && data.stories_rest)
     loadRest().then(() => { if (isFirstView(current, period)) goTarget(); }, () => {});
   // the rest of the front page's stories: fetched once the page has finished showing (not competing with it)
   if (data.stories_rest) {

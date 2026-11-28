@@ -496,7 +496,7 @@ def build(fragment_only=False):
 def write_sitemap(generated_at, archive_lastmods):
     """sitemap.xml lists every page for search engines (21 Nov 2026); robots.txt tells them where it is.
     (Cloudflare adds its own lines about AI use on top of our robots.txt.)"""
-    main_pages = ("", "medii.html", "arhiv.html", "tarsene.html", "abonament.html", "pravila.html")
+    main_pages = ("", "medii.html", "arhiv.html", "tarsene.html", "za-proekta.html", "abonament.html", "pravila.html")
     rows = [(p, generated_at) for p in main_pages] + sorted(archive_lastmods.items(), reverse=True)
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -598,6 +598,12 @@ def main():
                        seo=("medii.html", "Медии · News Reference",
                             "36 български медии: кой ги притежава, откъде идват парите им, спорове, колко истории "
                             "отразяват и колко често сменят или трият заглавия.")))
+
+    # „За проекта“ (28 Nov 2026, David): its own page; before, the section sat under the stories of every page
+    with open(os.path.join(OUT_DIR, "za-proekta.html"), "w", encoding="utf-8") as f:
+        f.write(render({**light, "page": "about", "stories": []}, template,
+                       seo=("za-proekta.html", "За проекта · News Reference",
+                            "Какво е News Reference, как събира и групира заглавията на българските медии и как решава кой „не отрази“.")))
 
     # „Правна информация“ (12 Nov 2026): who runs the site, terms, privacy, cookies, copyright, corrections
     with open(os.path.join(OUT_DIR, "pravila.html"), "w", encoding="utf-8") as f:

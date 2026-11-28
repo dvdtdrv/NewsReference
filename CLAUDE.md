@@ -74,7 +74,7 @@ Either way the repo on GitHub is the source of truth: work on main's latest code
    12 h, shared name/place, no conflicting places from `places.json`; log in data/merge_log.json).
    `corrections.json` = hand fixes of saved stories (applied once each).
 4. `build_site.py` + `site_template.html` (all CSS + JS of every page) -> `site/`: front page (index), medii.html,
-   arhiv.html + archive days, tarsene.html (Pagefind search, `build_search.mjs`), pravila.html (legal), support page,
+   arhiv.html + archive days, tarsene.html (Pagefind search, `build_search.mjs`), za-proekta.html, pravila.html (legal), support page,
    outlets.json, feed/*.json („Всички новини": one file per hour + feed/o-NAME.json per outlet, 23 Nov: picking DW
    took 38 s, now 0.2 s), periods/*.json, sitemap.xml, robots.txt. `no_photos.json` = outlets
    whose photos must not be shown. `SMALLER_PHOTOS` (24 Nov) asks 6 outlets' own image servers for a smaller copy
@@ -131,7 +131,9 @@ over http(s), not file://.
   „headlines and photos belong to the outlets" note stays on „За проекта" and pravila.html). Weights matched to the old stroke thickness, size-adjust to the old letter heights.
   Big numbers use proportional digits (David, 24 Nov: the equal-width ones sat too far apart). Any new font must have
   Bulgarian forms (GSUB locl cyrl:BGR, or Bulgarian by default like Sofia Sans).
-- Header on computers (> 860 px): Медии, Архив | NEWS REFERENCE | search, „Подкрепи" pill. „За проекта" lives in the footer.
+- Header on computers (> 860 px): Медии, Архив | NEWS REFERENCE | search, „Подкрепи" pill. „За проекта" is linked from the
+  footer and is its own page za-proekta.html since 28 Nov (before, the section sat under every page; old #about/#method
+  links forward to it).
 - Front page first screen: title, stats (медии / истории in the whole archive / статии, numbers like 73 028), the pulse
   (articles per hour, 24 h), tabs „Медиите днес" (outlet wheel) / „Къде е новината" (map). Sizes follow window height;
   `body.hero-tall` turns off the sliding stage when it doesn't fit.
