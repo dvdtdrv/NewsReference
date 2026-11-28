@@ -101,7 +101,11 @@ body.page-own .stage { height: clamp(300px, 42vh, 440px); height: clamp(300px, 4
   background: var(--paper); border-radius: 28px 28px 0 0;
   box-shadow: 0 -18px 50px rgba(21, 22, 43, .14);
   overflow-x: clip;   /* 22 Nov 2026: nothing inside may push the page sideways on a phone */
+  /* 28 Nov 2026 (David): on short pages the sheet (one window tall at least) showed a pale strip UNDER the footer;
+     the content now grows to fill the sheet, so the footer is always the last thing on the page */
+  display: flex; flex-direction: column;
 }
+.sheet > .wrap { width: 100%; flex: 1 0 auto; }
 /* 22 Nov 2026 (David: in Chrome the pulse was cut off by the sheet, in Opera not - the same screen, different zoom /
    window height): the first screen's sizes now also follow the window's HEIGHT, so it fits on laptop screens; if it
    still doesn't fit (very short windows, big zoom), the script adds body.hero-tall and the page simply scrolls. */
