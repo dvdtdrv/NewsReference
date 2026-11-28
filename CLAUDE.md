@@ -140,6 +140,8 @@ over http(s), not file://.
 - Phones (<= 480 px): article list (84 px photo left), one-line title, „Какво е това? +" button, „В числа" and pulse boxes,
   „Не отразиха +" opens on tap. Installed app: pull down to reload. Own rounded menus (`makeMenu`) replace <select>.
 - The outlet window (click any outlet name) shows totals, „Накратко" facts, outlet info with folded sources.
+- „Медии", headline-change legend: the two notes under „Как се класифицира една смяна" are folded behind a round
+  „!" next to the heading (28 Nov).
 
 ## Domain, hosting, accounts
 - newsreference.bg: bought at Jump.bg (David owns it), renews 17.11.2027 (29.60 EUR/yr). DNS at Cloudflare (David's

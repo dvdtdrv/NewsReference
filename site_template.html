@@ -569,6 +569,12 @@ body.page-own #outlets, body.page-own #archive { border-top: 0; padding-top: 32p
 .hc-legend dl > div { display: grid; grid-template-columns: 150px 1fr; gap: 14px; padding: 9px 0; border-top: 1px solid var(--rule); }
 .hc-legend dt .k { font: 400 11px/1.6 var(--display); letter-spacing: .08em; text-transform: uppercase; }
 .hc-legend dd { margin: 0; font-size: 14px; color: var(--ink-soft); }
+/* 28 Nov 2026 (David): the two notes under the legend stay folded until the round „!" next to the heading is clicked */
+.hc-info { width: 18px; height: 18px; padding: 0; margin-left: 8px; vertical-align: 1px; border: 1px solid var(--muted); border-radius: 50%;
+  background: none; font: 500 11px/16px var(--display); letter-spacing: 0; color: var(--muted); cursor: pointer; position: relative; }
+.hc-info::after { content: ""; position: absolute; inset: -12px; }   /* small to see, still easy to tap */
+.hc-info:hover { color: var(--ink); border-color: var(--ink); }
+.hc-info[aria-expanded="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
 .hc-how { margin: 14px 0 0; font-size: 13px; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: 14px; }
 @media (max-width: 700px) {
   .hc-meter { display: none; }
@@ -1096,7 +1102,7 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
           <tbody id="hc-body"></tbody>
         </table></div>
         <div class="hc-legend">
-          <p class="hc-legend-head">Как се класифицира една смяна</p>
+          <p class="hc-legend-head">Как се класифицира една смяна <button type="button" class="hc-info" id="hc-info" aria-expanded="false" aria-controls="hc-notes" title="Как мерим и какво означава една смяна">!</button></p>
           <dl>
             <div><dt><b class="k minor">Дребна</b></dt><dd>След като махнем отбелязвания като „(ВИДЕО)“, „(СНИМКИ)“, „(ОБНОВЕНА)“ и препинателните знаци, двете заглавия съвпадат поне на 90% и нито едно число не е сменено. Например поправена правописна грешка: „партньора“ → „партньорът“.</dd></div>
             <div><dt><b class="k update">Обновяване</b></dt><dd>Поне половината от заглавието е запазена, но е сменено число („Над 390 сигнала“ → „Над 400 сигнала“) или са добавени или заменени думи („…три полета до София“ → „…три полета до София, единият кацна в Пловдив“). Обикновено новината се развива.</dd></div>
@@ -1104,8 +1110,10 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
             <div><dt><b class="k major">Съществена</b></dt><dd>Запазена е по-малко от половината от заглавието – новото е почти изцяло друго.</dd></div>
             <div><dt><b class="k deleted">Изтрита</b></dt><dd>Връзката към статията вече води до „няма такава страница“ (грешка 404 или 410) или пренасочва към началото на сайта – при две поредни проверки, за да не броим временни сривове. Всяка статия се проверява около 3 и 12 часа и 1,5, 3, 7, 14 и 30 дни след публикуването. „—“ значи, че статиите на медията не се проверяват (БТА – разрешението ни е само за емисията; Dnevnik и Capital – страниците им не ни допускат) или още не са проверени. Проверката започна на 5 ноември 2026 г.</dd></div>
           </dl>
+          <div class="hc-notes" id="hc-notes" hidden>
           <p class="hc-how">Сходството между две заглавия се мери като дял от буквите, които съвпадат в същия ред. Подредбата по „% сменени“ е по дела на статиите с поне една смяна; „Смени общо“ брои всички смени, а колоните с цветове – смените от всеки вид. Медии с по-малко от <span id="hc-min"></span> статии за периода се показват, но не се класират.</p>
           <p class="hc-how">Смяната на заглавие не е доказателство за цензура – най-често е обновяване на развиваща се новина. Показателят е сигнал, който си струва да се провери, затова всяка смяна се вижда. Смените виждаме по два начина: когато статията се появи отново в емисията на медията с ново заглавие и, от 21 ноември 2026 г., когато отворим самата статия при проверките по-горе. Ново заглавие на самата страница броим само ако го видим и при следващата проверка, около 30 минути по-късно (за медиите, които четем от отделен компютър – около час), за да не запишем по грешка временна или сбъркана версия. Ако медията върне някое предишно заглавие, това е още една смяна. Статиите на БТА, Dnevnik и Capital не отваряме, затова при тях виждаме само смените в емисията. Преди 21 ноември виждахме само смените в емисиите, затова медиите с къси емисии и четените по-рядко може да показват по-малко смени за този период. Смени, при които връзката към статията остава същата, записваме от 5 ноември 2026 г.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -2900,6 +2908,15 @@ details.od-src > .od-case-src, details.od-src > .od-recent { margin-top: 8px; }
     const row = el("div", "outlet off");
     row.append(el("span", null, o.name), el("span", null, UNTRACKED_BG[o.name] || o.reason));
     ul.append(row);
+  });
+})();
+// „Медии": the notes under „Как се класифицира една смяна" open and close with the round „!" (28 Nov 2026, David)
+(() => {
+  const b = document.getElementById("hc-info"), notes = document.getElementById("hc-notes");
+  if (!b || !notes) return;
+  b.addEventListener("click", () => {
+    const open = b.getAttribute("aria-expanded") !== "true";
+    b.setAttribute("aria-expanded", String(open)); notes.hidden = !open;
   });
 })();
 </script>
